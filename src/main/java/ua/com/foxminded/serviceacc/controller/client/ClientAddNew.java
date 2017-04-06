@@ -2,28 +2,27 @@ package ua.com.foxminded.serviceacc.controller.client;
 
 import java.io.Serializable;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.Person;
 import ua.com.foxminded.serviceacc.service.ClientService;
 import ua.com.foxminded.serviceacc.service.PersonService;
 
-@Named
+@Controller
 public class ClientAddNew implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private boolean isShowNewClientForm;
 	private String firstName;
 	private String secondName;
 
-	@Inject
+	@Autowired
 	private ClientService clientService;
 
-	@Inject
+	@Autowired
 	private PersonService personService;
 
-	@Inject
+	@Autowired
 	private ClientController clientController;
 
 	public void newClientFormOnSave() {

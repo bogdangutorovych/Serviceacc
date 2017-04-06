@@ -1,14 +1,13 @@
 package ua.com.foxminded.serviceacc.controller.menu;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import ua.com.foxminded.serviceacc.controller.client.ClientController;
 
-@Named
+@Controller
 public class Menu {
 
-	@Inject
+	@Autowired
 	private ClientController clientController;
 
 	public void menuOnAdd() {

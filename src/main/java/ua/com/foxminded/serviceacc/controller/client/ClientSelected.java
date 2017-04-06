@@ -1,21 +1,20 @@
 package ua.com.foxminded.serviceacc.controller.client;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.service.ClientService;
 
-@Named
+@Controller
 public class ClientSelected {
 
-	@Inject
+	@Autowired
 	private ClientService clientService;
 
-	@Inject
+	@Autowired
 	private ClientController clientController;
 
-	@Inject
+	@Autowired
 	private ClientUpdate clientUpdate;
 
 	private Client selectedClient;

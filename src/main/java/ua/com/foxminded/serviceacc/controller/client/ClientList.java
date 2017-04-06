@@ -4,14 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import javax.inject.Named;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.service.ClientService;
 import ua.com.foxminded.serviceacc.service.PersonService;
 
-@Named
+@Controller
 public class ClientList implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -22,10 +21,10 @@ public class ClientList implements Serializable {
 
 	private boolean isBlockTable;
 
-	@Inject
+	@Autowired
 	private ClientService clientService;
 
-	@Inject
+	@Autowired
 	private PersonService personService;
 
 	@PostConstruct

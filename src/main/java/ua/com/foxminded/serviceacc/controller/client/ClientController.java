@@ -1,22 +1,22 @@
 package ua.com.foxminded.serviceacc.controller.client;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
 import java.io.Serializable;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
-@Named
+@Controller
 public class ClientController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Inject
+	@Autowired
 	private ClientList clientList;
 
-	@Inject
+	@Autowired
 	private ClientAddNew clientAddNew;
 
-	@Inject
+	@Autowired
 	private ClientSelected clientSelected;
 
 	public void allClientsUpdate() {

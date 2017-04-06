@@ -1,14 +1,14 @@
 package ua.com.foxminded.serviceacc.controller.client;
 
-import javax.inject.Inject;
-import javax.inject.Named;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.Person;
 import ua.com.foxminded.serviceacc.service.ClientService;
 import ua.com.foxminded.serviceacc.service.PersonService;
 
-@Named
+@Controller
 public class ClientUpdate {
 
 	private boolean isShowUpdateForm;
@@ -17,10 +17,10 @@ public class ClientUpdate {
 
 	private Person person;
 
-	@Inject
+	@Autowired
 	private ClientService clientService;
 
-	@Inject
+	@Autowired
 	private PersonService personService;
 
 	private ClientSelected clientSelected;
