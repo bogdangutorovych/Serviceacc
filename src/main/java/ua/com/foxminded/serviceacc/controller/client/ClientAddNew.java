@@ -2,14 +2,19 @@ package ua.com.foxminded.serviceacc.controller.client;
 
 import java.io.Serializable;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.Person;
 import ua.com.foxminded.serviceacc.service.ClientService;
 import ua.com.foxminded.serviceacc.service.PersonService;
 
-@Controller
+@Component
+@ViewScoped
 public class ClientAddNew implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private boolean isShowNewClientForm;

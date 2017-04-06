@@ -1,11 +1,16 @@
 package ua.com.foxminded.serviceacc.controller.client;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 
-@Controller
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
+
+@Component
+@ViewScoped
 public class ClientController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
