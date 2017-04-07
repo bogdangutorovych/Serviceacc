@@ -29,12 +29,12 @@ public class ClientServiceDataJpa implements ClientService {
 
 	@Override
 	public Client findById(Long clientId) {
-		return clientRepository.findOne(clientId);
+		return clientRepository.findOneEagerly(clientId);
 	}
 
 	@Override
 	public List<Client> findAll() {
-		return clientRepository.findAllAndFetchPersonEagly();
+		return clientRepository.findAllAndFetchEagerly();
 	}
 
 	@Override

@@ -10,6 +10,9 @@ import ua.com.foxminded.serviceacc.config.PersistenceConfig;
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.ClientLevelType;
 import ua.com.foxminded.serviceacc.model.ClientStatusType;
+import ua.com.foxminded.serviceacc.model.Manager;
+
+import java.util.List;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
@@ -28,12 +31,21 @@ public class ClientRepositoryTest {
     PersonRepository personRepository;
     @Autowired
     ContactRepository contactRepository;
+    @Autowired
+    ClientLevelTypeRepository clientLevelTypeRepository;
+    @Autowired
+    ClientStatusTypeRepository clientStatusTypeRepository;
+    @Autowired
+    ManagerRepository managerRepository;
 
     @After
     public void deleteData(){
+        managerRepository.deleteAll();
         clientRepository.deleteAll();
         personRepository.deleteAll();
         contactRepository.deleteAll();
+        clientLevelTypeRepository.deleteAll();
+        clientStatusTypeRepository.deleteAll();
     }
 
     @Test
@@ -68,6 +80,38 @@ public class ClientRepositoryTest {
         assertThat(clientRepository.findAll(), hasSize(1));
         clientRepository.delete(client);
         assertThat(clientRepository.findAll(), hasSize(0));
+    }
+
+    @Test
+    public void fetchClientWithPersonLevelStatus(){
+        Client client = ModelBuilder.buildTestClient();
+
+        ClientLevelType regular = new ClientLevelType(ModelBuilder.REGULAR);
+        clientLevelTypeRepository.save(regular);
+        client.setLevel(regular);
+
+        ClientStatusType active = new ClientStatusType("001", ModelBuilder.ACTIVE);
+        clientStatusTypeRepository.save(active);
+        client.setStatus(active);
+
+        personRepository.save(client.getPerson());
+        clientRepository.save(client);
+
+        Manager manager = ModelBuilder.buildTestManager();
+        personRepository.save(manager.getPerson());
+        managerRepository.save(manager);
+
+        client.setManager(manager);
+        clientRepository.save(client);
+
+        manager.getClients().add(client);
+        managerRepository.save(manager);
+
+        List<Client> clientList = clientRepository.findAllAndFetchEagerly();
+        Client fetched= clientList.get(0);
+
+        System.out.println(fetched);
+
     }
 
 
