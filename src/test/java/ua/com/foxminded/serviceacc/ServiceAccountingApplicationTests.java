@@ -1,4 +1,4 @@
-package ua.com.foxminded;
+package ua.com.foxminded.serviceacc;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -23,5 +23,5 @@ public class JsfConfig {
                 new ServletRegistrationBean(facesServlet(), "*.xhtml");
         registration.setName("FacesServlet");
         return registration;
-    }
+   }
 }
