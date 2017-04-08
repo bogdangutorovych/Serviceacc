@@ -69,4 +69,11 @@ public class ClientStatusHistory {
 		this.dateChanged = dateChanged;
 	}
 
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 }

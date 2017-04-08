@@ -62,5 +62,4 @@ public class PaymentType {
 		this.active = active;
 	}
 	
-	
 }

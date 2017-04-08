@@ -70,4 +70,11 @@ public class Payment {
 		this.type = type;
 	}
 
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 }

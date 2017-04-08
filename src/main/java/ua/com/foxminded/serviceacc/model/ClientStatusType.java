@@ -54,4 +54,12 @@ public class ClientStatusType {
     public void setClients(Set<Client> clients) {
         this.clients = clients;
     }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 }
