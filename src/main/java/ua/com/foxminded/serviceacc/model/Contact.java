@@ -2,7 +2,6 @@ package ua.com.foxminded.serviceacc.model;
 
 import javax.persistence.*;
 
-
 @Entity
 @Table(name = "contact")
 public class Contact {
