@@ -6,7 +6,7 @@ import java.util.Set;
 
 /**
  * Created by andreb on 04.04.17.
- * Class represent client graduate level
+ * Class represent client graduate title
  */
 @Entity
 @Table(name = "client_level_type")
@@ -16,15 +16,17 @@ public class ClientLevelType {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
     @Column (name = "id", unique = true, nullable = false)
     private Long id;
-    @Column (name = "level", unique = true, nullable = false)
-    private String level;
+    @Column (name = "title", unique = true, nullable = false)
+    private String title;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "level", orphanRemoval = true)
     private Set<Client> clients = new HashSet<>();
+    @Column(name = "active", nullable = false)
+    private boolean active = true;
 
     public ClientLevelType(){
     }
-    public ClientLevelType(String level){
-        this.level = level;
+    public ClientLevelType(String title){
+        this.title = title;
     }
 
     public Long getId() {
@@ -35,11 +37,11 @@ public class ClientLevelType {
         this.id = id;
     }
 
-    public String getLevel() {
-        return level;
+    public String getTitle() {
+        return title;
     }
 
-    public void setLevel(String level) {
-        this.level = level;
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

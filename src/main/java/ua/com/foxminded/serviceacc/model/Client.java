@@ -1,27 +1,5 @@
 package ua.com.foxminded.serviceacc.model;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-
-import ua.com.foxminded.serviceacc.model.ClientStatusType;
-import ua.com.foxminded.serviceacc.model.ClientLevelType;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -54,6 +32,9 @@ public class Client {
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<ClientStatusHistory> clientHistory = new HashSet<>();
+
+	@Column(name = "active", nullable = false)
+	private boolean active = true;
 
 	public Client() {
 	}

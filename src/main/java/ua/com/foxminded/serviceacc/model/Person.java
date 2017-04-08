@@ -1,21 +1,9 @@
 package ua.com.foxminded.serviceacc.model;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "person")
@@ -39,6 +27,9 @@ public class Person {
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Contact> contacts = new HashSet<>();
+
+	@Column(name = "active", nullable = false)
+	private boolean active = true;
 
 	public Person() {
 
@@ -89,6 +80,14 @@ public class Person {
 
 	public void setContacts(Set<Contact> contacts) {
 		this.contacts = contacts;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 }

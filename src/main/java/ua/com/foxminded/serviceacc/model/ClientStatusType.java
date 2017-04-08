@@ -6,7 +6,7 @@ import java.util.Set;
 
 /**
  * Created by andreb on 04.04.17.
- * Represent Client status
+ * Represent Client title
  */
 @Entity
 @Table(name = "client_status_type")
@@ -16,16 +16,19 @@ public class ClientStatusType {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
-    @Column (name = "status", unique = true, nullable = false)
-    private String status;
+    @Column (name = "title", unique = true, nullable = false)
+    private String title;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "status", orphanRemoval = true)
     private Set<Client> clients = new HashSet<>();
+    @Column(name = "active", nullable = false)
+    private boolean active = true;
+
 
     public ClientStatusType() {
     }
 
-    public ClientStatusType(String status) {
-        this.status = status;
+    public ClientStatusType(String title) {
+        this.title = title;
     }
 
     public Long getId() {
@@ -36,12 +39,12 @@ public class ClientStatusType {
         this.id = id;
     }
 
-    public String getStatus() {
-        return status;
+    public String getTitle() {
+        return title;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Set<Client> getClients() {
