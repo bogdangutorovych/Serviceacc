@@ -13,10 +13,10 @@ import java.util.List;
 public interface ClientRepository extends JpaRepository<Client, Long>, JpaSpecificationExecutor {
 
 	String eagerClient = "SELECT c FROM Client c " +
-			"JOIN FETCH c.person " +
-			"JOIN FETCH c.manager " +
-			"JOIN FETCH c.status " +
-			"JOIN FETCH c.level ";
+			"JOIN FETCH c.person ";// +
+//			"JOIN FETCH c.manager " +
+//			"JOIN FETCH c.status " +
+//			"JOIN FETCH c.level ";
 
 	@Query(eagerClient)
 	List<Client> findAllAndFetchPersonEagly();
