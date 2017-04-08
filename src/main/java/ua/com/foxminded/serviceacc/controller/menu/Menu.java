@@ -8,9 +8,11 @@ import ua.com.foxminded.serviceacc.controller.client.ClientController;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 @Component
-@ViewScoped
+//@ViewScoped
 public class Menu {
 
 	@Autowired
