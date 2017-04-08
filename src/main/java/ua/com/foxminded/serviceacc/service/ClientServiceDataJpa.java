@@ -1,12 +1,11 @@
 package ua.com.foxminded.serviceacc.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.repository.ClientRepository;
+
+import java.util.List;
 
 /**
  * Created by andreb on 31.03.17.
@@ -29,7 +28,7 @@ public class ClientServiceDataJpa implements ClientService {
 
 	@Override
 	public Client findById(Long clientId) {
-		return clientRepository.findOne(clientId);
+		return clientRepository.findOneEagerly(clientId);
 	}
 
 	@Override
