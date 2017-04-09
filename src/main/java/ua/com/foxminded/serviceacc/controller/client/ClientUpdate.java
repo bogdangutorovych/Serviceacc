@@ -33,22 +33,15 @@ public class ClientUpdate {
 	@Inject
 	private ClientStatusTypeService clientStatusTypeService;
 
-	private ClientSelected clientSelected;
+	
 
 	private MenuModel model;
 
-	public void init(ClientSelected clientSelected) {
-		this.clientSelected = clientSelected;
-		client = new Client();
-		person = new Person();
+	public void init(Client clientSelected) {		
+		client = new Client();		
 		client.setPerson(person);
-		client.setId(clientSelected.getSelectedClient().getId());
-		client.setStatus(clientSelected.getSelectedClient().getStatus());
-
-		person.setId(clientSelected.getSelectedClient().getPerson().getId());
-		person.setFirstName(clientSelected.getSelectedClient().getPerson().getFirstName());
-		person.setLastName(clientSelected.getSelectedClient().getPerson().getLastName());
-
+		client.setId(clientSelected.getId());
+		client.setStatus(clientSelected.getStatus());
 		createStatusMenu();
 	}
 
@@ -73,8 +66,7 @@ public class ClientUpdate {
 
 	public void updateFormButtonOk() {
 		personService.update(person);
-		clientService.update(client);
-		clientSelected.selectedFormOnUpdateComplete();
+		clientService.update(client);		
 	}
 
 	public void updateFormButtonCancel() {

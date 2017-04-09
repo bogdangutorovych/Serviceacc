@@ -7,20 +7,13 @@
 
 	<p:growl autoUpdate="true" />
 	<p:commandButton value="MAIN"
-		actionListener="#{clientController.menuOnMain}"
+		actionListener="#{menu.menuOnMain}"
 		update="@form:mainLayout" />
 	<p:panelMenu style="margin-bottom:10px">
 		<p:submenu label="Client">
 			<p:menuitem value="All"
-				actionListener="#{clientController.showAllClient}"
-				icon="ui-icon-plus" update="@form:mainLayout" />
-			<p:menuitem value="Add" disabled="true"
-				actionListener="#{clientController.showNewClientForm}"
-				icon="ui-icon-plus" update="@form:mainLayout" />
-			<p:menuitem value="Client status types" disabled="true"
-				icon="ui-icon-document"
-				actionListener="#{ClientStatusTypeController.showForm}"
-				update="@form:mainLayout" />
+				actionListener="#{menu.menuOnAll}"
+				icon="ui-icon-plus" update="@form:mainLayout" />			
 		</p:submenu>
 
 		<p:submenu label="Manager">

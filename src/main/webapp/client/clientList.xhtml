@@ -7,7 +7,7 @@
 
 	<p:dataTable id="table" rendered="#{clientList.isShowClients}"
 		var="client" value="#{clientList.list}" selectionMode="single"
-		selection="#{clientSelected.selectedClient}" rowKey="#{client.id}">
+		rowKey="#{client.id}">
 		<p:column headerText="id">
 			<h:outputText value="#{client.id}" />
 		</p:column>

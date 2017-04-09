@@ -16,12 +16,6 @@ public class ClientController implements Serializable {
 	private ClientList clientList;
 
 	@Inject
-	private ClientAddNew clientAddNew;
-
-	@Inject
-	private ClientSelected clientSelected;
-
-	@Inject
 	ClientStatusTypeController clientStatusTypeController;
 
 	public void allClientsUpdate() {
@@ -29,8 +23,7 @@ public class ClientController implements Serializable {
 	}
 
 	public void onRowSelect() {
-		clientAddNew.hide();
-		clientSelected.show();
+	
 	}
 
 	public void menuOnMain() {
@@ -54,29 +47,6 @@ public class ClientController implements Serializable {
 		clientList.hide();
 	}
 
-	public void showNewClientForm() {
-		clientSelected.hide();
-		clientAddNew.show();
-	}
-
-	public void hideNewClientForm() {
-		clientAddNew.hide();
-	}
-
-	public ClientAddNew getNewClient() {
-		return clientAddNew;
-	}
-
-	public void setNewClient(ClientAddNew clientAddNew) {
-		this.clientAddNew = clientAddNew;
-	}
-
-	public ClientSelected getClientSelected() {
-		return clientSelected;
-	}
-
-	public void setClientSelected(ClientSelected clientSelected) {
-		this.clientSelected = clientSelected;
-	}
+	
 
 }

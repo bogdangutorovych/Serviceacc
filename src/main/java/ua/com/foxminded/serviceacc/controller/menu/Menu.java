@@ -15,22 +15,18 @@ public class Menu {
 	@Inject
 	private ClientStatusTypeController clientStatusTypeController;
 
-	public void menuOnAdd() {
-		clientController.blockTable();
-		clientController.showNewClientForm();
-
+	public void menuOnMain() {
+		clientController.hideAllClient();
 	}
 
 	public void menuOnAddComplete() {
 		clientController.unBlockTable();
 		clientController.allClientsUpdate();
-		clientController.hideNewClientForm();
-
 	}
 
-	// public void menuOnAll() {
-	// clientController.showAllClient();
-	// }
+	 public void menuOnAll() {
+	 clientController.showAllClient();
+	 }
 
 	public ClientController getClientsAll() {
 		return clientController;
