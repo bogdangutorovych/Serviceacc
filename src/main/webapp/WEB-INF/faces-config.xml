@@ -53,13 +53,9 @@
 			<property-name>list</property-name>
 			<value>#{list}</value>
 		</managed-property>
-		<managed-property>
-			<property-name>isBlockTable</property-name>
-			<value>#{isBlockTable}</value>
-		</managed-property>
-		<managed-property>
-			<property-name>isShowClients</property-name>
-			<value>#{isShowClients}</value>
+			<managed-property>
+			<property-name>show</property-name>
+			<value>#{show}</value>
 		</managed-property>
 	</managed-bean>
 

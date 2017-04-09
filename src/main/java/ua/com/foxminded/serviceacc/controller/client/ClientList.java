@@ -9,7 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.service.ClientService;
-import ua.com.foxminded.serviceacc.service.PersonService;
+
 
 @Named
 @Getter @Setter
@@ -23,10 +23,7 @@ public class ClientList implements Serializable {
 
 	@Inject
 	private ClientService clientService;
-
-	@Inject
-	private PersonService personService;
-
+	
 	@PostConstruct
 	public void init() {
 		updateData();

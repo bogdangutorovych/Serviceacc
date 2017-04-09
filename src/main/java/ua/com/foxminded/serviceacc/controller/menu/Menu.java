@@ -1,12 +1,19 @@
 package ua.com.foxminded.serviceacc.controller.menu;
 
+import java.util.ArrayList;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import lombok.Getter;
+import lombok.Setter;
 import ua.com.foxminded.serviceacc.controller.ClientStatusTypeController;
 import ua.com.foxminded.serviceacc.controller.client.ClientController;
+import ua.com.foxminded.serviceacc.model.Client;
+import ua.com.foxminded.serviceacc.service.ClientService;
 
 @Named
+@Getter @Setter
 public class Menu {
 
 	@Inject
@@ -27,19 +34,5 @@ public class Menu {
 	 clientController.showAllClient();
 	 }
 
-	public ClientController getClientsAll() {
-		return clientController;
-	}
-
-	public void setClientsAll(ClientController clientController) {
-		this.clientController = clientController;
-	}
-
-	public ClientStatusTypeController getStatusAll() {
-		return clientStatusTypeController;
-	}
-
-	public void setStatusAll(ClientStatusTypeController clientStatusTypeController) {
-		this.clientStatusTypeController = clientStatusTypeController;
-	}
+	
 }
