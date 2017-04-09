@@ -2,27 +2,24 @@ package ua.com.foxminded.serviceacc.controller.client;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
-
+import lombok.Getter;
+import lombok.Setter;
 import ua.com.foxminded.serviceacc.model.Client;
-import ua.com.foxminded.serviceacc.model.Person;
 import ua.com.foxminded.serviceacc.service.ClientService;
 import ua.com.foxminded.serviceacc.service.PersonService;
 
 @Named
+@Getter @Setter
 public class ClientList implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private ArrayList<Client> list;
 
-	private boolean isShowClients = false;
-
-	private boolean isBlockTable;
+	private boolean show = false;	
 
 	@Inject
 	private ClientService clientService;
@@ -36,73 +33,18 @@ public class ClientList implements Serializable {
 	}
 
 	public void updateData() {
-		list = new ArrayList<>();
-		Person person = new Person();
-		person.setFirstName("firstName");
-		person.setLastName("lastName");
+		list = new ArrayList<>();		
 		Client client = new Client();
-		client.setId(1L);
-		client.setPerson(person);
-		list.add(client);
-		
-
+		client.setId(1L);	
+		list.add(client);	
 	}
-
-	public boolean getIsShowClients() {
-		return isShowClients;
-	}
-
-	public void setIsShowClients(boolean isShowClients) {
-		this.isShowClients = isShowClients;
-	}
-
-	public boolean getIsBlockTable() {
-		return isBlockTable;
-	}
-
-	public void setIsBlockTable(boolean isBlockTable) {
-		this.isBlockTable = isBlockTable;
-	}
-
+	
 	public void show() {
-		isShowClients = true;
+		show = true;
 	}
 
 	public void hide() {
-		isShowClients = false;
+		show = false;
 	}
 
-	public void block() {
-		isBlockTable = false;
-
-	}
-
-	public void unBlock() {
-		isBlockTable = true;
-
-	}
-
-	public ArrayList<Client> getList() {
-		return list;
-	}
-
-	public void setList(ArrayList<Client> list) {
-		this.list = list;
-	}
-
-	public ClientService getClientService() {
-		return clientService;
-	}
-
-	public void setClientService(ClientService clientService) {
-		this.clientService = clientService;
-	}
-
-	public PersonService getPersonService() {
-		return personService;
-	}
-
-	public void setPersonService(PersonService personService) {
-		this.personService = personService;
-	}
 }

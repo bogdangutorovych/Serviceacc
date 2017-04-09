@@ -19,8 +19,7 @@ public class Menu {
 		clientController.hideAllClient();
 	}
 
-	public void menuOnAddComplete() {
-		clientController.unBlockTable();
+	public void menuOnAddComplete() {		
 		clientController.allClientsUpdate();
 	}
 
