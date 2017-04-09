@@ -11,24 +11,31 @@ import java.util.Set;
 @Entity
 @Table(name = "client_status_type")
 public class ClientStatusType {
+
     @Id
     @SequenceGenerator(name = "generator", sequenceName = "client_id_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
+
+    @Column(name = "code", unique = true, nullable = false)
+    private String code;
+
     @Column (name = "title", unique = true, nullable = false)
     private String title;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "status", orphanRemoval = true)
     private Set<Client> clients = new HashSet<>();
+
     @Column(name = "active", nullable = false)
     private boolean active = true;
 
 
     public ClientStatusType() {
     }
-
-    public ClientStatusType(String title) {
+    public ClientStatusType(String code, String title) {
         this.title = title;
+        this.code = code;
     }
 
     public Long getId() {
@@ -37,6 +44,14 @@ public class ClientStatusType {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getTitle() {
