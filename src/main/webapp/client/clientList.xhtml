@@ -13,6 +13,15 @@
 			<p:column headerText="id">
 				<h:outputText value="#{client.id}" />
 			</p:column>
+			<p:column headerText="first name">
+				<h:outputText value="#{client.firstName}" />
+			</p:column>
+			<p:column headerText="last name">
+				<h:outputText value="#{client.lastName}" />
+			</p:column>
+			<p:column headerText="status">
+				<h:outputText value="#{client.status}" />
+			</p:column>
 		</p:dataTable>
 	</h:panelGrid>
 </ui:composition>

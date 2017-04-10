@@ -29,7 +29,7 @@ public class ClientCru implements Serializable {
 
 	private boolean show = false;
 
-	private Client selected = null;
+	private Client selected;
 
 	@Inject
 	private ClientService clientService;
@@ -50,6 +50,8 @@ public class ClientCru implements Serializable {
 	public void init() {
 		createStatusMenu();
 		createLevelMenu();
+		selected = new Client();
+
 	}
 
 	private void createStatusMenu() {
@@ -73,10 +75,14 @@ public class ClientCru implements Serializable {
 	}
 
 	public void onOk() {
+		if (selected.getId() == null) {
+			selected = clientService.create(selected);
+		} else {
+			clientService.update(selected);
+		}
+		selected = null;
 		hide();
 		clientController.show();
-		clientService.update(selected);
-		selected = null;
 	}
 
 	public void onCancel() {
