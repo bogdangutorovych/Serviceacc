@@ -1,6 +1,8 @@
 package ua.com.foxminded.serviceacc.controller.client;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -19,6 +21,7 @@ import ua.com.foxminded.serviceacc.model.ClientStatusType;
 import ua.com.foxminded.serviceacc.service.ClientLevelTypeService;
 import ua.com.foxminded.serviceacc.service.ClientService;
 import ua.com.foxminded.serviceacc.service.ClientStatusTypeService;
+import javax.faces.model.SelectItem;
 
 @Named
 @Getter
@@ -43,25 +46,24 @@ public class ClientCru implements Serializable {
 	@Inject
 	private ClientLevelTypeService clientLevelTypeService;
 
-	private MenuModel status;
+	private List<SelectItem> statuses;
 	private MenuModel level;
+	private String statusSelected = "";
+	private String levelSelected = "";
 
 	@PostConstruct
 	public void init() {
 		createStatusMenu();
 		createLevelMenu();
 		selected = new Client();
-
 	}
 
 	private void createStatusMenu() {
-		status = new DefaultMenuModel();
-		DefaultSubMenu firstSubmenu = new DefaultSubMenu("choose status");
-		for (ClientStatusType statusType : clientStatusTypeService.findAll()) {
-			DefaultMenuItem item = new DefaultMenuItem(statusType.getTitle());
-			firstSubmenu.addElement(item);
-		}
-		status.addElement(firstSubmenu);
+		statuses = new ArrayList<>();
+		SelectItem item = new SelectItem("Status1");
+		statuses.add(item);
+		item = new SelectItem("Status2");
+		statuses.add(item);
 	}
 
 	private void createLevelMenu() {
@@ -76,6 +78,7 @@ public class ClientCru implements Serializable {
 
 	public void onOk() {
 		if (selected.getId() == null) {
+			selected.setStatus(clientStatusTypeService.save(new ClientStatusType("code", statusSelected)));
 			selected = clientService.create(selected);
 		} else {
 			clientService.update(selected);
@@ -102,6 +105,12 @@ public class ClientCru implements Serializable {
 	}
 
 	public void show() {
+		if (selected != null) {
+			if (selected.getStatus() != null && selected.getLevel() != null) {
+				statusSelected = selected.getStatus().getTitle();
+				levelSelected = selected.getLevel().getTitle();
+			}
+		}
 		show = true;
 	}
 

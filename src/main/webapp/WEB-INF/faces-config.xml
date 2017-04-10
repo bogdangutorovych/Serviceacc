@@ -24,12 +24,16 @@
 			<value>#{show}</value>
 		</managed-property>
 		<managed-property>
-			<property-name>status</property-name>
-			<value>#{status}</value>
+			<property-name>statuses</property-name>
+			<value>#{statuses}</value>
 		</managed-property>		
 		<managed-property>
 			<property-name>level</property-name>
 			<value>#{level}</value>
+		</managed-property>	
+		<managed-property>
+			<property-name>statusSelected</property-name>
+			<value>#{statusSelected}</value>
 		</managed-property>	
 	</managed-bean>
 

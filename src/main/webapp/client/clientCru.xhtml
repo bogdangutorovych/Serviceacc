@@ -6,35 +6,35 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<p:panelGrid style="margin-bottom:10px" columns="2"
-		columnClasses="label, value"
-		rendered="#{clientCru.show}">
+		columnClasses="label, value" rendered="#{clientCru.show}">
 		<f:facet name="header">
 			<h:outputText value="Update client" />
 		</f:facet>
-		
+
 		<h:outputText value="id:" />
 		<h:outputText value="#{clientCru.selected.id}" />
-		
+
 		<h:outputText value="first name:" />
 		<h:inputText required="true" value="#{clientCru.selected.firstName}" />
-		
+
 		<h:outputText value="last name:" />
 		<h:inputText required="true" value="#{clientCru.selected.lastName}" />
 		
-		<h:outputText value="status" />
-		<p:panelMenu model="#{clientCru.status}" />
-		
+		<h:outputText value="status" />		
+		<p:outputLabel for="statusSelected" value="Grouping: " />
+		<p:selectOneMenu id="statusSelected" value="#{clientCru.statusSelected}">
+			<f:selectItem itemLabel="Select One" itemValue="" />
+			<f:selectItems value="#{clientCru.statuses}" />
+		</p:selectOneMenu>
+
 		<h:outputText value="level" />
 		<p:panelMenu model="#{clientCru.level}" />
-		
-		<p:commandButton id="ClientCruOk" value="Ok"		
-			actionListener="#{clientCru.onOk}"
-			update="@form:mainLayout" />
 
-		<p:commandButton id="ClientCruCancel"
-			value="Cancel"			
-			actionListener="#{clientCru.onCancel}"
-			update="@form:mainLayout"
+		<p:commandButton id="ClientCruOk" value="Ok"
+			actionListener="#{clientCru.onOk}" update="@form:mainLayout" />
+
+		<p:commandButton id="ClientCruCancel" value="Cancel"
+			actionListener="#{clientCru.onCancel}" update="@form:mainLayout"
 			immediate="true" />
 	</p:panelGrid>
 </ui:composition>
