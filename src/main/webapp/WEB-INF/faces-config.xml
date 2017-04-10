@@ -26,15 +26,19 @@
 		<managed-property>
 			<property-name>statuses</property-name>
 			<value>#{statuses}</value>
-		</managed-property>		
-		<managed-property>
-			<property-name>level</property-name>
-			<value>#{level}</value>
-		</managed-property>	
+		</managed-property>				
 		<managed-property>
 			<property-name>statusSelected</property-name>
 			<value>#{statusSelected}</value>
 		</managed-property>	
+		<managed-property>
+			<property-name>levels</property-name>
+			<value>#{levels}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>levelSelected</property-name>
+			<value>#{levelSelected}</value>
+		</managed-property>
 	</managed-bean>
 
 	<!-- client controller -->

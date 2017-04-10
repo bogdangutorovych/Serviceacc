@@ -47,6 +47,7 @@ public class ClientCru implements Serializable {
 	private ClientLevelTypeService clientLevelTypeService;
 
 	private List<SelectItem> statuses;
+	private List<SelectItem> levels;
 	private MenuModel level;
 	private String statusSelected = "";
 	private String levelSelected = "";
@@ -60,27 +61,36 @@ public class ClientCru implements Serializable {
 
 	private void createStatusMenu() {
 		statuses = new ArrayList<>();
-		SelectItem item = new SelectItem("Status1");
-		statuses.add(item);
-		item = new SelectItem("Status2");
-		statuses.add(item);
+		for (ClientStatusType current : clientStatusTypeService.findAll()) {
+			System.out.println(current.getTitle());
+			SelectItem item = new SelectItem(current.getTitle());
+			statuses.add(item);
+		}
 	}
 
 	private void createLevelMenu() {
-		level = new DefaultMenuModel();
-		DefaultSubMenu firstSubmenu = new DefaultSubMenu("choose level");
-		for (ClientLevelType levelType : clientLevelTypeService.findAll()) {
-			DefaultMenuItem item = new DefaultMenuItem(levelType.getTitle());
-			firstSubmenu.addElement(item);
+		levels = new ArrayList<>();
+		for (ClientLevelType current : clientLevelTypeService.findAll()) {
+			System.out.println(current.getTitle());
+			SelectItem item = new SelectItem(current.getTitle());
+			levels.add(item);
 		}
-		level.addElement(firstSubmenu);
 	}
 
 	public void onOk() {
 		if (selected.getId() == null) {
-			selected.setStatus(clientStatusTypeService.save(new ClientStatusType("code", statusSelected)));
-			selected = clientService.create(selected);
+			selected = clientService.update(selected);
+			ClientStatusType statusToSave = clientStatusTypeService.findByStatusName(statusSelected);
+			ClientLevelType levelToSave = clientLevelTypeService.findByLevelName(levelSelected);
+			selected.setStatus(statusToSave);
+			selected.setLevel(levelToSave);
+			clientService.update(selected);
 		} else {
+			selected = clientService.update(selected);
+			ClientStatusType statusToSave = clientStatusTypeService.findByStatusName(statusSelected);
+			ClientLevelType levelToSave = clientLevelTypeService.findByLevelName(levelSelected);
+			selected.setStatus(statusToSave);
+			selected.setLevel(levelToSave);
 			clientService.update(selected);
 		}
 		hide();
@@ -105,6 +115,8 @@ public class ClientCru implements Serializable {
 	}
 
 	public void show() {
+		createStatusMenu();
+		createLevelMenu();
 		if (selected != null) {
 			if (selected.getStatus() != null && selected.getLevel() != null) {
 				statusSelected = selected.getStatus().getTitle();

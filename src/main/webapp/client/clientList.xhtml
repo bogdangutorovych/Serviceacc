@@ -20,7 +20,10 @@
 				<h:outputText value="#{client.lastName}" />
 			</p:column>
 			<p:column headerText="status">
-				<h:outputText value="#{client.status}" />
+				<h:outputText value="#{client.status.title}" />
+			</p:column>
+			<p:column headerText="level">
+				<h:outputText value="#{client.level.title}" />
 			</p:column>
 		</p:dataTable>
 	</h:panelGrid>

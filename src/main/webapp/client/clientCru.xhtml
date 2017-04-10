@@ -20,15 +20,19 @@
 		<h:outputText value="last name:" />
 		<h:inputText required="true" value="#{clientCru.selected.lastName}" />
 		
-		<h:outputText value="status" />		
-		<p:outputLabel for="statusSelected" value="Grouping: " />
+		
+		<p:outputLabel for="statusSelected" value="status: " />
 		<p:selectOneMenu id="statusSelected" value="#{clientCru.statusSelected}">
 			<f:selectItem itemLabel="Select One" itemValue="" />
 			<f:selectItems value="#{clientCru.statuses}" />
 		</p:selectOneMenu>
 
-		<h:outputText value="level" />
-		<p:panelMenu model="#{clientCru.level}" />
+				
+		<p:outputLabel for="levelSelected" value="level: " />
+		<p:selectOneMenu id="levelSelected" value="#{clientCru.levelSelected}">
+			<f:selectItem itemLabel="Select One" itemValue="" />
+			<f:selectItems value="#{clientCru.levels}" />
+		</p:selectOneMenu>
 
 		<p:commandButton id="ClientCruOk" value="Ok"
 			actionListener="#{clientCru.onOk}" update="@form:mainLayout" />
