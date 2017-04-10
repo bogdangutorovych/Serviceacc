@@ -79,7 +79,7 @@ public class ClientStatusTypeController implements Serializable {
 
 	public void showForm() {
 		setIsShowForm(true);
-		clientController.hideAllClient();
+		clientController.hide();
 		clientStatusTypeService.findAll();
 	}
 

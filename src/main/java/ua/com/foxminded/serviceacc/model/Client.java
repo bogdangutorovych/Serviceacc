@@ -4,15 +4,25 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.*;
-
-import ua.com.foxminded.serviceacc.model.ClientStatusType;
-import ua.com.foxminded.serviceacc.model.ClientLevelType;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "client")
 public class Client {
-
 	@Id
 	@SequenceGenerator(name = "generator", sequenceName = "client_id_seq")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
@@ -29,22 +39,22 @@ public class Client {
 	@Column(name = "birth_day")
 	private Date birthday;
 
-	@ManyToOne (fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "manager_id")
 	private Manager manager;
 
-    @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "client_level_type_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "client_level_type_id")
 	private ClientLevelType level;
 
-	@ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "client_status_type_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "client_status_type_id")
 	private ClientStatusType status;
-	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Contact> contacts = new HashSet<>();
-    
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<ClientStatusHistory> clientHistory = new HashSet<>();
 
 	@Column(name = "active", nullable = false)
@@ -53,8 +63,8 @@ public class Client {
 	public Client() {
 	}
 
-	public Client(String firstName, String lastName, Date birthday, Manager manager, ClientLevelType level,
-			ClientStatusType status, Set<Contact> contacts, Set<ClientStatusHistory> clientHistory, boolean active) {
+	public Client(String firstName, String lastName, Date birthday, Manager manager, ClientLevelType level, ClientStatusType status, Set<Contact> contacts,
+			Set<ClientStatusHistory> clientHistory, boolean active) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.birthday = birthday;
@@ -145,7 +155,4 @@ public class Client {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-
-	
-  
 }

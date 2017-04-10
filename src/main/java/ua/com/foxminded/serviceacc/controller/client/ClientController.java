@@ -5,78 +5,72 @@ import java.io.Serializable;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import ua.com.foxminded.serviceacc.controller.ClientStatusTypeController;
+import lombok.Getter;
+import lombok.Setter;
+import ua.com.foxminded.serviceacc.model.Client;
 
 @Named
+@Getter @Setter
 public class ClientController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private boolean show = false;
+	
+	private boolean panelShowDisable = true;
+	
 	@Inject
 	private ClientList clientList;
 
 	@Inject
-	private ClientAddNew clientAddNew;
-
-	@Inject
-	private ClientSelected clientSelected;
-
-	@Inject
-	ClientStatusTypeController clientStatusTypeController;
+	private ClientCru clientCru;	
 
 	public void allClientsUpdate() {
 		clientList.updateData();
 	}
 
 	public void onRowSelect() {
-		clientAddNew.hide();
-		clientSelected.show();
-	}
-
-	public void menuOnMain() {
+		System.out.println("onRowSelect()");
 		clientList.hide();
+		clientCru.show();
+		
 	}
-
-	public void blockTable() {
-		clientList.block();
+	
+	public void onAdd() {
+		System.out.println("onRowSelect()");
+		clientList.hide();
+		Client client = new Client();
+		clientCru.setSelected(client);
+		clientCru.show();
+		
 	}
+	
+	public void onDelete() {
+		System.out.println("onDelete()");		
+		clientCru.deleteSelected();	
+		clientList.updateData();
+	}	
 
-	public void unBlockTable() {
-		clientList.unBlock();
-	}
-
-	public void showAllClient() {
+	public void show() {
+		System.out.println("showAllClient()");
+		show = true;
 		clientList.show();
-		clientStatusTypeController.hideForm();
+		turnOffShow();
 	}
 
-	public void hideAllClient() {
+	public void hide() {
+		System.out.println("hideAllClient()");
+		show = false;
 		clientList.hide();
+		turnOffShow();
 	}
-
-	public void showNewClientForm() {
-		clientSelected.hide();
-		clientAddNew.show();
+	
+	public void turnOnShow(){
+		panelShowDisable = false;
 	}
-
-	public void hideNewClientForm() {
-		clientAddNew.hide();
-	}
-
-	public ClientAddNew getNewClient() {
-		return clientAddNew;
-	}
-
-	public void setNewClient(ClientAddNew clientAddNew) {
-		this.clientAddNew = clientAddNew;
-	}
-
-	public ClientSelected getClientSelected() {
-		return clientSelected;
-	}
-
-	public void setClientSelected(ClientSelected clientSelected) {
-		this.clientSelected = clientSelected;
+	
+	public void turnOffShow(){
+		panelShowDisable = true;
 	}
 
 }

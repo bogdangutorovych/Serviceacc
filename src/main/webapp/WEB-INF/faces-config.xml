@@ -7,37 +7,30 @@
 	<managed-bean>
 		<managed-bean-name>menu</managed-bean-name>
 		<managed-bean-class>ua.com.foxminded.serviceacc.controller.menu.Menu</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
-
-	<!-- add new client -->
-	<managed-bean>
-		<managed-bean-name>clientAddNew</managed-bean-name>
-		<managed-bean-class>ua.com.foxminded.serviceacc.controller.client.ClientAddNew</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-		<managed-property>
-			<property-name>isShowNewClientForm</property-name>
-			<value>#{isShowNewClientForm}</value>
-		</managed-property>
-	</managed-bean>
-	<managed-bean>
-
-	<!-- update client -->
-		<managed-bean-name>clientUpdate</managed-bean-name>
-		<managed-bean-class>ua.com.foxminded.serviceacc.controller.client.ClientUpdate</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>		
+	</managed-bean>
+
+	<!-- CRU client -->
+	<managed-bean>
+		<managed-bean-name>clientCru</managed-bean-name>
+		<managed-bean-class>ua.com.foxminded.serviceacc.controller.client.ClientCru</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
 		<managed-property>
-			<property-name>client</property-name>
-			<value>#{client}</value>
+			<property-name>selected</property-name>
+			<value>#{selected}</value>
 		</managed-property>
 		<managed-property>
-			<property-name>isShowUpdateForm</property-name>
-			<value>#{isShowUpdateForm}</value>
+			<property-name>show</property-name>
+			<value>#{show}</value>
 		</managed-property>
 		<managed-property>
-			<property-name>model</property-name>
-			<value>#{model}</value>
-		</managed-property>
+			<property-name>status</property-name>
+			<value>#{status}</value>
+		</managed-property>		
+		<managed-property>
+			<property-name>level</property-name>
+			<value>#{level}</value>
+		</managed-property>	
 	</managed-bean>
 
 	<!-- client controller -->
@@ -45,6 +38,14 @@
 		<managed-bean-name>clientController</managed-bean-name>
 		<managed-bean-class>ua.com.foxminded.serviceacc.controller.client.ClientController</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>show</property-name>
+			<value>#{show}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>panelShowDisable</property-name>
+			<value>#{panelShowDisable}</value>
+		</managed-property>		
 	</managed-bean>
 
 
@@ -54,41 +55,18 @@
 		<managed-bean-class>ua.com.foxminded.serviceacc.controller.client.ClientList</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 		<managed-property>
-			<property-name>clientServices</property-name>
-			<value>#{clientServices}</value>
-		</managed-property>
-		<managed-property>
 			<property-name>list</property-name>
 			<value>#{list}</value>
 		</managed-property>
 		<managed-property>
-			<property-name>isBlockTable</property-name>
-			<value>#{isBlockTable}</value>
-		</managed-property>
-		<managed-property>
-			<property-name>isShowClients</property-name>
-			<value>#{isShowClients}</value>
-		</managed-property>
-	</managed-bean>
-	<managed-bean>
-
-		<!-- selected client -->
-		<managed-bean-name>clientSelected</managed-bean-name>
-		<managed-bean-class>ua.com.foxminded.serviceacc.controller.client.ClientSelected</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-		<managed-property>
-			<property-name>selectedClient</property-name>
-			<value>#{selectedClient}</value>
-		</managed-property>
-		<managed-property>
-			<property-name>isShowSelectedClientForm</property-name>
-			<value>#{isShowSelectedClientForm}</value>
-		</managed-property>
+			<property-name>show</property-name>
+			<value>#{show}</value>
+		</managed-property>		
 	</managed-bean>
 
 
-	
-		<application>
+
+	<application>
 		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
 	</application>
 
