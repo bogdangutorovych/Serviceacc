@@ -2,6 +2,7 @@ package ua.com.foxminded.serviceacc.controller.client;
 
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -13,7 +14,9 @@ import org.primefaces.model.menu.MenuModel;
 import lombok.Getter;
 import lombok.Setter;
 import ua.com.foxminded.serviceacc.model.Client;
+import ua.com.foxminded.serviceacc.model.ClientLevelType;
 import ua.com.foxminded.serviceacc.model.ClientStatusType;
+import ua.com.foxminded.serviceacc.service.ClientLevelTypeService;
 import ua.com.foxminded.serviceacc.service.ClientService;
 import ua.com.foxminded.serviceacc.service.ClientStatusTypeService;
 
@@ -25,8 +28,9 @@ public class ClientCru implements Serializable{
 
 	private boolean show = false;
 
-	private Client selected;	
-
+	private Client selected;
+	
+	
 	@Inject
 	private ClientService clientService;
 
@@ -34,27 +38,39 @@ public class ClientCru implements Serializable{
 	private ClientController clientController;
 
 	@Inject
-	private ClientStatusTypeService clientStatusTypeService;	
+	private ClientStatusTypeService clientStatusTypeService;
+	
+	@Inject
+	private ClientLevelTypeService clientLevelTypeService;
 
-	private MenuModel model;
+	private MenuModel status;
+	private MenuModel level;
 
-	public void init(Client clientSelected) {		
-		selected = new Client();		
-		selected.setId(clientSelected.getId());
-		selected.setStatus(clientSelected.getStatus());
+	@PostConstruct
+	public void init() {
 		createStatusMenu();
+		createLevelMenu();
 	}
-
-
+	
 	private void createStatusMenu() {
-		model = new DefaultMenuModel();
+		status = new DefaultMenuModel();
 		DefaultSubMenu firstSubmenu = new DefaultSubMenu("choose status");		
 		for (ClientStatusType  statusType: clientStatusTypeService.findAll()){
 			DefaultMenuItem item = new DefaultMenuItem(statusType.getTitle());			
 			firstSubmenu.addElement(item);
 		}
-		model.addElement(firstSubmenu);
-	}		
+		status.addElement(firstSubmenu);
+	}	
+	
+	private void createLevelMenu() {
+		level = new DefaultMenuModel();
+		DefaultSubMenu firstSubmenu = new DefaultSubMenu("choose level");		
+		for (ClientLevelType  levelType: clientLevelTypeService.findAll()){
+			DefaultMenuItem item = new DefaultMenuItem(levelType.getLevel());			
+			firstSubmenu.addElement(item);
+		}
+		level.addElement(firstSubmenu);
+	}	
 
 	public void onOk() {
 		hide();

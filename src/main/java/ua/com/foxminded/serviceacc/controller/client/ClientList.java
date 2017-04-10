@@ -7,46 +7,25 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import lombok.Getter;
+import lombok.Setter;
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.service.ClientService;
 
 
 @Named
+@Getter @Setter
 public class ClientList implements Serializable {
-
-	public ArrayList<Client> getList() {
-		return list;
-	}
-
-	public void setList(ArrayList<Client> list) {
-		this.list = list;
-	}
-
-	public boolean isClientsListShow() {
-		return clientsListShow;
-	}
-
-	public void setClientsListShow(boolean clientsListShow) {
-		this.clientsListShow = clientsListShow;
-	}
-
-	public ClientService getClientService() {
-		return clientService;
-	}
-
-	public void setClientService(ClientService clientService) {
-		this.clientService = clientService;
-	}
 
 	private static final long serialVersionUID = 1L;
 
 	private ArrayList<Client> list = new ArrayList<>();	
 
-	private boolean clientsListShow;	
+	private boolean show;	
 
 	@Inject
 	private ClientService clientService;
-	
+
 	@PostConstruct
 	public void init() {
 		updateData();
@@ -56,13 +35,13 @@ public class ClientList implements Serializable {
 	public void updateData() {
 		list = 	(ArrayList<Client>) clientService.findAll();		
 	}
-	
+
 	public void show() {
-		clientsListShow = true;
+		show = true;
 	}
 
 	public void hide() {
-		clientsListShow = false;
+		show = false;
 	}
 
 }

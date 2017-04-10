@@ -13,7 +13,11 @@
 		</f:facet>
 		<h:outputText value="id:" />
 		<h:inputText value="#{clientCru.selected.id}" required="true"/>
-		<p:panelMenu model="#{clientCru.model}" />
+		<h:outputText value="status" />
+		<p:panelMenu model="#{clientCru.status}" />
+		
+		<h:outputText value="level" />
+		<p:panelMenu model="#{clientCru.level}" />
 		
 		<p:commandButton id="ClientCruOk" value="Ok"		
 			actionListener="#{clientCru.onOk}"

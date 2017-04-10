@@ -5,25 +5,13 @@ import java.io.Serializable;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import lombok.Getter;
+import lombok.Setter;
+
 
 @Named
+@Getter @Setter
 public class ClientController implements Serializable {
-
-	public ClientList getClientList() {
-		return clientList;
-	}
-
-	public void setClientList(ClientList clientList) {
-		this.clientList = clientList;
-	}
-
-	public ClientCru getClientCru() {
-		return clientCru;
-	}
-
-	public void setClientCru(ClientCru clientCru) {
-		this.clientCru = clientCru;
-	}
 
 	private static final long serialVersionUID = 1L;
 
