@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:panelGrid style="margin-bottom:10px" columns="2"
+		columnClasses="label, value"
+		rendered="#{clientCru.show}">
+		<f:facet name="header">
+			<h:outputText value="Update client" />
+		</f:facet>
+		<h:outputText value="id:" />
+		<h:inputText value="#{clientCru.selected.id}" required="true"/>
+		<p:panelMenu model="#{clientCru.model}" />
+		
+		<p:commandButton id="ClientCruOk" value="Ok"		
+			actionListener="#{clientCru.onOk}"
+			update="@form:mainLayout" />
+
+		<p:commandButton id="ClientCruCancel"
+			value="Cancel"			
+			actionListener="#{clientCru.onCancel}"
+			update="@form:mainLayout"
+			immediate="true" />
+	</p:panelGrid>
+</ui:composition>

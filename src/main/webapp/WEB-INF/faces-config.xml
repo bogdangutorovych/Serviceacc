@@ -8,28 +8,33 @@
 		<managed-bean-name>menu</managed-bean-name>
 		<managed-bean-class>ua.com.foxminded.serviceacc.controller.menu.Menu</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
-
-
-
-
-	<!-- update client -->
-	<managed-bean>
-		<managed-bean-name>clientUpdate</managed-bean-name>
-		<managed-bean-class>ua.com.foxminded.serviceacc.controller.client.ClientUpdate</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
 		<managed-property>
-			<property-name>client</property-name>
-			<value>#{client}</value>
+			<property-name>clientController</property-name>
+			<value>#{clientController}</value>
 		</managed-property>
 		<managed-property>
-			<property-name>isShowUpdateForm</property-name>
-			<value>#{isShowUpdateForm}</value>
+			<property-name>clientStatusTypeController</property-name>
+			<value>#{clientStatusTypeController}</value>
+		</managed-property>
+	</managed-bean>
+
+	<!-- CRU client -->
+	<managed-bean>
+		<managed-bean-name>clientCru</managed-bean-name>
+		<managed-bean-class>ua.com.foxminded.serviceacc.controller.client.ClientCru</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>selected</property-name>
+			<value>#{selected}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>show</property-name>
+			<value>#{show}</value>
 		</managed-property>
 		<managed-property>
 			<property-name>model</property-name>
 			<value>#{model}</value>
-		</managed-property>
+		</managed-property>		
 	</managed-bean>
 
 	<!-- client controller -->
@@ -37,6 +42,14 @@
 		<managed-bean-name>clientController</managed-bean-name>
 		<managed-bean-class>ua.com.foxminded.serviceacc.controller.client.ClientController</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>clientList</property-name>
+			<value>#{clientList}</value>
+		</managed-property>	
+		<managed-property>
+			<property-name>clientCru</property-name>
+			<value>#{clientCru}</value>
+		</managed-property>	
 	</managed-bean>
 
 
@@ -44,19 +57,19 @@
 	<managed-bean>
 		<managed-bean-name>clientsList</managed-bean-name>
 		<managed-bean-class>ua.com.foxminded.serviceacc.controller.client.ClientList</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-		<managed-property>
-			<property-name>clientServices</property-name>
-			<value>#{clientServices}</value>
-		</managed-property>
+		<managed-bean-scope>session</managed-bean-scope>		
 		<managed-property>
 			<property-name>list</property-name>
 			<value>#{list}</value>
 		</managed-property>
-			<managed-property>
-			<property-name>show</property-name>
-			<value>#{show}</value>
+		<managed-property>
+			<property-name>clientsListShow</property-name>
+			<value>#{clientsListShow}</value>
 		</managed-property>
+		<managed-property>
+			<property-name>clientCru</property-name>
+			<value>#{clientCru}</value>
+		</managed-property>			
 	</managed-bean>
 
 

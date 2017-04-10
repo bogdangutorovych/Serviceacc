@@ -5,8 +5,10 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-	<p:dataTable id="table" rendered="#{clientList.show}"
+
+	<p:dataTable id="table" rendered="#{clientList.clientsListShow}"
 		var="client" value="#{clientList.list}" selectionMode="single"
+		selection="#{clientCru.selected}"
 		rowKey="#{client.id}">
 		<p:column headerText="id">
 			<h:outputText value="#{client.id}" />
