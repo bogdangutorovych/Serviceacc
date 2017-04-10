@@ -10,36 +10,26 @@ import org.primefaces.model.menu.MenuModel;
 
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.ClientStatusType;
-import ua.com.foxminded.serviceacc.model.Person;
 import ua.com.foxminded.serviceacc.service.ClientService;
 import ua.com.foxminded.serviceacc.service.ClientStatusTypeService;
-import ua.com.foxminded.serviceacc.service.PersonService;
 
 @Named
 public class ClientUpdate {
 
 	private boolean isShowUpdateForm;
 
-	private Client client;
-
-	private Person person;
+	private Client client;	
 
 	@Inject
-	private ClientService clientService;
+	private ClientService clientService;	
 
 	@Inject
-	private PersonService personService;
-
-	@Inject
-	private ClientStatusTypeService clientStatusTypeService;
-
-	
+	private ClientStatusTypeService clientStatusTypeService;	
 
 	private MenuModel model;
 
 	public void init(Client clientSelected) {		
 		client = new Client();		
-		client.setPerson(person);
 		client.setId(clientSelected.getId());
 		client.setStatus(clientSelected.getStatus());
 		createStatusMenu();
@@ -64,8 +54,7 @@ public class ClientUpdate {
 		setIsShowUpdateForm(true);
 	}
 
-	public void updateFormButtonOk() {
-		personService.update(person);
+	public void updateFormButtonOk() {		
 		clientService.update(client);		
 	}
 

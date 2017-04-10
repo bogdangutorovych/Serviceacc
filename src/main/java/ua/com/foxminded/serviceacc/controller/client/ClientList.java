@@ -2,9 +2,11 @@ package ua.com.foxminded.serviceacc.controller.client;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
+
 import lombok.Getter;
 import lombok.Setter;
 import ua.com.foxminded.serviceacc.model.Client;
@@ -17,7 +19,7 @@ public class ClientList implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private ArrayList<Client> list;
+	private ArrayList<Client> list = new ArrayList<>();
 
 	private boolean show = false;	
 
@@ -30,10 +32,7 @@ public class ClientList implements Serializable {
 	}
 
 	public void updateData() {
-		list = new ArrayList<>();		
-		Client client = new Client();
-		client.setId(1L);	
-		list.add(client);	
+		list = 	(ArrayList<Client>) clientService.findAll();		
 	}
 	
 	public void show() {

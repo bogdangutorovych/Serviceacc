@@ -1,11 +1,12 @@
 package ua.com.foxminded.serviceacc.controller.client;
 
 import java.io.Serializable;
+
 import javax.inject.Inject;
 import javax.inject.Named;
+
 import lombok.Getter;
 import lombok.Setter;
-import ua.com.foxminded.serviceacc.controller.ClientStatusTypeController;
 
 
 @Named
@@ -15,10 +16,7 @@ public class ClientController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private ClientList clientList;
-
-	@Inject
-	ClientStatusTypeController clientStatusTypeController;
+	private ClientList clientList;	
 
 	public void allClientsUpdate() {
 		clientList.updateData();
@@ -31,17 +29,13 @@ public class ClientController implements Serializable {
 	public void menuOnMain() {
 		clientList.hide();
 	}
-
 	
 	public void showAllClient() {
-		clientList.show();
-		clientStatusTypeController.hideForm();
+		clientList.show();	
 	}
 
 	public void hideAllClient() {
 		clientList.hide();
-	}
-
-	
+	}	
 
 }
