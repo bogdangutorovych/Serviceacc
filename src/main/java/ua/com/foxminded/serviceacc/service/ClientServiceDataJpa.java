@@ -2,6 +2,8 @@ package ua.com.foxminded.serviceacc.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.com.foxminded.serviceacc.repository.ClientRepository;
@@ -12,6 +14,8 @@ import ua.com.foxminded.serviceacc.model.Client;
  */
 @Service("clientService")
 public class ClientServiceDataJpa implements ClientService {
+
+	private static Logger LOG = LoggerFactory.getLogger(ClientServiceDataJpa.class);
 
 	@Autowired
 	ClientRepository clientRepository;
@@ -33,7 +37,9 @@ public class ClientServiceDataJpa implements ClientService {
 
 	@Override
 	public List<Client> findAll() {
-		return clientRepository.findAllAndFetchPersonEagly();
+		List<Client> clients = clientRepository.findAllByFetch();
+		LOG.info("List: " + clients);
+		return clients;
 	}
 
 	@Override

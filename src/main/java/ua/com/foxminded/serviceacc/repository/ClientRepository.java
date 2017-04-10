@@ -13,8 +13,13 @@ import ua.com.foxminded.serviceacc.model.Client;
  */
 public interface ClientRepository extends JpaRepository<Client, Long>, JpaSpecificationExecutor {
 
-	@Query("SELECT c FROM Client c WHERE c.active = true")
-	List<Client> findAllAndFetchPersonEagly();
+	String selectAllByJoinFetch = "SELECT c FROM Client c " +
+			"LEFT JOIN FETCH c.level " +
+			"LEFT JOIN FETCH c.status " +
+			"LEFT JOIN FETCH c.manager ";
+
+	@Query(selectAllByJoinFetch + "WHERE c.active = true")
+	List<Client> findAllByFetch();
 
 	@Query("SELECT c FROM Client c JOIN FETCH c.clientHistory")
 	List<Client> findAllAndFetchClientStatusHistoryEagly();
