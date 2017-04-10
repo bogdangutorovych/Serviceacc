@@ -80,14 +80,11 @@ public class ClientCru implements Serializable {
 		} else {
 			clientService.update(selected);
 		}
-		selected = null;
 		hide();
-		clientController.show();
 	}
 
 	public void onCancel() {
 		hide();
-		clientController.show();
 		selected = null;
 	}
 
@@ -101,6 +98,7 @@ public class ClientCru implements Serializable {
 
 	public void hide() {
 		show = false;
+		clientController.show();
 	}
 
 	public void show() {
