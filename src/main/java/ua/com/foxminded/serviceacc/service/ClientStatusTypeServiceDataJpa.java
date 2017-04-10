@@ -1,6 +1,5 @@
 package ua.com.foxminded.serviceacc.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +13,6 @@ import ua.com.foxminded.serviceacc.repository.ClientStatusTypeRepository;
  */
 @Service("clientStatusTypeService")
 public class ClientStatusTypeServiceDataJpa implements ClientStatusTypeService {
-	private List<ClientStatusType> statuses = new ArrayList<>();
-
-	public ClientStatusTypeServiceDataJpa(){
-		ClientStatusType status = new ClientStatusType("code1","active");	
-		statuses.add(status);
-		status = new ClientStatusType("code2","frozen");
-		statuses.add(status);
-	}
-
 
 	@Autowired
 	ClientStatusTypeRepository clientStatusTypeRepository;
@@ -49,8 +39,7 @@ public class ClientStatusTypeServiceDataJpa implements ClientStatusTypeService {
 
 	@Override
 	public List<ClientStatusType> findAll() {
-		//return clientStatusTypeRepository.findAll();
-		return statuses;
+		return clientStatusTypeRepository.findAll();
 	}
 
 	@Override
