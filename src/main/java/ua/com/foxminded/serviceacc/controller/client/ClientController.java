@@ -7,7 +7,7 @@ import javax.inject.Named;
 
 import lombok.Getter;
 import lombok.Setter;
-
+import ua.com.foxminded.serviceacc.model.Client;
 
 @Named
 @Getter @Setter
@@ -34,6 +34,21 @@ public class ClientController implements Serializable {
 		clientList.hide();
 		clientCru.show();
 		
+	}
+	
+	public void onAdd() {
+		System.out.println("onRowSelect()");
+		clientList.hide();
+		Client client = new Client();
+		clientCru.setSelected(client);
+		clientCru.show();
+		
+	}
+	
+	public void onDelete() {
+		System.out.println("onDelete()");		
+		clientCru.deleteSelected();	
+		clientList.updateData();
 	}	
 
 	public void show() {

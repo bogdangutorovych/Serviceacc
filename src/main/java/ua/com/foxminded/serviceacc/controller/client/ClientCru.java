@@ -100,6 +100,11 @@ public class ClientCru implements Serializable{
 	public void show() {
 		show = true;
 	}
+	
+	public void deleteSelected(){
+		System.out.println("deleteSelected()"+selected.getId());
+		clientService.delete(selected.getId());
+	}
 
 
 }

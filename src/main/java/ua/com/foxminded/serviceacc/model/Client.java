@@ -3,15 +3,23 @@ package ua.com.foxminded.serviceacc.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.*;
-
-import ua.com.foxminded.serviceacc.model.ClientStatusType;
-import ua.com.foxminded.serviceacc.model.ClientLevelType;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "client")
 public class Client {
-
 	@Id
 	@SequenceGenerator(name = "generator", sequenceName = "client_id_seq")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
@@ -101,6 +109,6 @@ public class Client {
 
 	public void setActive(boolean active) {
 		this.active = active;
-	}
-
+	}	
+	
 }

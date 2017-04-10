@@ -1,5 +1,7 @@
 package ua.com.foxminded.serviceacc.service;
 
+import static java.lang.Math.toIntExact;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +15,7 @@ import ua.com.foxminded.serviceacc.model.Client;
 @Service("clientService")
 public class ClientServiceDataJpa implements ClientService {
 	private List<Client> clients = new ArrayList<>();
-	
+
 	public ClientServiceDataJpa(){
 		Client client = new Client();	
 		client.setId(1L);
@@ -31,14 +33,21 @@ public class ClientServiceDataJpa implements ClientService {
 
 	@Override
 	public Client create(Client client) {
-		//return clientRepository.save(client);
-		clients.add(client);
+		//return clientRepository.save(client);		
+		clients.add(client);		
 		return client;
 	}
 
 	@Override
 	public Client update(Client client) {
 		//return clientRepository.save(client);
+		if (clients.contains(client)) {
+			System.out.println(client.getId());
+			int id = toIntExact(client.getId());
+			clients.set(id, client);
+		} else {
+			create(client);
+		}
 		return client;
 	}
 
@@ -56,6 +65,9 @@ public class ClientServiceDataJpa implements ClientService {
 	@Override
 	public void delete(Long clientId) {
 		//clientRepository.delete(clientId);
-		clients.remove(clientId);
+		int id = toIntExact(clientId);
+		clients.remove(id);		
+		System.out.println(clients.size());
+		
 	}
 }
