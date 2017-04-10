@@ -40,9 +40,8 @@ public class ClientController implements Serializable {
 	public void onAdd() {
 		System.out.println("onRowSelect()");
 		clientList.hide();
+		clientCru.setSelected(new Client());
 		clientCru.show();
-		Client client = new Client();
-		clientCru.setSelected(client);
 	}
 
 	public void onDelete() {

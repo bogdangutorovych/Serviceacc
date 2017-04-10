@@ -56,7 +56,7 @@ public class ClientCru implements Serializable {
 	public void init() {
 		createStatusMenu();
 		createLevelMenu();
-		selected = new Client();
+		// selected = new Client();
 	}
 
 	private void createStatusMenu() {
