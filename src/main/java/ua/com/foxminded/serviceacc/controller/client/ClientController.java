@@ -15,6 +15,10 @@ public class ClientController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private boolean show = false;
+	
+	private boolean panelShowDisable = true;
+	
 	@Inject
 	private ClientList clientList;
 
@@ -29,16 +33,29 @@ public class ClientController implements Serializable {
 		System.out.println("onRowSelect()");
 		clientList.hide();
 		clientCru.show();
+		
 	}	
 
-	public void showAllClient() {
-		System.out.println("showAllClient()");		
-		clientList.show();	
+	public void show() {
+		System.out.println("showAllClient()");
+		show = true;
+		clientList.show();
+		turnOffShow();
 	}
 
-	public void hideAllClient() {
+	public void hide() {
 		System.out.println("hideAllClient()");
+		show = false;
 		clientList.hide();
-	}	
+		turnOffShow();
+	}
+	
+	public void turnOnShow(){
+		panelShowDisable = false;
+	}
+	
+	public void turnOffShow(){
+		panelShowDisable = true;
+	}
 
 }

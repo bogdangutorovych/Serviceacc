@@ -38,6 +38,14 @@
 		<managed-bean-name>clientController</managed-bean-name>
 		<managed-bean-class>ua.com.foxminded.serviceacc.controller.client.ClientController</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>show</property-name>
+			<value>#{show}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>panelShowDisable</property-name>
+			<value>#{panelShowDisable}</value>
+		</managed-property>		
 	</managed-bean>
 
 

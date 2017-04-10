@@ -28,9 +28,9 @@ public class ClientCru implements Serializable{
 
 	private boolean show = false;
 
-	private Client selected;
-	
-	
+	private Client selected = null;
+
+
 	@Inject
 	private ClientService clientService;
 
@@ -39,7 +39,7 @@ public class ClientCru implements Serializable{
 
 	@Inject
 	private ClientStatusTypeService clientStatusTypeService;
-	
+
 	@Inject
 	private ClientLevelTypeService clientLevelTypeService;
 
@@ -51,7 +51,7 @@ public class ClientCru implements Serializable{
 		createStatusMenu();
 		createLevelMenu();
 	}
-	
+
 	private void createStatusMenu() {
 		status = new DefaultMenuModel();
 		DefaultSubMenu firstSubmenu = new DefaultSubMenu("choose status");		
@@ -61,7 +61,7 @@ public class ClientCru implements Serializable{
 		}
 		status.addElement(firstSubmenu);
 	}	
-	
+
 	private void createLevelMenu() {
 		level = new DefaultMenuModel();
 		DefaultSubMenu firstSubmenu = new DefaultSubMenu("choose level");		
@@ -74,15 +74,16 @@ public class ClientCru implements Serializable{
 
 	public void onOk() {
 		hide();
-		clientController.showAllClient();
-		clientService.update(selected);		
+		clientController.show();
+		clientService.update(selected);
+		selected = null;
 	}
 
 	public void onCancel() {
 		hide();
-		clientController.showAllClient();
-
-	}
+		clientController.show();
+		selected = null;
+	}	
 
 	public void updateFormChangeLevel(String level) {
 		// TODO: level

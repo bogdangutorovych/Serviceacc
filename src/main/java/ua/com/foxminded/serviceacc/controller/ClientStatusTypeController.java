@@ -1,10 +1,7 @@
 package ua.com.foxminded.serviceacc.controller;
 
-import lombok.Getter;
-import lombok.Setter;
-import ua.com.foxminded.serviceacc.controller.client.ClientController;
-import ua.com.foxminded.serviceacc.model.ClientStatusType;
-import ua.com.foxminded.serviceacc.service.ClientStatusTypeService;
+import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -12,8 +9,12 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.io.Serializable;
-import java.util.List;
+
+import lombok.Getter;
+import lombok.Setter;
+import ua.com.foxminded.serviceacc.controller.client.ClientController;
+import ua.com.foxminded.serviceacc.model.ClientStatusType;
+import ua.com.foxminded.serviceacc.service.ClientStatusTypeService;
 
 @Named
 @SessionScoped
@@ -79,7 +80,7 @@ public class ClientStatusTypeController implements Serializable {
 
     public void showForm() {
         setIsShowForm(true);
-        clientController.hideAllClient();
+        clientController.hide();
         clientStatusTypeService.findAll();
     }
 

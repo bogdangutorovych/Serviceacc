@@ -20,13 +20,13 @@ public class Menu {
 
 	public void menuOnMain() {
 		System.out.println("menuOnMain");
-		clientController.hideAllClient();
+		clientController.hide();
 	}
 
 
 	public void menuOnAll() {
 		System.out.println("menuOnAll");		
-		clientController.showAllClient();
+		clientController.show();
 	}
 
 }
