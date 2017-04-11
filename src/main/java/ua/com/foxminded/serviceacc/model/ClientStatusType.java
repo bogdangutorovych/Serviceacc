@@ -69,4 +69,12 @@ public class ClientStatusType {
     public void setActive(boolean active) {
         this.active = active;
     }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 }
