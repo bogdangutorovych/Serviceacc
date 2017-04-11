@@ -28,8 +28,6 @@ public class ClientServiceTest {
     @Autowired
     ClientService clientService;
     @Autowired
-    PersonService personService;
-    @Autowired
     ClientLevelTypeService clientLevelTypeService;
     @Autowired
     ClientStatusTypeService clientStatusTypeService;
@@ -38,29 +36,6 @@ public class ClientServiceTest {
 
     @Test
     public void findAllFetch() {
-        List<ClientLevelType> levels = buildListTestClientLevelType();
-        List<ClientStatusType> statuses = buildListTestClientStatusType();
-        for (int i = 0; i<3; i++){
-            Client client = buildTestClient();
-            ClientLevelType level = clientLevelTypeService.save(levels.get(i));
-            client.setLevel(level);
-            ClientStatusType status = clientStatusTypeService.save(statuses.get(i));
-            client.setStatus(status);
-
-            Manager manager = buildTestManager();
-            personService.create(manager.getPerson());
-            managerService.create(manager);
-            client.setManager(manager);
-
-            personService.create(client.getPerson());
-            clientService.create(client);
-            manager.getClients().add(client);
-            managerService.update(manager);
-        }
-        assertThat(clientService.findAll(), hasSize(3));
-        assertThat(managerService.findAll(), hasSize(3));
-        assertThat(clientLevelTypeService.findAll(), hasSize(3));
-        assertThat(clientStatusTypeService.findAll(), hasSize(3));
 
     }
 }

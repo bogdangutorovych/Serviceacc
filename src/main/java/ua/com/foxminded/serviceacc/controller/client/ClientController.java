@@ -1,83 +1,88 @@
 package ua.com.foxminded.serviceacc.controller.client;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+import ua.com.foxminded.serviceacc.model.Client;
+
 @Component
-//@ViewScoped
+//@Named
+@Getter
+@Setter
+//@SessionScoped
+@Scope("view")
+//@ManagedBean(name = "clientController")
 public class ClientController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private boolean show = false;
+
+	private boolean panelShowDisable = true;
+
 	@Autowired
+//	@ManagedProperty(value = "#{clientList}")
 	private ClientList clientList;
 
 	@Autowired
-	private ClientAddNew clientAddNew;
-
-	@Autowired
-	private ClientSelected clientSelected;
+//	@ManagedProperty(value = "#{clientCru}")
+	private ClientCru clientCru;
 
 	public void allClientsUpdate() {
 		clientList.updateData();
 	}
 
 	public void onRowSelect() {
-		clientAddNew.hide();
-		clientSelected.show();
-	}
-
-	public void menuOnMain() {
+		System.out.println("onRowSelect()");
 		clientList.hide();
+		clientCru.show();
+
 	}
 
-	public void blockTable() {
-		clientList.block();
+	public void onAdd() {
+		System.out.println("onRowSelect()");
+		clientList.hide();
+		clientCru.setSelected(new Client());
+		clientCru.show();
 	}
 
-	public void unBlockTable() {
-		clientList.unBlock();
+	public void onDelete() {
+		System.out.println("onDelete()");
+		clientCru.deleteSelected();
+		clientList.updateData();
 	}
 
-	public void showAllClient() {
+	public void show() {
+		System.out.println("showAllClient()");
+		show = true;
+		clientList.updateData();
 		clientList.show();
+		turnOffShow();
 	}
 
-	public void hideAllClient() {
+	public void hide() {
+		System.out.println("hideAllClient()");
+		show = false;
 		clientList.hide();
+		turnOffShow();
 	}
 
-	public void showNewClientForm() {
-		clientSelected.hide();
-		clientAddNew.show();
+	public void turnOnShow() {
+		panelShowDisable = false;
 	}
 
-	public void hideNewClientForm() {
-		clientAddNew.hide();
-	}
-
-	public ClientAddNew getNewClient() {
-		return clientAddNew;
-	}
-
-	public void setNewClient(ClientAddNew clientAddNew) {
-		this.clientAddNew = clientAddNew;
-	}
-
-	public ClientSelected getClientSelected() {
-		return clientSelected;
-	}
-
-	public void setClientSelected(ClientSelected clientSelected) {
-		this.clientSelected = clientSelected;
+	public void turnOffShow() {
+		panelShowDisable = true;
 	}
 
 }

@@ -1,28 +1,37 @@
 package ua.com.foxminded.serviceacc.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "service")
 public class Service {
-	
+
 	@Id
-	@SequenceGenerator(name = "generator", sequenceName = "client_id_seq")
+	@SequenceGenerator(name = "generator", sequenceName = "service_id_seq", initialValue = 1, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
-	
+
 	@Column(name = "name")
 	private String name;
-	
+
 	@ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "money_id")
+	@JoinColumn (name = "money_id")
 	private Money price;
-	
+
 	@ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "serviceType_id")
+	@JoinColumn (name = "serviceType_id")
 	private ServiceType type;
-	
+
 	@Column(name = "active", nullable = false)
 	private boolean active = true;
 
@@ -68,4 +77,11 @@ public class Service {
 		this.type = type;
 	}
 
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 }

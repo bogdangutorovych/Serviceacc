@@ -1,25 +1,31 @@
 package ua.com.foxminded.serviceacc.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "pay_status")
 public class PayStatus {
 	@Id
-	@SequenceGenerator(name = "generator", sequenceName = "pay_status_seq")
+	@SequenceGenerator(name = "generator", sequenceName = "pay_status_id_seq", initialValue = 1, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
 
 	@Column(name = "code", unique = true, nullable = false)
 	private String code;
-	
+
 	@Column (name = "title", unique = true, nullable = false)
 	private String title;
 
 	@Column(name = "active", nullable = false)
 	private boolean active = true;
-	
+
 	public PayStatus() {
 	}
 
@@ -60,7 +66,7 @@ public class PayStatus {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-	
-	
+
+
 
 }

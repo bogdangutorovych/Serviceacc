@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:panelGrid style="margin-bottom:10px" columns="2"
+		columnClasses="label, value" rendered="#{clientCru.show}">
+		<f:facet name="header">
+			<h:outputText value="Update client" />
+		</f:facet>
+
+		<h:outputText value="id:" />
+		<h:outputText value="#{clientCru.selected.id}" />
+
+		<h:outputText value="first name:" />
+		<h:inputText required="true" value="#{clientCru.selected.firstName}" />
+
+		<h:outputText value="last name:" />
+		<h:inputText required="true" value="#{clientCru.selected.lastName}" />
+		
+		
+		<p:outputLabel for="statusSelected" value="status: " />
+		<p:selectOneMenu id="statusSelected" value="#{clientCru.statusSelected}">
+			<f:selectItem itemLabel="Select One" itemValue="" />
+			<f:selectItems value="#{clientCru.statuses}" />
+		</p:selectOneMenu>
+
+				
+		<p:outputLabel for="levelSelected" value="level: " />
+		<p:selectOneMenu id="levelSelected" value="#{clientCru.levelSelected}">
+			<f:selectItem itemLabel="Select One" itemValue="" />
+			<f:selectItems value="#{clientCru.levels}" />
+		</p:selectOneMenu>
+
+		<p:commandButton id="ClientCruOk" value="Ok"
+			actionListener="#{clientCru.onOk}" update="@form:mainLayout" />
+
+		<p:commandButton id="ClientCruCancel" value="Cancel"
+			actionListener="#{clientCru.onCancel}" update="@form:mainLayout"
+			immediate="true" />
+	</p:panelGrid>
+</ui:composition>
