@@ -24,7 +24,7 @@ import javax.persistence.TemporalType;
 public class Salary {
 	
 	@Id
-	@SequenceGenerator(name = "generator", sequenceName = "salary_seq")
+	@SequenceGenerator(name = "generator", sequenceName = "salary_id_seq")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;

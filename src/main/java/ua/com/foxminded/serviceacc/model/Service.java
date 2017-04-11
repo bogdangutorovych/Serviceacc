@@ -16,7 +16,7 @@ import javax.persistence.Table;
 public class Service {
 	
 	@Id
-	@SequenceGenerator(name = "generator", sequenceName = "client_id_seq")
+	@SequenceGenerator(name = "generator", sequenceName = "service_id_seq")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;

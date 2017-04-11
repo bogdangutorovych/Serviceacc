@@ -24,7 +24,7 @@ import javax.persistence.TemporalType;
 @Table(name = "client")
 public class Client {
 	@Id
-	@SequenceGenerator(name = "generator", sequenceName = "client_id_seq")
+	@SequenceGenerator(name = "generator", sequenceName = "client_id_seq", initialValue = 1, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;

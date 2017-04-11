@@ -1,8 +1,17 @@
 package ua.com.foxminded.serviceacc.model;
 
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
  * Created by andreb on 04.04.17. Class represent client graduate level
@@ -12,7 +21,7 @@ import java.util.Set;
 public class ClientLevelType {
 
 	@Id
-	@SequenceGenerator(name = "generator", sequenceName = "client_id_seq")
+	@SequenceGenerator(name = "generator", sequenceName = "client_level_type_id_seq")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
