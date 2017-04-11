@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class Money {
 	
 	@Id
-	@SequenceGenerator(name = "generator", sequenceName = "money_id_seq")
+	@SequenceGenerator(name = "generator", sequenceName = "money_id_seq", initialValue = 1, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
