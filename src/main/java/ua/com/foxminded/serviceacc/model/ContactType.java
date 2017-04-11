@@ -17,7 +17,7 @@ import javax.persistence.Table;
 public class ContactType {
     
 	@Id
-    @SequenceGenerator(name = "generator", sequenceName = "contact_type_id_seq")
+    @SequenceGenerator(name = "generator", sequenceName = "contact_type_id_seq", initialValue = 1, allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
     @Column (name = "id", unique = true, nullable = false)
     private Long id;

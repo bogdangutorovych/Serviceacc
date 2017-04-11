@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Table(name = "pay_status")
 public class PayStatus {
 	@Id
-	@SequenceGenerator(name = "generator", sequenceName = "pay_status_id_seq")
+	@SequenceGenerator(name = "generator", sequenceName = "pay_status_id_seq", initialValue = 1, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
