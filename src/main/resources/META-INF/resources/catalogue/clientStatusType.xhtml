@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+
+    <p:dataTable id="clientStatusTypeList" editable="true"
+                 var="s" value="#{clientStatusTypeController.statusList}"
+                 emptyMessage="No items yet">
+
+        <f:facet name="header">Client Status Types</f:facet>
+        <p:ajax event="rowEdit" listener="#{clientStatusTypeController.onRowEdit}"/>
+
+        <p:column headerText="id">
+            <p:cellEditor>
+                <f:facet name="output"><h:outputText value="#{s.id}" /></f:facet>
+                <f:facet name="input"><p:inputText id="modelInput" value="#{s.id}" style="width:100%"/></f:facet>
+            </p:cellEditor>
+        </p:column>
+
+        <p:column headerText="code">
+            <p:cellEditor>
+                <f:facet name="output"><h:outputText value="#{s.code}" /></f:facet>
+                <f:facet name="input"><p:inputText value="#{s.code}" style="width:100%" label="Code"/></f:facet>
+            </p:cellEditor>
+        </p:column>
+
+        <p:column headerText="title">
+            <p:cellEditor>
+                <f:facet name="output"><h:outputText value="#{s.title}" /></f:facet>
+                <f:facet name="input"><p:inputText value="#{s.title}" style="width:100%" label="Title"/></f:facet>
+            </p:cellEditor>
+        </p:column>
+
+        <p:column style="width:32px">
+            <p:rowEditor />
+        </p:column>
+
+        <p:column>
+            <p:commandButton id="status_delete" value="Delete" actionListener="#{clientStatusTypeController.delete(s)}"
+                             update=":contentForm"/>
+        </p:column>
+
+    </p:dataTable>
+    <br/>
+    <p:commandButton id="status_add" value="Add item" actionListener="#{clientStatusTypeController.add()}"
+                     update=":contentForm"/>
+
+</ui:composition>

@@ -16,10 +16,16 @@ public class ClientStatusType {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
-    @Column (name = "title", unique = true, nullable = false)
+
+    @Column(name = "code")
+    private String code;
+
+    @Column(name = "title")
     private String title;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "status", orphanRemoval = true)
     private Set<Client> clients = new HashSet<>();
+
     @Column(name = "active", nullable = false)
     private boolean active = true;
 
@@ -27,7 +33,8 @@ public class ClientStatusType {
     public ClientStatusType() {
     }
 
-    public ClientStatusType(String title) {
+    public ClientStatusType(String code, String title) {
+        this.code = code;
         this.title = title;
     }
 
