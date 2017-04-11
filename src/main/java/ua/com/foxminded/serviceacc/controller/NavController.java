@@ -1,8 +1,5 @@
 package ua.com.foxminded.serviceacc.controller;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -11,10 +8,15 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean
 @SessionScoped
-@Getter
-@Setter
 public class NavController {
 
     private String mainContent = "/client/content.xhtml";
 
+    public String getMainContent() {
+        return mainContent;
+    }
+
+    public void setMainContent(String mainContent) {
+        this.mainContent = mainContent;
+    }
 }
