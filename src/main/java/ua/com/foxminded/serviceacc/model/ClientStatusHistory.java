@@ -20,7 +20,7 @@ import javax.persistence.TemporalType;
 public class ClientStatusHistory {
 
 	@Id
-	@SequenceGenerator(name = "generator", sequenceName = "client_status_history_id_seq")
+	@SequenceGenerator(name = "generator", sequenceName = "client_status_history_id_seq", initialValue = 1, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
