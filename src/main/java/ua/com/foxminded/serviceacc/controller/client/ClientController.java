@@ -2,6 +2,9 @@ package ua.com.foxminded.serviceacc.controller.client;
 
 import java.io.Serializable;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -12,6 +15,8 @@ import ua.com.foxminded.serviceacc.model.Client;
 @Named
 @Getter
 @Setter
+@SessionScoped
+@ManagedBean(name = "clientController")
 public class ClientController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -21,9 +26,11 @@ public class ClientController implements Serializable {
 	private boolean panelShowDisable = true;
 
 	@Inject
+	@ManagedProperty(value = "#{clientList}")
 	private ClientList clientList;
 
 	@Inject
+	@ManagedProperty(value = "#{clientCru}")
 	private ClientCru clientCru;
 
 	public void allClientsUpdate() {

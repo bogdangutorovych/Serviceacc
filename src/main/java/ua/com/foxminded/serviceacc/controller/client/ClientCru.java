@@ -7,10 +7,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import org.primefaces.model.menu.DefaultMenuItem;
-import org.primefaces.model.menu.DefaultMenuModel;
-import org.primefaces.model.menu.DefaultSubMenu;
 import org.primefaces.model.menu.MenuModel;
 
 import lombok.Getter;
@@ -21,11 +17,17 @@ import ua.com.foxminded.serviceacc.model.ClientStatusType;
 import ua.com.foxminded.serviceacc.service.ClientLevelTypeService;
 import ua.com.foxminded.serviceacc.service.ClientService;
 import ua.com.foxminded.serviceacc.service.ClientStatusTypeService;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.faces.model.SelectItem;
 
 @Named
 @Getter
 @Setter
+@SessionScoped
+@ManagedBean(name = "clientCru")
 public class ClientCru implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -35,15 +37,19 @@ public class ClientCru implements Serializable {
 	private Client selected;
 
 	@Inject
+	@ManagedProperty(value = "#{clientService}")
 	private ClientService clientService;
 
 	@Inject
+	@ManagedProperty(value = "#{clientController}")
 	private ClientController clientController;
 
 	@Inject
+	@ManagedProperty(value = "#{clientStatusTypeService}")
 	private ClientStatusTypeService clientStatusTypeService;
 
 	@Inject
+	@ManagedProperty(value = "#{clientLevelTypeService}")
 	private ClientLevelTypeService clientLevelTypeService;
 
 	private List<SelectItem> statuses;

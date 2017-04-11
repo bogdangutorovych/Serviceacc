@@ -1,5 +1,8 @@
 package ua.com.foxminded.serviceacc.controller.menu;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -9,13 +12,18 @@ import ua.com.foxminded.serviceacc.controller.ClientStatusTypeController;
 import ua.com.foxminded.serviceacc.controller.client.ClientController;
 
 @Named
-@Getter @Setter
+@Getter
+@Setter
+@SessionScoped
+@ManagedBean(name = "menu")
 public class Menu {
 
 	@Inject
+	@ManagedProperty(value = "#{clientController}")
 	private ClientController clientController;
 
 	@Inject
+	@ManagedProperty(value = "#{clientStatusTypeController}")
 	private ClientStatusTypeController clientStatusTypeController;
 
 	public void menuOnMain() {
@@ -23,9 +31,8 @@ public class Menu {
 		clientController.hide();
 	}
 
-
 	public void menuOnAll() {
-		System.out.println("menuOnAll");		
+		System.out.println("menuOnAll");
 		clientController.show();
 	}
 
