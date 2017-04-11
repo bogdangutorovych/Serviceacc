@@ -1,12 +1,18 @@
 package ua.com.foxminded.serviceacc.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "pay_status")
 public class PayStatus {
 	@Id
-	@SequenceGenerator(name = "generator", sequenceName = "pay_status_seq")
+	@SequenceGenerator(name = "generator", sequenceName = "pay_status_id_seq")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
