@@ -8,7 +8,7 @@ import javax.inject.Named;
 
 import lombok.Getter;
 import lombok.Setter;
-import ua.com.foxminded.serviceacc.controller.ClientStatusTypeController;
+import ua.com.foxminded.serviceacc.controller.catalogue.ClientStatusTypeController;
 import ua.com.foxminded.serviceacc.controller.client.ClientController;
 
 @Named
@@ -27,13 +27,21 @@ public class Menu {
 	private ClientStatusTypeController clientStatusTypeController;
 
 	public void menuOnMain() {
-		System.out.println("menuOnMain");
+		//System.out.println("menuOnMain");
 		clientController.hide();
+		clientStatusTypeController.hideForm();
 	}
 
-	public void menuOnAll() {
-		System.out.println("menuOnAll");
+	public void menuOnClients() {
+		//System.out.println("menuOnAll");
+		clientStatusTypeController.hideForm();
 		clientController.show();
+
+	}
+
+	public void menuOnClientStatusTypes() {
+		clientController.hide();
+		clientStatusTypeController.showForm();
 	}
 
 }

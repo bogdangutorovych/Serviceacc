@@ -12,7 +12,7 @@
 	<p:panelMenu style="margin-bottom:10px">
 		<p:submenu label="Client">
 			<p:menuitem value="All"
-				actionListener="#{menu.menuOnAll}"
+				actionListener="#{menu.menuOnClients}"
 				icon="ui-icon-plus" update="@form:mainLayout" />			
 		</p:submenu>
 
@@ -25,7 +25,8 @@
 		</p:submenu>
 
 		<p:submenu label="Services">
-			<p:menuitem disabled="true" value="Add" icon="ui-icon-plus" />
+			<p:menuitem value="Client status types" icon="ui-icon-document"
+						actionListener="#{menu.menuOnClientStatusTypes}" update="@form:mainLayout"/>
 		</p:submenu>
 
 	</p:panelMenu>

@@ -14,13 +14,25 @@
 			actionListener="#{clientController.onAdd}"
 			update="@form:mainLayout" />
 			
-			<p:commandButton rendered="#{clientList.show}" value="Delete"
+		<p:commandButton rendered="#{clientList.show}" value="Delete"
 			disabled="#{clientController.panelShowDisable}"			
 			actionListener="#{clientController.onDelete}"
 			update="@form:mainLayout" />
 
+		<p:commandButton rendered="#{clientStatusTypeController.isShowForm}" id="btn_add" value="Add item"
+			actionListener="#{clientStatusTypeController.add()}"
+			update="@form:mainLayout"/>
+						 <!--oncomplete="$(':clientStatusTypeList .ui-datatable-data > tr').last().find('span.ui-icon-pencil').click();"	-->
+
+
+		<p:commandButton rendered="#{clientStatusTypeController.isShowForm}" id="btn_delete" value="Delete"
+			disabled="#{clientStatusTypeController.selected==null}"
+			actionListener="#{clientStatusTypeController.delete(clientStatusTypeController.selected)}"
+			update="@form:mainLayout"/>
+
 		<ui:include src="/client/clientCru.xhtml" />
 		<ui:include src="/client/clientList.xhtml" />
+		<ui:include src="/catalogue/clientStatusType.xhtml" />
 	</h:panelGroup>
 
 </ui:composition>
