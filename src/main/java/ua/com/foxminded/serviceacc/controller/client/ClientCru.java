@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import javax.inject.Named;
-import org.primefaces.model.menu.MenuModel;
 
+import org.primefaces.model.menu.MenuModel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import lombok.Getter;
 import lombok.Setter;
 import ua.com.foxminded.serviceacc.model.Client;
@@ -19,15 +19,15 @@ import ua.com.foxminded.serviceacc.service.ClientService;
 import ua.com.foxminded.serviceacc.service.ClientStatusTypeService;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
+
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.SelectItem;
 
-@Named
+@Controller
 @Getter
 @Setter
 @SessionScoped
-@ManagedBean(name = "clientCru")
+@ManagedBean
 public class ClientCru implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -36,20 +36,16 @@ public class ClientCru implements Serializable {
 
 	private Client selected;
 
-	@Inject
-	@ManagedProperty(value = "#{clientService}")
+	@Autowired
 	private ClientService clientService;
 
-	@Inject
-	@ManagedProperty(value = "#{clientController}")
+	@Autowired
 	private ClientController clientController;
 
-	@Inject
-	@ManagedProperty(value = "#{clientStatusTypeService}")
+	@Autowired
 	private ClientStatusTypeService clientStatusTypeService;
 
-	@Inject
-	@ManagedProperty(value = "#{clientLevelTypeService}")
+	@Autowired
 	private ClientLevelTypeService clientLevelTypeService;
 
 	private List<SelectItem> statuses;

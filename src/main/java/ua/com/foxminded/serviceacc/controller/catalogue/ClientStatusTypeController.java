@@ -23,7 +23,7 @@ import ua.com.foxminded.serviceacc.service.ClientStatusTypeService;
 public class ClientStatusTypeController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private static boolean isShowForm = false;
+	private boolean isShowForm = false;
 
 	private ClientStatusType selected;
 
@@ -38,6 +38,7 @@ public class ClientStatusTypeController implements Serializable {
 	}
 
 	private ClientStatusTypeService cstService;
+
 	@Autowired
 	public ClientStatusTypeController(ClientStatusTypeService cstService) {
 		this.cstService = cstService;
@@ -65,7 +66,7 @@ public class ClientStatusTypeController implements Serializable {
 	}
 
 	public void add() {
-		ClientStatusType newStatus = new ClientStatusType("","");
+		ClientStatusType newStatus = new ClientStatusType("", "");
 		statusList.add(newStatus);
 	}
 
@@ -82,7 +83,7 @@ public class ClientStatusTypeController implements Serializable {
 
 	public void onRowCancel(RowEditEvent event) {
 		ClientStatusType status = (ClientStatusType) event.getObject();
-		if(status.getId()==null) {
+		if (status.getId() == null) {
 			statusList.remove(status);
 		}
 		selected = null;

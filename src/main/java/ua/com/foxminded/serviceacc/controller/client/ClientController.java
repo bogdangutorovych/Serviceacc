@@ -3,10 +3,10 @@ package ua.com.foxminded.serviceacc.controller.client;
 import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +16,7 @@ import ua.com.foxminded.serviceacc.model.Client;
 @Getter
 @Setter
 @SessionScoped
-@ManagedBean(name = "clientController")
+@ManagedBean
 public class ClientController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -25,12 +25,10 @@ public class ClientController implements Serializable {
 
 	private boolean panelShowDisable = true;
 
-	@Inject
-	@ManagedProperty(value = "#{clientList}")
+	@Autowired
 	private ClientList clientList;
 
-	@Inject
-	@ManagedProperty(value = "#{clientCru}")
+	@Autowired
 	private ClientCru clientCru;
 
 	public void allClientsUpdate() {
@@ -68,6 +66,7 @@ public class ClientController implements Serializable {
 	public void hide() {
 		System.out.println("hideAllClient()");
 		show = false;
+		clientCru.hide();
 		clientList.hide();
 		turnOffShow();
 	}
