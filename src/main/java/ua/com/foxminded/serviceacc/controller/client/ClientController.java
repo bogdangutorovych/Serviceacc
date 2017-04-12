@@ -1,20 +1,14 @@
 package ua.com.foxminded.serviceacc.controller.client;
 
-import java.io.Serializable;
+import org.springframework.beans.factory.annotation.Autowired;
+import ua.com.foxminded.serviceacc.model.Client;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import lombok.Getter;
-import lombok.Setter;
-import ua.com.foxminded.serviceacc.model.Client;
+import java.io.Serializable;
 
 @Named
-@Getter
-@Setter
 @SessionScoped
 @ManagedBean
 public class ClientController implements Serializable {
@@ -79,4 +73,35 @@ public class ClientController implements Serializable {
 		panelShowDisable = true;
 	}
 
+	public boolean isShow() {
+		return this.show;
+	}
+
+	public boolean isPanelShowDisable() {
+		return this.panelShowDisable;
+	}
+
+	public ClientList getClientList() {
+		return this.clientList;
+	}
+
+	public ClientCru getClientCru() {
+		return this.clientCru;
+	}
+
+	public void setShow(boolean show) {
+		this.show = show;
+	}
+
+	public void setPanelShowDisable(boolean panelShowDisable) {
+		this.panelShowDisable = panelShowDisable;
+	}
+
+	public void setClientList(ClientList clientList) {
+		this.clientList = clientList;
+	}
+
+	public void setClientCru(ClientCru clientCru) {
+		this.clientCru = clientCru;
+	}
 }

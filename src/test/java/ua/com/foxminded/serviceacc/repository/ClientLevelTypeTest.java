@@ -35,6 +35,8 @@ public class ClientLevelTypeTest {
 
     @Before
     public void fillClientStatusType(){
+        clientRepository.deleteAll();
+        clientLevelTypeRepository.deleteAll();
         List<ClientLevelType> statuses = ModelBuilder.buildListTestClientLevelType();
         clientLevelTypeRepository.save(statuses);
         assertThat(clientLevelTypeRepository.findAll(), hasSize(3));

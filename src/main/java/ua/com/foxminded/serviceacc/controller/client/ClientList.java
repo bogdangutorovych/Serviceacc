@@ -1,22 +1,17 @@
 package ua.com.foxminded.serviceacc.controller.client;
 
-import java.io.Serializable;
-import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import ua.com.foxminded.serviceacc.model.Client;
+import ua.com.foxminded.serviceacc.service.ClientService;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-
-import lombok.Getter;
-import lombok.Setter;
-import ua.com.foxminded.serviceacc.model.Client;
-import ua.com.foxminded.serviceacc.service.ClientService;
+import java.io.Serializable;
+import java.util.ArrayList;
 
 @Controller
-@Getter
-@Setter
 @SessionScoped
 @ManagedBean
 public class ClientList implements Serializable {
@@ -46,5 +41,29 @@ public class ClientList implements Serializable {
 
 	public void hide() {
 		show = false;
+	}
+
+	public ArrayList<Client> getList() {
+		return this.list;
+	}
+
+	public boolean isShow() {
+		return this.show;
+	}
+
+	public ClientService getClientService() {
+		return this.clientService;
+	}
+
+	public void setList(ArrayList<Client> list) {
+		this.list = list;
+	}
+
+	public void setShow(boolean show) {
+		this.show = show;
+	}
+
+	public void setClientService(ClientService clientService) {
+		this.clientService = clientService;
 	}
 }

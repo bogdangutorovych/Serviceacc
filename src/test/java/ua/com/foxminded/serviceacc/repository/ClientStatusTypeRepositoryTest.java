@@ -31,6 +31,8 @@ public class ClientStatusTypeRepositoryTest {
     
     @Before
     public void fillClientStatusType(){
+        clientRepository.deleteAll();
+        clientStatusTypeRepository.deleteAll();
         List<ClientStatusType> statuses = ModelBuilder.buildListTestClientStatusType();
         clientStatusTypeRepository.save(statuses);
         assertThat(clientStatusTypeRepository.findAll(), hasSize(3));

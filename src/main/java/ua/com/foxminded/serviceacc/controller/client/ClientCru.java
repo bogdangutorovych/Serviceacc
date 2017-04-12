@@ -1,16 +1,8 @@
 package ua.com.foxminded.serviceacc.controller.client;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-
 import org.primefaces.model.menu.MenuModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import lombok.Getter;
-import lombok.Setter;
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.ClientLevelType;
 import ua.com.foxminded.serviceacc.model.ClientStatusType;
@@ -18,14 +10,15 @@ import ua.com.foxminded.serviceacc.service.ClientLevelTypeService;
 import ua.com.foxminded.serviceacc.service.ClientService;
 import ua.com.foxminded.serviceacc.service.ClientStatusTypeService;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.SelectItem;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
-@Getter
-@Setter
 @SessionScoped
 @ManagedBean
 public class ClientCru implements Serializable {
@@ -133,4 +126,91 @@ public class ClientCru implements Serializable {
 		clientService.delete(selected.getId());
 	}
 
+	public boolean isShow() {
+		return this.show;
+	}
+
+	public Client getSelected() {
+		return this.selected;
+	}
+
+	public ClientService getClientService() {
+		return this.clientService;
+	}
+
+	public ClientController getClientController() {
+		return this.clientController;
+	}
+
+	public ClientStatusTypeService getClientStatusTypeService() {
+		return this.clientStatusTypeService;
+	}
+
+	public ClientLevelTypeService getClientLevelTypeService() {
+		return this.clientLevelTypeService;
+	}
+
+	public List<SelectItem> getStatuses() {
+		return this.statuses;
+	}
+
+	public List<SelectItem> getLevels() {
+		return this.levels;
+	}
+
+	public MenuModel getLevel() {
+		return this.level;
+	}
+
+	public String getStatusSelected() {
+		return this.statusSelected;
+	}
+
+	public String getLevelSelected() {
+		return this.levelSelected;
+	}
+
+	public void setShow(boolean show) {
+		this.show = show;
+	}
+
+	public void setSelected(Client selected) {
+		this.selected = selected;
+	}
+
+	public void setClientService(ClientService clientService) {
+		this.clientService = clientService;
+	}
+
+	public void setClientController(ClientController clientController) {
+		this.clientController = clientController;
+	}
+
+	public void setClientStatusTypeService(ClientStatusTypeService clientStatusTypeService) {
+		this.clientStatusTypeService = clientStatusTypeService;
+	}
+
+	public void setClientLevelTypeService(ClientLevelTypeService clientLevelTypeService) {
+		this.clientLevelTypeService = clientLevelTypeService;
+	}
+
+	public void setStatuses(List<SelectItem> statuses) {
+		this.statuses = statuses;
+	}
+
+	public void setLevels(List<SelectItem> levels) {
+		this.levels = levels;
+	}
+
+	public void setLevel(MenuModel level) {
+		this.level = level;
+	}
+
+	public void setStatusSelected(String statusSelected) {
+		this.statusSelected = statusSelected;
+	}
+
+	public void setLevelSelected(String levelSelected) {
+		this.levelSelected = levelSelected;
+	}
 }
