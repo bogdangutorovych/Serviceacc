@@ -2,17 +2,20 @@ package ua.com.foxminded.serviceacc.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.repository.ClientRepository;
+import ua.com.foxminded.serviceacc.model.Client;
 
 /**
  * Created by andreb on 31.03.17.
  */
 @Service("clientService")
 public class ClientServiceDataJpa implements ClientService {
+
+	private static Logger LOG = LoggerFactory.getLogger(ClientServiceDataJpa.class);
 
 	@Autowired
 	ClientRepository clientRepository;
@@ -29,12 +32,14 @@ public class ClientServiceDataJpa implements ClientService {
 
 	@Override
 	public Client findById(Long clientId) {
-		return clientRepository.findOneEagerly(clientId);
+		return clientRepository.findOne(clientId);
 	}
 
 	@Override
 	public List<Client> findAll() {
-		return clientRepository.findAllAndFetchEagerly();
+		List<Client> clients = clientRepository.findAllByFetch();
+		LOG.info("List: " + clients);
+		return clients;
 	}
 
 	@Override

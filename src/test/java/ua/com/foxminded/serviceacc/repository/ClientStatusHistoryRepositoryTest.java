@@ -12,6 +12,7 @@ import ua.com.foxminded.serviceacc.model.ClientStatusType;
 
 import java.util.List;
 
+
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
 
@@ -29,8 +30,6 @@ public class ClientStatusHistoryRepositoryTest {
     ClientStatusHistoryRepository clientStatusHistoryRepository;
     @Autowired
     ClientStatusTypeRepository clientStatusTypeRepository;
-    @Autowired
-    PersonRepository personRepository;
 
     @Before
     public void fillClientStatusType(){
@@ -51,7 +50,6 @@ public class ClientStatusHistoryRepositoryTest {
     public void saveClientStatusHistory(){
         Client client = ModelBuilder.buildTestClient();
         ClientStatusType active = clientStatusTypeRepository.findOneByTitle("Active");
-        personRepository.save(client.getPerson());
         clientRepository.save(client);
         ClientStatusHistory csh = ModelBuilder.buildTestClientHistory(client, client.getStatus());
         clientStatusHistoryRepository.save(csh);
@@ -65,4 +63,5 @@ public class ClientStatusHistoryRepositoryTest {
         assertThat(clientStatusHistoryRepository.findAll(), hasSize(2));
 
     }
+
 }

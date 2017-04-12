@@ -5,23 +5,26 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-	<p:dataTable id="table" rendered="#{clientList.isShowClients}"
-		var="client" value="#{clientList.list}" selectionMode="single"
-		selection="#{clientSelected.selectedClient}" rowKey="#{client.id}">
-		<p:column headerText="id">
-			<h:outputText value="#{client.id}" />
-		</p:column>
-		<p:column headerText="first name">
-			<h:outputText value="#{client.person.firstName}" />
-		</p:column>
-		<p:column headerText="second name">
-			<h:outputText value="#{client.person.lastName}" />
-		</p:column>
-		
-	</p:dataTable>
-	<p:contextMenu for="table">
-		<p:menuitem value="View"
-			actionListener="#{clientController.onRowSelect}"
-			update="@form:clientMain" />
-	</p:contextMenu>
+	<h:panelGrid rendered="#{clientList.show}">
+		<p:dataTable id="table" var="client" value="#{clientList.list}"
+			selectionMode="single" selection="#{clientCru.selected}"
+			rowKey="#{client.id}">
+			<p:ajax event="rowSelect" listener="#{clientController.turnOnShow}" update="@form:mainLayout" />
+			<p:column headerText="id">
+				<h:outputText value="#{client.id}" />
+			</p:column>
+			<p:column headerText="first name">
+				<h:outputText value="#{client.firstName}" />
+			</p:column>
+			<p:column headerText="last name">
+				<h:outputText value="#{client.lastName}" />
+			</p:column>
+			<p:column headerText="status">
+				<h:outputText value="#{client.status.title}" />
+			</p:column>
+			<p:column headerText="level">
+				<h:outputText value="#{client.level.title}" />
+			</p:column>
+		</p:dataTable>
+	</h:panelGrid>
 </ui:composition>

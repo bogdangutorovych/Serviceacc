@@ -9,6 +9,7 @@
 mvnw*
 /out/
 .tern-project
+.metadata
 
 ### STS ###
 .apt_generated
@@ -27,3 +28,4 @@ mvnw*
 *.jar
 *.war
 *.ear
+/bin/

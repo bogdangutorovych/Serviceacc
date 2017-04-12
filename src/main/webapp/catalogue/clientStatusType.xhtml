@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:panelGrid rendered="#{clientStatusTypeController.isShowForm}">
+
+        <p:dataTable id="clientStatusTypeList" editable="true"
+                     var="s" value="#{clientStatusTypeController.statusList}" rowKey="#{clientStatusTypeController.statusList.indexOf(s)}"
+                     emptyMessage="No items yet" selectionMode="single" selection="#{clientStatusTypeController.selected}">
+
+            <f:facet name="header">Client Status Types</f:facet>
+            <p:ajax event="rowEdit" listener="#{clientStatusTypeController.onRowEdit}"/>
+            <p:ajax event="rowEditCancel" listener="#{clientStatusTypeController.onRowCancel}"/>
+            <p:ajax event="rowSelect" update="@form:btn_delete" immediate="true"/>
+            <p:ajax event="rowUnselect" update="@form:btn_delete" immediate="true"/>
+
+            <p:column headerText="id" sortBy="#{s.id}">
+                #{s.id}
+            </p:column>
+
+            <p:column headerText="code">
+                <p:cellEditor>
+                    <f:facet name="output"><h:outputText value="#{s.code}" /></f:facet>
+                    <f:facet name="input"><p:inputText value="#{s.code}" style="width:100%" label="Code"/></f:facet>
+                </p:cellEditor>
+            </p:column>
+
+            <p:column headerText="title">
+                <p:cellEditor>
+                    <f:facet name="output"><h:outputText value="#{s.title}" /></f:facet>
+                    <f:facet name="input"><p:inputText value="#{s.title}" style="width:100%" label="Title"/></f:facet>
+                </p:cellEditor>
+            </p:column>
+
+            <p:column style="width:32px">
+                <p:rowEditor />
+            </p:column>
+
+        </p:dataTable>
+    </h:panelGrid>
+</ui:composition>

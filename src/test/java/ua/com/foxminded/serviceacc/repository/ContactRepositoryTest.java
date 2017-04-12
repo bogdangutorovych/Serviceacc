@@ -9,6 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ua.com.foxminded.serviceacc.config.PersistenceConfig;
 import ua.com.foxminded.serviceacc.model.Contact;
 
+
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
@@ -20,8 +21,6 @@ import static org.junit.Assert.assertThat;
 @ContextConfiguration(classes = {PersistenceConfig.class})
 public class ContactRepositoryTest {
 
-    @Autowired
-    PersonRepository personRepository;
     @Autowired
     ContactRepository contactRepository;
 
@@ -43,11 +42,8 @@ public class ContactRepositoryTest {
         Contact contact = ModelBuilder.buildTestContact();
         contactRepository.save(contact);
         assertThat(contactRepository.findAll(), hasSize(1));
-
-//        contact.setContactType(ContactType.mail);
-//        contactRepository.save(contact);
-//        assertThat((contactRepository.findOne(contact.getId())).getContactType(), is(ContactType.mail));
     }
+
 
     @Test
     public void deleteContact(){
