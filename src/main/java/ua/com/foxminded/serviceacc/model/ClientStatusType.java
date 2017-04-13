@@ -23,9 +23,6 @@ public class ClientStatusType {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "status", orphanRemoval = true)
-    private Set<Client> clients = new HashSet<>();
-
     @Column(name = "active", nullable = false)
     private boolean active = true;
 
@@ -54,14 +51,6 @@ public class ClientStatusType {
         this.title = title;
     }
 
-    public Set<Client> getClients() {
-        return clients;
-    }
-
-    public void setClients(Set<Client> clients) {
-        this.clients = clients;
-    }
-
     public boolean isActive() {
         return active;
     }
@@ -80,6 +69,21 @@ public class ClientStatusType {
 
     @Override
     public String toString() {
-        return title + " (" + id + ")";
+        return title;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ClientStatusType that = (ClientStatusType) o;
+
+        return id != null ? id.equals(that.id) : that.id == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 }

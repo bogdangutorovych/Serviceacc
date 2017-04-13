@@ -27,6 +27,7 @@ public class ClientLevelType {
 
     public ClientLevelType(){
     }
+
     public ClientLevelType(String code, String title){
         this.code = code;
         this.title = title;
@@ -38,6 +39,14 @@ public class ClientLevelType {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getTitle() {
@@ -66,6 +75,21 @@ public class ClientLevelType {
 
     @Override
     public String toString() {
-        return title + " (" + id + ")";
+        return title;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ClientLevelType that = (ClientLevelType) o;
+
+        return id != null ? id.equals(that.id) : that.id == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 }

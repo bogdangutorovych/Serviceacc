@@ -11,7 +11,6 @@ import ua.com.foxminded.serviceacc.service.ClientStatusTypeService;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
 import java.util.List;
