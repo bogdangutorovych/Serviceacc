@@ -9,36 +9,45 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
+import java.util.List;
 
 @Controller
 @ViewScoped
 @ManagedBean
-public class ClientController implements Serializable {
+public class ClientListController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Client selectedClient;
+	private static List<Client> list;
+
+	private Client selected;
 
 	private final ClientService clientService;
 	@Autowired
-	public ClientController(ClientService clientService) {
+	public ClientListController(ClientService clientService) {
 		this.clientService = clientService;
 	}
 
 	@PostConstruct
 	public void init() {
-		selectedClient = new Client();
+		list = clientService.findAll();
 	}
 
-	public void onOk() {
-		clientService.update(selectedClient);
+	public List<Client> getList() {
+		return list;
 	}
 
-	public Client getSelectedClient() {
-		return selectedClient;
+	public Client getSelected() {
+		return selected;
 	}
 
-	public void setSelectedClient(Client selectedClient) {
-		this.selectedClient = selectedClient;
+	public void setSelected(Client selected) {
+		this.selected = selected;
+	}
+
+	public void delete() {
+		list.remove(selected);
+		clientService.delete(selected.getId());
+		selected = null;
 	}
 }

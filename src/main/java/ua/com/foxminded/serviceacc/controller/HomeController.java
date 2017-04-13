@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
     @RequestMapping("/")
     public String home() {
-        return "template.xhtml";
+        return "templates/masterLayout.xhtml";
     }
 
 }
