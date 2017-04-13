@@ -7,12 +7,14 @@
 	<p:toolbar>
 		<f:facet name="left">
 			<p:commandButton id="btn_add" value="New" update=":contentForm" icon="ui-icon-document"
+							 actionListener="#{clientController.add()}"
 							 action='#{navController.setMainContent("/client/client.xhtml")}'/>
 
 			<span class="ui-separator"><span class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
 			<p:commandButton  id="btn_edit" value="Edit" update=":contentForm" icon="ui-icon-pencil"
 							  disabled="#{clientController.selectedClient==null}"
+							  actionListener="#{clientController.getActualLists()}"
 							  action='#{navController.setMainContent("/client/client.xhtml")}'/>
 
 			<span class="ui-separator"><span class="ui-icon ui-icon-grip-dotted-vertical" /></span>
@@ -42,13 +44,13 @@
 		<p:column headerText="First name" sortBy="#{c.firstName}">
             <h:outputText value="#{c.firstName}" />
 		</p:column>
-		<p:column headerText="last name">
+		<p:column headerText="last name" sortBy="#{c.lastName}">
 			<h:outputText value="#{c.lastName}" />
 		</p:column>
-		<p:column headerText="status">
+		<p:column headerText="status" sortBy="#{c.status}">
 			<h:outputText value="#{c.status.title}" />
 		</p:column>
-		<p:column headerText="level">
+		<p:column headerText="level" sortBy="#{c.level}">
 			<h:outputText value="#{c.level.title}" />
 		</p:column>
 

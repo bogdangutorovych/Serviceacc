@@ -12,19 +12,17 @@ import ua.com.foxminded.serviceacc.service.ClientStatusTypeService;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
 import java.util.List;
 
 @Controller
-@RequestScoped
+@ViewScoped
 @ManagedBean
 public class ClientController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@ManagedProperty(value = "selectedClient")
 	private Client selectedClient;
 
 	private static List<Client> list;
@@ -45,12 +43,23 @@ public class ClientController implements Serializable {
 	@PostConstruct
 	public void init() {
 		list = clientService.findAll();
+	}
+
+	public void add() {
 		selectedClient = new Client();
+		getActualLists();
+	}
+
+	public void getActualLists() {
 		availableStatuses = cstService.findAll();
 		availableLevels = cltService.findAll();
 	}
 
 	public void onOk() {
+		if(selectedClient.getId() == null) {
+			list.add(selectedClient);
+		}
+
 		clientService.update(selectedClient);
 	}
 

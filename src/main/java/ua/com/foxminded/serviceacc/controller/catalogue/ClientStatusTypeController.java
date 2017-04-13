@@ -70,7 +70,6 @@ public class ClientStatusTypeController implements Serializable {
         if (status.getId() == null) {
             statusList.remove(status);
         }
-        //selected = null;
     }
 
 }
