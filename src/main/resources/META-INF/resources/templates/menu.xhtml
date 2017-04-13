@@ -8,13 +8,13 @@
 		<p:growl autoUpdate="true" />
 		<p:menubar style="margin-bottom:10px">
 
-			<p:menuitem value="Clients" icon="ui-icon-plus" update="contentForm"
-						action='#{navController.setMainContent("/client/content.xhtml")}'/>
+			<p:menuitem value="Clients" icon="ui-icon-plus" update=":contentForm"
+						action='#{navController.setMainContent("/client/clientList.xhtml")}'/>
 			<p:menuitem value="Managers" icon="ui-icon-plus" />
 			<p:menuitem value="Invoices" icon="ui-icon-plus" />
 			<p:menuitem value="Services" icon="ui-icon-plus" />
 			<p:submenu label="Settings">
-				<p:menuitem value="ClientStatusType" icon="ui-icon-plus" update="contentForm"
+				<p:menuitem value="ClientStatusType" icon="ui-icon-plus" update=":contentForm"
 							action='#{navController.setMainContent("/catalogue/clientStatusType.xhtml")}'/>
 			</p:submenu>
 		</p:menubar>

@@ -17,10 +17,10 @@ public class ClientStatusType {
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @Column(name = "code")
+    @Column(name = "code", unique = true, nullable = false)
     private String code;
 
-    @Column(name = "title")
+    @Column(name = "title", nullable = false)
     private String title;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "status", orphanRemoval = true)

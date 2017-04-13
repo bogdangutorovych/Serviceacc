@@ -18,6 +18,8 @@ import java.util.List;
 public class ClientStatusTypeController implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    private ClientStatusType selected;
+
     private static List<ClientStatusType> statusList;
 
     private ClientStatusTypeService cstService;
@@ -31,26 +33,44 @@ public class ClientStatusTypeController implements Serializable {
         statusList = cstService.findAll();
     }
 
+    public ClientStatusTypeService getCstService() {
+        return cstService;
+    }
+
     public List<ClientStatusType> getStatusList() {
         return statusList;
     }
 
-    public void setService(ClientStatusTypeService service) {
-        this.cstService = service;
+    public ClientStatusType getSelected() {
+        return selected;
+    }
+
+    public void setSelected(ClientStatusType selected) {
+        this.selected = selected;
     }
 
     public void add() {
-        ClientStatusType newStatus = new ClientStatusType("","");
-        statusList.add(newStatus);
-        cstService.save(newStatus);
+        selected = new ClientStatusType("", "");
+        statusList.add(selected);
     }
 
-    public void delete(ClientStatusType status) {
-        statusList.remove(status);
-        cstService.delete(status.getId());
+    public void delete() {
+        statusList.remove(selected);
+        cstService.delete(selected.getId());
+        selected = null;
     }
 
     public void onRowEdit(RowEditEvent event) {
-        cstService.save(((ClientStatusType) event.getObject()));
+        cstService.save((ClientStatusType) event.getObject());
+        selected = null;
     }
+
+    public void onRowCancel(RowEditEvent event) {
+        ClientStatusType status = (ClientStatusType) event.getObject();
+        if (status.getId() == null) {
+            statusList.remove(status);
+        }
+        //selected = null;
+    }
+
 }

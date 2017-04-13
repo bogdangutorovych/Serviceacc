@@ -16,7 +16,9 @@ public class ClientLevelType {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
     @Column (name = "id", unique = true, nullable = false)
     private Long id;
-    @Column (name = "title", unique = true, nullable = false)
+    @Column (name = "code", unique = true, nullable = false)
+    private String code;
+    @Column (name = "title", nullable = false)
     private String title;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "level", orphanRemoval = true)
     private Set<Client> clients = new HashSet<>();
@@ -25,7 +27,8 @@ public class ClientLevelType {
 
     public ClientLevelType(){
     }
-    public ClientLevelType(String title){
+    public ClientLevelType(String code, String title){
+        this.code = code;
         this.title = title;
     }
 
