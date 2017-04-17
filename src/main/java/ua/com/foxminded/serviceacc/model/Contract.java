@@ -1,19 +1,7 @@
 package ua.com.foxminded.serviceacc.model;
 
 import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "contract")
@@ -32,24 +20,24 @@ public class Contract {
 	@Column(name = "date")
 	private Date date;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "client_id")
 	private Client client;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "manager_id")
 	private Manager manager;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "service_id")
 	private Service service;
 
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "clientRate")
+	@JoinColumn(name = "client_rate")
 	private Money clientRate;
 
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "managerRate")
+	@JoinColumn(name = "manager_rate")
 	private Money managerRate;
 
 	@Column(name = "active", nullable = false)
