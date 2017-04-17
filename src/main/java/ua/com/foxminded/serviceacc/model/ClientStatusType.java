@@ -11,7 +11,6 @@ import java.util.Set;
 @Entity
 @Table(name = "client_status_type")
 public class ClientStatusType {
-
     @Id
     @SequenceGenerator(name = "generator", sequenceName = "client_id_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
@@ -21,11 +20,8 @@ public class ClientStatusType {
     @Column(name = "code", unique = true, nullable = false)
     private String code;
 
-    @Column (name = "title", unique = true, nullable = false)
+    @Column(name = "title", nullable = false)
     private String title;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "status", orphanRemoval = true)
-    private Set<Client> clients = new HashSet<>();
 
     @Column(name = "active", nullable = false)
     private boolean active = true;
@@ -33,9 +29,10 @@ public class ClientStatusType {
 
     public ClientStatusType() {
     }
+
     public ClientStatusType(String code, String title) {
-        this.title = title;
         this.code = code;
+        this.title = title;
     }
 
     public Long getId() {
@@ -46,14 +43,6 @@ public class ClientStatusType {
         this.id = id;
     }
 
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -62,19 +51,39 @@ public class ClientStatusType {
         this.title = title;
     }
 
-    public Set<Client> getClients() {
-        return clients;
-    }
-
-    public void setClients(Set<Client> clients) {
-        this.clients = clients;
-    }
-
     public boolean isActive() {
         return active;
     }
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    @Override
+    public String toString() {
+        return title;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ClientStatusType that = (ClientStatusType) o;
+
+        return id != null ? id.equals(that.id) : that.id == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 }

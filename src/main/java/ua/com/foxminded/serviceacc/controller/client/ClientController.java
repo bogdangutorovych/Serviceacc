@@ -1,83 +1,91 @@
 package ua.com.foxminded.serviceacc.controller.client;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import ua.com.foxminded.serviceacc.model.Client;
+import ua.com.foxminded.serviceacc.model.ClientLevelType;
+import ua.com.foxminded.serviceacc.model.ClientStatusType;
+import ua.com.foxminded.serviceacc.service.ClientLevelTypeService;
+import ua.com.foxminded.serviceacc.service.ClientService;
+import ua.com.foxminded.serviceacc.service.ClientStatusTypeService;
 
-import java.io.Serializable;
-
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
+import java.io.Serializable;
+import java.util.List;
 
-@Component
-//@ViewScoped
+@Controller
+@ViewScoped
+@ManagedBean
 public class ClientController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private Client selectedClient;
+
+	private static List<Client> list;
+
+	private List<ClientStatusType> availableStatuses;
+	private List<ClientLevelType> availableLevels;
+
+	private final ClientService clientService;
+	private final ClientStatusTypeService cstService;
+	private final ClientLevelTypeService cltService;
 	@Autowired
-	private ClientList clientList;
-
-	@Autowired
-	private ClientAddNew clientAddNew;
-
-	@Autowired
-	private ClientSelected clientSelected;
-
-	public void allClientsUpdate() {
-		clientList.updateData();
+	public ClientController(ClientService clientService, ClientStatusTypeService cstService, ClientLevelTypeService cltService) {
+		this.clientService = clientService;
+		this.cstService = cstService;
+		this.cltService = cltService;
 	}
 
-	public void onRowSelect() {
-		clientAddNew.hide();
-		clientSelected.show();
+	@PostConstruct
+	public void init() {
+		list = clientService.findAll();
 	}
 
-	public void menuOnMain() {
-		clientList.hide();
+	public void add() {
+		selectedClient = new Client();
+		getActualLists();
 	}
 
-	public void blockTable() {
-		clientList.block();
+	public void getActualLists() {
+		availableStatuses = cstService.findAll();
+		availableLevels = cltService.findAll();
 	}
 
-	public void unBlockTable() {
-		clientList.unBlock();
+	public void onOk() {
+		if(selectedClient.getId() == null) {
+			list.add(selectedClient);
+		}
+
+		clientService.update(selectedClient);
 	}
 
-	public void showAllClient() {
-		clientList.show();
+	public void setSelectedClient(Client selectedClient) {
+		this.selectedClient = selectedClient;
 	}
 
-	public void hideAllClient() {
-		clientList.hide();
+	public Client getSelectedClient() {
+		return selectedClient;
+
 	}
 
-	public void showNewClientForm() {
-		clientSelected.hide();
-		clientAddNew.show();
+	public List<Client> getList() {
+		return list;
 	}
 
-	public void hideNewClientForm() {
-		clientAddNew.hide();
+	public void delete() {
+		list.remove(selectedClient);
+		clientService.delete(selectedClient.getId());
+		selectedClient = null;
 	}
 
-	public ClientAddNew getNewClient() {
-		return clientAddNew;
+	public List<ClientStatusType> getAvailableStatuses() {
+		return availableStatuses;
 	}
 
-	public void setNewClient(ClientAddNew clientAddNew) {
-		this.clientAddNew = clientAddNew;
+	public List<ClientLevelType> getAvailableLevels() {
+		return availableLevels;
 	}
-
-	public ClientSelected getClientSelected() {
-		return clientSelected;
-	}
-
-	public void setClientSelected(ClientSelected clientSelected) {
-		this.clientSelected = clientSelected;
-	}
-
 }

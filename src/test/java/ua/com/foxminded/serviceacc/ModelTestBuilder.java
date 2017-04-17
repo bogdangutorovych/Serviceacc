@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Created by andreb on 09.04.17.
+ *
  */
 public class ModelTestBuilder {
 
@@ -29,27 +30,12 @@ public class ModelTestBuilder {
         Contact contact = new Contact();
         contact.setContactName("066-123-45-67");
         contact.setContactType(null);
-        contact.setPerson(null);
 
         return contact;
     }
 
-    public static Person buildTestPerson(){
-        Person person = new Person();
-        person.setFirstName("Ivan");
-        person.setLastName("Petrov");
-        person.setBirthday(new Date());
-
-        Contact contact = buildTestContact();
-        contact.setPerson(person);
-
-        return person;
-    }
-
     public static Client buildTestClient(){
-        Person person = buildTestPerson();
         Client client = new Client();
-        client.setPerson(person);
         client.setStatus(null);
         client.setLevel(null);
         client.setManager(null);
@@ -58,14 +44,10 @@ public class ModelTestBuilder {
     }
 
     public static Manager buildTestManager(){
-        Person person = buildTestPerson();
-        person.setFirstName("Andrey");
-        person.setFirstName("Sidorov");
 
         Client client = buildTestClient();
 
         Manager manager = new Manager();
-        manager.setPerson(person);
         manager.getClients().add(client);
 
         return manager;
@@ -97,8 +79,4 @@ public class ModelTestBuilder {
         return levels;
     }
 
-//    public List<ContactType> buildTestContactTypeList(){
-//        List<>
-//        return contactTypes;
-//    }
 }

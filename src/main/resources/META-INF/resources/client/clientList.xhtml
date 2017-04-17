@@ -1,27 +1,59 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+				xmlns:f="http://xmlns.jcp.org/jsf/core"
+				xmlns:h="http://xmlns.jcp.org/jsf/html"
+				xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+				xmlns:p="http://primefaces.org/ui">
 
-	<p:dataTable id="table" rendered="#{clientList.isShowClients}"
-		var="client" value="#{clientList.list}" selectionMode="single"
-		selection="#{clientSelected.selectedClient}" rowKey="#{client.id}">
-		<p:column headerText="id">
-			<h:outputText value="#{client.id}" />
+	<p:toolbar>
+		<f:facet name="left">
+			<p:commandButton id="btn_add" value="New" update=":contentForm" icon="ui-icon-document"
+							 actionListener="#{clientController.add()}"
+							 action='#{navController.setMainContent("/client/client.xhtml")}'/>
+
+			<span class="ui-separator"><span class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+
+			<p:commandButton  id="btn_edit" value="Edit" update=":contentForm" icon="ui-icon-pencil"
+							  disabled="#{clientController.selectedClient==null}"
+							  actionListener="#{clientController.getActualLists()}"
+							  action='#{navController.setMainContent("/client/client.xhtml")}'/>
+
+			<span class="ui-separator"><span class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+
+			<p:commandButton  id="btn_delete" value="Delete" update=":contentForm" icon="ui-icon-trash"
+							  disabled="#{clientController.selectedClient==null}"
+							  actionListener="#{clientController.delete()}"/>
+
+		</f:facet>
+	</p:toolbar>
+
+	<br/>
+
+	<p:dataTable id="clientList" editable="true" emptyMessage="No items yet"
+				 var="c" value="#{clientController.list}"
+				 rowKey="#{clientController.list.indexOf(c)}"
+				 selectionMode="single" selection="#{clientController.selectedClient}">
+
+		<f:facet name="header">Clients</f:facet>
+		<p:ajax event="rowSelect" update="@form:btn_edit,@form:btn_delete" immediate="true"/>
+		<p:ajax event="rowUnselect" update="@form:btn_edit,@form:btn_delete" immediate="true"/>
+
+		<p:column headerText="id" sortBy="#{c.id}">
+			#{c.id}
 		</p:column>
-		<p:column headerText="first name">
-			<h:outputText value="#{client.person.firstName}" />
+
+		<p:column headerText="First name" sortBy="#{c.firstName}">
+            <h:outputText value="#{c.firstName}" />
 		</p:column>
-		<p:column headerText="second name">
-			<h:outputText value="#{client.person.lastName}" />
+		<p:column headerText="last name" sortBy="#{c.lastName}">
+			<h:outputText value="#{c.lastName}" />
 		</p:column>
-		
+		<p:column headerText="status" sortBy="#{c.status}">
+			<h:outputText value="#{c.status.title}" />
+		</p:column>
+		<p:column headerText="level" sortBy="#{c.level}">
+			<h:outputText value="#{c.level.title}" />
+		</p:column>
+
 	</p:dataTable>
-	<p:contextMenu for="table">
-		<p:menuitem value="View"
-			actionListener="#{clientController.onRowSelect}"
-			update="@form:clientMain" />
-	</p:contextMenu>
+
 </ui:composition>

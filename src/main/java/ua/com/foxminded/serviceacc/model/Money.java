@@ -1,24 +1,31 @@
 package ua.com.foxminded.serviceacc.model;
 
-import javax.persistence.*;
 import java.util.Currency;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "money")
 public class Money {
-	
+
 	@Id
-	@SequenceGenerator(name = "generator", sequenceName = "money_id_seq")
+	@SequenceGenerator(name = "generator", sequenceName = "money_id_seq", initialValue = 1, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
-	
+
 	@Column(name = "currency")
 	private Currency currency;
-	
+
 	@Column(name = "amount")
 	private int amount;
-	
+
 	@Column(name = "active", nullable = false)
 	private boolean active = true;
 

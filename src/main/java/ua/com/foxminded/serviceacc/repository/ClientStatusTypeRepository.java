@@ -10,6 +10,4 @@ import ua.com.foxminded.serviceacc.model.ClientStatusType;
  */
 public interface ClientStatusTypeRepository extends JpaRepository<ClientStatusType, Long>, JpaSpecificationExecutor {
     ClientStatusType findOneByTitle(String status);
-    @Query("SELECT c FROM ClientStatusType c JOIN FETCH c.clients WHERE c.title = ?1")
-    ClientStatusType findAllAndFetchClientEagerly(String status);
 }
