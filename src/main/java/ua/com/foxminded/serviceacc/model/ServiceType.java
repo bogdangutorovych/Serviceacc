@@ -19,10 +19,10 @@ public class ServiceType {
 
 	@Column(name = "code", unique = true, nullable = false)
 	private String code;
-	
+
 	@Column (name = "title", nullable = false)
 	private String title;
-	
+
 	@Column(name = "active", nullable = false)
 	private boolean active = true;
 
@@ -66,6 +66,6 @@ public class ServiceType {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-	
-	
+
+
 }

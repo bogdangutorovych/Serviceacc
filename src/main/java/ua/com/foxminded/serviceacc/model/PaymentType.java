@@ -17,7 +17,7 @@ public class PaymentType {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
 	@Column (name = "id", unique = true, nullable = false)
 	private Long id;
-	
+
 	@Column(name = "code", unique = true, nullable = false)
 	private String code;
 
@@ -26,7 +26,7 @@ public class PaymentType {
 
 	@Column(name = "active", nullable = false)
 	private boolean active = true;
-	
+
 	public PaymentType() {
 	}
 
@@ -67,6 +67,6 @@ public class PaymentType {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-	
-	
+
+
 }

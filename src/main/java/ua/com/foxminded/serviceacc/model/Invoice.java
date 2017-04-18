@@ -18,41 +18,40 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "invoice")
 public class Invoice {
-	
+
 	@Id
 	@SequenceGenerator(name = "generator", sequenceName = "invoice_id_seq", initialValue = 1, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
-	
+
 	@Column(name = "number")
 	private String number;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date")
 	private Date date;
-	
-	@ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "contract_id")
+
+	@ManyToOne (fetch = FetchType.EAGER)
+	@JoinColumn (name = "contract_id")
 	private Contract contract;
-	
-	@ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "money_id")
+
+	@ManyToOne (fetch = FetchType.EAGER)
+	@JoinColumn (name = "money_id")
 	private Money price;
-	
-	@ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "payStatus_id")
+
+	@ManyToOne (fetch = FetchType.EAGER)
+	@JoinColumn (name = "payStatus_id")
 	private PayStatus status;
-	
-	@ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "payment_id")
+
+	@ManyToOne (fetch = FetchType.EAGER)
+	@JoinColumn (name = "payment_id")
 	private Payment payment;
-	
+
 	@Column(name = "active", nullable = false)
 	private boolean active = true;
 
 	public Invoice() {
-
 	}
 
 	public Invoice(String number, Date date, Contract contract, Money price, PayStatus status, Payment payment) {
@@ -120,4 +119,11 @@ public class Invoice {
 		this.payment = payment;
 	}
 
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 }

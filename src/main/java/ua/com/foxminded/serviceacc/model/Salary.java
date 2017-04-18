@@ -22,32 +22,32 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "salary")
 public class Salary {
-	
+
 	@Id
 	@SequenceGenerator(name = "generator", sequenceName = "salary_id_seq", initialValue = 1, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
-	
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date")
 	private Date date;
-	
-	@ManyToOne (fetch = FetchType.LAZY)
+
+	@ManyToOne (fetch = FetchType.EAGER)
 	@JoinColumn(name = "manager_id")
 	private Manager manager;
-	
-	@ManyToOne (fetch = FetchType.LAZY)
+
+	@ManyToOne (fetch = FetchType.EAGER)
 	@JoinColumn(name = "money_id")
 	private Money amount;
-	
-	@ManyToOne (fetch = FetchType.LAZY)
+
+	@ManyToOne (fetch = FetchType.EAGER)
 	@JoinColumn(name = "payStatus_id")
 	private PayStatus status;
-	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Invoice> invoices = new HashSet<>();
-	
+
 	@Column(name = "active", nullable = false)
 	private boolean active = true;
 
@@ -111,4 +111,11 @@ public class Salary {
 		this.invoices = invoices;
 	}
 
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 }

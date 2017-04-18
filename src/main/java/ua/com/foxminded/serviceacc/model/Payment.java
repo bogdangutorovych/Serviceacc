@@ -18,28 +18,28 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "payment")
 public class Payment {
-	
+
 	@Id
 	@SequenceGenerator(name = "generator", sequenceName = "payment_id_seq", initialValue = 1, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
-	
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date")
 	private Date date;
-	
-	@ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "money_id")
+
+	@ManyToOne (fetch = FetchType.EAGER)
+	@JoinColumn (name = "money_id")
 	private Money money;
-	
-	@ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "paymentType_id")
+
+	@ManyToOne (fetch = FetchType.EAGER)
+	@JoinColumn (name = "paymentType_id")
 	private PaymentType type;
 
 	@Column(name = "active", nullable = false)
 	private boolean active = true;
-	
+
 	public Payment() {
 
 	}
@@ -82,4 +82,11 @@ public class Payment {
 		this.type = type;
 	}
 
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 }

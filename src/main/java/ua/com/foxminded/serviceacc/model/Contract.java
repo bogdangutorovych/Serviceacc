@@ -35,20 +35,20 @@ public class Contract {
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "client_id")
 	private Client client;
-	
-	@OneToOne(fetch = FetchType.LAZY)
+
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "manager_id")
 	private Manager manager;
-	
-	@OneToOne(fetch = FetchType.LAZY)
+
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "service_id")
 	private Service service;
-	
-	@OneToOne(fetch = FetchType.LAZY)
+
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "clientRate")
 	private Money clientRate;
-	
-	@OneToOne(fetch = FetchType.LAZY)
+
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "managerRate")
 	private Money managerRate;
 
@@ -60,7 +60,7 @@ public class Contract {
 	}
 
 	public Contract(String number, Date date, Client client, Manager manager, Service service, Money clientRate,
-			Money managerRate) {
+					Money managerRate) {
 		this.number = number;
 		this.date = date;
 		this.client = client;
@@ -134,4 +134,11 @@ public class Contract {
 		this.managerRate = managerRate;
 	}
 
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 }

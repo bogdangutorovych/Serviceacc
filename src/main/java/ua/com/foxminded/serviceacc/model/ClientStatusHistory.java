@@ -25,11 +25,11 @@ public class ClientStatusHistory {
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "client_id")
 	private Client client;
 
-	@ManyToOne (fetch = FetchType.LAZY)
+	@ManyToOne (fetch = FetchType.EAGER)
 	@JoinColumn (name = "client_status_type_id")
 	private ClientStatusType statusChanged;
 
@@ -43,11 +43,11 @@ public class ClientStatusHistory {
 	public ClientStatusHistory() {
 	}
 
-    public ClientStatusHistory(Client client, ClientStatusType statusChanged, Date dateChanged) {
-        this.client = client;
-        this.statusChanged = statusChanged;
-        this.dateChanged = dateChanged;
-    }
+	public ClientStatusHistory(Client client, ClientStatusType statusChanged, Date dateChanged) {
+		this.client = client;
+		this.statusChanged = statusChanged;
+		this.dateChanged = dateChanged;
+	}
 
 
 	public Long getId() {

@@ -1,107 +1,91 @@
 package ua.com.foxminded.serviceacc.controller.client;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import ua.com.foxminded.serviceacc.model.Client;
+import ua.com.foxminded.serviceacc.model.ClientLevelType;
+import ua.com.foxminded.serviceacc.model.ClientStatusType;
+import ua.com.foxminded.serviceacc.service.ClientLevelTypeService;
+import ua.com.foxminded.serviceacc.service.ClientService;
+import ua.com.foxminded.serviceacc.service.ClientStatusTypeService;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.inject.Named;
+import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
+import java.util.List;
 
-@Named
-@SessionScoped
+@Controller
+@ViewScoped
 @ManagedBean
 public class ClientController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private boolean show = false;
+	private Client selectedClient;
 
-	private boolean panelShowDisable = true;
+	private static List<Client> list;
 
+	private List<ClientStatusType> availableStatuses;
+	private List<ClientLevelType> availableLevels;
+
+	private final ClientService clientService;
+	private final ClientStatusTypeService cstService;
+	private final ClientLevelTypeService cltService;
 	@Autowired
-	private ClientList clientList;
-
-	@Autowired
-	private ClientCru clientCru;
-
-	public void allClientsUpdate() {
-		clientList.updateData();
+	public ClientController(ClientService clientService, ClientStatusTypeService cstService, ClientLevelTypeService cltService) {
+		this.clientService = clientService;
+		this.cstService = cstService;
+		this.cltService = cltService;
 	}
 
-	public void onRowSelect() {
-		System.out.println("onRowSelect()");
-		clientList.hide();
-		clientCru.show();
+	@PostConstruct
+	public void init() {
+		list = clientService.findAll();
+	}
+
+	public void add() {
+		selectedClient = new Client();
+		getActualLists();
+	}
+
+	public void getActualLists() {
+		availableStatuses = cstService.findAll();
+		availableLevels = cltService.findAll();
+	}
+
+	public void onOk() {
+		if(selectedClient.getId() == null) {
+			list.add(selectedClient);
+		}
+
+		clientService.update(selectedClient);
+	}
+
+	public void setSelectedClient(Client selectedClient) {
+		this.selectedClient = selectedClient;
+	}
+
+	public Client getSelectedClient() {
+		return selectedClient;
 
 	}
 
-	public void onAdd() {
-		System.out.println("onRowSelect()");
-		clientList.hide();
-		clientCru.setSelected(new Client());
-		clientCru.show();
+	public List<Client> getList() {
+		return list;
 	}
 
-	public void onDelete() {
-		System.out.println("onDelete()");
-		clientCru.deleteSelected();
-		clientList.updateData();
+	public void delete() {
+		list.remove(selectedClient);
+		clientService.delete(selectedClient.getId());
+		selectedClient = null;
 	}
 
-	public void show() {
-		System.out.println("showAllClient()");
-		show = true;
-		clientList.updateData();
-		clientList.show();
-		turnOffShow();
+	public List<ClientStatusType> getAvailableStatuses() {
+		return availableStatuses;
 	}
 
-	public void hide() {
-		System.out.println("hideAllClient()");
-		show = false;
-		clientCru.hide();
-		clientList.hide();
-		turnOffShow();
-	}
-
-	public void turnOnShow() {
-		panelShowDisable = false;
-	}
-
-	public void turnOffShow() {
-		panelShowDisable = true;
-	}
-
-	public boolean isShow() {
-		return this.show;
-	}
-
-	public boolean isPanelShowDisable() {
-		return this.panelShowDisable;
-	}
-
-	public ClientList getClientList() {
-		return this.clientList;
-	}
-
-	public ClientCru getClientCru() {
-		return this.clientCru;
-	}
-
-	public void setShow(boolean show) {
-		this.show = show;
-	}
-
-	public void setPanelShowDisable(boolean panelShowDisable) {
-		this.panelShowDisable = panelShowDisable;
-	}
-
-	public void setClientList(ClientList clientList) {
-		this.clientList = clientList;
-	}
-
-	public void setClientCru(ClientCru clientCru) {
-		this.clientCru = clientCru;
+	public List<ClientLevelType> getAvailableLevels() {
+		return availableLevels;
 	}
 }
