@@ -153,4 +153,24 @@ public class Client {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+
+	public void addContact(Contact contact) {
+		contacts.add(contact);
+		contact.setClient(this);
+	}
+
+	public void removeContact(Contact contact) {
+		contacts.remove(contact);
+		contact.setClient(null);
+	}
+
+	public void addStatusHistory(ClientStatusHistory csh) {
+		clientHistory.add(csh);
+		csh.setClient(this);
+	}
+
+	public void removeStatusHistory(ClientStatusHistory csh) {
+		clientHistory.remove(csh);
+		csh.setClient(null);
+	}
 }

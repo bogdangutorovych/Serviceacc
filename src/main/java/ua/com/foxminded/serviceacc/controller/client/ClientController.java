@@ -68,7 +68,6 @@ public class ClientController implements Serializable {
 
 	public Client getSelectedClient() {
 		return selectedClient;
-
 	}
 
 	public List<Client> getList() {

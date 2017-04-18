@@ -69,6 +69,7 @@ public class ClientStatusTypeController implements Serializable {
         ClientStatusType status = (ClientStatusType) event.getObject();
         if (status.getId() == null) {
             statusList.remove(status);
+            selected = null;
         }
     }
 

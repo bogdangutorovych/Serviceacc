@@ -15,7 +15,9 @@
 			<p:commandButton  id="btn_edit" value="Edit" update=":contentForm" icon="ui-icon-pencil"
 							  disabled="#{clientController.selectedClient==null}"
 							  actionListener="#{clientController.getActualLists()}"
-							  action='#{navController.setMainContent("/client/client.xhtml")}'/>
+							  action='#{navController.setMainContent("/client/client.xhtml")}'>
+				<f:setPropertyActionListener target="#{contactController.client}" value="delete" />
+			</p:commandButton>
 
 			<span class="ui-separator"><span class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
@@ -52,6 +54,9 @@
 		</p:column>
 		<p:column headerText="level" sortBy="#{c.level}">
 			<h:outputText value="#{c.level.title}" />
+		</p:column>
+		<p:column headerText="birthday" sortBy="#{c.birthday}">
+			<h:outputText value="#{c.birthday}" />
 		</p:column>
 
 	</p:dataTable>

@@ -89,4 +89,21 @@ public class Contact {
         this.active = active;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Contact contact = (Contact) o;
+
+        if (contactName != null ? !contactName.equals(contact.contactName) : contact.contactName != null) return false;
+        return contactType != null ? contactType.equals(contact.contactType) : contact.contactType == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = contactName != null ? contactName.hashCode() : 0;
+        result = 31 * result + (contactType != null ? contactType.hashCode() : 0);
+        return result;
+    }
 }

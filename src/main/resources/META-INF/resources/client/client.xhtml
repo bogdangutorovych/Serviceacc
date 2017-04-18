@@ -20,12 +20,12 @@
 
 	<h:panelGrid columns="2" cellpadding="5">
 		<h:outputText for="id" value="ID:" style="font-weight:bold" />
-		<h:inputText id="id" value="#{clientController.selectedClient.id}" disabled="true"/>
+		<p:inputText id="id" value="#{clientController.selectedClient.id}" disabled="true"/>
 
-		<h:outputLabel for="firstName" value="First name: " style="font-weight:bold" />
+		<p:outputLabel for="firstName" value="First name: " style="font-weight:bold" />
 		<p:inputText id="firstName" value="#{clientController.selectedClient.firstName}" required="true"/>
 
-		<h:outputLabel for="lastName" value="Last name: " style="font-weight:bold" />
+		<p:outputLabel for="lastName" value="Last name: " style="font-weight:bold" />
 		<p:inputText id="lastName" value="#{clientController.selectedClient.lastName}" required="true"/>
 
 		<p:outputLabel for="status" value="Status: " style="font-weight:bold" />
@@ -41,6 +41,76 @@
 			<f:selectItems value="#{clientController.availableLevels}"
 						   var="l" itemLabel="#{l.title}" itemValue="#{l}"/>
 		</p:selectOneMenu>
+
+		<p:outputLabel for="birthday" value="Birthday: " style="font-weight:bold" />
+		<p:calendar id="birthday" value="#{clientController.selectedClient.birthday}" showOn="button" />
 	</h:panelGrid>
+
+	<p:tabView >
+		<p:tab title="Contacts">
+			<p:toolbar>
+				<f:facet name="left">
+					<p:commandButton id="btn_add" value="New" update=":contentForm" icon="ui-icon-contact"
+									 actionListener="#{contactController.add()}"
+									 oncomplete="jQuery('.ui-datatable-data tr').last().find('span.ui-icon-pencil').each(function(){jQuery(this).click()});"/>
+
+					<span class="ui-separator"><span class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+
+					<p:commandButton  id="btn_delete" value="Delete" update=":contentForm" icon="ui-icon-trash"
+									  disabled="#{contactController.selected==null}"
+									  actionListener="#{contactController.delete()}"/>
+
+				</f:facet>
+			</p:toolbar>
+
+			<br/>
+			<p:dataTable id="contactList" editable="true" emptyMessage="No contacts"
+						 var="s" value="#{clientController.selectedClient.contacts}"
+						 rowKey="#{clientController.selectedClient.contacts.indexOf(s)}"
+						 selectionMode="single" selection="#{contactController.selected}">
+
+				<p:ajax event="rowEdit" listener="#{contactController.onRowEdit}"/>
+				<p:ajax event="rowEditCancel" listener="#{contactController.onRowCancel}"/>
+				<p:ajax event="rowSelect" update="@form:btn_edit,@form:btn_delete" immediate="true"/>
+				<p:ajax event="rowUnselect" update="@form:btn_edit,@form:btn_delete" immediate="true"/>
+
+				<p:column headerText="id" sortBy="#{s.id}">
+					#{s.id}
+				</p:column>
+
+				<p:column headerText="contactType" sortBy="#{s.contactType}">
+					<p:cellEditor>
+						<f:facet name="output">
+                    	<span style="display: inline-block; width: 100%; height: 100%">
+                        	<h:outputText value="#{s.contactType}" />
+                    	</span>
+						</f:facet>
+						<f:facet name="input"><p:inputText value="#{s.contactType}" style="width:100%" label="Contact Type"/></f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="contactName" sortBy="#{s.contactName}">
+					<p:cellEditor>
+						<f:facet name="output">
+                    	<span style="display: inline-block; width: 100%; height: 100%">
+                        	<h:outputText value="#{s.contactName}" />
+                    	</span>
+						</f:facet>
+						<f:facet name="input"><p:inputText value="#{s.contactName}" style="width:100%" label="Contact Name"/></f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column style="width:32px">
+					<p:rowEditor />
+				</p:column>
+
+			</p:dataTable>
+		</p:tab>
+		<p:tab title="Status history">
+			<h:panelGrid border="1" cellpadding="10">
+				<h:outputText value="Francis Ford Coppola's legendary..." />
+			</h:panelGrid>
+		</p:tab>
+	</p:tabView>
 
 </ui:composition>

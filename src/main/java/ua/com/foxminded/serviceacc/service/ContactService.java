@@ -1,5 +1,6 @@
 package ua.com.foxminded.serviceacc.service;
 
+import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.Contact;
 
 import java.util.List;
@@ -12,6 +13,7 @@ public interface ContactService {
     Contact create(Contact contact);
     Contact update(Contact contact);
     Contact findById(Long contactId);
+    List<Contact> findByClient(Client client);
     List<Contact> findAll();
     void delete(Long contactId);
 }

@@ -2,6 +2,7 @@ package ua.com.foxminded.serviceacc.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.Contact;
 import ua.com.foxminded.serviceacc.repository.ContactRepository;
 
@@ -29,6 +30,11 @@ public class ContactServiceDataJpa implements ContactService {
     @Override
     public Contact findById(Long contactId) {
         return contactRepository.findOne(contactId);
+    }
+
+    @Override
+    public List<Contact> findByClient(Client client) {
+        return contactRepository.findByClient(client);
     }
 
     @Override
