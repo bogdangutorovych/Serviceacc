@@ -29,11 +29,11 @@ public class Payment {
 	@Column(name = "date")
 	private Date date;
 
-	@ManyToOne (fetch = FetchType.LAZY)
+	@ManyToOne (fetch = FetchType.EAGER)
 	@JoinColumn (name = "money_id")
 	private Money money;
 
-	@ManyToOne (fetch = FetchType.LAZY)
+	@ManyToOne (fetch = FetchType.EAGER)
 	@JoinColumn (name = "paymentType_id")
 	private PaymentType type;
 

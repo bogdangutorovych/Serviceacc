@@ -30,7 +30,6 @@ public class Money {
 	private boolean active = true;
 
 	public Money() {
-
 	}
 
 	public Money(Currency currency, int amount) {

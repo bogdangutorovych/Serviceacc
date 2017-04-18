@@ -26,13 +26,6 @@ public class ModelTestBuilder {
     public static final String SKYPE = "Skype";
     public static final String OTHER = "Other";
 
-    public static Contact buildTestContact(){
-        Contact contact = new Contact();
-        contact.setContactName("066-123-45-67");
-        contact.setContactType(null);
-
-        return contact;
-    }
 
     public static Client buildTestClient(){
         Client client = new Client();

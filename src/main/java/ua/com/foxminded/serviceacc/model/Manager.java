@@ -4,18 +4,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "manager")
@@ -37,8 +26,9 @@ public class Manager {
     @Column(name = "birth_day")
     private Date birthday;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "manager", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Contact> contacts = new HashSet<>();
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "manager_id", referencedColumnName = "id")
+    private Set<ManagerInformation> informations = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "manager", orphanRemoval = true)
     private Set<Client> clients = new HashSet<>();
@@ -52,12 +42,12 @@ public class Manager {
     }
 
 
-    public Manager(String firstName, String lastName, Date birthday, Set<Contact> contacts, Set<Client> clients,
+    public Manager(String firstName, String lastName, Date birthday, Set<ManagerInformation> informations, Set<Client> clients,
                    boolean active) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
-        this.contacts = contacts;
+        this.informations = informations;
         this.clients = clients;
         this.active = active;
     }
@@ -103,13 +93,13 @@ public class Manager {
     }
 
 
-    public Set<Contact> getContacts() {
-        return contacts;
+    public Set<ManagerInformation> getInformations() {
+        return informations;
     }
 
 
-    public void setContacts(Set<Contact> contacts) {
-        this.contacts = contacts;
+    public void setInformations(Set<ManagerInformation> informations) {
+        this.informations = informations;
     }
 
 
@@ -131,7 +121,5 @@ public class Manager {
     public void setActive(boolean active) {
         this.active = active;
     }
-
-
 
 }

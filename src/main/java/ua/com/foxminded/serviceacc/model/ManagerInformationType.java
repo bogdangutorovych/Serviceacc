@@ -1,23 +1,17 @@
 package ua.com.foxminded.serviceacc.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by andreb on 04.04.17.
  * Represent contact type
  */
 @Entity
-@Table(name = "contact_type")
-public class ContactType {
+@Table(name = "manager_info_type")
+public class ManagerInformationType {
 
     @Id
-    @SequenceGenerator(name = "generator", sequenceName = "contact_type_id_seq", initialValue = 1, allocationSize = 1)
+    @SequenceGenerator(name = "generator", sequenceName = "manager_info_type_seq", initialValue = 1, allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
     @Column (name = "id", unique = true, nullable = false)
     private Long id;
@@ -31,9 +25,9 @@ public class ContactType {
     @Column(name = "active", nullable = false)
     private boolean active = true;
 
-    public ContactType() {
+    public ManagerInformationType() {
     }
-    public ContactType(String code, String title) {
+    public ManagerInformationType(String code, String title) {
         this.code = code;
         this.title = title;
     }

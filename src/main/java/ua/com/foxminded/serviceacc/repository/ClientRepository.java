@@ -17,8 +17,13 @@ public interface ClientRepository extends JpaRepository<Client, Long>, JpaSpecif
 			"LEFT JOIN FETCH c.status " +
 			"LEFT JOIN FETCH c.manager ";
 
-	@Query(selectAllByJoinFetch + "WHERE c.active = true")
+	String selectActiveClient = "SELECT c FROM Client c WHERE c.active = true ";
+
+	@Query(selectActiveClient)
 	List<Client> findAllByFetch();
+
+	@Query(selectActiveClient + "AND id = ?1")
+	Client findOneActive(Long clientId);
 
 	@Query("SELECT c FROM Client c JOIN FETCH c.clientHistory")
 	List<Client> findAllAndFetchClientStatusHistoryEagly();

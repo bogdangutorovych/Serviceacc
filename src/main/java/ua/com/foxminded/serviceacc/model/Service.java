@@ -24,11 +24,11 @@ public class Service {
 	@Column(name = "name")
 	private String name;
 
-	@ManyToOne (fetch = FetchType.LAZY)
+	@ManyToOne (fetch = FetchType.EAGER)
 	@JoinColumn (name = "money_id")
 	private Money price;
 
-	@ManyToOne (fetch = FetchType.LAZY)
+	@ManyToOne (fetch = FetchType.EAGER)
 	@JoinColumn (name = "serviceType_id")
 	private ServiceType type;
 

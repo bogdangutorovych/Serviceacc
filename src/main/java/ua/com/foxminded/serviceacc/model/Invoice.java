@@ -32,19 +32,19 @@ public class Invoice {
 	@Column(name = "date")
 	private Date date;
 
-	@ManyToOne (fetch = FetchType.LAZY)
+	@ManyToOne (fetch = FetchType.EAGER)
 	@JoinColumn (name = "contract_id")
 	private Contract contract;
 
-	@ManyToOne (fetch = FetchType.LAZY)
+	@ManyToOne (fetch = FetchType.EAGER)
 	@JoinColumn (name = "money_id")
 	private Money price;
 
-	@ManyToOne (fetch = FetchType.LAZY)
+	@ManyToOne (fetch = FetchType.EAGER)
 	@JoinColumn (name = "payStatus_id")
 	private PayStatus status;
 
-	@ManyToOne (fetch = FetchType.LAZY)
+	@ManyToOne (fetch = FetchType.EAGER)
 	@JoinColumn (name = "payment_id")
 	private Payment payment;
 
@@ -52,7 +52,6 @@ public class Invoice {
 	private boolean active = true;
 
 	public Invoice() {
-
 	}
 
 	public Invoice(String number, Date date, Contract contract, Money price, PayStatus status, Payment payment) {
