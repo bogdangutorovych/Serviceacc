@@ -12,7 +12,7 @@ import java.util.Set;
 @Table(name = "client_level_type")
 public class ClientLevelType {
     @Id
-    @SequenceGenerator(name = "generator", sequenceName = "client_id_seq")
+    @SequenceGenerator(name = "generator", sequenceName = "client_level_type_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
     @Column (name = "id", unique = true, nullable = false)
     private Long id;
