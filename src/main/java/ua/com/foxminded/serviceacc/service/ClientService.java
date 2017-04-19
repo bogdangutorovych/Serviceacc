@@ -15,7 +15,7 @@ public interface ClientService {
 
 	Client findById(Long clientId);
 
-	List<Client> findAllByFetch();
+	List<Client> findAll();
 
 	void delete(Long clientId);
 }

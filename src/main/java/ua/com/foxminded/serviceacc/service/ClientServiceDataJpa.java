@@ -33,12 +33,12 @@ public class ClientServiceDataJpa implements ClientService {
 	}
 
 	@Override
-	public List<Client> findAllByFetch() {
-		return clientRepository.findAll();
+	public void delete(Long clientId) {
+		clientRepository.delete(clientId);
 	}
 
 	@Override
-	public void delete(Long clientId) {
-		clientRepository.delete(clientId);
+	public List<Client> findAll() {
+		return clientRepository.findAll();
 	}
 }

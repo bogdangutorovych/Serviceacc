@@ -45,7 +45,7 @@ public class ClientController implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		list = clientService.findAllByFetch();
+		list = clientService.findAll();
 	}
 
 	public void add() {

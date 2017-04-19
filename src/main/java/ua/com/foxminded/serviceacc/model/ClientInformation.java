@@ -11,28 +11,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Loader;
-import org.hibernate.annotations.NamedQuery;
 import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
 
 @Entity
 @Table(name = "client_info")
 
-@SQLDelete(sql = "UPDATE client_info SET active = false WHERE client_info_id = ?")
-
-@Loader(namedQuery = "findClientInformationByClientId")
-
-@NamedQuery(name = "findClientInformationByClientId", query = "FROM ClientInformation WHERE id = ?1 AND active = true")
-
-@Where(clause = "active = true")
-
+@SQLDelete(sql = "UPDATE client_info SET active = false WHERE id = ?")
 public class ClientInformation {
 
 	@Id
 	@SequenceGenerator(name = "generator", sequenceName = "client_info_seq", initialValue = 1, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
-	@Column(name = "client_info_id", unique = true, nullable = false)
+	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
 
 	@Column(name = "content")

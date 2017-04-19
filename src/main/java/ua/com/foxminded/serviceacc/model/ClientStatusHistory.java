@@ -15,22 +15,12 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.Loader;
-import org.hibernate.annotations.NamedQuery;
 import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
 
 @Entity
 @Table(name = "client_status_history")
 
-@SQLDelete(sql = "UPDATE client_status_history SET active = false WHERE client_id = ?")
-
-@Loader(namedQuery = "findByClient")
-
-@NamedQuery(name = "findByClient", query = "FROM ClientStatusHistory WHERE id = ?1 AND active = true")
-
-@Where(clause = "active = true")
-
+@SQLDelete(sql = "UPDATE client_status_history SET active = false WHERE id = ?")
 public class ClientStatusHistory {
 
 	@Id
@@ -38,10 +28,6 @@ public class ClientStatusHistory {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "client_id")
-	private Client client;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "client_status_type_id")
@@ -57,8 +43,8 @@ public class ClientStatusHistory {
 	public ClientStatusHistory() {
 	}
 
-	public ClientStatusHistory(Client client, ClientStatusType statusChanged, Date dateChanged) {
-		this.client = client;
+	public ClientStatusHistory(ClientStatusType statusChanged, Date dateChanged) {
+
 		this.statusChanged = statusChanged;
 		this.dateChanged = dateChanged;
 	}
@@ -69,14 +55,6 @@ public class ClientStatusHistory {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Client getClient() {
-		return client;
-	}
-
-	public void setClient(Client client) {
-		this.client = client;
 	}
 
 	public ClientStatusType getStatusChanged() {

@@ -61,11 +61,12 @@ public class Client {
 	@JoinColumn(name = "client_status_type_id")
 	private ClientStatusType status;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "client_id", referencedColumnName = "id")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "client_id", referencedColumnName = "id", updatable = false)
 	private Set<ClientInformation> informations = new HashSet<>();
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "client_id", referencedColumnName = "id", updatable = false)
 	private Set<ClientStatusHistory> clientHistory = new HashSet<>();
 
 	@Column(name = "active", nullable = false)

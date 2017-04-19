@@ -16,6 +16,7 @@ public interface ClientStatusHistoryService {
 	ClientStatusHistory findById(Long clientStatusHistoryId);
 
 	// List<ClientStatusHistory> findByClient(Client client);
+
 	List<ClientStatusHistory> findAll();
 
 	void delete(Long clientStatusHistoryId);
