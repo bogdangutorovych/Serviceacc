@@ -3,10 +3,35 @@ package ua.com.foxminded.serviceacc.model;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.*;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Loader;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 @Entity
 @Table(name = "client")
+
+@SQLDelete(sql = "UPDATE client SET active = false WHERE id = ?")
+@Loader(namedQuery = "findOne")
+@NamedQuery(name = "findOne", query = "FROM Client WHERE id = ?1 AND active = true")
+@Where(clause = "active = true")
+
 public class Client {
 	@Id
 	@SequenceGenerator(name = "generator", sequenceName = "client_id_seq", initialValue = 1, allocationSize = 1)
@@ -37,10 +62,11 @@ public class Client {
 	private ClientStatusType status;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "client_id", referencedColumnName = "id")
+	@JoinColumn(name = "client_id", referencedColumnName = "id", updatable = false)
 	private Set<ClientInformation> informations = new HashSet<>();
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "client_id", referencedColumnName = "id", updatable = false)
 	private Set<ClientStatusHistory> clientHistory = new HashSet<>();
 
 	@Column(name = "active", nullable = false)
@@ -49,8 +75,9 @@ public class Client {
 	public Client() {
 	}
 
-	public Client(String firstName, String lastName, Date birthday, Manager manager, ClientLevelType level, ClientStatusType status, Set<ClientInformation> informations,
-				  Set<ClientStatusHistory> clientHistory, boolean active) {
+	public Client(String firstName, String lastName, Date birthday, Manager manager, ClientLevelType level,
+			ClientStatusType status, Set<ClientInformation> informations, Set<ClientStatusHistory> clientHistory,
+			boolean active) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.birthday = birthday;
