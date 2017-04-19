@@ -2,18 +2,7 @@ package ua.com.foxminded.serviceacc.model;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "invoice")
@@ -41,7 +30,7 @@ public class Invoice {
 	private Money price;
 
 	@ManyToOne (fetch = FetchType.EAGER)
-	@JoinColumn (name = "payStatus_id")
+	@JoinColumn (name = "pay_status_id")
 	private PayStatus status;
 
 	@ManyToOne (fetch = FetchType.EAGER)

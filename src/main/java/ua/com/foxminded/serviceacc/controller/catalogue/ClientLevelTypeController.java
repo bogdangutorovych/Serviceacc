@@ -69,8 +69,8 @@ public class ClientLevelTypeController implements Serializable {
         ClientLevelType Level = (ClientLevelType) event.getObject();
         if (Level.getId() == null) {
             LevelList.remove(Level);
+            selected = null;
         }
-        //selected = null;
     }
 
 }

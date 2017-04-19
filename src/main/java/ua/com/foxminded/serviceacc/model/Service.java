@@ -1,15 +1,6 @@
 package ua.com.foxminded.serviceacc.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "service")
@@ -29,7 +20,7 @@ public class Service {
 	private Money price;
 
 	@ManyToOne (fetch = FetchType.EAGER)
-	@JoinColumn (name = "serviceType_id")
+	@JoinColumn (name = "service_type_id")
 	private ServiceType type;
 
 	@Column(name = "active", nullable = false)
