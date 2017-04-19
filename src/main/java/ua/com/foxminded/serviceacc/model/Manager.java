@@ -30,7 +30,7 @@ public class Manager {
     @JoinColumn(name = "manager_id", referencedColumnName = "id")
     private Set<ManagerInformation> informations = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "manager", orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "manager")
     private Set<Client> clients = new HashSet<>();
 
     @Column(name = "active", nullable = false)
@@ -40,7 +40,6 @@ public class Manager {
     public Manager() {
 
     }
-
 
     public Manager(String firstName, String lastName, Date birthday, Set<ManagerInformation> informations, Set<Client> clients,
                    boolean active) {
