@@ -9,12 +9,12 @@ INSERT INTO CLIENT_LEVEL_TYPE (id, title, active, code) VALUES (1, 'Applicant', 
 INSERT INTO CLIENT_LEVEL_TYPE (id, title, active, code) VALUES (2, 'Beginner', true, 'BGN');
 INSERT INTO CLIENT_LEVEL_TYPE (id, title, active, code) VALUES (3, 'Regular', true, 'REG');
 INSERT INTO CLIENT_LEVEL_TYPE (id, title, active, code) VALUES (4, 'Graduate', true, 'GRD');
-ALTER SEQUENCE client_level_type_id_seq RESTART WITH 5;
+ALTER SEQUENCE client_level_type_seq RESTART WITH 5;
 
 INSERT INTO CLIENT_STATUS_TYPE (id, title, active, code) VALUES (1, 'Active', true, 'ACT');
 INSERT INTO CLIENT_STATUS_TYPE (id, title, active, code) VALUES (2, 'Frozen', true, 'FRZ');
 INSERT INTO CLIENT_STATUS_TYPE (id, title, active, code) VALUES (3, 'Pending', true, 'PND');
-ALTER SEQUENCE client_status_type_id_seq RESTART WITH 4;
+ALTER SEQUENCE client_status_type_seq RESTART WITH 4;
 
 INSERT INTO CLIENT (id, birth_day, first_name, last_name, client_level_type_id, manager_id, client_status_type_id, active) VALUES (1, '1980-03-14', 'Robert', 'Levandovsky', 1, null, 3, true);
 INSERT INTO CLIENT (id, birth_day, first_name, last_name, client_level_type_id, manager_id, client_status_type_id, active) VALUES (2, '1986-09-08', 'Michael', 'Phelps', 1, null, 3, true);
@@ -39,7 +39,7 @@ INSERT INTO CLIENT_INFO_TYPE (id, title, active, code) VALUES (2, 'e-mail', true
 INSERT INTO CLIENT_INFO_TYPE (id, title, active, code) VALUES (3, 'site', true, 'site');
 INSERT INTO CLIENT_INFO_TYPE (id, title, active, code) VALUES (4, 'skype', true, 'skype');
 INSERT INTO CLIENT_INFO_TYPE (id, title, active, code) VALUES (5, 'city', true, 'city');
-ALTER SEQUENCE contact_type_id_seq RESTART WITH 6;
+ALTER SEQUENCE client_info_type_seq RESTART WITH 6;
 
 INSERT INTO CLIENT_INFO (client_info_id, content, info_type_id, client_id, active) VALUES (1, '0503265566', 1, 1, true);
 INSERT INTO CLIENT_INFO (client_info_id, content, info_type_id, client_id, active) VALUES (2, 'test@gmail.com', 2, 1, true);

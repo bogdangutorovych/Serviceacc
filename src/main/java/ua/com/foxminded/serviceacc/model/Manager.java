@@ -41,7 +41,6 @@ public class Manager {
 
     }
 
-
     public Manager(String firstName, String lastName, Date birthday, Set<ManagerInformation> informations, Set<Client> clients,
                    boolean active) {
         this.firstName = firstName;
