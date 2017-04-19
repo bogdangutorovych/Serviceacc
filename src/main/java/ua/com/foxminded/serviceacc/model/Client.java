@@ -36,7 +36,7 @@ public class Client {
 	@JoinColumn(name = "client_status_type_id")
 	private ClientStatusType status;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "client_id", referencedColumnName = "id")
 	private Set<ClientInformation> informations = new HashSet<>();
 

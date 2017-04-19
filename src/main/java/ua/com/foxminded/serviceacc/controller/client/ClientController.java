@@ -59,7 +59,7 @@ public class ClientController implements Serializable {
 		if(selectedClient.getId() == null) {
 			list.add(selectedClient);
 		}
-
+		System.out.println("onOk " + selectedClient.getInformations());
 		clientService.update(selectedClient);
 	}
 
@@ -68,10 +68,12 @@ public class ClientController implements Serializable {
 	}
 
 	public void setSelectedClient(Client selectedClient) {
-		this.selectedClient = selectedClient;
+//        System.out.println("!Set client:" + selectedClient);
+        this.selectedClient = selectedClient;
 	}
 
 	public Client getSelectedClient() {
+//        System.out.println("Get client:" + selectedClient);
 		return selectedClient;
 
 	}
