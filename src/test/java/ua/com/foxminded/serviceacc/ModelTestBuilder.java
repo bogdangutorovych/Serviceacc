@@ -26,14 +26,23 @@ public class ModelTestBuilder {
     public static final String SKYPE = "Skype";
     public static final String OTHER = "Other";
 
+    public static final String CONTENT = "CODE";
+    public static final String CODE = "some data";
+
 
     public static Client buildTestClient(){
         Client client = new Client();
         client.setStatus(null);
         client.setLevel(null);
-        client.setManager(null);
+        client.setActive(true);
 
         return client;
+    }
+
+    public static ClientInformation buildTestClientInformation(){
+        ClientInformation infos = new ClientInformation();
+        infos.setActive(true);
+        return infos;
     }
 
     public static Manager buildTestManager(){

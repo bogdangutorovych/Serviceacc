@@ -14,6 +14,7 @@ import ua.com.foxminded.serviceacc.model.ClientInformationType;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static ua.com.foxminded.serviceacc.ModelTestBuilder.*;
 
 /**
  * Created by andreb on 17.04.17.
@@ -65,6 +66,32 @@ public class ClientInfosPersistTest {
         clientService.create(client);
 
         assertThat(clientService.findById(client.getId()).getInformations(), hasSize(2));
+    }
+
+    @Test
+    public void changeAndSaveInfosInClient(){
+
+        ClientInformationType type1 = new ClientInformationType("001", "type1");
+        type1.setActive(true);
+        clientInformationTypeService.save(type1);
+
+        ClientInformation info1 = buildTestClientInformation();
+        info1.setContent("content1");
+        info1.setClientInformationType(type1);
+
+        ClientInformation info2 = buildTestClientInformation();
+        info1.setContent("content2");
+        info1.setClientInformationType(type1);
+
+        Client client = buildTestClient();
+        client.getInformations().add(info1);
+        client.getInformations().add(info2);
+
+        clientService.create(client);
+        client.getInformations().remove(info1);
+        clientService.update(client);
+
+        assertThat(client.getInformations(), hasSize(1));
     }
 
 }

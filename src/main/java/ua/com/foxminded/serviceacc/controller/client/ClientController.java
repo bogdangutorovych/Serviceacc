@@ -3,6 +3,7 @@ package ua.com.foxminded.serviceacc.controller.client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ua.com.foxminded.serviceacc.model.Client;
+import ua.com.foxminded.serviceacc.model.ClientInformation;
 import ua.com.foxminded.serviceacc.model.ClientLevelType;
 import ua.com.foxminded.serviceacc.model.ClientStatusType;
 import ua.com.foxminded.serviceacc.service.ClientLevelTypeService;
@@ -62,6 +63,10 @@ public class ClientController implements Serializable {
 		clientService.update(selectedClient);
 	}
 
+	public void onCancel() {
+		selectedClient=null;
+	}
+
 	public void setSelectedClient(Client selectedClient) {
 		this.selectedClient = selectedClient;
 	}
@@ -81,6 +86,13 @@ public class ClientController implements Serializable {
 		selectedClient = null;
 	}
 
+	public void deleteInformation(ClientInformation info) {
+		System.out.println("Info: " + info);
+		System.out.println(selectedClient.getInformations());
+		selectedClient.getInformations().remove(info);
+//		selectedClient = clientService.update(selectedClient);
+	}
+
 	public List<ClientStatusType> getAvailableStatuses() {
 		return availableStatuses;
 	}
@@ -88,4 +100,5 @@ public class ClientController implements Serializable {
 	public List<ClientLevelType> getAvailableLevels() {
 		return availableLevels;
 	}
+
 }

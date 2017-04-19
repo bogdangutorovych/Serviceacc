@@ -12,6 +12,7 @@
 			<span class="ui-separator"><span class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
 			<p:commandButton  id="btn_cancel" value="Cancel" update=":contentForm" icon="ui-icon-close"
+							  actionListener="#{clientController.onCancel()}"
 							  action='#{navController.setMainContent("/client/clientList.xhtml")}' immediate="true"/>
 		</f:facet>
 	</p:toolbar>
@@ -41,6 +42,33 @@
 			<f:selectItems value="#{clientController.availableLevels}"
 						   var="l" itemLabel="#{l.title}" itemValue="#{l}"/>
 		</p:selectOneMenu>
+
+	</h:panelGrid>
+	<h:panelGrid>
+
+		<p:outputLabel for="level" value="Client Informations: " style="font-weight:bold" />
+
+		<p:dataTable id="infoList" var="info" value="#{clientController.selectedClient.informations}"
+					 selectionMode="single" emptyMessage="No items yet" rowKey="#{info.id}">
+			<f:facet name="header">
+				<h:outputText value="Client Information" />
+			</f:facet>
+			<p:column headerText="Content">
+				<h:outputText value="#{info.content}" />
+			</p:column>
+			<p:column headerText="Type">
+				<h:outputText value="#{info.clientInformationType}" />
+			</p:column>
+			<p:column style="width:40px">
+				<p:commandButton id="btn_delete_info" update="infoList" icon="ui-icon-trash"
+				action="#{clientController.deleteInformation(info)}">
+				</p:commandButton>
+			</p:column>
+			<f:facet name="footer">
+				<p:commandButton process="infoList" update="infoList" value="Add" />
+			</f:facet>
+		</p:dataTable>
+
 	</h:panelGrid>
 
 </ui:composition>
