@@ -50,10 +50,6 @@ public class Client {
 	private Date birthday;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "manager_id")
-	private Manager manager;
-
-	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "client_level_type_id")
 	private ClientLevelType level;
 
@@ -61,11 +57,11 @@ public class Client {
 	@JoinColumn(name = "client_status_type_id")
 	private ClientStatusType status;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "client_id", referencedColumnName = "id", updatable = false)
 	private Set<ClientInformation> informations = new HashSet<>();
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "client_id", referencedColumnName = "id", updatable = false)
 	private Set<ClientStatusHistory> clientHistory = new HashSet<>();
 
@@ -75,13 +71,11 @@ public class Client {
 	public Client() {
 	}
 
-	public Client(String firstName, String lastName, Date birthday, Manager manager, ClientLevelType level,
-			ClientStatusType status, Set<ClientInformation> informations, Set<ClientStatusHistory> clientHistory,
-			boolean active) {
+	public Client(String firstName, String lastName, Date birthday, ClientLevelType level, ClientStatusType status,
+			Set<ClientInformation> informations, Set<ClientStatusHistory> clientHistory, boolean active) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.birthday = birthday;
-		this.manager = manager;
 		this.level = level;
 		this.status = status;
 		this.informations = informations;
@@ -119,14 +113,6 @@ public class Client {
 
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
-	}
-
-	public Manager getManager() {
-		return manager;
-	}
-
-	public void setManager(Manager manager) {
-		this.manager = manager;
 	}
 
 	public ClientLevelType getLevel() {

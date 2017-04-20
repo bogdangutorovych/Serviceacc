@@ -34,18 +34,11 @@ public class ModelTestBuilder {
 		Client client = new Client();
 		client.setStatus(null);
 		client.setLevel(null);
-		client.setManager(null);
-
 		return client;
 	}
 
 	public static Manager buildTestManager() {
-
-		Client client = buildTestClient();
-
 		Manager manager = new Manager();
-		manager.getClients().add(client);
-
 		return manager;
 	}
 
