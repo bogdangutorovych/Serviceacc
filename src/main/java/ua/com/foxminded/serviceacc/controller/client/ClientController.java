@@ -1,11 +1,11 @@
 package ua.com.foxminded.serviceacc.controller.client;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import ua.com.foxminded.serviceacc.model.Client;
-import ua.com.foxminded.serviceacc.model.ClientInformation;
-import ua.com.foxminded.serviceacc.model.ClientLevelType;
-import ua.com.foxminded.serviceacc.model.ClientStatusType;
+import ua.com.foxminded.serviceacc.model.*;
+import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
 import ua.com.foxminded.serviceacc.service.ClientLevelTypeService;
 import ua.com.foxminded.serviceacc.service.ClientService;
 import ua.com.foxminded.serviceacc.service.ClientStatusTypeService;
@@ -23,19 +23,26 @@ import java.util.Set;
 @ManagedBean
 public class ClientController implements Serializable {
 
+	private static Logger logger = LoggerFactory.getLogger(ClientController.class);
+
 	private static final long serialVersionUID = 1L;
 
 	private Client selectedClient;
-	Set<ClientInformation> set = new HashSet<>();
+	Set<ClientInformation> tempInfosSet = new HashSet<>();
+	private ClientInformation tempInfo = new ClientInformation();
 
 	private static List<Client> list;
 
 	private List<ClientStatusType> availableStatuses;
 	private List<ClientLevelType> availableLevels;
+	private List<ClientInformationType> availableInfoTypes;
 
 	private final ClientService clientService;
 	private final ClientStatusTypeService cstService;
 	private final ClientLevelTypeService cltService;
+	@Autowired
+	private ClientInformationTypeService informationTypeService;
+
 	@Autowired
 	public ClientController(ClientService clientService, ClientStatusTypeService cstService, ClientLevelTypeService cltService) {
 		this.clientService = clientService;
@@ -56,19 +63,23 @@ public class ClientController implements Serializable {
 	public void getActualLists() {
 		availableStatuses = cstService.findAll();
 		availableLevels = cltService.findAll();
+		availableInfoTypes = informationTypeService.findAll();
 	}
 
 	public void onOk() {
+		logger.info("onOk");
 		if(selectedClient.getId() == null) {
 			list.add(selectedClient);
 		}
 		clientService.update(selectedClient);
-		set.clear();
+		tempInfosSet.clear();
 	}
 
 	public void onCancel() {
-		selectedClient.getInformations().addAll(set);
-		set.clear();
+		System.out.println("ONCANCEL");
+		logger.info("onCancel");
+		selectedClient.getInformations().addAll(tempInfosSet);
+		tempInfosSet.clear();
 	}
 
 	public void setSelectedClient(Client selectedClient) {
@@ -90,8 +101,17 @@ public class ClientController implements Serializable {
 	}
 
 	public void deleteInformation(ClientInformation info) {
-		set.addAll(selectedClient.getInformations());
+		tempInfosSet.addAll(selectedClient.getInformations());
 		selectedClient.getInformations().remove(info);
+	}
+
+	public void addInformation(){
+		logger.info("addInfo");
+		tempInfo.setActive(true);
+		selectedClient.getInformations().add(tempInfo);
+		tempInfo.setContent("");
+		tempInfo.setClientInformationType(null);
+		logger.info("end addInfo");
 	}
 
 	public List<ClientStatusType> getAvailableStatuses() {
@@ -102,4 +122,15 @@ public class ClientController implements Serializable {
 		return availableLevels;
 	}
 
+	public List<ClientInformationType> getAvailableInfoTypes() {
+		return availableInfoTypes;
+	}
+
+	public ClientInformation getTempInfo() {
+		return tempInfo;
+	}
+
+	public void setTempInfo(ClientInformation tempInfo) {
+		this.tempInfo = tempInfo;
+	}
 }

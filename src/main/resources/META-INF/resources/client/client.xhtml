@@ -53,7 +53,7 @@
 			<f:facet name="header">
 				<h:outputText value="Client Information" />
 			</f:facet>
-			<p:column headerText="Content">
+			<p:column headerText="Content" sortBy="#{info.id}">
 				<h:outputText value="#{info.content}" />
 			</p:column>
 			<p:column headerText="Type">
@@ -64,11 +64,31 @@
 				action="#{clientController.deleteInformation(info)}">
 				</p:commandButton>
 			</p:column>
-			<!--<f:facet name="footer">-->
-				<!--<p:commandButton process="infoList" update="infoList" value="Add" />-->
-			<!--</f:facet>-->
+			<f:facet name="footer">
+				<p:commandButton process="infoList" update="infoList" value="Add"
+					onclick="PF('addInfo').show();" />
+			</f:facet>
 		</p:dataTable>
 
 	</h:panelGrid>
+
+	<p:dialog header="Add Information" widgetVar="addInfo" minHeight="40">
+		<h:panelGrid columns="2" cellpadding="5">
+			<p:outputLabel for="content" value="Content:" />
+			<p:inputText id="content" value="#{clientController.tempInfo.content}" required="true" label="content" />
+
+			<p:outputLabel for="infotype" value="Type:" />
+			<p:selectOneMenu id="infotype" value="#{clientController.tempInfo.clientInformationType}" converter="omnifaces.SelectItemsConverter">
+				<f:selectItem itemLabel="Select type..." noSelectionOption="true" />
+				<f:selectItems value="#{clientController.availableInfoTypes}"
+							   var="i" itemLabel="#{i.title}" itemValue="#{i}"/>
+			</p:selectOneMenu>
+
+			<f:facet name="footer">
+				<p:commandButton value="Save" update="infoList" actionListener="#{clientController.addInformation}"/>
+								 <!--oncomplete="handleLoginRequest(xhr, status, args)" />-->
+			</f:facet>
+		</h:panelGrid>
+	</p:dialog>
 
 </ui:composition>
