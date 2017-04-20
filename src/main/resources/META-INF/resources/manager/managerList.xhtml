@@ -1,0 +1,52 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:f="http://xmlns.jcp.org/jsf/core"
+				xmlns:h="http://xmlns.jcp.org/jsf/html"
+				xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+				xmlns:p="http://primefaces.org/ui">
+
+	<p:toolbar>
+		<f:facet name="left">
+			<p:commandButton id="btn_add" value="New" update=":contentForm" icon="ui-icon-document"
+							 actionListener="#{managerController.add()}"
+							 action='#{navController.setMainContent("/manager/manager.xhtml")}'/>
+
+			<span class="ui-separator"><span class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+
+			<p:commandButton  id="btn_edit" value="Edit" update=":contentForm" icon="ui-icon-pencil"
+							  disabled="#{managerController.selectedManager==null}"
+							  action='#{navController.setMainContent("/manager/manager.xhtml")}'/>
+
+			<span class="ui-separator"><span class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+
+			<p:commandButton  id="btn_delete" value="Delete" update=":contentForm" icon="ui-icon-trash"
+							  disabled="true"
+							  actionListener="#{managerController.delete()}"/>
+
+		</f:facet>
+	</p:toolbar>
+
+	<br/>
+
+	<p:dataTable id="managerList" editable="true" emptyMessage="No items yet"
+				 var="m" value="#{managerController.list}"
+				 rowKey="#{managerController.list.indexOf(m)}"
+				 selectionMode="single" selection="#{managerController.selectedManager}">
+
+		<f:facet name="header">Managers</f:facet>
+		<p:ajax event="rowSelect" update="@form:btn_edit,@form:btn_delete" immediate="true"/>
+		<p:ajax event="rowUnselect" update="@form:btn_edit,@form:btn_delete" immediate="true"/>
+		
+		<p:column headerText="id" sortBy="#{m.id}">
+			#{m.id}
+		</p:column>
+
+		<p:column headerText="First name" sortBy="#{m.firstName}">
+            <h:outputText value="#{m.firstName}" />
+		</p:column>
+		<p:column headerText="last name" sortBy="#{m.lastName}">
+			<h:outputText value="#{m.lastName}" />
+		</p:column>
+
+	</p:dataTable>
+
+</ui:composition>
