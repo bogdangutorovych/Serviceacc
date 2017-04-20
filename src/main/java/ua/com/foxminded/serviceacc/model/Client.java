@@ -50,11 +50,11 @@ public class Client {
 	private Date birthday;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "client_level_type_id")
+	@JoinColumn(name = "client_level_type_id", referencedColumnName = "id")
 	private ClientLevelType level;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "client_status_type_id")
+	@JoinColumn(name = "client_status_type_id", referencedColumnName = "id")
 	private ClientStatusType status;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

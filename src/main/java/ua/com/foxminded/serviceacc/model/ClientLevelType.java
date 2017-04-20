@@ -1,95 +1,93 @@
 package ua.com.foxminded.serviceacc.model;
 
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
- * Created by andreb on 04.04.17.
- * Class represent client graduate title
+ * Created by andreb on 04.04.17. Class represent client graduate title
  */
 @Entity
 @Table(name = "client_level_type")
 public class ClientLevelType {
-    @Id
-    @SequenceGenerator(name = "generator", sequenceName = "client_level_type_id_seq", initialValue = 1, allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
-    @Column (name = "id", unique = true, nullable = false)
-    private Long id;
-    @Column (name = "code", unique = true, nullable = false)
-    private String code;
-    @Column (name = "title", nullable = false)
-    private String title;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "level")
-    private Set<Client> clients = new HashSet<>();
-    @Column(name = "active", nullable = false)
-    private boolean active = true;
+	@Id
+	@SequenceGenerator(name = "generator", sequenceName = "client_level_type_id_seq", initialValue = 1, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
+	@Column(name = "id", unique = true, nullable = false)
+	private Long id;
 
-    public ClientLevelType(){
-    }
+	@Column(name = "code", unique = true, nullable = false)
+	private String code;
 
-    public ClientLevelType(String code, String title){
-        this.code = code;
-        this.title = title;
-    }
+	@Column(name = "title", nullable = false)
+	private String title;
 
-    public Long getId() {
-        return id;
-    }
+	@Column(name = "active", nullable = false)
+	private boolean active = true;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public ClientLevelType() {
+	}
 
-    public String getCode() {
-        return code;
-    }
+	public ClientLevelType(String code, String title) {
+		this.code = code;
+		this.title = title;
+	}
 
-    public void setCode(String code) {
-        this.code = code;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public String getCode() {
+		return code;
+	}
 
-    public Set<Client> getClients() {
-        return clients;
-    }
+	public void setCode(String code) {
+		this.code = code;
+	}
 
-    public void setClients(Set<Client> clients) {
-        this.clients = clients;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public boolean isActive() {
-        return active;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public void setActive(boolean active) {
-        this.active = active;
-    }
+	public boolean isActive() {
+		return active;
+	}
 
-    @Override
-    public String toString() {
-        return title;
-    }
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+	@Override
+	public String toString() {
+		return title;
+	}
 
-        ClientLevelType that = (ClientLevelType) o;
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
 
-        return id != null ? id.equals(that.id) : that.id == null;
-    }
+		ClientLevelType that = (ClientLevelType) o;
 
-    @Override
-    public int hashCode() {
-        return id != null ? id.hashCode() : 0;
-    }
+		return id != null ? id.equals(that.id) : that.id == null;
+	}
+
+	@Override
+	public int hashCode() {
+		return id != null ? id.hashCode() : 0;
+	}
 }
