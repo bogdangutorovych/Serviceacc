@@ -14,7 +14,9 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @ViewScoped
@@ -24,6 +26,7 @@ public class ClientController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Client selectedClient;
+	Set<ClientInformation> set = new HashSet<>();
 
 	private static List<Client> list;
 
@@ -59,23 +62,21 @@ public class ClientController implements Serializable {
 		if(selectedClient.getId() == null) {
 			list.add(selectedClient);
 		}
-		System.out.println("onOk " + selectedClient.getInformations());
 		clientService.update(selectedClient);
+		set.clear();
 	}
 
 	public void onCancel() {
-		selectedClient=null;
+		selectedClient.getInformations().addAll(set);
+		set.clear();
 	}
 
 	public void setSelectedClient(Client selectedClient) {
-//        System.out.println("!Set client:" + selectedClient);
         this.selectedClient = selectedClient;
 	}
 
 	public Client getSelectedClient() {
-//        System.out.println("Get client:" + selectedClient);
 		return selectedClient;
-
 	}
 
 	public List<Client> getList() {
@@ -89,10 +90,8 @@ public class ClientController implements Serializable {
 	}
 
 	public void deleteInformation(ClientInformation info) {
-		System.out.println("Info: " + info);
-		System.out.println(selectedClient.getInformations());
+		set.addAll(selectedClient.getInformations());
 		selectedClient.getInformations().remove(info);
-//		selectedClient = clientService.update(selectedClient);
 	}
 
 	public List<ClientStatusType> getAvailableStatuses() {
