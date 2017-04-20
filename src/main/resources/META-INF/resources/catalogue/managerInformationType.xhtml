@@ -7,28 +7,28 @@
     <p:toolbar>
         <f:facet name="left">
             <p:commandButton id="btn_add" value="New" update=":contentForm" icon="ui-icon-document"
-                             actionListener="#{clientInformationTypeController.add()}"
+                             actionListener="#{managerInformationTypeController.add()}"
                              oncomplete="jQuery('.ui-datatable-data tr').last().find('span.ui-icon-pencil').each(function(){jQuery(this).click()});"/>
 
             <span class="ui-separator"><span class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
             <p:commandButton  id="btn_delete" value="Delete" update=":contentForm" icon="ui-icon-trash"
-                              disabled="#{clientInformationTypeController.selected==null}"
-                              actionListener="#{clientInformationTypeController.delete()}"/>
+                              disabled="#{managerInformationTypeController.selected==null}"
+                              actionListener="#{managerInformationTypeController.delete()}"/>
 
         </f:facet>
     </p:toolbar>
 
     <br/>
 
-    <p:dataTable id="clientInformationTypeList" editable="true" emptyMessage="No items yet"
-                 var="s" value="#{clientInformationTypeController.clientInformationTypeList}"
-                 rowKey="#{clientInformationTypeController.clientInformationTypeList.indexOf(s)}"
-                 selectionMode="single" selection="#{clientInformationTypeController.selected}">
+    <p:dataTable id="managerInformationTypeList" editable="true" emptyMessage="No items yet"
+                 var="s" value="#{managerInformationTypeController.managerInformationTypeList}"
+                 rowKey="#{managerInformationTypeController.managerInformationTypeList.indexOf(s)}"
+                 selectionMode="single" selection="#{managerInformationTypeController.selected}">
 
         <f:facet name="header">Client Information Types</f:facet>
-        <p:ajax event="rowEdit" listener="#{clientInformationTypeController.onRowEdit}"/>
-        <p:ajax event="rowEditCancel" listener="#{clientInformationTypeController.onRowCancel}"/>
+        <p:ajax event="rowEdit" listener="#{managerInformationTypeController.onRowEdit}"/>
+        <p:ajax event="rowEditCancel" listener="#{managerInformationTypeController.onRowCancel}"/>
         <p:ajax event="rowSelect" update="@form:btn_delete" immediate="true"/>
         <p:ajax event="rowUnselect" update="@form:btn_delete" immediate="true"/>
 
