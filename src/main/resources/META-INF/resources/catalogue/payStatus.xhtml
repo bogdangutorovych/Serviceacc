@@ -26,7 +26,7 @@
                  rowKey="#{payStatusController.payStatusList.indexOf(s)}"
                  selectionMode="single" selection="#{payStatusController.selected}">
 
-        <f:facet name="header">Client Information Types</f:facet>
+        <f:facet name="header">Pay Statuses</f:facet>
         <p:ajax event="rowEdit" listener="#{payStatusController.onRowEdit}"/>
         <p:ajax event="rowEditCancel" listener="#{payStatusController.onRowCancel}"/>
         <p:ajax event="rowSelect" update="@form:btn_delete" immediate="true"/>

@@ -26,7 +26,7 @@
                  rowKey="#{serviceTypeController.serviceTypeList.indexOf(s)}"
                  selectionMode="single" selection="#{serviceTypeController.selected}">
 
-        <f:facet name="header">Client Information Types</f:facet>
+        <f:facet name="header">Service Types</f:facet>
         <p:ajax event="rowEdit" listener="#{serviceTypeController.onRowEdit}"/>
         <p:ajax event="rowEditCancel" listener="#{serviceTypeController.onRowCancel}"/>
         <p:ajax event="rowSelect" update="@form:btn_delete" immediate="true"/>
