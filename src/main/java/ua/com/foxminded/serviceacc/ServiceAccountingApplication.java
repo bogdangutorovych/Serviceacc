@@ -8,7 +8,12 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan("ua.com.foxminded.serviceacc")
-public class ServiceAccountingApplication {
+public class ServiceAccountingApplication extends SpringBootServletInitializer {
+
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(ServiceAccountingApplication.class);
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(ServiceAccountingApplication.class, args);
