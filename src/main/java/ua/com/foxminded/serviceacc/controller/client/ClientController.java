@@ -107,13 +107,11 @@ public class ClientController implements Serializable {
 	public void addInformation(){
 		logger.info("addInfo:" + tempInfo);
 		tempInfo.setActive(true);
+		tempInfo.setId(0L);
 		logger.info("addInfo selectedClient: " + selectedClient);
-//		tempInfo.setContent("Content");
-//		tempInfo.setClientInformationType(informationTypeService.findByTypeName("skype"));
 		selectedClient.getInformations().add(tempInfo);
 //		tempInfo.setContent("");
 //		tempInfo.setClientInformationType(null);
-		logger.info("end addInfo");
 	}
 
 	public List<ClientStatusType> getAvailableStatuses() {

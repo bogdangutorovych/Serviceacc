@@ -77,7 +77,7 @@
 			<p:inputText id="content" value="#{clientController.tempInfo.content}" required="true" label="content" />
 
 			<p:outputLabel for="infotype" value="Type:" />
-			<p:selectOneMenu id="infotype" value="#{clientController.tempInfo.clientInformationType}" converter="omnifaces.SelectItemsConverter">
+			<p:selectOneMenu id="infotype" value="#{clientController.tempInfo.clientInformationType}" required="true" converter="omnifaces.SelectItemsConverter">
 				<f:selectItem itemLabel="Select type..." noSelectionOption="true" />
 				<f:selectItems value="#{clientController.availableInfoTypes}"
 							   var="i" itemLabel="#{i.title}" itemValue="#{i}"/>
@@ -85,7 +85,6 @@
 
 			<f:facet name="footer">
 				<p:commandButton value="Save" update="infoList" actionListener="#{clientController.addInformation()}"/>
-								 <!--oncomplete="handleLoginRequest(xhr, status, args)" />-->
 			</f:facet>
 		</h:panelGrid>
 	</p:dialog>
