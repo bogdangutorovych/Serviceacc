@@ -44,16 +44,16 @@ INSERT INTO CLIENT_INFO_TYPE (id, title, active, code) VALUES (2, 'e-mail', true
 INSERT INTO CLIENT_INFO_TYPE (id, title, active, code) VALUES (3, 'site', true, 'site');
 INSERT INTO CLIENT_INFO_TYPE (id, title, active, code) VALUES (4, 'skype', true, 'skype');
 INSERT INTO CLIENT_INFO_TYPE (id, title, active, code) VALUES (5, 'city', true, 'city');
-ALTER SEQUENCE contact_type_id_seq RESTART WITH 6;
+ALTER SEQUENCE client_info_type_seq RESTART WITH 6;
 
-INSERT INTO CLIENT_INFO (client_info_id, content, info_type_id, client_id, active) VALUES (1, '0503265566', 1, 1, true);
-INSERT INTO CLIENT_INFO (client_info_id, content, info_type_id, client_id, active) VALUES (2, 'test@gmail.com', 2, 1, true);
-INSERT INTO CLIENT_INFO (client_info_id, content, info_type_id, client_id, active) VALUES (3, 'www.test.ua', 3, 1, true);
-INSERT INTO CLIENT_INFO (client_info_id, content, info_type_id, client_id, active) VALUES (4, 'testik', 4, 1, true);
-INSERT INTO CLIENT_INFO (client_info_id, content, info_type_id, client_id, active) VALUES (5, 'Kyev', 5, 1, true);
-INSERT INTO CLIENT_INFO (client_info_id, content, info_type_id, client_id, active) VALUES (6, '0936854214', 1, 2, true);
-INSERT INTO CLIENT_INFO (client_info_id, content, info_type_id, client_id, active) VALUES (7, 'karamba@gmail.com', 2, 2, true);
-INSERT INTO CLIENT_INFO (client_info_id, content, info_type_id, client_id, active) VALUES (8, null, 3, 2, true);
-INSERT INTO CLIENT_INFO (client_info_id, content, info_type_id, client_id, active) VALUES (9, 'rocket56', 4, 2, true);
-INSERT INTO CLIENT_INFO (client_info_id, content, info_type_id, client_id, active) VALUES (10, 'Kyev', 5, 2, true);
+INSERT INTO CLIENT_INFO (id, content, info_type_id, client_id, active) VALUES (1, '0503265566', 1, 1, true);
+INSERT INTO CLIENT_INFO (id, content, info_type_id, client_id, active) VALUES (2, 'test@gmail.com', 2, 1, true);
+INSERT INTO CLIENT_INFO (id, content, info_type_id, client_id, active) VALUES (3, 'www.test.ua', 3, 1, true);
+INSERT INTO CLIENT_INFO (id, content, info_type_id, client_id, active) VALUES (4, 'testik', 4, 1, true);
+INSERT INTO CLIENT_INFO (id, content, info_type_id, client_id, active) VALUES (5, 'Kyev', 5, 1, true);
+INSERT INTO CLIENT_INFO (id, content, info_type_id, client_id, active) VALUES (6, '0936854214', 1, 2, true);
+INSERT INTO CLIENT_INFO (id, content, info_type_id, client_id, active) VALUES (7, 'karamba@gmail.com', 2, 2, true);
+INSERT INTO CLIENT_INFO (id, content, info_type_id, client_id, active) VALUES (8, null, 3, 2, true);
+INSERT INTO CLIENT_INFO (id, content, info_type_id, client_id, active) VALUES (9, 'rocket56', 4, 2, true);
+INSERT INTO CLIENT_INFO (id, content, info_type_id, client_id, active) VALUES (10, 'Kyev', 5, 2, true);
 ALTER SEQUENCE client_info_seq RESTART WITH 11;

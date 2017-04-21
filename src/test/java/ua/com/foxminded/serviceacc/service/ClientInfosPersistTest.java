@@ -35,18 +35,23 @@ public class ClientInfosPersistTest {
     ClientInformationTypeService clientInformationTypeService;
 
     @Test
-    public void saveClientWithInfoAndGet() {
+    public void saveClientWithInfos() {
 
-        ClientInformationType skype = clientInformationTypeService.findByTypeName("skype");
-        assertThat(skype.getTitle(), is("skype"));
+        String typeName = "Skype2";
+        String typeCode = "SKP2";
+        //Save new type and check
+        ClientInformationType skype1 = new ClientInformationType(typeCode, typeName);
+        skype1.setActive(true);
+        clientInformationTypeService.save(skype1);
+        assertThat(skype1.getTitle(), is(typeName));
 
         ClientInformation info1 = new ClientInformation();
-        info1.setClientInformationType(skype);
+        info1.setClientInformationType(skype1);
         info1.setContent("oneone");
         info1.setActive(true);
 
         ClientInformation info2 = new ClientInformation();
-        info2.setClientInformationType(skype);
+        info2.setClientInformationType(skype1);
         info2.setContent("twotwo");
         info2.setActive(true);
 
@@ -59,15 +64,7 @@ public class ClientInfosPersistTest {
 
         clientService.create(client);
 
-
         assertThat(clientService.findById(client.getId()).getInformations(), hasSize(2));
     }
 
-    @Test
-    public void checkClientInfos() {
-
-        Client fetched = clientService.findById(1L);
-        assertThat(fetched.getInformations(), hasSize(5));
-        System.out.println(fetched.getInformations());
-    }
 }

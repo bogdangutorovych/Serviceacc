@@ -1,16 +1,10 @@
 package ua.com.foxminded.serviceacc.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by andreb on 04.04.17.
- * Represent contact type
+ * Represent information type
  */
 @Entity
 @Table(name = "client_info_type")
@@ -67,5 +61,21 @@ public class ClientInformationType {
     @Override
     public String toString() {
         return "type = " + title;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ClientInformationType that = (ClientInformationType) o;
+
+        return id != null ? id.equals(that.id) : that.id == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 }

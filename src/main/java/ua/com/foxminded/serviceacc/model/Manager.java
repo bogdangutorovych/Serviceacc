@@ -4,122 +4,105 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "manager")
 public class Manager {
 
-    @Id
-    @SequenceGenerator(name = "generator", sequenceName = "manager_id_seq", initialValue = 1, allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
-    @Column(name = "id", unique = true, nullable = false)
-    private Long id;
+	@Id
+	@SequenceGenerator(name = "generator", sequenceName = "manager_id_seq", initialValue = 1, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
+	@Column(name = "id", unique = true, nullable = false)
+	private Long id;
 
-    @Column(name = "first_name")
-    private String firstName;
+	@Column(name = "first_name")
+	private String firstName;
 
-    @Column(name = "last_name")
-    private String lastName;
+	@Column(name = "last_name")
+	private String lastName;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "birth_day")
-    private Date birthday;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "birth_day")
+	private Date birthday;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "manager_id", referencedColumnName = "id")
-    private Set<ManagerInformation> informations = new HashSet<>();
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "manager_id", referencedColumnName = "id")
+	private Set<ManagerInformation> informations = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "manager", orphanRemoval = true)
-    private Set<Client> clients = new HashSet<>();
+	@Column(name = "active", nullable = false)
+	private boolean active = true;
 
-    @Column(name = "active", nullable = false)
-    private boolean active = true;
+	public Manager() {
 
+	}
 
-    public Manager() {
+	public Manager(String firstName, String lastName, Date birthday, Set<ManagerInformation> informations,
+			Set<Client> clients, boolean active) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.birthday = birthday;
+		this.informations = informations;
+		this.active = active;
+	}
 
-    }
+	public Long getId() {
+		return id;
+	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public Manager(String firstName, String lastName, Date birthday, Set<ManagerInformation> informations, Set<Client> clients,
-                   boolean active) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthday = birthday;
-        this.informations = informations;
-        this.clients = clients;
-        this.active = active;
-    }
+	public String getFirstName() {
+		return firstName;
+	}
 
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Date getBirthday() {
+		return birthday;
+	}
 
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
 
-    public String getFirstName() {
-        return firstName;
-    }
+	public Set<ManagerInformation> getInformations() {
+		return informations;
+	}
 
+	public void setInformations(Set<ManagerInformation> informations) {
+		this.informations = informations;
+	}
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	public boolean isActive() {
+		return active;
+	}
 
-
-    public String getLastName() {
-        return lastName;
-    }
-
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-
-    public Set<ManagerInformation> getInformations() {
-        return informations;
-    }
-
-
-    public void setInformations(Set<ManagerInformation> informations) {
-        this.informations = informations;
-    }
-
-
-    public Set<Client> getClients() {
-        return clients;
-    }
-
-
-    public void setClients(Set<Client> clients) {
-        this.clients = clients;
-    }
-
-
-    public boolean isActive() {
-        return active;
-    }
-
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 }

@@ -1,19 +1,21 @@
 package ua.com.foxminded.serviceacc.controller.client;
 
+import java.io.Serializable;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.ClientLevelType;
 import ua.com.foxminded.serviceacc.model.ClientStatusType;
 import ua.com.foxminded.serviceacc.service.ClientLevelTypeService;
 import ua.com.foxminded.serviceacc.service.ClientService;
 import ua.com.foxminded.serviceacc.service.ClientStatusTypeService;
-
-import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
-import java.io.Serializable;
-import java.util.List;
 
 @Controller
 @ViewScoped
@@ -32,8 +34,10 @@ public class ClientController implements Serializable {
 	private final ClientService clientService;
 	private final ClientStatusTypeService cstService;
 	private final ClientLevelTypeService cltService;
+
 	@Autowired
-	public ClientController(ClientService clientService, ClientStatusTypeService cstService, ClientLevelTypeService cltService) {
+	public ClientController(ClientService clientService, ClientStatusTypeService cstService,
+			ClientLevelTypeService cltService) {
 		this.clientService = clientService;
 		this.cstService = cstService;
 		this.cltService = cltService;
@@ -55,7 +59,7 @@ public class ClientController implements Serializable {
 	}
 
 	public void onOk() {
-		if(selectedClient.getId() == null) {
+		if (selectedClient.getId() == null) {
 			list.add(selectedClient);
 		}
 

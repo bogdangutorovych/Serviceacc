@@ -2,21 +2,14 @@ package ua.com.foxminded.serviceacc.model;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
+
+import org.hibernate.annotations.SQLDelete;
 
 @Entity
 @Table(name = "client_status_history")
+
+@SQLDelete(sql = "UPDATE client_status_history SET active = false WHERE id = ?")
 public class ClientStatusHistory {
 
 	@Id
@@ -26,11 +19,7 @@ public class ClientStatusHistory {
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "client_id")
-	private Client client;
-
-	@ManyToOne (fetch = FetchType.EAGER)
-	@JoinColumn (name = "client_status_type_id")
+	@JoinColumn(name = "client_status_type_id")
 	private ClientStatusType statusChanged;
 
 	@Temporal(TemporalType.DATE)
@@ -43,12 +32,11 @@ public class ClientStatusHistory {
 	public ClientStatusHistory() {
 	}
 
-	public ClientStatusHistory(Client client, ClientStatusType statusChanged, Date dateChanged) {
-		this.client = client;
+	public ClientStatusHistory(ClientStatusType statusChanged, Date dateChanged) {
+
 		this.statusChanged = statusChanged;
 		this.dateChanged = dateChanged;
 	}
-
 
 	public Long getId() {
 		return id;
@@ -56,14 +44,6 @@ public class ClientStatusHistory {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Client getClient() {
-		return client;
-	}
-
-	public void setClient(Client client) {
-		this.client = client;
 	}
 
 	public ClientStatusType getStatusChanged() {
