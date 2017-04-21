@@ -25,6 +25,11 @@ public class ModelTestBuilder {
     public static final String ADDRESS = "Address";
     public static final String SKYPE = "Skype";
     public static final String OTHER = "Other";
+    
+    public static final String DOLLAR = "Dollar";
+    public static final String HRYVNIA = "Hryvnia";
+    public static final String RUBLE = "Ruble";
+
 
 
     public static Client buildTestClient(){
@@ -68,6 +73,15 @@ public class ModelTestBuilder {
         levels.add(new ClientLevelType("001", BEGINNER));
         levels.add(new ClientLevelType("002", APPLICANT));
         levels.add(new ClientLevelType("003", REGULAR));
+
+        return levels;
+    }
+    
+    public static List<CurrencyType> buildListTestCurrencyType(){
+        List<CurrencyType> levels = new ArrayList<>();
+        levels.add(new CurrencyType("USA", DOLLAR));
+        levels.add(new CurrencyType("UAH", HRYVNIA));
+        levels.add(new CurrencyType("RUB", RUBLE));
 
         return levels;
     }

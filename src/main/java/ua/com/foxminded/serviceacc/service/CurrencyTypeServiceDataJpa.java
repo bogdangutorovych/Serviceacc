@@ -12,42 +12,37 @@ import ua.com.foxminded.serviceacc.repository.CurrencyTypeRepository;
 public class CurrencyTypeServiceDataJpa implements CurrencyTypeService {
 
 	@Autowired
-	CurrencyTypeRepository currencyRepository;
+	CurrencyTypeRepository currencyTypeRepository;
 
 	@Override
 	public CurrencyType save(CurrencyType currencyType) {
-		// TODO Auto-generated method stub
-		return null;
+		return currencyTypeRepository.save(currencyType);
 	}
 
 	@Override
 	public CurrencyType update(CurrencyType currencyType) {
-		// TODO Auto-generated method stub
-		return null;
+		return currencyTypeRepository.save(currencyType);
 	}
 
 	@Override
 	public CurrencyType findById(Long currencyType) {
-		// TODO Auto-generated method stub
-		return null;
+		return currencyTypeRepository.findOne(currencyType);
 	}
 
 	@Override
 	public CurrencyType findByCurrentName(String currencyName) {
-		// TODO Auto-generated method stub
-		return null;
+		return currencyTypeRepository.findOneByTitle(currencyName);
 	}
 
 	@Override
 	public List<CurrencyType> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return currencyTypeRepository.findAll();
+	
 	}
 
 	@Override
 	public void delete(Long currencyTypeId) {
-		// TODO Auto-generated method stub
-
+		currencyTypeRepository.delete(currencyTypeId);
 	}
 
 }

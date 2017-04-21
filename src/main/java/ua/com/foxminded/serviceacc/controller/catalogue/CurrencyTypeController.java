@@ -33,8 +33,8 @@ public class CurrencyTypeController implements Serializable {
 
     @PostConstruct
     public void init() {
-//    	currencyList = currencyService.findAll();
-    	currencyList = new ArrayList(Currency.getAvailableCurrencies());
+    	currencyList = currencyService.findAll();
+//    	currencyList = new ArrayList(Currency.getAvailableCurrencies());
     }
 
     public CurrencyTypeService getCurrensyService() {
