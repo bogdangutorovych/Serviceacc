@@ -69,6 +69,7 @@ public class ClientController implements Serializable {
 		logger.info("getAL: " + selectedClient.getInformations());
 		logger.info("tempSet: " + tempInfosSet);
 		tempInfosSet.addAll(selectedClient.getInformations());
+        logger.info("tempSet: " + tempInfosSet);
 	}
 
 	public void onOk() {
@@ -114,6 +115,10 @@ public class ClientController implements Serializable {
 	}
 
 	public void deleteInformation(ClientInformation info) {
+		logger.info("Remove Info");
+		logger.info("tempSet" + tempInfosSet);
+		logger.info("clientSet" + selectedClient.getInformations());
+		logger.info("info for remove: " + info);
 		tempInfosSet.remove(info);
 	}
 
@@ -150,5 +155,9 @@ public class ClientController implements Serializable {
 
 	public Set<ClientInformation> getTempInfosSet() {
 		return tempInfosSet;
+	}
+
+	public void setTempInfosSet(Set<ClientInformation> tempInfosSet) {
+		this.tempInfosSet = tempInfosSet;
 	}
 }

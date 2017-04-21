@@ -60,7 +60,7 @@
 				<h:outputText value="#{info.clientInformationType}" />
 			</p:column>
 			<p:column style="width:40px">
-				<p:commandButton id="btn_delete_info" update="infoList" icon="ui-icon-trash"
+				<p:commandButton id="btn_delete_info" process="infoList" update="infoList" icon="ui-icon-trash"
 				action="#{clientController.deleteInformation(info)}">
 				</p:commandButton>
 			</p:column>
