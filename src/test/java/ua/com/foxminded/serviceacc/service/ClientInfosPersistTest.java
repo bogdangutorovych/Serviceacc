@@ -20,7 +20,7 @@ import static org.junit.Assert.assertThat;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@ActiveProfiles("dev")
+@ActiveProfiles("prod")
 public class ClientInfosPersistTest {
 
     @Autowired
