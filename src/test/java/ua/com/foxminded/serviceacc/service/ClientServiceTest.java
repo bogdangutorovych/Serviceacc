@@ -33,6 +33,8 @@ public class ClientServiceTest {
     ClientStatusTypeService clientStatusTypeService;
     @Autowired
     ManagerService managerService;
+    @Autowired
+    CurrencyTypeService currencyTypeService;
 
     @Test
     public void findAllFetch() {
