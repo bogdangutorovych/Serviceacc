@@ -65,8 +65,7 @@
 				</p:commandButton>
 			</p:column>
 			<f:facet name="footer">
-				<p:commandButton process="infoList" update="infoList" value="Add"
-					onclick="PF('addInfo').show();" />
+				<p:commandButton value="Add" onclick="PF('addInfo').show();" />
 			</f:facet>
 		</p:dataTable>
 
@@ -85,7 +84,7 @@
 			</p:selectOneMenu>
 
 			<f:facet name="footer">
-				<p:commandButton value="Save" update="infoList" actionListener="#{clientController.addInformation}"/>
+				<p:commandButton value="Save" update="infoList" actionListener="#{clientController.addInformation()}"/>
 								 <!--oncomplete="handleLoginRequest(xhr, status, args)" />-->
 			</f:facet>
 		</h:panelGrid>

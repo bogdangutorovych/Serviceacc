@@ -76,7 +76,6 @@ public class ClientController implements Serializable {
 	}
 
 	public void onCancel() {
-		System.out.println("ONCANCEL");
 		logger.info("onCancel");
 		selectedClient.getInformations().addAll(tempInfosSet);
 		tempInfosSet.clear();
@@ -106,11 +105,14 @@ public class ClientController implements Serializable {
 	}
 
 	public void addInformation(){
-		logger.info("addInfo");
+		logger.info("addInfo:" + tempInfo);
 		tempInfo.setActive(true);
+		logger.info("addInfo selectedClient: " + selectedClient);
+//		tempInfo.setContent("Content");
+//		tempInfo.setClientInformationType(informationTypeService.findByTypeName("skype"));
 		selectedClient.getInformations().add(tempInfo);
-		tempInfo.setContent("");
-		tempInfo.setClientInformationType(null);
+//		tempInfo.setContent("");
+//		tempInfo.setClientInformationType(null);
 		logger.info("end addInfo");
 	}
 
