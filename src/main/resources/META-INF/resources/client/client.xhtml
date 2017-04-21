@@ -65,13 +65,13 @@
 				</p:commandButton>
 			</p:column>
 			<f:facet name="footer">
-				<p:commandButton value="Add" process="infoList" onclick="PF('addInfo').show();" />
+				<p:commandButton value="Add" update="infoList" oncomplete="PF('addInfo').show();" />
 			</f:facet>
 		</p:dataTable>
 
 	</h:panelGrid>
 
-	<p:dialog header="Add Information" widgetVar="addInfo" minHeight="40">
+	<p:dialog header="Add Information" widgetVar="addInfo" minHeight="40" >
 		<h:panelGrid columns="2" cellpadding="5">
 			<p:outputLabel for="content" value="Content:" />
 			<p:inputText id="content" value="#{clientController.tempInfo.content}" required="true" label="content" />
@@ -84,7 +84,8 @@
 			</p:selectOneMenu>
 
 			<f:facet name="footer">
-				<p:commandButton value="Save" update="infoList" actionListener="#{clientController.addInformation()}"/>
+				<p:commandButton value="Save" update="infoList" actionListener="#{clientController.addInformation()}"
+				oncomplete="PF('addInfo').hide();" />
 			</f:facet>
 		</h:panelGrid>
 	</p:dialog>

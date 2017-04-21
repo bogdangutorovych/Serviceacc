@@ -29,7 +29,7 @@ public class ClientController implements Serializable {
 
 	private Client selectedClient;
 	Set<ClientInformation> tempInfosSet = new HashSet<>();
-	private ClientInformation tempInfo = new ClientInformation();
+	private ClientInformation tempInfo;
 
 	private static List<Client> list;
 
@@ -70,6 +70,7 @@ public class ClientController implements Serializable {
 		logger.info("tempSet: " + tempInfosSet);
 		tempInfosSet.addAll(selectedClient.getInformations());
         logger.info("tempSet: " + tempInfosSet);
+		tempInfo = new ClientInformation();
 	}
 
 	public void onOk() {
@@ -81,10 +82,12 @@ public class ClientController implements Serializable {
 		logger.info("clientSet" + selectedClient.getInformations());
 		selectedClient.getInformations().clear();
 		selectedClient.getInformations().addAll(tempInfosSet);
-		Client cli = clientService.update(selectedClient);
+		selectedClient = clientService.update(selectedClient);
 		logger.info("tempSet" + tempInfosSet);
-		logger.info("clientSet" + cli.getInformations());
+		logger.info("clientSet" + selectedClient.getInformations());
 		tempInfosSet.clear();
+		selectedClient = null;
+		list = clientService.findAll();
 	}
 
 	public void onCancel() {
@@ -92,8 +95,28 @@ public class ClientController implements Serializable {
 		logger.info("tempSet" + tempInfosSet);
 		logger.info("clientSet" + selectedClient.getInformations());
 		tempInfosSet.clear();
-		tempInfo.setContent("");
-		tempInfo.setClientInformationType(null);
+		selectedClient = null;
+	}
+
+	public void addInformation(){
+		logger.info("addInfo:" + tempInfo);
+		tempInfo.setActive(true);
+		tempInfo.setId(0L);
+		logger.info("addInfo selectedClient: " + selectedClient);
+		tempInfosSet.add(tempInfo);
+		tempInfo = new ClientInformation();
+		logger.info("tempSet" + tempInfosSet);
+		logger.info("clientSet" + selectedClient.getInformations());
+
+	}
+
+	public void deleteInformation(ClientInformation info) {
+		logger.info("Remove Info");
+		logger.info("tempSet" + tempInfosSet);
+		logger.info("clientSet" + selectedClient.getInformations());
+		logger.info("info for remove: " + info);
+		tempInfosSet.remove(info);
+		logger.info("tempSet" + tempInfosSet);
 	}
 
 	public void setSelectedClient(Client selectedClient) {
@@ -112,25 +135,6 @@ public class ClientController implements Serializable {
 		list.remove(selectedClient);
 		clientService.delete(selectedClient.getId());
 		selectedClient = null;
-	}
-
-	public void deleteInformation(ClientInformation info) {
-		logger.info("Remove Info");
-		logger.info("tempSet" + tempInfosSet);
-		logger.info("clientSet" + selectedClient.getInformations());
-		logger.info("info for remove: " + info);
-		tempInfosSet.remove(info);
-	}
-
-	public void addInformation(){
-		logger.info("addInfo:" + tempInfo);
-		tempInfo.setActive(true);
-		tempInfo.setId(0L);
-		logger.info("addInfo selectedClient: " + selectedClient);
-		tempInfosSet.add(tempInfo);
-		logger.info("tempSet" + tempInfosSet);
-		logger.info("clientSet" + selectedClient.getInformations());
-
 	}
 
 	public List<ClientStatusType> getAvailableStatuses() {
@@ -160,4 +164,5 @@ public class ClientController implements Serializable {
 	public void setTempInfosSet(Set<ClientInformation> tempInfosSet) {
 		this.tempInfosSet = tempInfosSet;
 	}
+
 }
