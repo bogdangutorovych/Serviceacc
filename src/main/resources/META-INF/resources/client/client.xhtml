@@ -48,7 +48,7 @@
 
 		<p:outputLabel for="level" value="Client Informations: " style="font-weight:bold" />
 
-		<p:dataTable id="infoList" var="info" value="#{clientController.selectedClient.informations}"
+		<p:dataTable id="infoList" var="info" value="#{clientController.tempInfosSet}"
 					 selectionMode="single" emptyMessage="No items yet" rowKey="#{info.id}">
 			<f:facet name="header">
 				<h:outputText value="Client Information" />
@@ -65,7 +65,7 @@
 				</p:commandButton>
 			</p:column>
 			<f:facet name="footer">
-				<p:commandButton value="Add" onclick="PF('addInfo').show();" />
+				<p:commandButton value="Add" process="infoList" onclick="PF('addInfo').show();" />
 			</f:facet>
 		</p:dataTable>
 

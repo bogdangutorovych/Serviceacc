@@ -61,9 +61,14 @@ public class ClientController implements Serializable {
 	}
 
 	public void getActualLists() {
+		logger.info("getActualList");
 		availableStatuses = cstService.findAll();
 		availableLevels = cltService.findAll();
 		availableInfoTypes = informationTypeService.findAll();
+		logger.info("Client: " + selectedClient.getId());
+		logger.info("getAL: " + selectedClient.getInformations());
+		logger.info("tempSet: " + tempInfosSet);
+		tempInfosSet.addAll(selectedClient.getInformations());
 	}
 
 	public void onOk() {
@@ -71,14 +76,23 @@ public class ClientController implements Serializable {
 		if(selectedClient.getId() == null) {
 			list.add(selectedClient);
 		}
-		clientService.update(selectedClient);
+		logger.info("tempSet" + tempInfosSet);
+		logger.info("clientSet" + selectedClient.getInformations());
+		selectedClient.getInformations().clear();
+		selectedClient.getInformations().addAll(tempInfosSet);
+		Client cli = clientService.update(selectedClient);
+		logger.info("tempSet" + tempInfosSet);
+		logger.info("clientSet" + cli.getInformations());
 		tempInfosSet.clear();
 	}
 
 	public void onCancel() {
 		logger.info("onCancel");
-		selectedClient.getInformations().addAll(tempInfosSet);
+		logger.info("tempSet" + tempInfosSet);
+		logger.info("clientSet" + selectedClient.getInformations());
 		tempInfosSet.clear();
+		tempInfo.setContent("");
+		tempInfo.setClientInformationType(null);
 	}
 
 	public void setSelectedClient(Client selectedClient) {
@@ -100,8 +114,7 @@ public class ClientController implements Serializable {
 	}
 
 	public void deleteInformation(ClientInformation info) {
-		tempInfosSet.addAll(selectedClient.getInformations());
-		selectedClient.getInformations().remove(info);
+		tempInfosSet.remove(info);
 	}
 
 	public void addInformation(){
@@ -109,9 +122,10 @@ public class ClientController implements Serializable {
 		tempInfo.setActive(true);
 		tempInfo.setId(0L);
 		logger.info("addInfo selectedClient: " + selectedClient);
-		selectedClient.getInformations().add(tempInfo);
-//		tempInfo.setContent("");
-//		tempInfo.setClientInformationType(null);
+		tempInfosSet.add(tempInfo);
+		logger.info("tempSet" + tempInfosSet);
+		logger.info("clientSet" + selectedClient.getInformations());
+
 	}
 
 	public List<ClientStatusType> getAvailableStatuses() {
@@ -132,5 +146,9 @@ public class ClientController implements Serializable {
 
 	public void setTempInfo(ClientInformation tempInfo) {
 		this.tempInfo = tempInfo;
+	}
+
+	public Set<ClientInformation> getTempInfosSet() {
+		return tempInfosSet;
 	}
 }
