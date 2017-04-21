@@ -60,7 +60,7 @@ public class ClientInformationType {
 
     @Override
     public String toString() {
-        return "type = " + title;
+        return title;
     }
 
     @Override

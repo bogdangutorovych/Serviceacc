@@ -89,6 +89,11 @@ public class ClientInformation {
 		return id != null ? id.equals(that.id) : that.id == null;
 
 	}
+	
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
 
 	@Override
 	public String toString() {
