@@ -75,7 +75,7 @@ public class ModelTestBuilder {
 	
     public static List<CurrencyType> buildListTestCurrencyType(){
         List<CurrencyType> levels = new ArrayList<>();
-        levels.add(new CurrencyType("USA", DOLLAR));
+        levels.add(new CurrencyType("USD", DOLLAR));
         levels.add(new CurrencyType("UAH", HRYVNIA));
         levels.add(new CurrencyType("RUB", RUBLE));
 

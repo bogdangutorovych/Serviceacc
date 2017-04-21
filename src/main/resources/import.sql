@@ -16,7 +16,7 @@ INSERT INTO CLIENT_STATUS_TYPE (id, title, active, code) VALUES (2, 'Frozen', tr
 INSERT INTO CLIENT_STATUS_TYPE (id, title, active, code) VALUES (3, 'Pending', true, 'PND');
 ALTER SEQUENCE client_status_type_id_seq RESTART WITH 4;
 
-INSERT INTO CURRENCY_TYPE (id, title, active, code) VALUES (1, 'Dollar', true, 'USA');
+INSERT INTO CURRENCY_TYPE (id, title, active, code) VALUES (1, 'Dollar', true, 'USD');
 INSERT INTO CURRENCY_TYPE (id, title, active, code) VALUES (2, 'Hryvnia', true, 'UAH');
 INSERT INTO CURRENCY_TYPE (id, title, active, code) VALUES (3, 'Ruble', true, 'RUB');
 ALTER SEQUENCE currency_type_seq RESTART WITH 4;
