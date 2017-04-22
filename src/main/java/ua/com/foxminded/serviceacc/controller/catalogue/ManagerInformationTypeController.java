@@ -70,9 +70,9 @@ public class ManagerInformationTypeController implements Serializable {
 	}
 
 	public void onRowCancel(RowEditEvent event) {
-		ClientLevelType Level = (ClientLevelType) event.getObject();
-		if (Level.getId() == null) {
-			managerInformationTypeList.remove(Level);
+		ManagerInformationType info = (ManagerInformationType) event.getObject();
+		if (info.getId() == null) {
+			managerInformationTypeList.remove(info);
 			selected = null;
 		}
 	}

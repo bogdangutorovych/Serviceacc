@@ -69,9 +69,9 @@ public class ClientLevelTypeController implements Serializable {
 	}
 
 	public void onRowCancel(RowEditEvent event) {
-		ClientLevelType Level = (ClientLevelType) event.getObject();
-		if (Level.getId() == null) {
-			LevelList.remove(Level);
+		ClientLevelType level = (ClientLevelType) event.getObject();
+		if (level.getId() == null) {
+			LevelList.remove(level);
 			selected = null;
 		}
 	}
