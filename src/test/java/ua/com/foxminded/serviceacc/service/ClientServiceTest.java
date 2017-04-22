@@ -22,7 +22,7 @@ import static ua.com.foxminded.serviceacc.ModelTestBuilder.*;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@ActiveProfiles("dev")
+@ActiveProfiles("test")
 public class ClientServiceTest {
 
     @Autowired

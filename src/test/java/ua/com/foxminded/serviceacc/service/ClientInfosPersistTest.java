@@ -21,7 +21,7 @@ import static ua.com.foxminded.serviceacc.ModelTestBuilder.*;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@ActiveProfiles("dev")
+@ActiveProfiles("test")
 public class ClientInfosPersistTest {
 
     @Autowired
@@ -56,7 +56,6 @@ public class ClientInfosPersistTest {
         info2.setContent("twotwo");
         info2.setActive(true);
 
-
         Client client = ModelTestBuilder.buildTestClient();
         client.setActive(true);
 
@@ -80,8 +79,8 @@ public class ClientInfosPersistTest {
         info1.setClientInformationType(type1);
 
         ClientInformation info2 = buildTestClientInformation();
-        info1.setContent("content2");
-        info1.setClientInformationType(type1);
+        info2.setContent("content2");
+        info2.setClientInformationType(type1);
 
         Client client = buildTestClient();
         client.getInformations().add(info1);

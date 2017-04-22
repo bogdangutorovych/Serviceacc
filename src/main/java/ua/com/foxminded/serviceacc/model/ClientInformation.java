@@ -1,21 +1,10 @@
 package ua.com.foxminded.serviceacc.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-
+import javax.persistence.*;
 import org.hibernate.annotations.SQLDelete;
 
 @Entity
 @Table(name = "client_info")
-
 @SQLDelete(sql = "UPDATE client_info SET active = false WHERE id = ?")
 public class ClientInformation {
 
@@ -79,21 +68,21 @@ public class ClientInformation {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
 
 		ClientInformation that = (ClientInformation) o;
 
-		return id != null ? id.equals(that.id) : that.id == null;
-
+		if (content != null ? !content.equals(that.content) : that.content != null) return false;
+		return clientInformationType != null ? clientInformationType.equals(that.clientInformationType) : that.clientInformationType == null;
 	}
-	
-    @Override
-    public int hashCode() {
-        return id != null ? id.hashCode() : 0;
-    }
+
+	@Override
+	public int hashCode() {
+		int result = content != null ? content.hashCode() : 0;
+		result = 31 * result + (clientInformationType != null ? clientInformationType.hashCode() : 0);
+		return result;
+	}
 
 	@Override
 	public String toString() {
