@@ -70,12 +70,12 @@ public class ClientInformationType {
 
         ClientInformationType that = (ClientInformationType) o;
 
-        return id != null ? id.equals(that.id) : that.id == null;
+        return title != null ? title.equals(that.title) : that.title == null;
 
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        return title != null ? title.hashCode() : 0;
     }
 }

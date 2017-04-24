@@ -12,7 +12,6 @@
 			<span class="ui-separator"><span class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
 			<p:commandButton  id="btn_cancel" value="Cancel" update=":contentForm" icon="ui-icon-close"
-							  actionListener="#{clientController.onCancel()}"
 							  action='#{navController.setMainContent("/client/clientList.xhtml")}' immediate="true"/>
 		</f:facet>
 	</p:toolbar>
@@ -44,50 +43,20 @@
 		</p:selectOneMenu>
 
 	</h:panelGrid>
+
 	<h:panelGrid>
+		<p:dataTable id="infoList" var="type" value="#{clientController.informationTypeList}"
+					 selectionMode="single" emptyMessage="No items yet"
+					 rowKey="#{type.id}">
 
-		<p:outputLabel for="level" value="Client Informations: " style="font-weight:bold" />
+			<p:column headerText="Type" sortBy="#{type.id}">
+				<h:outputText value="#{type.title}" />
+			</p:column>
+			<p:column headerText="Content">
+				<h:inputText value="#{clientController.getInfoByType(type).content}" />
+			</p:column>
 
-		<p:dataTable id="infoList" var="info" value="#{clientController.tempInfosSet}"
-					 selectionMode="single" emptyMessage="No items yet" rowKey="#{info.id}">
-			<f:facet name="header">
-				<h:outputText value="Client Information" />
-			</f:facet>
-			<p:column headerText="Content" sortBy="#{info.id}">
-				<h:outputText value="#{info.content}" />
-			</p:column>
-			<p:column headerText="Type">
-				<h:outputText value="#{info.clientInformationType}" />
-			</p:column>
-			<p:column style="width:40px">
-				<p:commandButton id="btn_delete_info" process="infoList" update="infoList" icon="ui-icon-trash"
-				action="#{clientController.deleteInformation(info)}">
-				</p:commandButton>
-			</p:column>
-			<f:facet name="footer">
-				<p:commandButton value="Add" update="infoList" oncomplete="PF('addInfo').show();" />
-			</f:facet>
 		</p:dataTable>
-
 	</h:panelGrid>
-
-	<p:dialog header="Add Information" widgetVar="addInfo" minHeight="40" >
-		<h:panelGrid columns="2" cellpadding="5">
-			<p:outputLabel for="content" value="Content:" />
-			<p:inputText id="content" value="#{clientController.tempInfo.content}" required="true" label="content" />
-
-			<p:outputLabel for="infotype" value="Type:" />
-			<p:selectOneMenu id="infotype" value="#{clientController.tempInfo.clientInformationType}" required="true" converter="omnifaces.SelectItemsConverter">
-				<f:selectItem itemLabel="Select type..." noSelectionOption="true" />
-				<f:selectItems value="#{clientController.availableInfoTypes}"
-							   var="i" itemLabel="#{i.title}" itemValue="#{i}"/>
-			</p:selectOneMenu>
-
-			<f:facet name="footer">
-				<p:commandButton value="Save" update="infoList" actionListener="#{clientController.addInformation()}"
-				oncomplete="PF('addInfo').hide();" />
-			</f:facet>
-		</h:panelGrid>
-	</p:dialog>
 
 </ui:composition>
