@@ -46,6 +46,13 @@ INSERT INTO CLIENT_INFO_TYPE (id, title, active, code) VALUES (4, 'skype', true,
 INSERT INTO CLIENT_INFO_TYPE (id, title, active, code) VALUES (5, 'city', true, 'city');
 ALTER SEQUENCE client_info_type_seq RESTART WITH 6;
 
+INSERT INTO MANAGER_INFO_TYPE (id, title, active, code) VALUES (1, 'telephone', true, 'phone');
+INSERT INTO MANAGER_INFO_TYPE (id, title, active, code) VALUES (2, 'e-mail', true, 'mail');
+INSERT INTO MANAGER_INFO_TYPE (id, title, active, code) VALUES (3, 'site', true, 'site');
+INSERT INTO MANAGER_INFO_TYPE (id, title, active, code) VALUES (4, 'skype', true, 'skype');
+INSERT INTO MANAGER_INFO_TYPE (id, title, active, code) VALUES (5, 'city', true, 'city');
+ALTER SEQUENCE manager_info_type_seq RESTART WITH 6;
+
 INSERT INTO CLIENT_INFO (id, content, info_type_id, client_id, active) VALUES (1, '0503265566', 1, 1, true);
 INSERT INTO CLIENT_INFO (id, content, info_type_id, client_id, active) VALUES (2, 'test@gmail.com', 2, 1, true);
 INSERT INTO CLIENT_INFO (id, content, info_type_id, client_id, active) VALUES (3, 'www.test.ua', 3, 1, true);
@@ -57,3 +64,16 @@ INSERT INTO CLIENT_INFO (id, content, info_type_id, client_id, active) VALUES (8
 INSERT INTO CLIENT_INFO (id, content, info_type_id, client_id, active) VALUES (9, 'rocket56', 4, 2, true);
 INSERT INTO CLIENT_INFO (id, content, info_type_id, client_id, active) VALUES (10, 'Kyev', 5, 2, true);
 ALTER SEQUENCE client_info_seq RESTART WITH 11;
+
+
+INSERT INTO MANAGER_INFO (id, content, info_type_id, manager_id, active) VALUES (1, '0503265566', 1, 1, true);
+INSERT INTO MANAGER_INFO (id, content, info_type_id, manager_id, active) VALUES (2, 'test@gmail.com', 2, 1, true);
+INSERT INTO MANAGER_INFO (id, content, info_type_id, manager_id, active) VALUES (3, 'www.test.ua', 3, 1, true);
+INSERT INTO MANAGER_INFO (id, content, info_type_id, manager_id, active) VALUES (4, 'testik', 4, 1, true);
+INSERT INTO MANAGER_INFO (id, content, info_type_id, manager_id, active) VALUES (5, 'Kyev', 5, 1, true);
+INSERT INTO MANAGER_INFO (id, content, info_type_id, manager_id, active) VALUES (6, '0936854214', 1, 2, true);
+INSERT INTO MANAGER_INFO (id, content, info_type_id, manager_id, active) VALUES (7, 'karamba@gmail.com', 2, 2, true);
+INSERT INTO MANAGER_INFO (id, content, info_type_id, manager_id, active) VALUES (8, null, 3, 2, true);
+INSERT INTO MANAGER_INFO (id, content, info_type_id, manager_id, active) VALUES (9, 'rocket56', 4, 2, true);
+INSERT INTO MANAGER_INFO (id, content, info_type_id, manager_id, active) VALUES (10, 'Kyev', 5, 3, true);
+ALTER SEQUENCE manager_info_seq RESTART WITH 11;
