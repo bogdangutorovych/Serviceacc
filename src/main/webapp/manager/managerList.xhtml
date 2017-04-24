@@ -19,7 +19,7 @@
 			<span class="ui-separator"><span class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
 			<p:commandButton  id="btn_delete" value="Delete" update=":contentForm" icon="ui-icon-trash"
-							  disabled="true"
+							  disabled="#{managerController.selectedManager==null}"
 							  actionListener="#{managerController.delete()}"/>
 
 		</f:facet>
