@@ -1,62 +1,63 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-				xmlns:f="http://xmlns.jcp.org/jsf/core"
-				xmlns:h="http://xmlns.jcp.org/jsf/html"
-				xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-				xmlns:p="http://primefaces.org/ui">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
 
-	<p:toolbar>
-		<f:facet name="left">
-			<p:commandButton id="btn_ok" value="Ok" update=":contentForm" icon="ui-icon-check"
-							 actionListener="#{clientController.onOk()}"
-							 action='#{navController.setMainContent("/client/clientList.xhtml")}'/>
-			<span class="ui-separator"><span class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+    <p:toolbar>
+        <f:facet name="left">
+            <p:commandButton id="btn_ok" value="Ok" update=":contentForm" icon="ui-icon-check"
+                             actionListener="#{clientController.onOk()}"
+                             action='#{navController.setMainContent("/client/clientList.xhtml")}'/>
+            <span class="ui-separator"><span class="ui-icon ui-icon-grip-dotted-vertical"/></span>
 
-			<p:commandButton  id="btn_cancel" value="Cancel" update=":contentForm" icon="ui-icon-close"
-							  action='#{navController.setMainContent("/client/clientList.xhtml")}' immediate="true"/>
-		</f:facet>
-	</p:toolbar>
+            <p:commandButton id="btn_cancel" value="Cancel" update=":contentForm" icon="ui-icon-close"
+                             action='#{navController.setMainContent("/client/clientList.xhtml")}' immediate="true"/>
+        </f:facet>
+    </p:toolbar>
 
-	<br/>
+    <br/>
 
-	<h:panelGrid columns="2" cellpadding="5">
-		<h:outputText for="id" value="ID:" style="font-weight:bold" />
-		<h:inputText id="id" value="#{clientController.selectedClient.id}" disabled="true"/>
+    <h:panelGrid columns="2" cellpadding="5">
+        <h:outputText for="id" value="ID:" style="font-weight:bold"/>
+        <h:inputText id="id" value="#{clientController.selectedClient.id}" disabled="true"/>
 
-		<h:outputLabel for="firstName" value="First name: " style="font-weight:bold" />
-		<p:inputText id="firstName" value="#{clientController.selectedClient.firstName}" required="true"/>
+        <h:outputLabel for="firstName" value="First name: " style="font-weight:bold"/>
+        <p:inputText id="firstName" value="#{clientController.selectedClient.firstName}" required="true"/>
 
-		<h:outputLabel for="lastName" value="Last name: " style="font-weight:bold" />
-		<p:inputText id="lastName" value="#{clientController.selectedClient.lastName}" required="true"/>
+        <h:outputLabel for="lastName" value="Last name: " style="font-weight:bold"/>
+        <p:inputText id="lastName" value="#{clientController.selectedClient.lastName}" required="true"/>
 
-		<p:outputLabel for="status" value="Status: " style="font-weight:bold" />
-		<p:selectOneMenu id="status" value="#{clientController.selectedClient.status}" converter="omnifaces.SelectItemsConverter">
-			<f:selectItem itemLabel="Select status..." noSelectionOption="true" />
-			<f:selectItems value="#{clientController.availableStatuses}"
-						   var="s" itemLabel="#{s.title}" itemValue="#{s}"/>
-		</p:selectOneMenu>
+        <p:outputLabel for="status" value="Status: " style="font-weight:bold"/>
+        <p:selectOneMenu id="status" value="#{clientController.selectedClient.status}"
+                         converter="omnifaces.SelectItemsConverter">
+            <f:selectItem itemLabel="Select status..." noSelectionOption="true"/>
+            <f:selectItems value="#{clientController.availableStatuses}"
+                           var="s" itemLabel="#{s.title}" itemValue="#{s}"/>
+        </p:selectOneMenu>
 
-		<p:outputLabel for="level" value="Level: " style="font-weight:bold" />
-		<p:selectOneMenu  id="level" value="#{clientController.selectedClient.level}" converter="omnifaces.SelectItemsConverter">
-			<f:selectItem itemLabel="Select level..." noSelectionOption="true" />
-			<f:selectItems value="#{clientController.availableLevels}"
-						   var="l" itemLabel="#{l.title}" itemValue="#{l}"/>
-		</p:selectOneMenu>
+        <p:outputLabel for="level" value="Level: " style="font-weight:bold"/>
+        <p:selectOneMenu id="level" value="#{clientController.selectedClient.level}"
+                         converter="omnifaces.SelectItemsConverter">
+            <f:selectItem itemLabel="Select level..." noSelectionOption="true"/>
+            <f:selectItems value="#{clientController.availableLevels}"
+                           var="l" itemLabel="#{l.title}" itemValue="#{l}"/>
+        </p:selectOneMenu>
 
-	</h:panelGrid>
+    </h:panelGrid>
 
-	<h:panelGrid>
-		<p:dataTable id="infoList" var="type" value="#{clientController.informationTypeList}"
-					 selectionMode="single" emptyMessage="No items yet"
-					 rowKey="#{type.id}">
-
-			<p:column headerText="Type" sortBy="#{type.id}">
-				<h:outputText value="#{type.title}" />
-			</p:column>
-			<p:column headerText="Content">
-				<h:inputText value="#{clientController.getInfoByType(type).content}" />
-			</p:column>
-
-		</p:dataTable>
-	</h:panelGrid>
+    <h:panelGrid>
+        <f:facet name="header">
+            <h:outputText value="Client Information"/>
+        </f:facet>
+        <p:outputPanel>
+            <ui:repeat value="#{clientController.informationTypeList}" var="type">
+                <h:panelGrid columns="2" cellpadding="5">
+                    <p:outputLabel for="info_content" value="#{type.title}:" style="font-weight:bold"/>
+                    <p:inputText id="info_content" value="#{clientController.getInfoByType(type).content}"/>
+                </h:panelGrid>
+            </ui:repeat>
+        </p:outputPanel>
+    </h:panelGrid>
 
 </ui:composition>
