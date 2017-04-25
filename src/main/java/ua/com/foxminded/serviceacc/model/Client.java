@@ -1,6 +1,6 @@
 package ua.com.foxminded.serviceacc.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,8 +17,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Loader;
 import org.hibernate.annotations.SQLDelete;
@@ -45,9 +43,8 @@ public class Client {
 	@Column(name = "last_name")
 	private String lastName;
 
-	@Temporal(TemporalType.DATE)
 	@Column(name = "birth_day")
-	private Date birthday;
+	private LocalDate birthday;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "client_level_type_id", referencedColumnName = "id")
@@ -71,7 +68,7 @@ public class Client {
 	public Client() {
 	}
 
-	public Client(String firstName, String lastName, Date birthday, ClientLevelType level, ClientStatusType status,
+	public Client(String firstName, String lastName, LocalDate birthday, ClientLevelType level, ClientStatusType status,
 			Set<ClientInformation> informations, Set<ClientStatusHistory> clientHistory, boolean active) {
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -107,11 +104,11 @@ public class Client {
 		this.lastName = lastName;
 	}
 
-	public Date getBirthday() {
+	public LocalDate getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(Date birthday) {
+	public void setBirthday(LocalDate birthday) {
 		this.birthday = birthday;
 	}
 

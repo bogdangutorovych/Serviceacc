@@ -1,8 +1,8 @@
 package ua.com.foxminded.serviceacc.service;
 
-import ua.com.foxminded.serviceacc.model.ClientStatusType;
-
 import java.util.List;
+
+import ua.com.foxminded.serviceacc.model.ClientStatusType;
 
 /**
  * Created by andreb on 04.04.17.

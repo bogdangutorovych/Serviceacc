@@ -1,9 +1,8 @@
 package ua.com.foxminded.serviceacc.service;
 
-import ua.com.foxminded.serviceacc.model.ClientInformationType;
-import ua.com.foxminded.serviceacc.model.ManagerInformationType;
-
 import java.util.List;
+
+import ua.com.foxminded.serviceacc.model.ManagerInformationType;
 
 /**
  * Created by andreb on 04.04.17.
