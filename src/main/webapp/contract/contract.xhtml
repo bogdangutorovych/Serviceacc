@@ -22,18 +22,19 @@
 
 	<br />
 	<h:panelGrid columns="2" cellpadding="5">
-		<h:outputText for="id" value="ID:" style="font-weight:bold" />
-		<h:inputText id="id" value="#{contractController.selectedContract.id}"
-			disabled="true" />
 
-		<h:outputLabel for="number" value="Number: " style="font-weight:bold" />
-		<p:inputText id="number"
-			value="#{contractController.selectedContract.number}" required="true" />
-
-
-		<h:outputLabel for="date" value="Date: " style="font-weight:bold" />
+		<h:outputLabel for="date" value="Contract date : "
+			style="font-weight:bold" />
 		<p:calendar id="date"
 			value="#{contractController.selectedContract.date}" required="true" />
+
+		<p:outputLabel for="client" value="Client: " style="font-weight:bold"/>
+        <p:selectOneMenu id="client" value="#{contractController.selectedContract.client}"
+                         converter="omnifaces.SelectItemsConverter">
+            <f:selectItem itemLabel="Select client..." noSelectionOption="true"/>
+            <f:selectItems value="#{contractController.availableClients}"
+                           var="с" itemLabel="#{с.lastName}" itemValue="#{с}"/>
+        </p:selectOneMenu>
 
 	</h:panelGrid>
 </ui:composition>

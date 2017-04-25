@@ -1,6 +1,7 @@
 package ua.com.foxminded.serviceacc.controller.contract;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -28,6 +29,7 @@ public class ContractController implements Serializable {
 	private Contract selectedContract;
 	private List<Contract> list;
 	private Client availableClient;
+	private List<Client> availableClients = new ArrayList<>();
 	// private List<Manager> availableManager;
 	// private List<Service> availableService;
 
@@ -43,6 +45,7 @@ public class ContractController implements Serializable {
 	@PostConstruct
 	public void init() {
 		list = contractService.findAll();
+		availableClients = clientService.findAll();
 	}
 
 	public void add() {
@@ -82,6 +85,10 @@ public class ContractController implements Serializable {
 
 	public List<Contract> getList() {
 		return list;
+	}
+
+	public List<Client> getAvailableClients() {
+		return availableClients;
 	}
 
 }

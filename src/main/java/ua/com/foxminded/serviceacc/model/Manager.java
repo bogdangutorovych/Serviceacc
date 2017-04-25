@@ -1,6 +1,6 @@
 package ua.com.foxminded.serviceacc.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -47,7 +47,7 @@ public class Manager {
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "birth_day")
-	private Date birthday;
+	private LocalDate birthday;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "manager_id", referencedColumnName = "id")
@@ -60,7 +60,7 @@ public class Manager {
 
 	}
 
-	public Manager(String firstName, String lastName, Date birthday, Set<ManagerInformation> informations,
+	public Manager(String firstName, String lastName, LocalDate birthday, Set<ManagerInformation> informations,
 			Set<Client> clients, boolean active) {
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -93,11 +93,11 @@ public class Manager {
 		this.lastName = lastName;
 	}
 
-	public Date getBirthday() {
+	public LocalDate getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(Date birthday) {
+	public void setBirthday(LocalDate birthday) {
 		this.birthday = birthday;
 	}
 
