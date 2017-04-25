@@ -55,11 +55,11 @@ public class Payment {
 		this.id = id;
 	}
 
-	public LocalDate getLocalDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setLocalDate(LocalDate date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 

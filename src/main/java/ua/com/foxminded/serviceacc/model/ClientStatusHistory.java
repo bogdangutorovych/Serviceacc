@@ -62,11 +62,11 @@ public class ClientStatusHistory {
 		this.statusChanged = statusChanged;
 	}
 
-	public LocalDate getLocalDateChanged() {
+	public LocalDate getDateChanged() {
 		return dateChanged;
 	}
 
-	public void setLocalDateChanged(LocalDate dateChanged) {
+	public void setDateChanged(LocalDate dateChanged) {
 		this.dateChanged = dateChanged;
 	}
 
