@@ -87,6 +87,7 @@ public class ManagerController implements Serializable {
 		}
 		Manager manager = managerService.update(selectedManager);
 		managers.set(managers.indexOf(selectedManager), manager);
+		selectedManager = manager;
 	}
 
 	public Manager getSelectedManager() {
