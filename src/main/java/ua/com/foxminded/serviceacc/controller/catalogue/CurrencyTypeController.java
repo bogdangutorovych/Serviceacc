@@ -1,18 +1,18 @@
 package ua.com.foxminded.serviceacc.controller.catalogue;
 
-import org.primefaces.event.RowEditEvent;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import ua.com.foxminded.serviceacc.model.CurrencyType;
-import ua.com.foxminded.serviceacc.service.CurrencyTypeService;
+import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Currency;
-import java.util.List;
+
+import org.primefaces.event.RowEditEvent;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+import ua.com.foxminded.serviceacc.model.CurrencyType;
+import ua.com.foxminded.serviceacc.service.CurrencyTypeService;
 
 @Controller
 @ManagedBean

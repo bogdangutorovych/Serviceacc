@@ -1,9 +1,9 @@
 package ua.com.foxminded.serviceacc.service;
 
 
-import ua.com.foxminded.serviceacc.model.Manager;
-
 import java.util.List;
+
+import ua.com.foxminded.serviceacc.model.Manager;
 
 /**
  * Created by andreb on 31.03.17.
