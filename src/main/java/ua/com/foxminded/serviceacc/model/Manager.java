@@ -12,14 +12,25 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Loader;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 @Entity
 @Table(name = "manager")
+
+@SQLDelete(sql = "UPDATE manager SET active = false WHERE id = ?")
+@Loader(namedQuery = "findManagerById")
+@NamedQuery(name = "findManagerById", query = "FROM Manager WHERE id = ?1 AND active = true")
+@Where(clause = "active = true")
+
 public class Manager {
 
 	@Id

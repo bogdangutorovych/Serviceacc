@@ -14,41 +14,37 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @ViewScoped
 @ManagedBean
 public class ClientController implements Serializable {
 
-	private static Logger logger = LoggerFactory.getLogger(ClientController.class);
+	private static final Logger log = LoggerFactory.getLogger(ClientController.class);
 
 	private static final long serialVersionUID = 1L;
 
 	private Client selectedClient;
-	Set<ClientInformation> tempInfosSet = new HashSet<>();
-	private ClientInformation tempInfo;
-
 	private static List<Client> list;
+	private List<ClientInformation> tempList = new ArrayList<>();
 
 	private List<ClientStatusType> availableStatuses;
 	private List<ClientLevelType> availableLevels;
-	private List<ClientInformationType> availableInfoTypes;
 
 	private final ClientService clientService;
 	private final ClientStatusTypeService cstService;
 	private final ClientLevelTypeService cltService;
+	private final ClientInformationTypeService citService;
 
 	@Autowired
-	private ClientInformationTypeService informationTypeService;
-
-	@Autowired
-	public ClientController(ClientService clientService, ClientStatusTypeService cstService, ClientLevelTypeService cltService) {
+	public ClientController(ClientService clientService, ClientStatusTypeService cstService, ClientLevelTypeService cltService, ClientInformationTypeService citService) {
 		this.clientService = clientService;
 		this.cstService = cstService;
 		this.cltService = cltService;
+		this.citService = citService;
 	}
 
 	@PostConstruct
@@ -62,62 +58,61 @@ public class ClientController implements Serializable {
 	}
 
 	public void getActualLists() {
-		logger.info("getActualList");
 		availableStatuses = cstService.findAll();
 		availableLevels = cltService.findAll();
-		availableInfoTypes = informationTypeService.findAll();
-		logger.info("Client: " + selectedClient.getId());
-		logger.info("getAL: " + selectedClient.getInformations());
-		logger.info("tempSet: " + tempInfosSet);
-		tempInfosSet.addAll(selectedClient.getInformations());
-        logger.info("tempSet: " + tempInfosSet);
-		tempInfo = new ClientInformation();
 	}
 
 	public void onOk() {
-		logger.info("onOk");
 		if(selectedClient.getId() == null) {
 			list.add(selectedClient);
 		}
-		logger.info("tempSet" + tempInfosSet);
-		logger.info("clientSet" + selectedClient.getInformations());
-		selectedClient.getInformations().clear();
-		selectedClient.getInformations().addAll(tempInfosSet);
-		selectedClient = clientService.update(selectedClient);
-		logger.info("tempSet" + tempInfosSet);
-		logger.info("clientSet" + selectedClient.getInformations());
-		tempInfosSet.clear();
+
+		//Check for empty ClientInformation objects. We don't want to save empty ClientInformation objects
+		Iterator<ClientInformation> iteratorInfos = selectedClient.getInformations().iterator();
+		while(iteratorInfos.hasNext()){
+			if (iteratorInfos.next().getContent().isEmpty()){
+				iteratorInfos.remove();
+			}
+		}
+		log.info("Infos for save: " + selectedClient.getInformations());
+		//Update client and get updated Client object
+		Client fetched = clientService.update(selectedClient);
+		//Replace client from list by updated client
+		int i = list.indexOf(selectedClient);
+		list.set(i, fetched);
+
+	}
+
+	/*
+	* Find ClientInformationType from selectedClient by InformationType
+	* Needs for render ClientInformation collection section
+	 */
+	public ClientInformation getInfoByType(ClientInformationType type){
+		ClientInformation info = null;
+		if (selectedClient != null){
+			tempList.clear();
+			tempList.addAll(selectedClient.getInformations());
+			for (ClientInformation i : tempList){
+				if (i.getClientInformationType().equals(type)){
+					return i;
+				}
+			}
+		}else{
+			return null; //selectedClient = null ???
+		}
+		if (info == null){
+			info = new ClientInformation();
+			info.setClientInformationType(type);
+			info.setActive(true);
+			selectedClient.getInformations().add(info);
+		}
+		return info;
+	}
+
+	public void delete() {
+		list.remove(selectedClient);
+		clientService.delete(selectedClient.getId());
 		selectedClient = null;
-		list = clientService.findAll();
-	}
-
-	public void onCancel() {
-		logger.info("onCancel");
-		logger.info("tempSet" + tempInfosSet);
-		logger.info("clientSet" + selectedClient.getInformations());
-		tempInfosSet.clear();
-		selectedClient = null;
-	}
-
-	public void addInformation(){
-		logger.info("addInfo:" + tempInfo);
-		tempInfo.setActive(true);
-		tempInfo.setId(0L);
-		logger.info("addInfo selectedClient: " + selectedClient);
-		tempInfosSet.add(tempInfo);
-		tempInfo = new ClientInformation();
-		logger.info("tempSet" + tempInfosSet);
-		logger.info("clientSet" + selectedClient.getInformations());
-
-	}
-
-	public void deleteInformation(ClientInformation info) {
-		logger.info("Remove Info");
-		logger.info("tempSet" + tempInfosSet);
-		logger.info("clientSet" + selectedClient.getInformations());
-		logger.info("info for remove: " + info);
-		tempInfosSet.remove(info);
-		logger.info("tempSet" + tempInfosSet);
 	}
 
 	public void setSelectedClient(Client selectedClient) {
@@ -132,12 +127,6 @@ public class ClientController implements Serializable {
 		return list;
 	}
 
-	public void delete() {
-		list.remove(selectedClient);
-		clientService.delete(selectedClient.getId());
-		selectedClient = null;
-	}
-
 	public List<ClientStatusType> getAvailableStatuses() {
 		return availableStatuses;
 	}
@@ -146,24 +135,6 @@ public class ClientController implements Serializable {
 		return availableLevels;
 	}
 
-	public List<ClientInformationType> getAvailableInfoTypes() {
-		return availableInfoTypes;
-	}
-
-	public ClientInformation getTempInfo() {
-		return tempInfo;
-	}
-
-	public void setTempInfo(ClientInformation tempInfo) {
-		this.tempInfo = tempInfo;
-	}
-
-	public Set<ClientInformation> getTempInfosSet() {
-		return tempInfosSet;
-	}
-
-	public void setTempInfosSet(Set<ClientInformation> tempInfosSet) {
-		this.tempInfosSet = tempInfosSet;
-	}
+	public List<ClientInformationType> getInformationTypeList(){ return citService.findAll();}
 
 }

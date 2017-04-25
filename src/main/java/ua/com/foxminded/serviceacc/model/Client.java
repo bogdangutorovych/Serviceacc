@@ -28,8 +28,8 @@ import org.hibernate.annotations.Where;
 @Table(name = "client")
 
 @SQLDelete(sql = "UPDATE client SET active = false WHERE id = ?")
-@Loader(namedQuery = "findOne")
-@NamedQuery(name = "findOne", query = "FROM Client WHERE id = ?1 AND active = true")
+@Loader(namedQuery = "findClientById")
+@NamedQuery(name = "findClientById", query = "FROM Client WHERE id = ?1 AND active = true")
 @Where(clause = "active = true")
 
 public class Client {
