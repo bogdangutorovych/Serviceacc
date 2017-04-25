@@ -47,12 +47,14 @@
 			#{c.id}
 		</p:column>
 
-		<p:column headerText="Date" sortBy="#{c.date}">
+		<p:column headerText="Date">
 			<h:outputText value="#{c.date}" />
 		</p:column>
-		<p:column headerText="Number" sortBy="#{c.number}">
+		<p:column headerText="Number">
 			<h:outputText value="#{c.number}" />
-		
+		</p:column>
+		<p:column headerText="Client">
+			<h:outputText value="#{c.availableClient.lastName}" />
 		</p:column>
 
 	</p:dataTable>

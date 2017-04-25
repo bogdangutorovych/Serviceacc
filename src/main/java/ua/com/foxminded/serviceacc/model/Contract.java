@@ -83,11 +83,19 @@ public class Contract {
 		this.number = number;
 	}
 
-	public LocalDate getLocalDate() {
+	// public LocalDate getLocalDate() {
+	// return date;
+	// }
+	//
+	// public void setLocalDate(LocalDate date) {
+	// this.date = date;
+	// }
+
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setLocalDate(LocalDate date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
