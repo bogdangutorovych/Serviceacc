@@ -8,14 +8,14 @@
 		<f:facet name="left">
 			<p:commandButton id="btn_add" value="New" update=":contentForm" icon="ui-icon-document"
 							 actionListener="#{clientController.add()}"
-							 action='#{navController.setMainContent("/client/client.xhtml")}'/>
+							 action='#{navController.setMainContent("client/client")}'/>
 
 			<span class="ui-separator"><span class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
 			<p:commandButton  id="btn_edit" value="Edit" update=":contentForm" icon="ui-icon-pencil"
 							  disabled="#{clientController.selectedClient==null}"
 							  actionListener="#{clientController.getActualLists()}"
-							  action='#{navController.setMainContent("/client/client.xhtml")}'/>
+							  action='#{navController.setMainContent("client/client")}'/>
 
 			<span class="ui-separator"><span class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 

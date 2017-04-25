@@ -9,9 +9,9 @@
 		<p:panelMenu>
 			<p:submenu expanded="true" label="Menu">
 				<p:menuitem value="Clients" icon="ui-icon-person" update=":contentForm"
-							action='#{navController.setMainContent("/client/clientList.xhtml")}'/>
+							action='#{navController.setMainContent("client/clientList")}'/>
 				<p:menuitem value="Managers" icon="ui-icon-person" update=":contentForm"
-							action='#{navController.setMainContent("/manager/managerList.xhtml")}'/>
+							action='#{navController.setMainContent("manager/managerList")}'/>
 				<p:menuitem value="Contracts" icon="ui-icon-suitcase" />
 				<p:menuitem value="Services" icon="ui-icon-gear" />
 				<p:menuitem value="Invoices" icon="ui-icon-document" />
@@ -20,21 +20,21 @@
 			</p:submenu>
 			<p:submenu label="Settings">
 				<p:menuitem value="ClientStatusType" icon="ui-icon-note" update=":contentForm"
-							action='#{navController.setMainContent("/catalogue/clientStatusType.xhtml")}'/>
+							action='#{navController.setMainContent("catalogue/clientStatusType")}'/>
 				<p:menuitem value="ClientLevelType" icon="ui-icon-note" update=":contentForm"
-							action='#{navController.setMainContent("/catalogue/clientLevelType.xhtml")}'/>
+							action='#{navController.setMainContent("catalogue/clientLevelType")}'/>
 				<p:menuitem value="CurrencyType" icon="ui-icon-note" update=":contentForm"
-							action='#{navController.setMainContent("/catalogue/currencyType.xhtml")}'/>
+							action='#{navController.setMainContent("catalogue/currencyType")}'/>
 				<p:menuitem value="ClientInformationType" icon="ui-icon-note" update=":contentForm"
-							action='#{navController.setMainContent("/catalogue/clientInformationType.xhtml")}'/>
+							action='#{navController.setMainContent("catalogue/clientInformationType")}'/>
 				<p:menuitem value="ManagerInformationType" icon="ui-icon-note" update=":contentForm"
-							action='#{navController.setMainContent("/catalogue/managerInformationType.xhtml")}'/>
+							action='#{navController.setMainContent("catalogue/managerInformationType")}'/>
 				<p:menuitem value="PaymentType" icon="ui-icon-note" update=":contentForm"
-							action='#{navController.setMainContent("/catalogue/paymentType.xhtml")}'/>
+							action='#{navController.setMainContent("catalogue/paymentType")}'/>
 				<p:menuitem value="PayStatus" icon="ui-icon-note" update=":contentForm"
-							action='#{navController.setMainContent("/catalogue/payStatus.xhtml")}'/>
+							action='#{navController.setMainContent("catalogue/payStatus")}'/>
 				<p:menuitem value="ServiceType" icon="ui-icon-note" update=":contentForm"
-							action='#{navController.setMainContent("/catalogue/serviceType.xhtml")}'/>
+							action='#{navController.setMainContent("catalogue/serviceType")}'/>
 			</p:submenu>
 		</p:panelMenu>
 	</h:form>
