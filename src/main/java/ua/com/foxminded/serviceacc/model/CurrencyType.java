@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class CurrencyType {
 
 	@Id
-	@SequenceGenerator(name = "generator", sequenceName = "currency_type_seq")
+	@SequenceGenerator(name = "generator", sequenceName = "currency_type_seq", initialValue = 1, allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
@@ -63,6 +63,5 @@ public class CurrencyType {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-	
 
 }
