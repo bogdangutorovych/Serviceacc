@@ -12,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "contract")
@@ -28,7 +26,6 @@ public class Contract {
 	@Column(name = "number")
 	private String number;
 
-	@Temporal(TemporalType.DATE)
 	@Column(name = "contract_date")
 	private LocalDate date;
 
@@ -86,11 +83,11 @@ public class Contract {
 		this.number = number;
 	}
 
-	public LocalDate getDate() {
+	public LocalDate getLocalDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setLocalDate(LocalDate date) {
 		this.date = date;
 	}
 

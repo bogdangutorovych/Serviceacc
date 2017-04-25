@@ -1,6 +1,6 @@
 package ua.com.foxminded.serviceacc.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.SQLDelete;
 
@@ -33,9 +31,8 @@ public class ClientStatusHistory {
 	@JoinColumn(name = "client_status_type_id")
 	private ClientStatusType statusChanged;
 
-	@Temporal(TemporalType.DATE)
 	@Column(name = "date_changed")
-	private Date dateChanged;
+	private LocalDate dateChanged;
 
 	@Column(name = "active", nullable = false)
 	private boolean active = true;
@@ -43,7 +40,7 @@ public class ClientStatusHistory {
 	public ClientStatusHistory() {
 	}
 
-	public ClientStatusHistory(ClientStatusType statusChanged, Date dateChanged) {
+	public ClientStatusHistory(ClientStatusType statusChanged, LocalDate dateChanged) {
 
 		this.statusChanged = statusChanged;
 		this.dateChanged = dateChanged;
@@ -65,11 +62,11 @@ public class ClientStatusHistory {
 		this.statusChanged = statusChanged;
 	}
 
-	public Date getDateChanged() {
+	public LocalDate getLocalDateChanged() {
 		return dateChanged;
 	}
 
-	public void setDateChanged(Date dateChanged) {
+	public void setLocalDateChanged(LocalDate dateChanged) {
 		this.dateChanged = dateChanged;
 	}
 

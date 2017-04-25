@@ -1,11 +1,12 @@
 package ua.com.foxminded.serviceacc.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import ua.com.foxminded.serviceacc.model.ClientInformation;
 import ua.com.foxminded.serviceacc.repository.ClientInformationRepository;
-
-import java.util.List;
 
 /** Created by Grischenko Maxim on 22.04.17. */
 

@@ -1,8 +1,17 @@
 package ua.com.foxminded.serviceacc.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "payment")
@@ -14,9 +23,8 @@ public class Payment {
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
 
-	@Temporal(TemporalType.DATE)
 	@Column(name = "date")
-	private Date date;
+	private LocalDate date;
 
 	@ManyToOne (fetch = FetchType.EAGER)
 	@JoinColumn (name = "money_id")
@@ -33,7 +41,7 @@ public class Payment {
 
 	}
 
-	public Payment(Date date, Money money, PaymentType type) {
+	public Payment(LocalDate date, Money money, PaymentType type) {
 		this.date = date;
 		this.money = money;
 		this.type = type;
@@ -47,11 +55,11 @@ public class Payment {
 		this.id = id;
 	}
 
-	public Date getDate() {
+	public LocalDate getLocalDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setLocalDate(LocalDate date) {
 		this.date = date;
 	}
 

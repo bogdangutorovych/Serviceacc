@@ -11,7 +11,6 @@ import org.primefaces.event.RowEditEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import ua.com.foxminded.serviceacc.model.ClientLevelType;
 import ua.com.foxminded.serviceacc.model.ManagerInformationType;
 import ua.com.foxminded.serviceacc.service.ManagerInformationTypeService;
 

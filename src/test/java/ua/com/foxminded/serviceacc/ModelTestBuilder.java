@@ -1,7 +1,6 @@
 package ua.com.foxminded.serviceacc;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import ua.com.foxminded.serviceacc.model.Client;
@@ -61,7 +60,7 @@ public class ModelTestBuilder {
     }
 
     public static ClientStatusHistory buildTestClientHistory(Client client, ClientStatusType changedStatus){
-        ClientStatusHistory clientStatusHistory = new ClientStatusHistory(changedStatus, new Date());
+        ClientStatusHistory clientStatusHistory = new ClientStatusHistory(changedStatus, java.time.LocalDate.now());
 
         return clientStatusHistory;
     }

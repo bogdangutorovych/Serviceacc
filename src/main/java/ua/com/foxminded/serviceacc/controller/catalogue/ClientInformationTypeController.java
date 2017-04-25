@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import ua.com.foxminded.serviceacc.model.ClientInformationType;
-import ua.com.foxminded.serviceacc.model.ClientLevelType;
 import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
 
 @Controller

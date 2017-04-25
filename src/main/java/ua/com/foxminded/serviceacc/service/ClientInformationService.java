@@ -1,7 +1,8 @@
 package ua.com.foxminded.serviceacc.service;
 
-import ua.com.foxminded.serviceacc.model.ClientInformation;
 import java.util.List;
+
+import ua.com.foxminded.serviceacc.model.ClientInformation;
 
 /** Created by Grischenko Maxim on 22.04.17. */
 

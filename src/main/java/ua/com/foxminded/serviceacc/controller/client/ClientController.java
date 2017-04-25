@@ -1,22 +1,28 @@
 package ua.com.foxminded.serviceacc.controller.client;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import ua.com.foxminded.serviceacc.model.*;
-import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
-import ua.com.foxminded.serviceacc.service.ClientLevelTypeService;
-import ua.com.foxminded.serviceacc.service.ClientService;
-import ua.com.foxminded.serviceacc.service.ClientStatusTypeService;
-
-import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+import ua.com.foxminded.serviceacc.model.Client;
+import ua.com.foxminded.serviceacc.model.ClientInformation;
+import ua.com.foxminded.serviceacc.model.ClientInformationType;
+import ua.com.foxminded.serviceacc.model.ClientLevelType;
+import ua.com.foxminded.serviceacc.model.ClientStatusType;
+import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
+import ua.com.foxminded.serviceacc.service.ClientLevelTypeService;
+import ua.com.foxminded.serviceacc.service.ClientService;
+import ua.com.foxminded.serviceacc.service.ClientStatusTypeService;
 
 @Controller
 @ViewScoped
