@@ -8,11 +8,11 @@
         <f:facet name="left">
             <p:commandButton id="btn_ok" value="Ok" update=":contentForm" icon="ui-icon-check"
                              actionListener="#{clientController.onOk()}"
-                             action='#{navController.setMainContent("/client/clientList.xhtml")}'/>
+                             action='#{navController.setMainContent("client/clientList")}'/>
             <span class="ui-separator"><span class="ui-icon ui-icon-grip-dotted-vertical"/></span>
 
             <p:commandButton id="btn_cancel" value="Cancel" update=":contentForm" icon="ui-icon-close"
-                             action='#{navController.setMainContent("/client/clientList.xhtml")}' immediate="true"/>
+                             action='#{navController.setMainContent("client/clientList")}' immediate="true"/>
         </f:facet>
     </p:toolbar>
 
