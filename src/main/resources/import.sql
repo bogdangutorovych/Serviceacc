@@ -21,6 +21,11 @@ INSERT INTO CURRENCY_TYPE (id, title, active, code) VALUES (2, 'Hryvnia', true, 
 INSERT INTO CURRENCY_TYPE (id, title, active, code) VALUES (3, 'Ruble', true, 'RUB');
 ALTER SEQUENCE currency_type_seq RESTART WITH 4;
 
+INSERT INTO CONTRACT (id, number, contract_date, active) VALUES (1, '2017/01', '2017-01-01', true);
+INSERT INTO CONTRACT (id, number, contract_date, active) VALUES (2, '2017/02', '2017-02-12', true);
+INSERT INTO CONTRACT (id, number, contract_date, active) VALUES (3, '2017/03', '2017-04-24', true);
+ALTER SEQUENCE currency_type_seq RESTART WITH 4;
+
 INSERT INTO CLIENT (id, birth_day, first_name, last_name, client_level_type_id, client_status_type_id, active) VALUES (1, '1980-03-14', 'Robert', 'Levandovsky', 1, 3, true);
 INSERT INTO CLIENT (id, birth_day, first_name, last_name, client_level_type_id, client_status_type_id, active) VALUES (2, '1986-09-08', 'Michael', 'Phelps', 1, 3, true);
 INSERT INTO CLIENT (id, birth_day, first_name, last_name, client_level_type_id, client_status_type_id, active) VALUES (3, '1991-01-14', 'Marten', 'Fourcade', 2, 1, true);

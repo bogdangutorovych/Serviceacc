@@ -18,10 +18,10 @@ public class Contract {
 	private String number;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "date")
+	@Column(name = "contract_date")
 	private Date date;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "client_id")
 	private Client client;
 
@@ -59,11 +59,11 @@ public class Contract {
 		this.managerRate = managerRate;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
