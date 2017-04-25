@@ -80,7 +80,6 @@ public class ClientController implements Serializable {
 				iteratorInfos.remove();
 			}
 		}
-		log.info("Infos for save: " + selectedClient.getInformations());
 		//Update client and get updated Client object
 		Client updated = clientService.update(selectedClient);
 		//Replace client from list by updated client
