@@ -1,0 +1,61 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:toolbar>
+		<f:facet name="left">
+			<p:commandButton id="btn_add" value="New" update=":contentForm"
+				icon="ui-icon-document" actionListener="#{contractController.add()}"
+				action='#{navController.setMainContent("/contract/contract.xhtml")}' />
+
+			<span class="ui-separator"><span
+				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+
+			<p:commandButton id="btn_edit" value="Edit" update=":contentForm"
+				icon="ui-icon-pencil"
+				disabled="#{contractController.selectedContract==null}"
+				actionListener="#{contractController.getList()}"
+				action='#{navController.setMainContent("/contract/contract.xhtml")}' />
+
+			<span class="ui-separator"><span
+				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+
+			<p:commandButton id="btn_delete" value="Delete" update=":contentForm"
+				icon="ui-icon-trash"
+				disabled="#{contractController.selectedContract==null}"
+				actionListener="#{contractController.delete()}" />
+
+		</f:facet>
+	</p:toolbar>
+
+	<br />
+ 
+	<p:dataTable id="contractList" editable="true"
+		emptyMessage="No items yet" var="c" value="#{contractController.list}"
+		rowKey="#{contractController.list.indexOf(c)}" selectionMode="single"
+		selection="#{contractController.selectedContract}">
+
+		<f:facet name="header">Conracts</f:facet>
+		<p:ajax event="rowSelect" update="@form:btn_edit,@form:btn_delete"
+			immediate="true" />
+		<p:ajax event="rowUnselect" update="@form:btn_edit,@form:btn_delete"
+			immediate="true" />
+
+		<p:column headerText="id" sortBy="#{c.id}">
+			#{c.id}
+		</p:column>
+
+		<p:column headerText="Date" sortBy="#{c.date}">
+			<h:outputText value="#{c.date}" />
+		</p:column>
+		<p:column headerText="Number" sortBy="#{c.number}">
+			<h:outputText value="#{c.number}" />
+		</p:column>
+
+	</p:dataTable>
+	
+
+
+</ui:composition>
