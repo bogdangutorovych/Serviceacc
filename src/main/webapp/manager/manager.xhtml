@@ -30,6 +30,18 @@
 
 	</h:panelGrid>
 	
-	
+	<h:panelGrid columns="2" cellpadding="5">
+        <f:facet name="header">
+            <h:outputText value="Manager Information"/>
+        </f:facet>
+        <p:outputPanel>
+            <ui:repeat value="#{managerController.managerInformationTypeList}" var="type">
+                <h:panelGrid columns="2" cellpadding="5">
+                    <p:outputLabel for="info_content" value="#{type.title}:" style="font-weight:bold"/>
+                    <p:inputText id="info_content" value="#{managerController.getInfoByType(type).content}"/>
+                </h:panelGrid>
+            </ui:repeat>
+        </p:outputPanel>
+    </h:panelGrid>
 
 </ui:composition>

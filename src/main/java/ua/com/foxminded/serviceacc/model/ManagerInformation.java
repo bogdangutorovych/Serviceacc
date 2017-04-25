@@ -26,7 +26,7 @@ public class ManagerInformation {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "info_type_id")
-	private ManagerInformationType informationType;
+	private ManagerInformationType managerInformationType;
 
 	@Column(name = "active", nullable = false)
 	private boolean active = true;
@@ -34,10 +34,10 @@ public class ManagerInformation {
 	public ManagerInformation() {
 	}
 
-	public ManagerInformation(String content, ManagerInformationType informationType, boolean active) {
+	public ManagerInformation(String content, ManagerInformationType managerInformationType, boolean active) {
 
 		this.content = content;
-		this.informationType = informationType;
+		this.managerInformationType = managerInformationType;
 		this.active = active;
 	}
 
@@ -57,12 +57,12 @@ public class ManagerInformation {
 		this.content = content;
 	}
 
-	public ManagerInformationType getInformationType() {
-		return informationType;
+	public ManagerInformationType getManagerInformationType() {
+		return managerInformationType;
 	}
 
-	public void setInformationType(ManagerInformationType informationType) {
-		this.informationType = informationType;
+	public void setManagerInformationType(ManagerInformationType managerInformationType) {
+		this.managerInformationType = managerInformationType;
 	}
 
 	public boolean isActive() {
@@ -71,6 +71,12 @@ public class ManagerInformation {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	@Override
+	public String toString() {
+		return "ManagerInformation [id=" + id + ", content=" + content + ", managerInformationType="
+				+ managerInformationType + ", active=" + active + "]";
 	}
 
 }

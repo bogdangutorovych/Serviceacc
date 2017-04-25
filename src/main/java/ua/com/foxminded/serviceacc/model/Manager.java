@@ -51,7 +51,7 @@ public class Manager {
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "manager_id", referencedColumnName = "id")
-	private Set<ManagerInformation> informations = new HashSet<>();
+	private Set<ManagerInformation> managerInformationSet = new HashSet<>();
 
 	@Column(name = "active", nullable = false)
 	private boolean active = true;
@@ -65,7 +65,7 @@ public class Manager {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.birthday = birthday;
-		this.informations = informations;
+		this.managerInformationSet = informations;
 		this.active = active;
 	}
 
@@ -101,12 +101,12 @@ public class Manager {
 		this.birthday = birthday;
 	}
 
-	public Set<ManagerInformation> getInformations() {
-		return informations;
+	public Set<ManagerInformation> getManagerInformationSet() {
+		return managerInformationSet;
 	}
 
-	public void setInformations(Set<ManagerInformation> informations) {
-		this.informations = informations;
+	public void setManagerInformationSet(Set<ManagerInformation> managerInformationSet) {
+		this.managerInformationSet = managerInformationSet;
 	}
 
 	public boolean isActive() {
