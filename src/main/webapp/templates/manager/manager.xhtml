@@ -1,47 +1,59 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-				xmlns:f="http://xmlns.jcp.org/jsf/core"
-				xmlns:h="http://xmlns.jcp.org/jsf/html"
-				xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-				xmlns:p="http://primefaces.org/ui">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
 	<p:toolbar>
 		<f:facet name="left">
-			<p:commandButton id="btn_ok" value="Ok" update=":contentForm" icon="ui-icon-check"
-							 actionListener="#{managerController.onOk()}"
-							 action='#{navController.setMainContent("manager/managerList")}'/>
-			<span class="ui-separator"><span class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+			<p:commandButton id="btn_ok" value="Ok" update=":contentForm"
+				icon="ui-icon-check" actionListener="#{managerController.onOk()}"
+				action='#{navController.setMainContent("manager/managerList")}' />
+			<span class="ui-separator"><span
+				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
-			<p:commandButton  id="btn_cancel" value="Cancel" update=":contentForm" icon="ui-icon-close"
-							  action='#{navController.setMainContent("manager/managerList")}' immediate="true"/>
+			<p:commandButton id="btn_cancel" value="Cancel" update=":contentForm"
+				icon="ui-icon-close"
+				action='#{navController.setMainContent("manager/managerList")}'
+				immediate="true" />
 		</f:facet>
 	</p:toolbar>
 
-	<br/>
+	<br />
 
 	<h:panelGrid columns="2" cellpadding="5">
 		<h:outputText for="id" value="ID:" style="font-weight:bold" />
-		<h:inputText id="id" value="#{managerController.selectedManager.id}" disabled="true"/>
+		<h:inputText id="id" value="#{managerController.selectedManager.id}"
+			disabled="true" />
 
-		<h:outputLabel for="firstName" value="First name: " style="font-weight:bold" />
-		<p:inputText id="firstName" value="#{managerController.selectedManager.firstName}" required="true"/>
+		<h:outputLabel for="firstName" value="First name: "
+			style="font-weight:bold" />
+		<p:inputText id="firstName"
+			value="#{managerController.selectedManager.firstName}"
+			required="true" />
 
-		<h:outputLabel for="lastName" value="Last name: " style="font-weight:bold" />
-		<p:inputText id="lastName" value="#{managerController.selectedManager.lastName}" required="true"/>
+		<h:outputLabel for="lastName" value="Last name: "
+			style="font-weight:bold" />
+		<p:inputText id="lastName"
+			value="#{managerController.selectedManager.lastName}" required="true" />
 
 	</h:panelGrid>
-	
-	<h:panelGrid columns="2" cellpadding="5">
-        <f:facet name="header">
-            <h:outputText value="Manager Information"/>
-        </f:facet>
-        <p:outputPanel>
-            <ui:repeat value="#{managerController.managerInformationTypeList}" var="type">
-                <h:panelGrid columns="2" cellpadding="5">
-                    <p:outputLabel for="info_content" value="#{type.title}:" style="font-weight:bold"/>
-                    <p:inputText id="info_content" value="#{managerController.getInfoByType(type).content}"/>
-                </h:panelGrid>
-            </ui:repeat>
-        </p:outputPanel>
-    </h:panelGrid>
+
+	<p:dataTable id="ManagerInformationList" editable="true"
+		emptyMessage="No items yet" var="type"
+		value="#{managerController.managerInformationTypeList}">
+
+		<f:facet name="header">Manager Information</f:facet>
+
+		<p:column headerText="Type">
+			<p:outputLabel for="info_content" value="#{type.title}:"
+				style="font-weight:bold" />
+		</p:column>
+
+		<p:column headerText="Content">
+			<p:inputText id="info_content"
+				value="#{managerController.getInfoByType(type).content}" />
+		</p:column>
+	</p:dataTable>
 
 </ui:composition>

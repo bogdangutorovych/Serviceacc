@@ -46,18 +46,21 @@
 
     </h:panelGrid>
 
-    <h:panelGrid columns="2" cellpadding="5">
-        <f:facet name="header">
-            <h:outputText value="Client Information"/>
-        </f:facet>
-        <p:outputPanel>
-            <ui:repeat value="#{clientController.informationTypeList}" var="type">
-                <h:panelGrid columns="2" cellpadding="5">
-                    <p:outputLabel for="info_content" value="#{type.title}:" style="font-weight:bold"/>
-                    <p:inputText id="info_content" value="#{clientController.getInfoByType(type).content}"/>
-                </h:panelGrid>
-            </ui:repeat>
-        </p:outputPanel>
-    </h:panelGrid>
+    <p:dataTable id="ClientInformationList" editable="true"
+        emptyMessage="No items yet" var="type"
+        value="#{clientController.informationTypeList}">
+
+        <f:facet name="header">Client Information</f:facet>
+
+        <p:column headerText="Type">
+            <p:outputLabel for="info_content" value="#{type.title}:"
+                style="font-weight:bold" />
+        </p:column>
+
+        <p:column headerText="Content">
+            <p:inputText id="info_content"
+                value="#{clientController.getInfoByType(type).content}" />
+        </p:column>
+    </p:dataTable>
 
 </ui:composition>
