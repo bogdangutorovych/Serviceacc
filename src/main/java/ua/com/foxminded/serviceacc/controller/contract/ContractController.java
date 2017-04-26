@@ -17,11 +17,13 @@ import org.springframework.stereotype.Controller;
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.Contract;
 import ua.com.foxminded.serviceacc.model.Manager;
+import ua.com.foxminded.serviceacc.model.Money;
 import ua.com.foxminded.serviceacc.model.Service;
 import ua.com.foxminded.serviceacc.service.ClientService;
 import ua.com.foxminded.serviceacc.service.ContractService;
 import ua.com.foxminded.serviceacc.service.LocalDateAttributeConverter;
 import ua.com.foxminded.serviceacc.service.ManagerService;
+import ua.com.foxminded.serviceacc.service.ServiceService;
 
 @Controller
 @ViewScoped
@@ -37,38 +39,42 @@ public class ContractController implements Serializable {
 	private Client availableClient;
 	private List<Client> availableClients = new ArrayList<>();
 
+	private Money clientRate;
+	// private List<Money> clientRates;
+
 	private Manager availableManager;
 	private List<Manager> availableManagers = new ArrayList<>();
 
+	private Money managerRate;
+	// private List<Money> managerRates;
+
 	private Service availableService;
-	private List<Service> availableServices;
+	private List<Service> availableServices = new ArrayList<>();
 
 	private ContractService contractService;
 	private ClientService clientService;
 	private ManagerService managerService;
-	// private ServiceService serviceService;
+	private ServiceService serviceService;
+	// private MoneyService moneyService;
 
 	private Date utilDate;
 
 	@Autowired
 	public ContractController(ContractService contractService, ClientService clientService,
-			ManagerService managerService) {
+			ManagerService managerService, ServiceService serviceService) {
 		this.contractService = contractService;
 		this.clientService = clientService;
 		this.managerService = managerService;
+		this.serviceService = serviceService;
 	}
 
 	@PostConstruct
 	public void init() {
 		utilDate = new Date();
 		list = contractService.findAll();
-		// Iterator<Contract> iterator = list.iterator();
-		// while (iterator.hasNext()) {
-		// availableClients.add(iterator.next().getClient());
-		//
-		// }
 		availableClients = clientService.findAll();
 		availableManagers = managerService.findAll();
+		// availableServices = serviceService.findAll();
 	}
 
 	public void add() {
@@ -84,13 +90,12 @@ public class ContractController implements Serializable {
 
 	public void onOk() {
 		if (selectedContract.getId() == null) {
-			// LocalDateAttributeConverter dateConverter = new
-			// LocalDateAttributeConverter();
-			// LocalDate date = new
-			// LocalDateAttributeConverter().convertToEntityAttribute(utilDate);
 			selectedContract.setDate(new LocalDateAttributeConverter().convertToEntityAttribute(utilDate));
 			selectedContract.setClient(availableClient);
 			selectedContract.setManager(availableManager);
+			// selectedContract.setClientRate(clientRate);
+			// selectedContract.setManagerRate(managerRate);
+			// selectedContract.setService(availableService);
 			selectedContract = contractService.create(selectedContract);
 			selectedContract.setNumber("Contract # " + selectedContract.getId());
 
@@ -157,5 +162,49 @@ public class ContractController implements Serializable {
 	public void setAvailableManagers(List<Manager> availableManagers) {
 		this.availableManagers = availableManagers;
 	}
+
+	public Service getAvailableService() {
+		return availableService;
+	}
+
+	public void setAvailableService(Service availableService) {
+		this.availableService = availableService;
+	}
+
+	public List<Service> getAvailableServices() {
+		return availableServices;
+	}
+
+	public void setAvailableServices(List<Service> availableServices) {
+		this.availableServices = availableServices;
+	}
+
+	public void setAvailableClients(List<Client> availableClients) {
+		this.availableClients = availableClients;
+	}
+
+	public Money getManagerRate() {
+		return managerRate;
+	}
+
+	public void setManagerRate(Money managerRate) {
+		this.managerRate = managerRate;
+	}
+
+	public Money getClientRate() {
+		return clientRate;
+	}
+
+	public void setClientRate(Money clientRate) {
+		this.clientRate = clientRate;
+	}
+
+	// public List<Money> getManagerRates() {
+	// return managerRates;
+	// }
+	//
+	// public void setManagerRates(List<Money> managerRates) {
+	// this.managerRates = managerRates;
+	// }
 
 }

@@ -63,18 +63,24 @@
 			<h:outputText value="#{c.client.lastName}" />
 		</p:column>
 
-		<p:column headerText="client rate" sortBy="#{c.clientRate}">
+		<!-- <p:column headerText="client rate" sortBy="#{c.clientRate}">
 			<h:outputText value="#{c.clientRate}" />
 		</p:column>
+
+		<p:column headerText="currency" sortBy="#{c.clientRate.currency}">
+			<h:outputText value="#{c.clientRate.currency}" />
+		</p:column> -->
 
 		<p:column headerText="Manager" sortBy="#{c.manager.lastName}">
 			<h:outputText value="#{c.manager.lastName}" />
 		</p:column>
 
-		<p:column headerText="manager rate" sortBy="#{c.managerRate}">
+	<!-- 	<p:column headerText="manager rate" sortBy="#{c.managerRate}">
 			<h:outputText value="#{c.managerRate}" />
 		</p:column>
-
+		<p:column headerText="currency" sortBy="#{c.managerRate.currency}">
+			<h:outputText value="#{c.managerRate.currency}" />
+		</p:column> -->
 	</p:dataTable>
 
 

@@ -20,14 +20,12 @@ public class LocalDateAttributeConverter implements AttributeConverter<LocalDate
 
 	@Override
 	public Date convertToDatabaseColumn(LocalDate locDate) {
-		// return (locDate == null ? null : Date.valueOf(locDate));
 		return asUtilDate(locDate, ZoneId.systemDefault());
 	}
 
 	@Override
 	public LocalDate convertToEntityAttribute(Date utilDate) {
 		return asLocalDate(utilDate, ZoneId.systemDefault());
-		// return (utilDate == null ? null : utilDate.toLocalDate());
 	}
 
 	public static java.util.Date asUtilDate(Object date, ZoneId zone) {
