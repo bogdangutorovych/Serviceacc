@@ -1,0 +1,59 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:toolbar style="margin-bottom:10px">
+		<f:facet name="left">
+			<p:commandButton id="btn_ok" value="Ok" update=":contentForm"
+				icon="ui-icon-check" />
+			<span class="ui-separator"><span
+				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+
+			<p:commandButton id="btn_cancel" value="Cancel" update=":contentForm"
+				icon="ui-icon-close" />
+		</f:facet>
+	</p:toolbar>
+
+	<h:panelGrid columns="2" cellpadding="5">
+		<h:outputText value="ID: " />
+		<h:outputText value="1" />		
+		<h:outputText value="Name:" />
+		<p:inputText value="lections, training and etc" />		
+		<h:outputText value="Description:" />
+		<p:inputText value="topics, subjects and etc" />		
+	</h:panelGrid>
+
+	<h:panelGrid columns="1">
+		<p:dataTable id="infoList" var="type" value="Table">
+			<f:facet name="header">
+				<h:outputText value="Finance information" />
+			</f:facet>
+			<p:column headerText="Currency">
+				<h:outputText value="UAH" />
+			</p:column>
+			<p:column headerText="Price">
+				<h:outputText value="0" />
+			</p:column>
+			<p:column headerText="Salary">
+				<h:outputText value="0" />
+			</p:column>
+			<f:facet name="footer">
+				<p:commandButton value="add" />
+				<p:commandButton value="edit" />
+				<p:commandButton value="delete" />
+			</f:facet>
+		</p:dataTable>
+
+	</h:panelGrid>
+
+
+
+
+
+
+
+
+
+</ui:composition>
