@@ -4,20 +4,23 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 @Entity
 @Table(name = "manager_info")
 public class ManagerInformation {
 
 	@Id
-	@SequenceGenerator(name = "generator", sequenceName = "manager_info_seq", initialValue = 1, allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
+	@GenericGenerator(name = "generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
+			@Parameter(name = "sequence_name", value = "manager_info_seq"),
+			@Parameter(name = "initial_value", value = "1"), @Parameter(name = "increment_size", value = "1") })
+	@GeneratedValue(generator = "generator")
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
 
@@ -26,7 +29,7 @@ public class ManagerInformation {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "info_type_id")
-	private ManagerInformationType informationType;
+	private ManagerInformationType managerInformationType;
 
 	@Column(name = "active", nullable = false)
 	private boolean active = true;
@@ -34,10 +37,10 @@ public class ManagerInformation {
 	public ManagerInformation() {
 	}
 
-	public ManagerInformation(String content, ManagerInformationType informationType, boolean active) {
+	public ManagerInformation(String content, ManagerInformationType managerInformationType, boolean active) {
 
 		this.content = content;
-		this.informationType = informationType;
+		this.managerInformationType = managerInformationType;
 		this.active = active;
 	}
 
@@ -57,12 +60,12 @@ public class ManagerInformation {
 		this.content = content;
 	}
 
-	public ManagerInformationType getInformationType() {
-		return informationType;
+	public ManagerInformationType getManagerInformationType() {
+		return managerInformationType;
 	}
 
-	public void setInformationType(ManagerInformationType informationType) {
-		this.informationType = informationType;
+	public void setManagerInformationType(ManagerInformationType managerInformationType) {
+		this.managerInformationType = managerInformationType;
 	}
 
 	public boolean isActive() {
@@ -71,6 +74,12 @@ public class ManagerInformation {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	@Override
+	public String toString() {
+		return "ManagerInformation [id=" + id + ", content=" + content + ", managerInformationType="
+				+ managerInformationType + ", active=" + active + "]";
 	}
 
 }

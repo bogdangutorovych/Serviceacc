@@ -8,14 +8,14 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class NavController {
 
-    private String mainContent = "/client/clientList.xhtml";
+    private String mainContent = "/templates/client/clientList.xhtml";
 
     public String getMainContent() {
         return mainContent;
     }
 
     public void setMainContent(String mainContent) {
-        this.mainContent = mainContent;
+        this.mainContent = "/templates/" + mainContent + ".xhtml";
     }
 
     

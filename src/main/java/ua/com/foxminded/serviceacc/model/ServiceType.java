@@ -3,24 +3,27 @@ package ua.com.foxminded.serviceacc.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 @Entity
 @Table(name = "service_type")
 public class ServiceType {
 	@Id
-	@SequenceGenerator(name = "generator", sequenceName = "service_type_id_seq", initialValue = 1, allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
+	@GenericGenerator(name = "generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
+			@Parameter(name = "sequence_name", value = "service_type_id_seq"),
+			@Parameter(name = "initial_value", value = "1"), @Parameter(name = "increment_size", value = "1") })
+	@GeneratedValue(generator = "generator")
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
 
 	@Column(name = "code", unique = true, nullable = false)
 	private String code;
 
-	@Column (name = "title", nullable = false)
+	@Column(name = "title", nullable = false)
 	private String title;
 
 	@Column(name = "active", nullable = false)
@@ -30,7 +33,7 @@ public class ServiceType {
 	}
 
 	public ServiceType(String code, String title) {
-        this.code = code;
+		this.code = code;
 		this.title = title;
 	}
 
@@ -65,6 +68,5 @@ public class ServiceType {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-
 
 }

@@ -82,39 +82,35 @@ public class ClientController implements Serializable {
 				iteratorInfos.remove();
 			}
 		}
-		log.info("Infos for save: " + selectedClient.getInformations());
+
 		// Update client and get updated Client object
-		Client fetched = clientService.update(selectedClient);
+		Client updated = clientService.update(selectedClient);
 		// Replace client from list by updated client
 		int i = list.indexOf(selectedClient);
-		list.set(i, fetched);
-
+		list.set(i, updated);
+		selectedClient = updated;
 	}
 
 	/*
-	 * Find ClientInformationType from selectedClient by InformationType Needs
+	 * 
+	 * Find ClientInformationType from selectedClient by InformationType Need
 	 * for render ClientInformation collection section
 	 */
-	public ClientInformation getInfoByType(ClientInformationType type) {
-		ClientInformation info = null;
-		if (selectedClient != null) {
-			tempList.clear();
-			tempList.addAll(selectedClient.getInformations());
-			for (ClientInformation i : tempList) {
-				if (i.getClientInformationType().equals(type)) {
-					return i;
-				}
+	public ClientInformation getInfoByType(ClientInformationType clientInformationType) {
+
+		for (ClientInformation clientInfo : selectedClient.getInformations()) {
+			if (clientInfo.getClientInformationType().equals(clientInformationType)) {
+				return clientInfo;
 			}
-		} else {
-			return null; // selectedClient = null ???
 		}
-		if (info == null) {
-			info = new ClientInformation();
-			info.setClientInformationType(type);
-			info.setActive(true);
-			selectedClient.getInformations().add(info);
-		}
-		return info;
+
+		ClientInformation clientInformation = new ClientInformation();
+		clientInformation.setClientInformationType(clientInformationType);
+		clientInformation.setActive(true);
+		selectedClient.getInformations().add(clientInformation);
+
+		return clientInformation;
+
 	}
 
 	public void delete() {

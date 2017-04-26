@@ -6,32 +6,35 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 @Entity
 @Table(name = "payment")
 public class Payment {
 
 	@Id
-	@SequenceGenerator(name = "generator", sequenceName = "payment_id_seq", initialValue = 1, allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
+	@GenericGenerator(name = "generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
+			@Parameter(name = "sequence_name", value = "payment_id_seq"),
+			@Parameter(name = "initial_value", value = "1"), @Parameter(name = "increment_size", value = "1") })
+	@GeneratedValue(generator = "generator")
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
 
 	@Column(name = "date")
 	private LocalDate date;
 
-	@ManyToOne (fetch = FetchType.EAGER)
-	@JoinColumn (name = "money_id")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "money_id")
 	private Money money;
 
-	@ManyToOne (fetch = FetchType.EAGER)
-	@JoinColumn (name = "payment_type_id")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "payment_type_id")
 	private PaymentType type;
 
 	@Column(name = "active", nullable = false)

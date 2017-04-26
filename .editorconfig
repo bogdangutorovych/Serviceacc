@@ -1,13 +1,30 @@
 # EditorConfig helps developers define and maintain consistent
 # coding styles between different editors and IDEs
 # editorconfig.org
+<<<<<<< HEAD
 root = true
 [*]
 # Indents
 indent_style = space
 indent_size = 4
+=======
+
+root = true
+
+[*]
+
+# Indents
+indent_style = space
+indent_size = 4
+
+>>>>>>> ebe29a99211eb0f5d88dfb4dc895896ecb4710c2
 # Unix-style newlines, trim trailing whitespaces, final new line
 end_of_line = lf
 trim_trailing_whitespace = true
 insert_final_newline = true
+<<<<<<< HEAD
 charset = utf-8
+=======
+
+charset = utf-8
+>>>>>>> ebe29a99211eb0f5d88dfb4dc895896ecb4710c2

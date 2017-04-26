@@ -3,18 +3,21 @@ package ua.com.foxminded.serviceacc.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 @Entity
 @Table(name = "currency_type")
 public class CurrencyType {
 
 	@Id
-	@SequenceGenerator(name = "generator", sequenceName = "currency_type_seq")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
+	@GenericGenerator(name = "generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
+			@Parameter(name = "sequence_name", value = "currency_type_seq"),
+			@Parameter(name = "initial_value", value = "1"), @Parameter(name = "increment_size", value = "1") })
+	@GeneratedValue(generator = "generator")
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
 	@Column(name = "code", unique = true, nullable = false)
@@ -63,6 +66,5 @@ public class CurrencyType {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-	
 
 }

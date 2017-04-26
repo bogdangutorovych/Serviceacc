@@ -8,7 +8,7 @@
 		<f:facet name="left">
 			<p:commandButton id="btn_add" value="New" update=":contentForm"
 				icon="ui-icon-document" actionListener="#{contractController.add()}"
-				action='#{navController.setMainContent("/contract/contract.xhtml")}' />
+				action='#{navController.setMainContent("contract/contract")}' />
 
 			<span class="ui-separator"><span
 				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
@@ -17,7 +17,7 @@
 				icon="ui-icon-pencil"
 				disabled="#{contractController.selectedContract==null}"
 				actionListener="#{contractController.getList()}"
-				action='#{navController.setMainContent("/contract/contract.xhtml")}' />
+				action='#{navController.setMainContent("contract/contract")}' />
 
 			<span class="ui-separator"><span
 				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
