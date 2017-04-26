@@ -58,10 +58,6 @@ public class Client {
 	private ClientStatusType status;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "client_id", referencedColumnName = "id")
-	private Set<ClientInformation> informations = new HashSet<>();
-
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "client_id", referencedColumnName = "id", updatable = false)
 	private Set<ClientStatusHistory> clientHistory = new HashSet<>();
 
@@ -72,13 +68,12 @@ public class Client {
 	}
 
 	public Client(String firstName, String lastName, LocalDate birthday, ClientLevelType level, ClientStatusType status,
-			Set<ClientInformation> informations, Set<ClientStatusHistory> clientHistory, boolean active) {
+	        Set<ClientStatusHistory> clientHistory, boolean active) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.birthday = birthday;
 		this.level = level;
 		this.status = status;
-		this.informations = informations;
 		this.clientHistory = clientHistory;
 		this.active = active;
 	}
@@ -129,14 +124,6 @@ public class Client {
 
 	public void setStatus(ClientStatusType status) {
 		this.status = status;
-	}
-
-	public Set<ClientInformation> getInformations() {
-		return informations;
-	}
-
-	public void setInformations(Set<ClientInformation> informations) {
-		this.informations = informations;
 	}
 
 	public Set<ClientStatusHistory> getClientHistory() {

@@ -19,6 +19,7 @@ import ua.com.foxminded.serviceacc.model.ClientInformation;
 import ua.com.foxminded.serviceacc.model.ClientInformationType;
 import ua.com.foxminded.serviceacc.model.ClientLevelType;
 import ua.com.foxminded.serviceacc.model.ClientStatusType;
+import ua.com.foxminded.serviceacc.service.ClientInformationService;
 import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
 import ua.com.foxminded.serviceacc.service.ClientLevelTypeService;
 import ua.com.foxminded.serviceacc.service.ClientService;
@@ -44,13 +45,15 @@ public class ClientController implements Serializable {
 	private final ClientStatusTypeService cstService;
 	private final ClientLevelTypeService cltService;
 	private final ClientInformationTypeService citService;
+	private final ClientInformationService ciService;
 
 	@Autowired
-	public ClientController(ClientService clientService, ClientStatusTypeService cstService, ClientLevelTypeService cltService, ClientInformationTypeService citService) {
+	public ClientController(ClientService clientService, ClientStatusTypeService cstService, ClientLevelTypeService cltService, ClientInformationTypeService citService, ClientInformationService ciService) {
 		this.clientService = clientService;
 		this.cstService = cstService;
 		this.cltService = cltService;
 		this.citService = citService;
+		this.ciService = ciService;
 	}
 
 	@PostConstruct
@@ -74,10 +77,15 @@ public class ClientController implements Serializable {
 		}
 
 		//Check for empty ClientInformation objects. We don't want to save empty ClientInformation objects
-		Iterator<ClientInformation> iteratorInfos = selectedClient.getInformations().iterator();
+//		Iterator<ClientInformation> iteratorInfos = selectedClient.getInformations().iterator();
+		Iterator<ClientInformation> iteratorInfos = ciService.findByClient(selectedClient).iterator();
 		while(iteratorInfos.hasNext()){
-			if (iteratorInfos.next().getContent().isEmpty()){
+		    ClientInformation infos = iteratorInfos.next(); 
+			if (infos.getContent().isEmpty()){
 				iteratorInfos.remove();
+				ciService.delete(infos.getId());
+			} else {
+			    ciService.update(infos);
 			}
 		}
 		//Update client and get updated Client object
@@ -94,7 +102,7 @@ public class ClientController implements Serializable {
 	 */
 	public ClientInformation getInfoByType(ClientInformationType clientInformationType){
 
-		for (ClientInformation clientInfo : selectedClient.getInformations()){
+		for (ClientInformation clientInfo : ciService.findByClient(selectedClient)){
 			if (clientInfo.getClientInformationType().equals(clientInformationType)){
 				return clientInfo;
 			}
@@ -103,7 +111,8 @@ public class ClientController implements Serializable {
 		ClientInformation clientInformation = new ClientInformation();
 		clientInformation.setClientInformationType(clientInformationType);
 		clientInformation.setActive(true);
-		selectedClient.getInformations().add(clientInformation);
+//		selectedClient.getInformations().add(clientInformation);
+		ciService.save(clientInformation);
 
 		return clientInformation;
 
