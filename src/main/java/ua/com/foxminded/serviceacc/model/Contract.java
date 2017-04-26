@@ -88,6 +88,7 @@ public class Contract {
 	}
 
 	public void setDate(LocalDate date) {
+
 		this.date = date;
 	}
 

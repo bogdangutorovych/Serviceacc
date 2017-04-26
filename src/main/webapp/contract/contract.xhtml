@@ -25,16 +25,28 @@
 
 		<h:outputLabel for="date" value="Contract date : "
 			style="font-weight:bold" />
-		<p:calendar id="date"
-			value="#{contractController.selectedContract.date}" required="true" />
+		<p:calendar id="date" pattern="dd/MM/yyyy"
+			value="#{contractController.utilDate}">
+		</p:calendar>
 
-		<p:outputLabel for="client" value="Client: " style="font-weight:bold"/>
-        <p:selectOneMenu id="client" value="#{contractController.selectedContract.client}"
-                         converter="omnifaces.SelectItemsConverter">
-            <f:selectItem itemLabel="Select client..." noSelectionOption="true"/>
-            <f:selectItems value="#{contractController.availableClients}"
-                           var="с" itemLabel="#{с.lastName}" itemValue="#{с}"/>
-        </p:selectOneMenu>
+		<p:outputLabel for="client" value="Client: " style="font-weight:bold" />
+		<p:selectOneMenu id="client"
+			value="#{contractController.availableClient}"
+			converter="omnifaces.SelectItemsConverter">
+			<f:selectItem itemLabel="Select client..." noSelectionOption="true" />
+			<f:selectItems value="#{contractController.availableClients}" var="с"
+				itemLabel="#{с.lastName}" itemValue="#{с}" />
+		</p:selectOneMenu>
+
+		<p:outputLabel for="manager" value="Manager: "
+			style="font-weight:bold" />
+		<p:selectOneMenu id="manager"
+			value="#{contractController.availableManager}"
+			converter="omnifaces.SelectItemsConverter">
+			<f:selectItem itemLabel="Select manager..." noSelectionOption="true" />
+			<f:selectItems value="#{contractController.availableManagers}"
+				var="m" itemLabel="#{m.lastName}" itemValue="#{m}" />
+		</p:selectOneMenu>
 
 	</h:panelGrid>
 </ui:composition>

@@ -10,7 +10,7 @@ import ua.com.foxminded.serviceacc.repository.ContractRepository;
 
 @Service("contractService")
 public class ContractServiceDataJpa implements ContractService {
-	
+
 	@Autowired
 	ContractRepository contractRepository;
 
@@ -36,7 +36,7 @@ public class ContractServiceDataJpa implements ContractService {
 
 	@Override
 	public void delete(Long contractId) {
-		contractRepository.delete(contractId);		
+		contractRepository.delete(contractId);
 	}
 
 }

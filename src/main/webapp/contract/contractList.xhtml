@@ -31,7 +31,7 @@
 	</p:toolbar>
 
 	<br />
- 
+
 	<p:dataTable id="contractList" editable="true"
 		emptyMessage="No items yet" var="c" value="#{contractController.list}"
 		rowKey="#{contractController.list.indexOf(c)}" selectionMode="single"
@@ -42,23 +42,41 @@
 			immediate="true" />
 		<p:ajax event="rowUnselect" update="@form:btn_edit,@form:btn_delete"
 			immediate="true" />
-
+		<!-- 
 		<p:column headerText="id" sortBy="#{c.id}">
 			#{c.id}
 		</p:column>
-
-		<p:column headerText="Date">
+ -->
+		<p:column headerText="Date" sortBy="#{c.date}">
 			<h:outputText value="#{c.date}" />
 		</p:column>
-		<p:column headerText="Number">
+
+		<p:column headerText="Number" sortBy="#{c.number}">
 			<h:outputText value="#{c.number}" />
 		</p:column>
-		<p:column headerText="Client">
-			<h:outputText value="#{c.availableClient.lastName}" />
+
+		<p:column headerText="Service" sortBy="#{c.service}">
+			<h:outputText value="#{c.service}" />
+		</p:column>
+
+		<p:column headerText="Client" sortBy="#{c.client.lastName}">
+			<h:outputText value="#{c.client.lastName}" />
+		</p:column>
+
+		<p:column headerText="client rate" sortBy="#{c.clientRate}">
+			<h:outputText value="#{c.clientRate}" />
+		</p:column>
+
+		<p:column headerText="Manager" sortBy="#{c.manager.lastName}">
+			<h:outputText value="#{c.manager.lastName}" />
+		</p:column>
+
+		<p:column headerText="manager rate" sortBy="#{c.managerRate}">
+			<h:outputText value="#{c.managerRate}" />
 		</p:column>
 
 	</p:dataTable>
-	
+
 
 
 </ui:composition>
