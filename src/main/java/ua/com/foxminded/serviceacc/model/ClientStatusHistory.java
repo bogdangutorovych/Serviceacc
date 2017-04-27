@@ -31,7 +31,7 @@ public class ClientStatusHistory {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "client_status_type_id")
-	private ClientStatusType statusChanged;
+	private ContractStatus statusChanged;
 
 	@Column(name = "date_changed")
 	private LocalDate dateChanged;
@@ -42,7 +42,7 @@ public class ClientStatusHistory {
 	public ClientStatusHistory() {
 	}
 
-	public ClientStatusHistory(ClientStatusType statusChanged, LocalDate dateChanged) {
+	public ClientStatusHistory(ContractStatus statusChanged, LocalDate dateChanged) {
 
 		this.statusChanged = statusChanged;
 		this.dateChanged = dateChanged;
@@ -56,11 +56,11 @@ public class ClientStatusHistory {
 		this.id = id;
 	}
 
-	public ClientStatusType getStatusChanged() {
+	public ContractStatus getStatusChanged() {
 		return statusChanged;
 	}
 
-	public void setStatusChanged(ClientStatusType statusChanged) {
+	public void setStatusChanged(ContractStatus statusChanged) {
 		this.statusChanged = statusChanged;
 	}
 

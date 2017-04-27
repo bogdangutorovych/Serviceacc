@@ -13,11 +13,11 @@ import org.hibernate.annotations.Parameter;
  * Created by andreb on 04.04.17. Represent Client title
  */
 @Entity
-@Table(name = "client_status_type")
-public class ClientStatusType {
+@Table(name = "contract_status")
+public class ContractStatus {
 	@Id
 	@GenericGenerator(name = "generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
-			@Parameter(name = "sequence_name", value = "client_status_type_id_seq"),
+			@Parameter(name = "sequence_name", value = "contract_type_id_seq"),
 			@Parameter(name = "initial_value", value = "1"), @Parameter(name = "increment_size", value = "1") })
 	@GeneratedValue(generator = "generator")
 	@Column(name = "id", unique = true, nullable = false)
@@ -32,10 +32,10 @@ public class ClientStatusType {
 	@Column(name = "active", nullable = false)
 	private boolean active = true;
 
-	public ClientStatusType() {
+	public ContractStatus() {
 	}
 
-	public ClientStatusType(String code, String title) {
+	public ContractStatus(String code, String title) {
 		this.code = code;
 		this.title = title;
 	}
@@ -84,7 +84,7 @@ public class ClientStatusType {
 		if (o == null || getClass() != o.getClass())
 			return false;
 
-		ClientStatusType that = (ClientStatusType) o;
+		ContractStatus that = (ContractStatus) o;
 
 		return id != null ? id.equals(that.id) : that.id == null;
 	}

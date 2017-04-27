@@ -1,19 +1,12 @@
 package ua.com.foxminded.serviceacc.model;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -31,123 +24,73 @@ import org.hibernate.annotations.Where;
 @Where(clause = "active = true")
 
 public class Client {
-    @Id
-    @GenericGenerator(name = "generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
-            @Parameter(name = "sequence_name", value = "client_id_seq"),
-            @Parameter(name = "initial_value", value = "1"), @Parameter(name = "increment_size", value = "1") })
-    @GeneratedValue(generator = "generator")
-    @Column(name = "id", unique = true, nullable = false)
-    private Long id;
+	@Id
+	@GenericGenerator(name = "generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
+			@Parameter(name = "sequence_name", value = "client_id_seq"),
+			@Parameter(name = "initial_value", value = "1"), @Parameter(name = "increment_size", value = "1") })
+	@GeneratedValue(generator = "generator")
+	@Column(name = "id", unique = true, nullable = false)
+	private Long id;
 
-    @Column(name = "first_name")
-    private String firstName;
+	@Column(name = "first_name")
+	private String firstName;
 
-    @Column(name = "last_name")
-    private String lastName;
+	@Column(name = "last_name")
+	private String lastName;
 
-    @Column(name = "birth_day")
-    private LocalDate birthday;
+	@Column(name = "birth_day")
+	private LocalDate birthday;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "client_level_type_id", referencedColumnName = "id")
-    private ClientLevelType level;
+	@Column(name = "active", nullable = false)
+	private boolean active = true;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "client_status_type_id", referencedColumnName = "id")
-    private ClientStatusType status;
+	public Client() {
+	}
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "client_id", referencedColumnName = "id", updatable = false)
-    private Set<ClientStatusHistory> clientHistory = new HashSet<>();
+	public Client(String firstName, String lastName, LocalDate birthday, boolean active) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.birthday = birthday;
+		this.active = active;
+	}
 
-    @Column(name = "active", nullable = false)
-    private boolean active = true;
+	public Long getId() {
+		return id;
+	}
 
-    public Client() {
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public Client(String firstName, String lastName, LocalDate birthday, ClientLevelType level, ClientStatusType status,
-            Set<ClientInformation> informations, Set<ClientStatusHistory> clientHistory, boolean active) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthday = birthday;
-        this.level = level;
-        this.status = status;
-        this.clientHistory = clientHistory;
-        this.active = active;
-    }
+	public String getFirstName() {
+		return firstName;
+	}
 
-    public Client(String firstName, String lastName, LocalDate birthday, ClientLevelType level, ClientStatusType status,
-            Set<ClientStatusHistory> clientHistory, boolean active) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthday = birthday;
-        this.level = level;
-        this.status = status;
-        this.clientHistory = clientHistory;
-        this.active = active;
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public String getFirstName() {
-        return firstName;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	public LocalDate getBirthday() {
+		return birthday;
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	public void setBirthday(LocalDate birthday) {
+		this.birthday = birthday;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public boolean isActive() {
+		return active;
+	}
 
-    public LocalDate getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(LocalDate birthday) {
-        this.birthday = birthday;
-    }
-
-    public ClientLevelType getLevel() {
-        return level;
-    }
-
-    public void setLevel(ClientLevelType level) {
-        this.level = level;
-    }
-
-    public ClientStatusType getStatus() {
-        return status;
-    }
-
-    public void setStatus(ClientStatusType status) {
-        this.status = status;
-    }
-
-    public Set<ClientStatusHistory> getClientHistory() {
-        return clientHistory;
-    }
-    
-    public void setClientHistory(Set<ClientStatusHistory> clientHistory) {
-        this.clientHistory = clientHistory;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 }

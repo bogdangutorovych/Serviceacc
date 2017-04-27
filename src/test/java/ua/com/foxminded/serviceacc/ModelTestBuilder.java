@@ -7,7 +7,7 @@ import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.ClientInformation;
 import ua.com.foxminded.serviceacc.model.ClientLevelType;
 import ua.com.foxminded.serviceacc.model.ClientStatusHistory;
-import ua.com.foxminded.serviceacc.model.ClientStatusType;
+import ua.com.foxminded.serviceacc.model.ContractStatus;
 import ua.com.foxminded.serviceacc.model.CurrencyType;
 import ua.com.foxminded.serviceacc.model.Manager;
 
@@ -59,17 +59,17 @@ public class ModelTestBuilder {
         return manager;
     }
 
-    public static ClientStatusHistory buildTestClientHistory(Client client, ClientStatusType changedStatus){
+    public static ClientStatusHistory buildTestClientHistory(Client client, ContractStatus changedStatus){
         ClientStatusHistory clientStatusHistory = new ClientStatusHistory(changedStatus, java.time.LocalDate.now());
 
         return clientStatusHistory;
     }
 
-    public static List<ClientStatusType> buildListTestClientStatusType(){
-        List<ClientStatusType> statuses = new ArrayList<>();
-        ClientStatusType active = new ClientStatusType("001", ACTIVE);
-        ClientStatusType frozen = new ClientStatusType("002", FROZEN);
-        ClientStatusType pending = new ClientStatusType("003", PENDING);
+    public static List<ContractStatus> buildListTestClientStatusType(){
+        List<ContractStatus> statuses = new ArrayList<>();
+        ContractStatus active = new ContractStatus("001", ACTIVE);
+        ContractStatus frozen = new ContractStatus("002", FROZEN);
+        ContractStatus pending = new ContractStatus("003", PENDING);
         statuses.add(active);
         statuses.add(frozen);
         statuses.add(pending);

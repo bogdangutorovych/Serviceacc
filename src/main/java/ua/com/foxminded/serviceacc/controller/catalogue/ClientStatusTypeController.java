@@ -3,7 +3,7 @@ package ua.com.foxminded.serviceacc.controller.catalogue;
 import org.primefaces.event.RowEditEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import ua.com.foxminded.serviceacc.model.ClientStatusType;
+import ua.com.foxminded.serviceacc.model.ContractStatus;
 import ua.com.foxminded.serviceacc.service.ClientStatusTypeService;
 
 import javax.annotation.PostConstruct;
@@ -18,9 +18,9 @@ import java.util.List;
 public class ClientStatusTypeController implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private ClientStatusType selected;
+    private ContractStatus selected;
 
-    private static List<ClientStatusType> statusList;
+    private static List<ContractStatus> statusList;
 
     private ClientStatusTypeService cstService;
     @Autowired
@@ -37,20 +37,20 @@ public class ClientStatusTypeController implements Serializable {
         return cstService;
     }
 
-    public List<ClientStatusType> getStatusList() {
+    public List<ContractStatus> getStatusList() {
         return statusList;
     }
 
-    public ClientStatusType getSelected() {
+    public ContractStatus getSelected() {
         return selected;
     }
 
-    public void setSelected(ClientStatusType selected) {
+    public void setSelected(ContractStatus selected) {
         this.selected = selected;
     }
 
     public void add() {
-        selected = new ClientStatusType("", "");
+        selected = new ContractStatus("", "");
         statusList.add(selected);
     }
 
@@ -61,12 +61,12 @@ public class ClientStatusTypeController implements Serializable {
     }
 
     public void onRowEdit(RowEditEvent event) {
-        cstService.save((ClientStatusType) event.getObject());
+        cstService.save((ContractStatus) event.getObject());
         selected = null;
     }
 
     public void onRowCancel(RowEditEvent event) {
-        ClientStatusType status = (ClientStatusType) event.getObject();
+        ContractStatus status = (ContractStatus) event.getObject();
         if (status.getId() == null) {
             statusList.remove(status);
             selected = null;

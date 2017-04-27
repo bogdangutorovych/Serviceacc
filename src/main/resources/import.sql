@@ -11,25 +11,26 @@ INSERT INTO CLIENT_LEVEL_TYPE (id, title, active, code) VALUES (3, 'Regular', tr
 INSERT INTO CLIENT_LEVEL_TYPE (id, title, active, code) VALUES (4, 'Graduate', true, 'GRD');
 ALTER SEQUENCE client_level_type_id_seq RESTART WITH 5;
 
-INSERT INTO CLIENT_STATUS_TYPE (id, title, active, code) VALUES (1, 'Active', true, 'ACT');
-INSERT INTO CLIENT_STATUS_TYPE (id, title, active, code) VALUES (2, 'Frozen', true, 'FRZ');
-INSERT INTO CLIENT_STATUS_TYPE (id, title, active, code) VALUES (3, 'Pending', true, 'PND');
-ALTER SEQUENCE client_status_type_id_seq RESTART WITH 4;
+INSERT INTO CONTRACT_STATUS (id, title, active, code) VALUES (1, 'Active', true, 'ACT');
+INSERT INTO CONTRACT_STATUS (id, title, active, code) VALUES (2, 'Frozen', true, 'FRZ');
+INSERT INTO CONTRACT_STATUS (id, title, active, code) VALUES (3, 'Pending', true, 'PND');
+INSERT INTO CONTRACT_STATUS (id, title, active, code) VALUES (4, 'Closed', true, 'CLZ');
+ALTER SEQUENCE client_status_type_id_seq RESTART WITH 5;
 
 INSERT INTO CURRENCY_TYPE (id, title, active, code) VALUES (1, 'Dollar', true, 'USD');
 INSERT INTO CURRENCY_TYPE (id, title, active, code) VALUES (2, 'Hryvnia', true, 'UAH');
 INSERT INTO CURRENCY_TYPE (id, title, active, code) VALUES (3, 'Ruble', true, 'RUB');
 ALTER SEQUENCE currency_type_seq RESTART WITH 4;
 
-INSERT INTO CLIENT (id, birth_day, first_name, last_name, client_level_type_id, client_status_type_id, active) VALUES (1, '1980-03-14', 'Robert', 'Levandovsky', 1, 3, true);
-INSERT INTO CLIENT (id, birth_day, first_name, last_name, client_level_type_id, client_status_type_id, active) VALUES (2, '1986-09-08', 'Michael', 'Phelps', 1, 3, true);
-INSERT INTO CLIENT (id, birth_day, first_name, last_name, client_level_type_id, client_status_type_id, active) VALUES (3, '1991-01-14', 'Marten', 'Fourcade', 2, 1, true);
-INSERT INTO CLIENT (id, birth_day, first_name, last_name, client_level_type_id, client_status_type_id, active) VALUES (4, '1996-07-30', 'Rafael', 'Nadal', 2, 1, true);
-INSERT INTO CLIENT (id, birth_day, first_name, last_name, client_level_type_id, client_status_type_id, active) VALUES (5, '1997-05-20', 'Sergey', 'Bubka', 2, 1, true);
-INSERT INTO CLIENT (id, birth_day, first_name, last_name, client_level_type_id, client_status_type_id, active) VALUES (6, '1996-02-21', 'Arvidas', 'Sabonis', 3, 1, true);
-INSERT INTO CLIENT (id, birth_day, first_name, last_name, client_level_type_id, client_status_type_id, active) VALUES (7, '1986-03-25', 'Oksana', 'Bayul', 3, 2, true);
-INSERT INTO CLIENT (id, birth_day, first_name, last_name, client_level_type_id, client_status_type_id, active) VALUES (8, '1980-04-03', 'Steffy', 'Graf', 4, 1, false);
-INSERT INTO CLIENT (id, birth_day, first_name, last_name, client_level_type_id, client_status_type_id, active) VALUES (9, '1995-09-12', 'Vitaly', 'Klichko', 3, 2, true);
+INSERT INTO CLIENT (id, birth_day, first_name, last_name, client_level_type_id, active) VALUES (1, '1980-03-14', 'Robert', 'Levandovsky', 1, true);
+INSERT INTO CLIENT (id, birth_day, first_name, last_name, client_level_type_id, active) VALUES (2, '1986-09-08', 'Michael', 'Phelps', 1, true);
+INSERT INTO CLIENT (id, birth_day, first_name, last_name, client_level_type_id, active) VALUES (3, '1991-01-14', 'Marten', 'Fourcade', 2, true);
+INSERT INTO CLIENT (id, birth_day, first_name, last_name, client_level_type_id, active) VALUES (4, '1996-07-30', 'Rafael', 'Nadal', 2, true);
+INSERT INTO CLIENT (id, birth_day, first_name, last_name, client_level_type_id, active) VALUES (5, '1997-05-20', 'Sergey', 'Bubka', 2, true);
+INSERT INTO CLIENT (id, birth_day, first_name, last_name, client_level_type_id, active) VALUES (6, '1996-02-21', 'Arvidas', 'Sabonis', 3, true);
+INSERT INTO CLIENT (id, birth_day, first_name, last_name, client_level_type_id, active) VALUES (7, '1986-03-25', 'Oksana', 'Bayul', 3, true);
+INSERT INTO CLIENT (id, birth_day, first_name, last_name, client_level_type_id, active) VALUES (8, '1980-04-03', 'Steffy', 'Graf', 4, false);
+INSERT INTO CLIENT (id, birth_day, first_name, last_name, client_level_type_id, active) VALUES (9, '1995-09-12', 'Vitaly', 'Klichko', 3, true);
 ALTER SEQUENCE client_id_seq RESTART WITH 10;
 
 INSERT INTO CONTRACT (id, number, contract_date, client_id, manager_id, active) VALUES (1, 'Contract # 1', '01.01.2017', 1, 2, true);
