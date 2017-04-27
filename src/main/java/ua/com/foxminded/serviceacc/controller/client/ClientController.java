@@ -18,7 +18,7 @@ import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.ClientInformation;
 import ua.com.foxminded.serviceacc.model.ClientInformationType;
 import ua.com.foxminded.serviceacc.model.ClientLevelType;
-import ua.com.foxminded.serviceacc.model.ClientStatusType;
+import ua.com.foxminded.serviceacc.model.ContractStatus;
 import ua.com.foxminded.serviceacc.service.ClientInformationService;
 import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
 import ua.com.foxminded.serviceacc.service.ClientLevelTypeService;
@@ -37,7 +37,7 @@ public class ClientController implements Serializable {
 	private Client selectedClient;
 	private static List<Client> list;
 
-	private List<ClientStatusType> availableStatuses;
+	private List<ContractStatus> availableStatuses;
 	private List<ClientLevelType> availableLevels;
 	private List<ClientInformation> clientInfo;
 
@@ -115,7 +115,7 @@ public class ClientController implements Serializable {
 		return list;
 	}
 
-	public List<ClientStatusType> getAvailableStatuses() {
+	public List<ContractStatus> getAvailableStatuses() {
 		return availableStatuses;
 	}
 

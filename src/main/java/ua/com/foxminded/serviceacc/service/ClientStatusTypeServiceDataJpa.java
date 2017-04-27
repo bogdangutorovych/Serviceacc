@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ua.com.foxminded.serviceacc.model.ClientStatusType;
+import ua.com.foxminded.serviceacc.model.ContractStatus;
 import ua.com.foxminded.serviceacc.repository.ClientStatusTypeRepository;
 
 /**
@@ -18,27 +18,27 @@ public class ClientStatusTypeServiceDataJpa implements ClientStatusTypeService {
     ClientStatusTypeRepository clientStatusTypeRepository;
 
     @Override
-    public ClientStatusType save(ClientStatusType clientStatusType) {
+    public ContractStatus save(ContractStatus clientStatusType) {
         return clientStatusTypeRepository.save(clientStatusType);
     }
 
     @Override
-    public ClientStatusType update(ClientStatusType clientStatusType) {
+    public ContractStatus update(ContractStatus clientStatusType) {
         return clientStatusTypeRepository.save(clientStatusType);
     }
 
     @Override
-    public ClientStatusType findById(Long clientStatusTypeId) {
+    public ContractStatus findById(Long clientStatusTypeId) {
         return clientStatusTypeRepository.findOne(clientStatusTypeId);
     }
 
     @Override
-    public ClientStatusType findByStatusName(String statusName) {
+    public ContractStatus findByStatusName(String statusName) {
         return clientStatusTypeRepository.findOneByTitle(statusName);
     }
 
     @Override
-    public List<ClientStatusType> findAll() {
+    public List<ContractStatus> findAll() {
         return clientStatusTypeRepository.findAll();
     }
 

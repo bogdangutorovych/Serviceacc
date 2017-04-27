@@ -2,17 +2,17 @@ package ua.com.foxminded.serviceacc.service;
 
 import java.util.List;
 
-import ua.com.foxminded.serviceacc.model.ClientStatusType;
+import ua.com.foxminded.serviceacc.model.ContractStatus;
 
 /**
  * Created by andreb on 04.04.17.
  */
 public interface ClientStatusTypeService {
 
-    ClientStatusType save(ClientStatusType clientStatusType);
-    ClientStatusType update(ClientStatusType clientStatusType);
-    ClientStatusType findById(Long clientStatusTypeId);
-    ClientStatusType findByStatusName(String statusName);
-    List<ClientStatusType> findAll();
+    ContractStatus save(ContractStatus clientStatusType);
+    ContractStatus update(ContractStatus clientStatusType);
+    ContractStatus findById(Long clientStatusTypeId);
+    ContractStatus findByStatusName(String statusName);
+    List<ContractStatus> findAll();
     void delete(Long clientStatusTypeId);
 }
