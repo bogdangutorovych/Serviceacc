@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.ClientInformation;
 import ua.com.foxminded.serviceacc.repository.ClientInformationRepository;
 
@@ -13,34 +14,37 @@ import ua.com.foxminded.serviceacc.repository.ClientInformationRepository;
 @Service("clientInformationService")
 public class ClientInformationServiceDataJpa  implements ClientInformationService {
 
-    private final ClientInformationRepository clientInfoTypeRepository;
     @Autowired
-    public ClientInformationServiceDataJpa(ClientInformationRepository clientInfoTypeRepository) {
-        this.clientInfoTypeRepository = clientInfoTypeRepository;
-    }
+    ClientInformationRepository clientInformationRepository;
 
     @Override
     public ClientInformation save(ClientInformation clientInformation) {
-        return clientInfoTypeRepository.save(clientInformation);
+        return clientInformationRepository.save(clientInformation);
     }
 
     @Override
     public ClientInformation update(ClientInformation clientInformation) {
-        return clientInfoTypeRepository.save(clientInformation);
+        return clientInformationRepository.save(clientInformation);
     }
 
     @Override
-    public ClientInformation findById(Long contactTypeId) {
-        return clientInfoTypeRepository.findOne(contactTypeId);
+    public ClientInformation findById(Long clientInformationId) {
+        return clientInformationRepository.findOne(clientInformationId);
     }
 
     @Override
     public List<ClientInformation> findAll() {
-        return clientInfoTypeRepository.findAll();
+        return clientInformationRepository.findAll();
     }
 
     @Override
-    public void delete(Long contactTypeId) {
-        clientInfoTypeRepository.delete(contactTypeId);
+    public void delete(Long clientInformationId) {
+        clientInformationRepository.delete(clientInformationId);
     }
+
+    @Override
+    public List<ClientInformation> findByClient(Client client) {
+        return clientInformationRepository.findByClient(client);
+    }
+    
 }

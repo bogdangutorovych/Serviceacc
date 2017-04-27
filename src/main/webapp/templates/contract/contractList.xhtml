@@ -42,11 +42,11 @@
 			immediate="true" />
 		<p:ajax event="rowUnselect" update="@form:btn_edit,@form:btn_delete"
 			immediate="true" />
-		<!-- 
+	
 		<p:column headerText="id" sortBy="#{c.id}">
 			#{c.id}
 		</p:column>
- -->
+
 		<p:column headerText="Date" sortBy="#{c.date}">
 			<h:outputText value="#{c.date}" />
 		</p:column>
@@ -75,9 +75,7 @@
 			<h:outputText value="#{c.manager.lastName}" />
 		</p:column>
 
-	<!-- 	<p:column headerText="manager rate" sortBy="#{c.managerRate}">
-			<h:outputText value="#{c.managerRate}" />
-		</p:column>
+	<!-- 	
 		<p:column headerText="currency" sortBy="#{c.managerRate.currency}">
 			<h:outputText value="#{c.managerRate.currency}" />
 		</p:column> -->

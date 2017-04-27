@@ -35,8 +35,20 @@ public class ClientInformation {
 
 	@Column(name = "active", nullable = false)
 	private boolean active = true;
+	
+	@ManyToOne (fetch = FetchType.EAGER)
+	@JoinColumn (name = "client_id")
+	private Client client; 
 
-	public ClientInformation() {
+	public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public ClientInformation() {
 	}
 
 	public ClientInformation(String content, ClientInformationType clientInformationType, boolean active) {

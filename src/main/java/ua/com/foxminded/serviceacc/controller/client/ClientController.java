@@ -19,6 +19,7 @@ import ua.com.foxminded.serviceacc.model.ClientInformation;
 import ua.com.foxminded.serviceacc.model.ClientInformationType;
 import ua.com.foxminded.serviceacc.model.ClientLevelType;
 import ua.com.foxminded.serviceacc.model.ClientStatusType;
+import ua.com.foxminded.serviceacc.service.ClientInformationService;
 import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
 import ua.com.foxminded.serviceacc.service.ClientLevelTypeService;
 import ua.com.foxminded.serviceacc.service.ClientService;
@@ -35,23 +36,26 @@ public class ClientController implements Serializable {
 
 	private Client selectedClient;
 	private static List<Client> list;
-	private List<ClientInformation> tempList = new ArrayList<>();
 
 	private List<ClientStatusType> availableStatuses;
 	private List<ClientLevelType> availableLevels;
+	private List<ClientInformation> clientInfo;
 
 	private final ClientService clientService;
 	private final ClientStatusTypeService cstService;
 	private final ClientLevelTypeService cltService;
 	private final ClientInformationTypeService citService;
+	private final ClientInformationService ciService;
 
 	@Autowired
 	public ClientController(ClientService clientService, ClientStatusTypeService cstService,
-			ClientLevelTypeService cltService, ClientInformationTypeService citService) {
+			ClientLevelTypeService cltService, ClientInformationTypeService citService,
+			ClientInformationService ciService) {
 		this.clientService = clientService;
 		this.cstService = cstService;
 		this.cltService = cltService;
 		this.citService = citService;
+		this.ciService = ciService;
 	}
 
 	@PostConstruct
@@ -67,50 +71,30 @@ public class ClientController implements Serializable {
 	public void getActualLists() {
 		availableStatuses = cstService.findAll();
 		availableLevels = cltService.findAll();
+		clientInfo = getClientInformationList();
 	}
 
 	public void onOk() {
 		if (selectedClient.getId() == null) {
 			list.add(selectedClient);
+			clientService.update(selectedClient);
 		}
 
-		// Check for empty ClientInformation objects. We don't want to save
-		// empty ClientInformation objects
-		Iterator<ClientInformation> iteratorInfos = selectedClient.getInformations().iterator();
+		Iterator<ClientInformation> iteratorInfos = clientInfo.iterator();
 		while (iteratorInfos.hasNext()) {
-			if (iteratorInfos.next().getContent().isEmpty()) {
-				iteratorInfos.remove();
+			ClientInformation info = iteratorInfos.next();
+			if (info.getContent().isEmpty() && info.getId() != null) {
+				ciService.update(info);
+				ciService.delete(info.getId());
+			} else if (info.getContent().isEmpty() && info.getId() == null) {
+			} else {
+				ciService.update(info);
 			}
 		}
-
-		// Update client and get updated Client object
 		Client updated = clientService.update(selectedClient);
-		// Replace client from list by updated client
 		int i = list.indexOf(selectedClient);
 		list.set(i, updated);
 		selectedClient = updated;
-	}
-
-	/*
-	 * 
-	 * Find ClientInformationType from selectedClient by InformationType Need
-	 * for render ClientInformation collection section
-	 */
-	public ClientInformation getInfoByType(ClientInformationType clientInformationType) {
-
-		for (ClientInformation clientInfo : selectedClient.getInformations()) {
-			if (clientInfo.getClientInformationType().equals(clientInformationType)) {
-				return clientInfo;
-			}
-		}
-
-		ClientInformation clientInformation = new ClientInformation();
-		clientInformation.setClientInformationType(clientInformationType);
-		clientInformation.setActive(true);
-		selectedClient.getInformations().add(clientInformation);
-
-		return clientInformation;
-
 	}
 
 	public void delete() {
@@ -139,8 +123,32 @@ public class ClientController implements Serializable {
 		return availableLevels;
 	}
 
-	public List<ClientInformationType> getInformationTypeList() {
+	public ClientInformation getInfoByType(ClientInformationType clientInformationType) {
+
+		if (selectedClient.getId() != null) {
+			for (ClientInformation clientInfo : ciService.findByClient(selectedClient)) {
+				if (clientInfo.getClientInformationType().equals(clientInformationType)) {
+					return clientInfo;
+				}
+			}
+		}
+
+		ClientInformation clientInfo = new ClientInformation();
+		clientInfo.setClientInformationType(clientInformationType);
+		clientInfo.setClient(selectedClient);
+		return clientInfo;
+	}
+
+	public List<ClientInformationType> getInfoTypeList() {
 		return citService.findAll();
 	}
 
+	public List<ClientInformation> getClientInformationList() {
+		clientInfo = new ArrayList<>();
+		for (ClientInformationType type : getInfoTypeList()) {
+			ClientInformation info = getInfoByType(type);
+			clientInfo.add(info);
+		}
+		return clientInfo;
+	}
 }
