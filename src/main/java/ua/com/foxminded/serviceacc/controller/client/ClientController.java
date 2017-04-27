@@ -75,7 +75,7 @@ public class ClientController implements Serializable {
     public void onOk() {
         if(selectedClient.getId() == null) {
             list.add(selectedClient);
-            Client updated = clientService.update(selectedClient);
+            clientService.update(selectedClient);
         }
 
         //Check for empty ClientInformation objects. We don't want to save empty ClientInformation objects
