@@ -7,42 +7,50 @@
 	<h:form id="menuForm">
 		<p:growl autoUpdate="true" />
 		<p:panelMenu>
-			<p:submenu expanded="true" label="Menu">
-				<p:menuitem value="Clients" icon="ui-icon-person" update=":contentForm"
-							action='#{navController.setMainContent("client/clientList")}'/>
-							
-				<p:menuitem value="Managers" icon="ui-icon-person" update=":contentForm"
-						action='#{navController.setMainContent("manager/managerList")}'/>
-						
-				<p:menuitem value="Contracts" icon="ui-icon-suitcase" update=":contentForm"
-							action='#{navController.setMainContent("contract/contractList")}'/>
 
-				<p:menuitem value="Services" icon="ui-icon-gear" 
-				update=":contentForm"
-							action='#{navController.setMainContent("service/service")}'/>				
-							
-	
-				<p:menuitem value="Invoices" icon="ui-icon-document" />
-				<p:menuitem value="Payments" icon="ui-icon-document" />
-				<p:menuitem value="Salary" icon="ui-icon-document" />
+			<p:submenu expanded="true" label="Меню">
+				<p:menuitem value="Клиенты" icon="ui-icon-person"
+					update=":contentForm"
+					action='#{navController.setMainContent("client/clientList")}' />
+				<p:menuitem value="Менторы" icon="ui-icon-person"
+					update=":contentForm"
+					action='#{navController.setMainContent("manager/managerList")}' />
+				<p:menuitem value="Договора" icon="ui-icon-suitcase" update=":contentForm"
+							action='#{navController.setMainContent("contract/contractList")}'/>
+				<p:menuitem value="Услуги" icon="ui-icon-gear" update=":contentForm"
+							action='#{navController.setMainContent("service/service")}'/>		
+				<p:submenu label="Счета">
+					<p:menuitem value="Все счета" icon="ui-icon-document" />
+					<p:menuitem value="Выставление счетов" icon="ui-icon-document" />
+				</p:submenu>
+				<p:menuitem value="Оплаты" icon="ui-icon-document" />
+				<p:menuitem value="Зарплата" icon="ui-icon-document" />
+				<p:menuitem value="Зарплата" icon="ui-icon-document" />
 			</p:submenu>
-			<p:submenu label="Settings">
-				<p:menuitem value="ClientStatusType" icon="ui-icon-note" update=":contentForm"
-							action='#{navController.setMainContent("catalogue/clientStatusType")}'/>
-				<p:menuitem value="ClientLevelType" icon="ui-icon-note" update=":contentForm"
-							action='#{navController.setMainContent("catalogue/clientLevelType")}'/>
-				<p:menuitem value="CurrencyType" icon="ui-icon-note" update=":contentForm"
-							action='#{navController.setMainContent("catalogue/currencyType")}'/>
-				<p:menuitem value="ClientInformationType" icon="ui-icon-note" update=":contentForm"
-							action='#{navController.setMainContent("catalogue/clientInformationType")}'/>
-				<p:menuitem value="ManagerInformationType" icon="ui-icon-note" update=":contentForm"
-							action='#{navController.setMainContent("catalogue/managerInformationType")}'/>
-				<p:menuitem value="PaymentType" icon="ui-icon-note" update=":contentForm"
-							action='#{navController.setMainContent("catalogue/paymentType")}'/>
-				<p:menuitem value="PayStatus" icon="ui-icon-note" update=":contentForm"
-							action='#{navController.setMainContent("catalogue/payStatus")}'/>
-				<p:menuitem value="ServiceType" icon="ui-icon-note" update=":contentForm"
-							action='#{navController.setMainContent("catalogue/serviceType")}'/>
+			<p:submenu label="Настройки">
+				<p:menuitem value="Типы статусов клиента" icon="ui-icon-note"
+					update=":contentForm"
+					action='#{navController.setMainContent("catalogue/clientStatusType")}' />
+				<p:menuitem value="Типы уровеней клиента" icon="ui-icon-note"
+					update=":contentForm"
+					action='#{navController.setMainContent("catalogue/clientLevelType")}' />
+				<p:menuitem value="Валюта" icon="ui-icon-note" update=":contentForm"
+					action='#{navController.setMainContent("catalogue/currencyType")}' />
+				<p:menuitem value="Типы доп.информации клиента" icon="ui-icon-note"
+					update=":contentForm"
+					action='#{navController.setMainContent("catalogue/clientInformationType")}' />
+				<p:menuitem value="Типы доп.информации ментора" icon="ui-icon-note"
+					update=":contentForm"
+					action='#{navController.setMainContent("catalogue/managerInformationType")}' />
+				<p:menuitem value="Типы оплат" icon="ui-icon-note"
+					update=":contentForm"
+					action='#{navController.setMainContent("catalogue/paymentType")}' />
+				<p:menuitem value="Статусы оплат" icon="ui-icon-note"
+					update=":contentForm"
+					action='#{navController.setMainContent("catalogue/payStatus")}' />
+				<p:menuitem value="Типы услуг" icon="ui-icon-note"
+					update=":contentForm"
+					action='#{navController.setMainContent("catalogue/serviceType")}' />
 			</p:submenu>
 		</p:panelMenu>
 	</h:form>
