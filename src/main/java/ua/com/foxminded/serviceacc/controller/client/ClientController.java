@@ -30,121 +30,125 @@ import ua.com.foxminded.serviceacc.service.ClientStatusTypeService;
 @ManagedBean
 public class ClientController implements Serializable {
 
-    private static final Logger log = LoggerFactory.getLogger(ClientController.class);
+	private static final Logger log = LoggerFactory.getLogger(ClientController.class);
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private Client selectedClient;
-    private static List<Client> list;
+	private Client selectedClient;
+	private static List<Client> list;
 
-    private List<ClientStatusType> availableStatuses;
-    private List<ClientLevelType> availableLevels;
-    private List<ClientInformation> clientInfo;
-    
-    private final ClientService clientService;
-    private final ClientStatusTypeService cstService;
-    private final ClientLevelTypeService cltService;
-    private final ClientInformationTypeService citService;
-    private final ClientInformationService ciService;
+	private List<ClientStatusType> availableStatuses;
+	private List<ClientLevelType> availableLevels;
+	private List<ClientInformation> clientInfo;
 
-    @Autowired
-    public ClientController(ClientService clientService, ClientStatusTypeService cstService, ClientLevelTypeService cltService, ClientInformationTypeService citService, ClientInformationService ciService) {
-        this.clientService = clientService;
-        this.cstService = cstService;
-        this.cltService = cltService;
-        this.citService = citService;
-        this.ciService = ciService;
-    }
+	private final ClientService clientService;
+	private final ClientStatusTypeService cstService;
+	private final ClientLevelTypeService cltService;
+	private final ClientInformationTypeService citService;
+	private final ClientInformationService ciService;
 
-    @PostConstruct
-    public void init() {
-        list = clientService.findAll();
-    }
+	@Autowired
+	public ClientController(ClientService clientService, ClientStatusTypeService cstService,
+			ClientLevelTypeService cltService, ClientInformationTypeService citService,
+			ClientInformationService ciService) {
+		this.clientService = clientService;
+		this.cstService = cstService;
+		this.cltService = cltService;
+		this.citService = citService;
+		this.ciService = ciService;
+	}
 
-    public void add() {
-        selectedClient = new Client();
-        getActualLists();
-    }
+	@PostConstruct
+	public void init() {
+		list = clientService.findAll();
+	}
 
-    public void getActualLists() {
-        availableStatuses = cstService.findAll();
-        availableLevels = cltService.findAll();
-        clientInfo = getClientInformationList();
-    }
+	public void add() {
+		selectedClient = new Client();
+		getActualLists();
+	}
 
-    public void onOk() {
-        if(selectedClient.getId() == null) {
-            list.add(selectedClient);
-            clientService.update(selectedClient);
-        }
+	public void getActualLists() {
+		availableStatuses = cstService.findAll();
+		availableLevels = cltService.findAll();
+		clientInfo = getClientInformationList();
+	}
 
-        Iterator<ClientInformation> iteratorInfos = clientInfo.iterator();
-        while(iteratorInfos.hasNext()){
-            ClientInformation info = iteratorInfos.next(); 
-            if (info.getContent().isEmpty() && info.getId() !=null) {
-                ciService.update(info);
-                ciService.delete(info.getId());
-            } else if (info.getContent().isEmpty() && info.getId() == null) {
-            } else {
-                ciService.update(info);
-            }
-        }
-        Client updated = clientService.update(selectedClient);
-        int i = list.indexOf(selectedClient);
-        list.set(i, updated);
-        selectedClient = updated;
-    }
+	public void onOk() {
+		if (selectedClient.getId() == null) {
+			list.add(selectedClient);
+			clientService.update(selectedClient);
+		}
 
-    public void delete() {
-        list.remove(selectedClient);
-        clientService.delete(selectedClient.getId());
-        selectedClient = null;
-    }
+		Iterator<ClientInformation> iteratorInfos = clientInfo.iterator();
+		while (iteratorInfos.hasNext()) {
+			ClientInformation info = iteratorInfos.next();
+			if (info.getContent().isEmpty() && info.getId() != null) {
+				ciService.update(info);
+				ciService.delete(info.getId());
+			} else if (info.getContent().isEmpty() && info.getId() == null) {
+			} else {
+				ciService.update(info);
+			}
+		}
+		Client updated = clientService.update(selectedClient);
+		int i = list.indexOf(selectedClient);
+		list.set(i, updated);
+		selectedClient = updated;
+	}
 
-    public void setSelectedClient(Client selectedClient) {
-        this.selectedClient = selectedClient;
-    }
+	public void delete() {
+		list.remove(selectedClient);
+		clientService.delete(selectedClient.getId());
+		selectedClient = null;
+	}
 
-    public Client getSelectedClient() {
-        return selectedClient;
-    }
+	public void setSelectedClient(Client selectedClient) {
+		this.selectedClient = selectedClient;
+	}
 
-    public List<Client> getList() {
-        return list;
-    }
+	public Client getSelectedClient() {
+		return selectedClient;
+	}
 
-    public List<ClientStatusType> getAvailableStatuses() {
-        return availableStatuses;
-    }
+	public List<Client> getList() {
+		return list;
+	}
 
-    public List<ClientLevelType> getAvailableLevels() {
-        return availableLevels;
-    }
+	public List<ClientStatusType> getAvailableStatuses() {
+		return availableStatuses;
+	}
 
-    public ClientInformation getInfoByType(ClientInformationType clientInformationType){
+	public List<ClientLevelType> getAvailableLevels() {
+		return availableLevels;
+	}
 
-        if (selectedClient.getId() != null) {
-            for (ClientInformation clientInfo : ciService.findByClient(selectedClient)) {
-                if (clientInfo.getClientInformationType().equals(clientInformationType)) {
-                    return clientInfo;
-                }
-            }
-        }
+	public ClientInformation getInfoByType(ClientInformationType clientInformationType) {
 
-        ClientInformation clientInfo = new ClientInformation();
-        clientInfo.setClientInformationType(clientInformationType);
-        clientInfo.setClient(selectedClient);
-        return clientInfo;
-    }
-    
-    public List<ClientInformationType> getInfoTypeList(){ return citService.findAll();}
+		if (selectedClient.getId() != null) {
+			for (ClientInformation clientInfo : ciService.findByClient(selectedClient)) {
+				if (clientInfo.getClientInformationType().equals(clientInformationType)) {
+					return clientInfo;
+				}
+			}
+		}
 
-    public List<ClientInformation> getClientInformationList() {
-        clientInfo = new ArrayList<>();
-        for (ClientInformationType type : getInfoTypeList()) {
-            ClientInformation info = getInfoByType(type);
-            clientInfo.add(info);
-        } 
-        return clientInfo;
-    }
+		ClientInformation clientInfo = new ClientInformation();
+		clientInfo.setClientInformationType(clientInformationType);
+		clientInfo.setClient(selectedClient);
+		return clientInfo;
+	}
+
+	public List<ClientInformationType> getInfoTypeList() {
+		return citService.findAll();
+	}
+
+	public List<ClientInformation> getClientInformationList() {
+		clientInfo = new ArrayList<>();
+		for (ClientInformationType type : getInfoTypeList()) {
+			ClientInformation info = getInfoByType(type);
+			clientInfo.add(info);
+		}
+		return clientInfo;
+	}
 }

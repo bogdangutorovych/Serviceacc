@@ -29,10 +29,10 @@ public class Contract {
 	@Column(name = "number")
 	private String number;
 
-	@Column(name = "date")
+	@Column(name = "contract_date")
 	private LocalDate date;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "client_id")
 	private Client client;
 
@@ -43,6 +43,10 @@ public class Contract {
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "service_id")
 	private Service service;
+
+	// @OneToOne(fetch = FetchType.EAGER)
+	// @JoinColumn(name = "contract_status_id")
+	// private ContractStatus contractStatus;
 
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "client_rate")
@@ -70,11 +74,11 @@ public class Contract {
 		this.managerRate = managerRate;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -91,6 +95,7 @@ public class Contract {
 	}
 
 	public void setDate(LocalDate date) {
+
 		this.date = date;
 	}
 

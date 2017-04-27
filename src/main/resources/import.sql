@@ -32,6 +32,11 @@ INSERT INTO CLIENT (id, birth_day, first_name, last_name, client_level_type_id, 
 INSERT INTO CLIENT (id, birth_day, first_name, last_name, client_level_type_id, client_status_type_id, active) VALUES (9, '1995-09-12', 'Vitaly', 'Klichko', 3, 2, true);
 ALTER SEQUENCE client_id_seq RESTART WITH 10;
 
+INSERT INTO CONTRACT (id, number, contract_date, client_id, manager_id, active) VALUES (1, 'Contract # 1', '01.01.2017', 1, 2, true);
+INSERT INTO CONTRACT (id, number, contract_date, client_id, manager_id, active) VALUES (2, 'Contract # 2', '28.12.2017', 2, 1, true);
+INSERT INTO CONTRACT (id, number, contract_date, client_id, manager_id, active) VALUES (3, 'Contract # 3', '25.04.2017', 3, 1, true);
+ALTER SEQUENCE contract_id_seq RESTART WITH 4;
+
 INSERT INTO CLIENT_STATUS_HISTORY (id, date_changed, client_id, client_status_type_id, active) VALUES (1, '2017-04-01', 7, 1, true);
 INSERT INTO CLIENT_STATUS_HISTORY (id, date_changed, client_id, client_status_type_id, active) VALUES (2, '2017-04-10', 7, 2, true);
 INSERT INTO CLIENT_STATUS_HISTORY (id, date_changed, client_id, client_status_type_id, active) VALUES (3, '2017-01-01', 6, 1, true);
