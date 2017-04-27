@@ -65,7 +65,6 @@ INSERT INTO CLIENT_INFO (id, content, info_type_id, client_id, active) VALUES (9
 INSERT INTO CLIENT_INFO (id, content, info_type_id, client_id, active) VALUES (10, 'Kyev', 5, 2, true);
 ALTER SEQUENCE client_info_seq RESTART WITH 11;
 
-
 INSERT INTO MANAGER_INFO (id, content, info_type_id, manager_id, active) VALUES (1, '0503265566', 1, 1, true);
 INSERT INTO MANAGER_INFO (id, content, info_type_id, manager_id, active) VALUES (2, 'test@gmail.com', 2, 1, true);
 INSERT INTO MANAGER_INFO (id, content, info_type_id, manager_id, active) VALUES (3, 'www.test.ua', 3, 1, true);
