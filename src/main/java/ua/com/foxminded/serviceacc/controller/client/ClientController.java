@@ -146,4 +146,15 @@ public class ClientController implements Serializable {
 
 	public List<ClientInformationType> getInformationTypeList(){ return citService.findAll();}
 
+	public List<ClientInformation> getClientInformationList() {
+	    if(selectedClient.getId() == null) {
+	        for (ClientInformationType type : getInformationTypeList()) {
+	            ClientInformation clientInfo = new ClientInformation();
+	            clientInfo.setClientInformationType(type);
+	            tempList.add(clientInfo);
+	        }
+        }
+	    
+	    return ciService.findByClient(selectedClient);
+	}
 }

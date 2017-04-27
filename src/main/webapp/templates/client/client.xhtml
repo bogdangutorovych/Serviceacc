@@ -46,6 +46,7 @@
 
     </h:panelGrid>
 
+<!--
     <h:panelGrid columns="2" cellpadding="5">
         <f:facet name="header">
             <h:outputText value="Client Information"/>
@@ -59,5 +60,22 @@
             </ui:repeat>
         </p:outputPanel>
     </h:panelGrid>
+-->
+    <p:dataTable id="clientInfoList" editable="true" emptyMessage="No items yet"
+                 var="clientInfo" value="#{clientController.clientInformationList}"
+                 rowKey="#{clientController.clientInformationList.indexOf(clientInfo)}"
+                 selectionMode="single">
+
+        <f:facet name="header">Client Information</f:facet>
+
+        <p:column headerText="type" >
+           <h:outputText value="#{clientInfo.clientInformationType}" />
+        </p:column>
+
+        <p:column headerText="content" >
+           <h:outputText value="#{clientInfo.content}" />
+        </p:column>
+
+    </p:dataTable>
 
 </ui:composition>
