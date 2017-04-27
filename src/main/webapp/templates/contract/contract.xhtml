@@ -29,55 +29,35 @@
 			value="#{contractController.utilDate}">
 		</p:calendar>
 
-			<p:outputLabel for="client" value="Client: " style="font-weight:bold" />
-			<p:selectOneMenu id="client"
-				value="#{contractController.availableClient}"
-				converter="omnifaces.SelectItemsConverter">
-				<f:selectItem itemLabel="Select client..." noSelectionOption="true" />
-				<f:selectItems value="#{contractController.availableClients}"
-					var="contract" itemLabel="#{contract.lastName}"
-					itemValue="#{contract}" />
-			</p:selectOneMenu>
-			
-				<p:outputLabel for="manager" value="Manager: "
-				style="font-weight:bold" />
-			<p:selectOneMenu id="manager"
-				value="#{contractController.availableManager}"
-				converter="omnifaces.SelectItemsConverter">
-				<f:selectItem itemLabel="Select manager..." noSelectionOption="true" />
-				<f:selectItems value="#{contractController.availableManagers}"
-					var="manager" itemLabel="#{manager.lastName}"
-					itemValue="#{manager}" />
-			</p:selectOneMenu>
-		
-			<p:outputLabel for="service" value="Service: "
-				style="font-weight:bold" />
-			<p:selectOneMenu id="service"
-				value="#{contractController.availableService}"
-				converter="omnifaces.SelectItemsConverter">
-				<f:selectItem itemLabel="Select service..." noSelectionOption="true" />
-				<f:selectItems value="#{contractController.availableServices}"
-					var="service" itemLabel="#{service.name}" itemValue="#{service}" />
-			</p:selectOneMenu>
-		
+		<p:outputLabel for="service" value="Service: "
+			style="font-weight:bold" />
+		<p:selectOneMenu id="service"
+			value="#{contractController.availableService}"
+			converter="omnifaces.SelectItemsConverter">
+			<f:selectItem itemLabel="Select service..." noSelectionOption="true" />
+			<f:selectItems value="#{contractController.availableServices}"
+				var="service" itemLabel="#{service.name}" itemValue="#{service}" />
+		</p:selectOneMenu>
+
+		<p:outputLabel for="client" value="Client: " style="font-weight:bold" />
+		<p:selectOneMenu id="client"
+			value="#{contractController.availableClient}"
+			converter="omnifaces.SelectItemsConverter">
+			<f:selectItem itemLabel="Select client..." noSelectionOption="true" />
+			<f:selectItems value="#{contractController.availableClients}"
+				var="client" itemLabel="#{client.firstName} #{client.lastName}" itemValue="#{client}" />
+		</p:selectOneMenu>
+
+		<p:outputLabel for="manager" value="Manager: "
+			style="font-weight:bold" />
+		<p:selectOneMenu id="manager"
+			value="#{contractController.availableManager}"
+			converter="omnifaces.SelectItemsConverter">
+			<f:selectItem itemLabel="Select manager..." noSelectionOption="true" />
+			<f:selectItems value="#{contractController.availableManagers}"
+				var="manager" itemLabel="#{manager.firstName} #{manager.lastName}" itemValue="#{manager}" />
+		</p:selectOneMenu>
+
 	</h:panelGrid>
 
-<!-- 			<h:outputLabel for="clientRate" value="client rate: "
-				style="font-weight:bold" />
-			<p:inputText id="clientRate" value="#{contractController.clientRate}"required="true"/>
-			
-				<h:outputLabel for="currency" value="currency: "
-				style="font-weight:bold" />
-					<p:selectOneMenu id="currency"
-				value="#{contractController.clientRate.currency.code}"
-				converter="omnifaces.SelectItemsConverter">
-				<f:selectItem itemLabel="Select currency..." noSelectionOption="true" />
-				<f:selectItems value="#{contractController.clientRate.currency.code}"
-					var="currency" itemLabel="#{currency.code}"
-					itemValue="currency" />
-			</p:selectOneMenu>
-			
-		 -->
-		
-		
 </ui:composition>

@@ -17,7 +17,6 @@ import org.springframework.stereotype.Controller;
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.Contract;
 import ua.com.foxminded.serviceacc.model.Manager;
-import ua.com.foxminded.serviceacc.model.Money;
 import ua.com.foxminded.serviceacc.model.Service;
 import ua.com.foxminded.serviceacc.service.ClientService;
 import ua.com.foxminded.serviceacc.service.ContractService;
@@ -39,13 +38,14 @@ public class ContractController implements Serializable {
 	private Client availableClient;
 	private List<Client> availableClients = new ArrayList<>();
 
-	private Money clientRate;
+	// private Money clientRate;
+	// private Long clientRateAmount;
 	// private List<Money> clientRates;
 
 	private Manager availableManager;
 	private List<Manager> availableManagers = new ArrayList<>();
 
-	private Money managerRate;
+	// private Money managerRate;
 	// private List<Money> managerRates;
 
 	private Service availableService;
@@ -79,7 +79,6 @@ public class ContractController implements Serializable {
 
 	public void add() {
 		selectedContract = new Contract();
-		// list.add(selectedContract);
 	}
 
 	public void delete() {
@@ -93,9 +92,6 @@ public class ContractController implements Serializable {
 			selectedContract.setDate(new LocalDateAttributeConverter().convertToEntityAttribute(utilDate));
 			selectedContract.setClient(availableClient);
 			selectedContract.setManager(availableManager);
-			// selectedContract.setClientRate(clientRate);
-			// selectedContract.setManagerRate(managerRate);
-			// selectedContract.setService(availableService);
 			selectedContract = contractService.create(selectedContract);
 			selectedContract.setNumber("Contract # " + selectedContract.getId());
 
@@ -106,16 +102,11 @@ public class ContractController implements Serializable {
 	}
 
 	public void onCancel() {
-		// System.out.println("Button cancel");
 		logger.info("onCancel");
-		// logger.info("tempSet" + tempInfosSet);
-		// logger.info("clientSet" + selectedClient.getInformations());
-		// tempInfosSet.clear();
 		selectedContract = null;
 	}
 
 	public Contract getSelectedContract() {
-
 		return selectedContract;
 	}
 
@@ -182,29 +173,5 @@ public class ContractController implements Serializable {
 	public void setAvailableClients(List<Client> availableClients) {
 		this.availableClients = availableClients;
 	}
-
-	public Money getManagerRate() {
-		return managerRate;
-	}
-
-	public void setManagerRate(Money managerRate) {
-		this.managerRate = managerRate;
-	}
-
-	public Money getClientRate() {
-		return clientRate;
-	}
-
-	public void setClientRate(Money clientRate) {
-		this.clientRate = clientRate;
-	}
-
-	// public List<Money> getManagerRates() {
-	// return managerRates;
-	// }
-	//
-	// public void setManagerRates(List<Money> managerRates) {
-	// this.managerRates = managerRates;
-	// }
 
 }

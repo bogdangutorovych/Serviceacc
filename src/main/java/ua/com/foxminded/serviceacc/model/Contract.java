@@ -44,6 +44,10 @@ public class Contract {
 	@JoinColumn(name = "service_id")
 	private Service service;
 
+	// @OneToOne(fetch = FetchType.EAGER)
+	// @JoinColumn(name = "contract_status_id")
+	// private ContractStatus contractStatus;
+
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "client_rate")
 	private Money clientRate;

@@ -71,16 +71,8 @@
 			<h:outputText value="#{c.client.lastName}" />
 		</p:column>
 
-		 <p:column headerText="client rate" sortBy="#{c.clientRate}" filterBy="#{c.clientRate}" filterMatchMode="contains">
-			<h:outputText value="#{c.clientRate}" />
-		</p:column>
-
 		<p:column headerText="Manager" sortBy="#{c.manager.lastName}" filterBy="#{c.manager.lastName}" filterMatchMode="contains">
 			<h:outputText value="#{c.manager.lastName}" />
-		</p:column>
-
-	 <p:column headerText="manager rate" sortBy="#{c.managerRate}" filterBy="#{c.managerRate}" filterMatchMode="contains">
-			<h:outputText value="#{c.clientRate}" />
 		</p:column>
 		
 	</p:dataTable>

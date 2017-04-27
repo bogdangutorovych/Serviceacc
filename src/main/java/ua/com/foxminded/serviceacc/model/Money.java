@@ -27,7 +27,7 @@ public class Money {
 	private Currency currency;
 
 	@Column(name = "amount")
-	private int amount;
+	private Long amount;
 
 	@Column(name = "active", nullable = false)
 	private boolean active = true;
@@ -35,7 +35,7 @@ public class Money {
 	public Money() {
 	}
 
-	public Money(Currency currency, int amount) {
+	public Money(Currency currency, Long amount) {
 		this.currency = currency;
 		this.amount = amount;
 	}
@@ -56,11 +56,11 @@ public class Money {
 		this.currency = currency;
 	}
 
-	public int getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
 
-	public void setAmount(int amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
 
