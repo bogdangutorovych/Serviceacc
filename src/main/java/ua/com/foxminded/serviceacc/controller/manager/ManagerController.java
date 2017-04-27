@@ -93,7 +93,11 @@ public class ManagerController implements Serializable {
 		this.selectedManager = selectedManager;
 	}
 
-	public List<Manager> getList() {
+	public Manager getSelectedManager() {
+        return selectedManager;
+    }
+
+    public List<Manager> getList() {
 		return managers;
 	}
 
