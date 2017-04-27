@@ -46,21 +46,19 @@
 
     </h:panelGrid>
 
-    <p:dataTable id="ClientInformationList" editable="true"
-        emptyMessage="No items yet" var="type"
-        value="#{clientController.informationTypeList}">
+    <p:dataTable id="clientInfoList" editable="true" emptyMessage="No items yet"
+                 var="clientInfo" value="#{clientController.clientInformationList}">
 
         <f:facet name="header">Client Information</f:facet>
 
-        <p:column headerText="Type">
-            <p:outputLabel for="info_content" value="#{type.title}:"
-                style="font-weight:bold" />
+        <p:column>
+           <p:outputLabel value="#{clientInfo.clientInformationType}" style="font-weight:bold" />
         </p:column>
 
-        <p:column headerText="Content">
-            <p:inputText id="info_content"
-                value="#{clientController.getInfoByType(type).content}" />
+        <p:column>
+           <p:inputText value="#{clientInfo.content}" />
         </p:column>
+
     </p:dataTable>
 
 </ui:composition>
