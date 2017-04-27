@@ -78,25 +78,18 @@ public class ClientController implements Serializable {
             clientService.update(selectedClient);
         }
 
-        //Check for empty ClientInformation objects. We don't want to save empty ClientInformation objects
         Iterator<ClientInformation> iteratorInfos = clientInfo.iterator();
         while(iteratorInfos.hasNext()){
             ClientInformation info = iteratorInfos.next(); 
             if (info.getContent().isEmpty() && info.getId() !=null) {
                 ciService.update(info);
                 ciService.delete(info.getId());
-                System.out.println("Delete empty!");
             } else if (info.getContent().isEmpty() && info.getId() == null) {
             } else {
                 ciService.update(info);
-                System.out.println("Update Info!");
-                System.out.println(info.getClientInformationType());
-                System.out.println(info.getContent());
             }
         }
-        //Update client and get updated Client object
         Client updated = clientService.update(selectedClient);
-        //Replace client from list by updated client
         int i = list.indexOf(selectedClient);
         list.set(i, updated);
         selectedClient = updated;
