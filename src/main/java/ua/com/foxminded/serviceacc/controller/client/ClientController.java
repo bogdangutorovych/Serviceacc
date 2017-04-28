@@ -40,7 +40,7 @@ public class ClientController implements Serializable {
     private List<ClientStatusType> availableStatuses;
     private List<ClientLevelType> availableLevels;
     private List<ClientInformation> clientInfo;
-    
+
     private final ClientService clientService;
     private final ClientStatusTypeService cstService;
     private final ClientLevelTypeService cltService;
@@ -48,7 +48,9 @@ public class ClientController implements Serializable {
     private final ClientInformationService ciService;
 
     @Autowired
-    public ClientController(ClientService clientService, ClientStatusTypeService cstService, ClientLevelTypeService cltService, ClientInformationTypeService citService, ClientInformationService ciService) {
+    public ClientController(ClientService clientService, ClientStatusTypeService cstService,
+            ClientLevelTypeService cltService, ClientInformationTypeService citService,
+            ClientInformationService ciService) {
         this.clientService = clientService;
         this.cstService = cstService;
         this.cltService = cltService;
@@ -73,15 +75,15 @@ public class ClientController implements Serializable {
     }
 
     public void onOk() {
-        if(selectedClient.getId() == null) {
+        if (selectedClient.getId() == null) {
             list.add(selectedClient);
             clientService.update(selectedClient);
         }
 
         Iterator<ClientInformation> iteratorInfos = clientInfo.iterator();
-        while(iteratorInfos.hasNext()){
-            ClientInformation info = iteratorInfos.next(); 
-            if (info.getContent().isEmpty() && info.getId() !=null) {
+        while (iteratorInfos.hasNext()) {
+            ClientInformation info = iteratorInfos.next();
+            if (info.getContent().isEmpty() && info.getId() != null) {
                 ciService.update(info);
                 ciService.delete(info.getId());
             } else if (info.getContent().isEmpty() && info.getId() == null) {
@@ -121,7 +123,7 @@ public class ClientController implements Serializable {
         return availableLevels;
     }
 
-    public ClientInformation getInfoByType(ClientInformationType clientInformationType){
+    public ClientInformation getInfoByType(ClientInformationType clientInformationType) {
 
         if (selectedClient.getId() != null) {
             for (ClientInformation clientInfo : ciService.findByClient(selectedClient)) {
@@ -136,15 +138,17 @@ public class ClientController implements Serializable {
         clientInfo.setClient(selectedClient);
         return clientInfo;
     }
-    
-    public List<ClientInformationType> getInfoTypeList(){ return citService.findAll();}
+
+    public List<ClientInformationType> getInfoTypeList() {
+        return citService.findAll();
+    }
 
     public List<ClientInformation> getClientInformationList() {
         clientInfo = new ArrayList<>();
         for (ClientInformationType type : getInfoTypeList()) {
             ClientInformation info = getInfoByType(type);
             clientInfo.add(info);
-        } 
+        }
         return clientInfo;
     }
 }
