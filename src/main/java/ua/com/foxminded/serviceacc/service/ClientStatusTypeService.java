@@ -10,9 +10,12 @@ import ua.com.foxminded.serviceacc.model.ClientStatusType;
 public interface ClientStatusTypeService {
 
     ClientStatusType save(ClientStatusType clientStatusType);
+
     ClientStatusType update(ClientStatusType clientStatusType);
+
     ClientStatusType findById(Long clientStatusTypeId);
-    ClientStatusType findByStatusName(String statusName);
+
     List<ClientStatusType> findAll();
+
     void delete(Long clientStatusTypeId);
 }

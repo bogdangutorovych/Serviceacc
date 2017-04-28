@@ -33,11 +33,6 @@ public class ClientStatusTypeServiceDataJpa implements ClientStatusTypeService {
     }
 
     @Override
-    public ClientStatusType findByStatusName(String statusName) {
-        return clientStatusTypeRepository.findOneByTitle(statusName);
-    }
-
-    @Override
     public List<ClientStatusType> findAll() {
         return clientStatusTypeRepository.findAll();
     }

@@ -9,15 +9,13 @@ import ua.com.foxminded.serviceacc.model.ClientStatusHistory;
  */
 public interface ClientStatusHistoryService {
 
-	ClientStatusHistory save(ClientStatusHistory clientStatusHistory);
+    ClientStatusHistory save(ClientStatusHistory clientStatusHistory);
 
-	ClientStatusHistory update(ClientStatusHistory clientStatusHistory);
+    ClientStatusHistory update(ClientStatusHistory clientStatusHistory);
 
-	ClientStatusHistory findById(Long clientStatusHistoryId);
+    ClientStatusHistory findById(Long clientStatusHistoryId);
 
-	// List<ClientStatusHistory> findByClient(Client client);
+    List<ClientStatusHistory> findAll();
 
-	List<ClientStatusHistory> findAll();
-
-	void delete(Long clientStatusHistoryId);
+    void delete(Long clientStatusHistoryId);
 }

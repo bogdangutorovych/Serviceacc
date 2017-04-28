@@ -10,7 +10,7 @@ import ua.com.foxminded.serviceacc.model.Manager;
  */
 public interface ManagerService {
 
-    Manager create(Manager manager);
+    Manager save(Manager manager);
     Manager update(Manager manager);
     Manager findById(Long managerId);
     List<Manager> findAll();

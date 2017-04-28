@@ -10,9 +10,12 @@ import ua.com.foxminded.serviceacc.model.ManagerInformationType;
 public interface ManagerInformationTypeService {
 
     ManagerInformationType save(ManagerInformationType managerInformationType);
+
     ManagerInformationType update(ManagerInformationType managerInformationType);
+
     ManagerInformationType findById(Long typeId);
-    ManagerInformationType findByTypeName(String typeName);
+
     List<ManagerInformationType> findAll();
+
     void delete(Long typeId);
 }
