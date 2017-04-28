@@ -15,7 +15,7 @@ INSERT INTO CONTRACT_STATUS (id, title, active, code) VALUES (1, 'Active', true,
 INSERT INTO CONTRACT_STATUS (id, title, active, code) VALUES (2, 'Frozen', true, 'FRZ');
 INSERT INTO CONTRACT_STATUS (id, title, active, code) VALUES (3, 'Pending', true, 'PND');
 INSERT INTO CONTRACT_STATUS (id, title, active, code) VALUES (4, 'Closed', true, 'CLZ');
-ALTER SEQUENCE client_status_type_id_seq RESTART WITH 5;
+ALTER SEQUENCE contract_status_id_seq RESTART WITH 5;
 
 INSERT INTO CURRENCY_TYPE (id, title, active, code) VALUES (1, 'Dollar', true, 'USD');
 INSERT INTO CURRENCY_TYPE (id, title, active, code) VALUES (2, 'Hryvnia', true, 'UAH');
@@ -36,15 +36,8 @@ ALTER SEQUENCE client_id_seq RESTART WITH 10;
 INSERT INTO CONTRACT (id, number, contract_date, client_id, manager_id, contract_status_id, active) VALUES (1, 'Contract # 1', '01.01.2017', 1, 2, 1, true);
 INSERT INTO CONTRACT (id, number, contract_date, client_id, manager_id, contract_status_id, active) VALUES (2, 'Contract # 2', '28.12.2017', 2, 1, 2, true);
 INSERT INTO CONTRACT (id, number, contract_date, client_id, manager_id, contract_status_id, active) VALUES (3, 'Contract # 3', '25.04.2017', 3, 1, 3, true);
-INSERT INTO CONTRACT (id, number, contract_date, client_id, manager_id, contract_status_id, active) VALUES (3, 'Contract # 3', '25.04.2017', 3, 1, 4, true);
+INSERT INTO CONTRACT (id, number, contract_date, client_id, manager_id, contract_status_id, active) VALUES (4, 'Contract # 4', '25.04.2017', 3, 1, 4, true);
 ALTER SEQUENCE contract_id_seq RESTART WITH 5;
-
-INSERT INTO CLIENT_STATUS_HISTORY (id, date_changed, client_id, client_status_type_id, active) VALUES (1, '2017-04-01', 7, 1, true);
-INSERT INTO CLIENT_STATUS_HISTORY (id, date_changed, client_id, client_status_type_id, active) VALUES (2, '2017-04-10', 7, 2, true);
-INSERT INTO CLIENT_STATUS_HISTORY (id, date_changed, client_id, client_status_type_id, active) VALUES (3, '2017-01-01', 6, 1, true);
-INSERT INTO CLIENT_STATUS_HISTORY (id, date_changed, client_id, client_status_type_id, active) VALUES (4, '2017-02-01', 6, 2, true);
-INSERT INTO CLIENT_STATUS_HISTORY (id, date_changed, client_id, client_status_type_id, active) VALUES (5, '2017-03-10', 6, 1, true);
-ALTER SEQUENCE client_status_history_id_seq RESTART WITH 6;
 
 INSERT INTO CLIENT_INFO_TYPE (id, title, active, code) VALUES (1, 'telephone', true, 'phone');
 INSERT INTO CLIENT_INFO_TYPE (id, title, active, code) VALUES (2, 'e-mail', true, 'mail');

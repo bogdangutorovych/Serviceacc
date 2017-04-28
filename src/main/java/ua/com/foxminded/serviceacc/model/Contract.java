@@ -8,14 +8,22 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Loader;
 import org.hibernate.annotations.Parameter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 @Entity
 @Table(name = "contract")
+@SQLDelete(sql = "UPDATE contract SET active = false WHERE id = ?")
+@Loader(namedQuery = "findContractById")
+@NamedQuery(name = "findContractById", query = "FROM Contract WHERE id = ?1 AND active = true")
+@Where(clause = "active = true")
 public class Contract {
 
 	@Id
@@ -44,9 +52,9 @@ public class Contract {
 	@JoinColumn(name = "service_id")
 	private Service service;
 
-	// @OneToOne(fetch = FetchType.EAGER)
-	// @JoinColumn(name = "contract_status_id")
-	// private ContractStatus contractStatus;
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "contract_status_id")
+	private ContractStatus contractStatus;
 
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "client_rate")
@@ -63,8 +71,8 @@ public class Contract {
 
 	}
 
-	public Contract(String number, LocalDate date, Client client, Manager manager, Service service, Money clientRate,
-			Money managerRate) {
+	public Contract(String number, LocalDate date, Client client, Manager manager, Service service,
+			ContractStatus contractStatus, Money clientRate, Money managerRate) {
 		this.number = number;
 		this.date = date;
 		this.client = client;
@@ -72,6 +80,7 @@ public class Contract {
 		this.service = service;
 		this.clientRate = clientRate;
 		this.managerRate = managerRate;
+		this.contractStatus = contractStatus;
 	}
 
 	public Long getId() {
@@ -121,6 +130,14 @@ public class Contract {
 
 	public void setService(Service service) {
 		this.service = service;
+	}
+
+	public ContractStatus getContractStatus() {
+		return contractStatus;
+	}
+
+	public void setContractStatus(ContractStatus contractStatus) {
+		this.contractStatus = contractStatus;
 	}
 
 	public Money getClientRate() {

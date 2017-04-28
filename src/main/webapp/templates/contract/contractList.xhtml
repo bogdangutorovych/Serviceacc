@@ -6,14 +6,14 @@
 
 	<p:toolbar>
 		<f:facet name="left">
-			<p:commandButton id="btn_add" value="New" update=":contentForm"
+			<p:commandButton id="btn_add" value="Добавить" update=":contentForm"
 				icon="ui-icon-document" actionListener="#{contractController.add()}"
 				action='#{navController.setMainContent("contract/contract")}' />
 
 			<span class="ui-separator"><span
 				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
-			<p:commandButton id="btn_edit" value="Edit" update=":contentForm"
+			<p:commandButton id="btn_edit" value="Редактировать" update=":contentForm"
 				icon="ui-icon-pencil"
 				disabled="#{contractController.selectedContract==null}"
 				actionListener="#{contractController.getList()}"
@@ -22,7 +22,7 @@
 			<span class="ui-separator"><span
 				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
-			<p:commandButton id="btn_delete" value="Delete" update=":contentForm"
+			<p:commandButton id="btn_delete" value="Удалить" update=":contentForm"
 				icon="ui-icon-trash"
 				disabled="#{contractController.selectedContract==null}"
 				actionListener="#{contractController.delete()}" />
@@ -33,14 +33,14 @@
 	<br />
 
 	<p:dataTable id="contractList" editable="true"
-		emptyMessage="No items yet" var="c" value="#{contractController.list}"
+		emptyMessage="Нет данных" var="c" value="#{contractController.list}"
 		rowKey="#{contractController.list.indexOf(c)}" selectionMode="single"
 		selection="#{contractController.selectedContract}"
 		widgetVar="contractTable">
 
-		<f:facet name="header">Conracts
+		<f:facet name="header">Договора
 		<p:outputPanel>
-				<h:outputText value="Search all fields:    " />
+				<h:outputText value="Искать везде: " />
 				<p:inputText id="globalFilter" onkeyup="PF('contractTable').filter()"
 					style="width:150px" placeholder="Enter keyword" />
 			</p:outputPanel>
@@ -55,26 +55,30 @@
 			#{c.id}
 		</p:column>
 
-		<p:column headerText="Date" sortBy="#{c.date}" filterBy="#{c.date}" filterMatchMode="contains">
+		<p:column headerText="дата" sortBy="#{c.date}" filterBy="#{c.date}" filterMatchMode="contains">
 			<h:outputText value="#{c.date}" />
 		</p:column>
 
-		<p:column headerText="Number" sortBy="#{c.number}" filterBy="#{c.number}" filterMatchMode="contains">
+		<p:column headerText="номер" sortBy="#{c.number}" filterBy="#{c.number}" filterMatchMode="contains">
 			<h:outputText value="#{c.number}" />
 		</p:column>
 
-		<p:column headerText="Service" sortBy="#{c.service}" filterBy="#{c.service}" filterMatchMode="contains">
+		<p:column headerText="услуга" sortBy="#{c.service}" filterBy="#{c.service}" filterMatchMode="contains">
 			<h:outputText value="#{c.service}" />
 		</p:column>
 
-		<p:column headerText="Client" sortBy="#{c.client.lastName}" filterBy="#{c.client.lastName}" filterMatchMode="contains">
+		<p:column headerText="клиент" sortBy="#{c.client.lastName}" filterBy="#{c.client.lastName}" filterMatchMode="contains">
 			<h:outputText value="#{c.client.lastName}" />
 		</p:column>
 
-		<p:column headerText="Manager" sortBy="#{c.manager.lastName}" filterBy="#{c.manager.lastName}" filterMatchMode="contains">
+		<p:column headerText="ментор" sortBy="#{c.manager.lastName}" filterBy="#{c.manager.lastName}" filterMatchMode="contains">
 			<h:outputText value="#{c.manager.lastName}" />
 		</p:column>
 		
+	<!--  	<p:column headerText="статус" sortBy="#{c.status}" filterBy="#{c.status}" filterMatchMode="contains">
+			<h:outputText value="#{c.status}" />
+		</p:column>
+		-->
 	</p:dataTable>
 
 

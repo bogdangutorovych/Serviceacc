@@ -6,14 +6,14 @@
 
 	<p:toolbar>
 		<f:facet name="left">
-			<p:commandButton id="btn_add" value="New" update=":contentForm"
+			<p:commandButton id="btn_add" value="Добавить" update=":contentForm"
 				icon="ui-icon-document" actionListener="#{clientController.add()}"
 				action='#{navController.setMainContent("client/client")}' />
 
 			<span class="ui-separator"><span
 				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
-			<p:commandButton id="btn_edit" value="Edit" update=":contentForm"
+			<p:commandButton id="btn_edit" value="Редактировать" update=":contentForm"
 				icon="ui-icon-pencil"
 				disabled="#{clientController.selectedClient==null}"
 				actionListener="#{clientController.getActualLists()}"
@@ -22,7 +22,7 @@
 			<span class="ui-separator"><span
 				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
-			<p:commandButton id="btn_delete" value="Delete" update=":contentForm"
+			<p:commandButton id="btn_delete" value="Удалить" update=":contentForm"
 				icon="ui-icon-trash"
 				disabled="#{clientController.selectedClient==null}"
 				actionListener="#{clientController.delete()}" />
@@ -33,15 +33,15 @@
 	<br />
 
 	<p:dataTable id="clientList" editable="true"
-		emptyMessage="No items yet" var="c" value="#{clientController.list}"
+		emptyMessage="Нет данных" var="c" value="#{clientController.list}"
 		rowKey="#{clientController.list.indexOf(c)}" selectionMode="single"
 		selection="#{clientController.selectedClient}"
 		widgetVar="clientsTable">
 
 		<f:facet name="header">
-		    Clients
+		    Клиенты
 			<p:outputPanel>
-				<h:outputText value="Search all fields:" />
+				<h:outputText value="Искать везде:" />
 				<p:inputText id="globalFilter" onkeyup="PF('clientsTable').filter()"
 					style="width:150px" placeholder="Enter keyword" />
 			</p:outputPanel>
@@ -56,17 +56,11 @@
 			#{c.id}
 		</p:column>
 
-		<p:column headerText="First name" sortBy="#{c.firstName}" filterBy="#{c.firstName}" filterMatchMode="contains">
+		<p:column headerText="Имя" sortBy="#{c.firstName}" filterBy="#{c.firstName}" filterMatchMode="contains">
 			<h:outputText value="#{c.firstName}" />
 		</p:column>
-		<p:column headerText="last name" sortBy="#{c.lastName}" filterBy="#{c.lastName}" filterMatchMode="contains">
+		<p:column headerText="Фамилия" sortBy="#{c.lastName}" filterBy="#{c.lastName}" filterMatchMode="contains">
 			<h:outputText value="#{c.lastName}" />
-		</p:column>
-		<p:column headerText="status" sortBy="#{c.status}" filterBy="#{c.status}" filterMatchMode="contains">
-			<h:outputText value="#{c.status.title}" />
-		</p:column>
-		<p:column headerText="level" sortBy="#{c.level}" filterBy="#{c.level}" filterMatchMode="contains">
-			<h:outputText value="#{c.level.title}" />
 		</p:column>
 
 	</p:dataTable>

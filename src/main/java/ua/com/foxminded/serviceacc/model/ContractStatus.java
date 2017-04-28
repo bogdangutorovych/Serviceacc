@@ -9,15 +9,13 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
-/**
- * Created by andreb on 04.04.17. Represent Client title
- */
 @Entity
 @Table(name = "contract_status")
+
 public class ContractStatus {
 	@Id
 	@GenericGenerator(name = "generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
-			@Parameter(name = "sequence_name", value = "contract_type_id_seq"),
+			@Parameter(name = "sequence_name", value = "contract_status_id_seq"),
 			@Parameter(name = "initial_value", value = "1"), @Parameter(name = "increment_size", value = "1") })
 	@GeneratedValue(generator = "generator")
 	@Column(name = "id", unique = true, nullable = false)

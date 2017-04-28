@@ -30,7 +30,7 @@ public class ClientServiceTest {
     @Autowired
     ClientLevelTypeService clientLevelTypeService;
     @Autowired
-    ClientStatusTypeService clientStatusTypeService;
+    ContractStatusService clientStatusTypeService;
     @Autowired
     ManagerService managerService;
     @Autowired
