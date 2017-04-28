@@ -9,10 +9,8 @@ import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.ClientInformation;
 import ua.com.foxminded.serviceacc.repository.ClientInformationRepository;
 
-/** Created by Grischenko Maxim on 22.04.17. */
-
 @Service("clientInformationService")
-public class ClientInformationServiceDataJpa  implements ClientInformationService {
+public class ClientInformationServiceDataJpa implements ClientInformationService {
 
     @Autowired
     ClientInformationRepository clientInformationRepository;
@@ -46,5 +44,5 @@ public class ClientInformationServiceDataJpa  implements ClientInformationServic
     public List<ClientInformation> findByClient(Client client) {
         return clientInformationRepository.findByClient(client);
     }
-    
+
 }

@@ -1,6 +1,7 @@
 package ua.com.foxminded.serviceacc.controller.manager;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import ua.com.foxminded.serviceacc.model.Manager;
 import ua.com.foxminded.serviceacc.model.ManagerInformation;
 import ua.com.foxminded.serviceacc.model.ManagerInformationType;
+import ua.com.foxminded.serviceacc.service.ManagerInformationService;
 import ua.com.foxminded.serviceacc.service.ManagerInformationTypeService;
 import ua.com.foxminded.serviceacc.service.ManagerService;
 
@@ -29,18 +31,22 @@ public class ManagerController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Manager selectedManager;
+    private List<ManagerInformation> managerInfo;
 
 	private List<Manager> managers;
 	private List<ManagerInformationType> managerInformationTypeList;
 
 	private ManagerService managerService;
 	private ManagerInformationTypeService managerInformationTypeService;
+	private ManagerInformationService managerInformationService;
 
 	@Autowired
 	public ManagerController(ManagerService managerService,
-			ManagerInformationTypeService managerInformationTypeService) {
+			ManagerInformationTypeService managerInformationTypeService,
+			ManagerInformationService managerInformationService) {
 		this.managerService = managerService;
 		this.managerInformationTypeService = managerInformationTypeService;
+		this.managerInformationService = managerInformationService;
 	}
 
 	@PostConstruct
@@ -49,24 +55,9 @@ public class ManagerController implements Serializable {
 		managerInformationTypeList = managerInformationTypeService.findAll();
 	}
 
-	public ManagerInformation getInfoByType(ManagerInformationType managerInformationType) {
-
-		for (ManagerInformation managerInfo : selectedManager.getManagerInformationSet()) {
-			if (managerInfo.getManagerInformationType().equals(managerInformationType)) {
-				return managerInfo;
-			}
-		}
-
-		ManagerInformation managerInformation = new ManagerInformation();
-		managerInformation.setManagerInformationType(managerInformationType);
-		managerInformation.setActive(true);
-		selectedManager.getManagerInformationSet().add(managerInformation);
-
-		return managerInformation;
-	}
-
 	public void add() {
 		selectedManager = new Manager();
+		managerInfo = getManagerInformationList();
 	}
 
 	public void delete() {
@@ -76,29 +67,37 @@ public class ManagerController implements Serializable {
 	}
 
 	public void onOk() {
-		if (selectedManager.getId() == null) {
-			managers.add(selectedManager);
-		}
-		Iterator<ManagerInformation> iteratorInfos = selectedManager.getManagerInformationSet().iterator();
-		while (iteratorInfos.hasNext()) {
-			if (iteratorInfos.next().getContent().isEmpty()) {
-				iteratorInfos.remove();
-			}
-		}
-		Manager manager = managerService.update(selectedManager);
-		managers.set(managers.indexOf(selectedManager), manager);
-		selectedManager = manager;
-	}
+	    if(selectedManager.getId() == null) {
+            managers.add(selectedManager);
+            managerService.update(selectedManager);
+        }
 
-	public Manager getSelectedManager() {
-		return selectedManager;
-	}
+        Iterator<ManagerInformation> iteratorInfos = managerInfo.iterator();
+        while(iteratorInfos.hasNext()){
+            ManagerInformation info = iteratorInfos.next(); 
+            if (info.getContent().isEmpty() && info.getId() !=null) {
+                managerInformationService.update(info);
+                managerInformationService.delete(info.getId());
+            } else if (info.getContent().isEmpty() && info.getId() == null) {
+            } else {
+                managerInformationService.update(info);
+            }
+        }
+        Manager updated = managerService.update(selectedManager);
+        int i = managers.indexOf(selectedManager);
+        managers.set(i, updated);
+        selectedManager = updated;
+    }
 
 	public void setSelectedManager(Manager selectedManager) {
 		this.selectedManager = selectedManager;
 	}
 
-	public List<Manager> getList() {
+	public Manager getSelectedManager() {
+        return selectedManager;
+    }
+
+    public List<Manager> getList() {
 		return managers;
 	}
 
@@ -117,5 +116,32 @@ public class ManagerController implements Serializable {
 	public void setManagerInformationTypeList(List<ManagerInformationType> managerInformationTypeList) {
 		this.managerInformationTypeList = managerInformationTypeList;
 	}
+	
+	public ManagerInformation getInfoByType(ManagerInformationType managerInformationType) {
+
+	    if (selectedManager.getId() != null) {
+            for (ManagerInformation managerInfo : managerInformationService.findByManager(selectedManager)) {
+                if (managerInfo.getManagerInformationType().equals(managerInformationType)) {
+                    return managerInfo;
+                }
+            }
+        }
+
+        ManagerInformation managerInfo = new ManagerInformation();
+        managerInfo.setManagerInformationType(managerInformationType);
+        managerInfo.setManager(selectedManager);
+        return managerInfo;
+    }
+	
+	public List<ManagerInformationType> getInfoTypeList(){ return managerInformationTypeService.findAll();}
+	
+    public List<ManagerInformation> getManagerInformationList() {
+        managerInfo = new ArrayList<>();
+        for (ManagerInformationType type : getInfoTypeList()) {
+            ManagerInformation info = getInfoByType(type);
+            managerInfo.add(info);
+        } 
+        return managerInfo;
+    }
 
 }

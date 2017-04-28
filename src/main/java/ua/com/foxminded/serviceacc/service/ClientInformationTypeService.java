@@ -9,15 +9,13 @@ import ua.com.foxminded.serviceacc.model.ClientInformationType;
  */
 public interface ClientInformationTypeService {
 
-	ClientInformationType save(ClientInformationType clientInformationType);
+    ClientInformationType save(ClientInformationType clientInformationType);
 
-	ClientInformationType update(ClientInformationType clientInformationType);
+    ClientInformationType update(ClientInformationType clientInformationType);
 
-	ClientInformationType findById(Long clientInformationTypeId);
+    ClientInformationType findById(Long clientInformationTypeId);
 
-	ClientInformationType findByTypeName(String clientInformationTypeName);
+    List<ClientInformationType> findAll();
 
-	List<ClientInformationType> findAll();
-
-	void delete(Long clientInformationTypeId);
+    void delete(Long clientInformationTypeId);
 }

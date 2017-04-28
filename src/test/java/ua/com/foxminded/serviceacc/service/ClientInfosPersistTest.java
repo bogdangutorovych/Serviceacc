@@ -52,7 +52,7 @@ public class ClientInfosPersistTest {
 
         Client client = ModelTestBuilder.buildTestClient();
         client.setActive(true);
-        clientService.create(client);
+        clientService.save(client);
         
         ClientInformation info1 = new ClientInformation();
         info1.setClientInformationType(skype1);
@@ -79,7 +79,7 @@ public class ClientInfosPersistTest {
         clientInformationTypeService.save(type1);
 
         Client client = buildTestClient();
-        clientService.create(client);
+        clientService.save(client);
         
         ClientInformation info1 = buildTestClientInformation();
         info1.setContent("content1");

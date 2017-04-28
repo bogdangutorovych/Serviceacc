@@ -18,7 +18,7 @@ public class ClientServiceDataJpa implements ClientService {
 	ClientRepository clientRepository;
 
 	@Override
-	public Client create(Client client) {
+	public Client save(Client client) {
 		return clientRepository.save(client);
 	}
 
