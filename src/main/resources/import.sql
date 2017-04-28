@@ -33,10 +33,10 @@ INSERT INTO CLIENT (id, birth_day, first_name, last_name, active) VALUES (8, '19
 INSERT INTO CLIENT (id, birth_day, first_name, last_name, active) VALUES (9, '1995-09-12', 'Vitaly', 'Klichko', true);
 ALTER SEQUENCE client_id_seq RESTART WITH 10;
 
-INSERT INTO CONTRACT (id, number, contract_date, client_id, manager_id, contract_status_id, active) VALUES (1, 'Contract # 1', '01.01.2017', 1, 2, 1, true);
-INSERT INTO CONTRACT (id, number, contract_date, client_id, manager_id, contract_status_id, active) VALUES (2, 'Contract # 2', '28.12.2017', 2, 1, 2, true);
-INSERT INTO CONTRACT (id, number, contract_date, client_id, manager_id, contract_status_id, active) VALUES (3, 'Contract # 3', '25.04.2017', 3, 1, 3, true);
-INSERT INTO CONTRACT (id, number, contract_date, client_id, manager_id, contract_status_id, active) VALUES (4, 'Contract # 4', '25.04.2017', 3, 1, 4, true);
+INSERT INTO CONTRACT (id, number, contract_date, client_id, manager_id, contract_status_id, active) VALUES (1, 'Contract # 1', '01-01-2017', 1, 2, 1, true);
+INSERT INTO CONTRACT (id, number, contract_date, client_id, manager_id, contract_status_id, active) VALUES (2, 'Contract # 2', '28-12-2017', 2, 1, 2, true);
+INSERT INTO CONTRACT (id, number, contract_date, client_id, manager_id, contract_status_id, active) VALUES (3, 'Contract # 3', '25-04-2017', 3, 1, 3, true);
+INSERT INTO CONTRACT (id, number, contract_date, client_id, manager_id, contract_status_id, active) VALUES (4, 'Contract # 4', '25-04-2017', 3, 1, 4, true);
 ALTER SEQUENCE contract_id_seq RESTART WITH 5;
 
 INSERT INTO CLIENT_INFO_TYPE (id, title, active, code) VALUES (1, 'telephone', true, 'phone');

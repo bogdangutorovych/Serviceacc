@@ -66,6 +66,10 @@
 		<p:column headerText="услуга" sortBy="#{c.service}" filterBy="#{c.service}" filterMatchMode="contains">
 			<h:outputText value="#{c.service}" />
 		</p:column>
+		
+		<p:column headerText="статус" sortBy="#{c.contractStatus.title}" filterBy="#{c.contractStatus.title}" filterMatchMode="contains">
+			<h:outputText value="#{c.contractStatus.title}" />
+		</p:column>
 
 		<p:column headerText="клиент" sortBy="#{c.client.lastName}" filterBy="#{c.client.lastName}" filterMatchMode="contains">
 			<h:outputText value="#{c.client.lastName}" />
