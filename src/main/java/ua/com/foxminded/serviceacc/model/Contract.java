@@ -38,7 +38,13 @@ public class Contract {
 	private String number;
 
 	@Column(name = "contract_date")
-	private LocalDate date;
+	private LocalDate contractDate;
+
+	@Column(name = "payment_date")
+	private LocalDate paymentDate;
+
+	@Column(name = "close_date")
+	private LocalDate closeDate;
 
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "client_id")
@@ -74,7 +80,7 @@ public class Contract {
 	public Contract(String number, LocalDate date, Client client, Manager manager, Service service,
 			ContractStatus contractStatus, Money clientRate, Money managerRate) {
 		this.number = number;
-		this.date = date;
+		this.contractDate = date;
 		this.client = client;
 		this.manager = manager;
 		this.service = service;
@@ -99,13 +105,12 @@ public class Contract {
 		this.number = number;
 	}
 
-	public LocalDate getDate() {
-		return date;
+	public LocalDate getContractDate() {
+		return contractDate;
 	}
 
-	public void setDate(LocalDate date) {
-
-		this.date = date;
+	public void setContractDate(LocalDate contractDate) {
+		this.contractDate = contractDate;
 	}
 
 	public Client getClient() {
