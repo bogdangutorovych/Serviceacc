@@ -1,18 +1,12 @@
 package ua.com.foxminded.serviceacc.model;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -48,10 +42,6 @@ public class Manager {
     @Column(name = "birth_day")
     private LocalDate birthday;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "manager_id", referencedColumnName = "id")
-    private Set<ManagerInformation> managerInformationSet = new HashSet<>();
-
     @Column(name = "active", nullable = false)
     private boolean active = true;
 
@@ -59,12 +49,10 @@ public class Manager {
 
     }
 
-    public Manager(String firstName, String lastName, LocalDate birthday, Set<ManagerInformation> managerInformationSet,
-            boolean active) {
+    public Manager(String firstName, String lastName, LocalDate birthday, boolean active) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
-        this.managerInformationSet = managerInformationSet;
         this.active = active;
     }
 
@@ -98,14 +86,6 @@ public class Manager {
 
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
-    }
-
-    public Set<ManagerInformation> getManagerInformationSet() {
-        return managerInformationSet;
-    }
-
-    public void setManagerInformationSet(Set<ManagerInformation> managerInformationSet) {
-        this.managerInformationSet = managerInformationSet;
     }
 
     public boolean isActive() {
