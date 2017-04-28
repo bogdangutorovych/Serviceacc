@@ -57,7 +57,9 @@ public class ContractController implements Serializable {
 	private ServiceService serviceService;
 	// private MoneyService moneyService;
 
-	private Date utilDate;
+	private Date contractUtilDate;
+	private Date paymentUtilDate;
+	private Date closeUtilDate;
 
 	@Autowired
 	public ContractController(ContractService contractService, ClientService clientService,
@@ -70,11 +72,17 @@ public class ContractController implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		utilDate = new Date();
+		utilDateInit();
 		list = contractService.findAll();
 		availableClients = clientService.findAll();
 		availableManagers = managerService.findAll();
 		// availableServices = serviceService.findAll();
+	}
+
+	private void utilDateInit() {
+		contractUtilDate = new Date();
+		paymentUtilDate = new Date();
+		closeUtilDate = new Date();
 	}
 
 	public void add() {
@@ -89,7 +97,8 @@ public class ContractController implements Serializable {
 
 	public void onOk() {
 		if (selectedContract.getId() == null) {
-			selectedContract.setDate(new LocalDateAttributeConverter().convertToEntityAttribute(utilDate));
+			selectedContract
+					.setContractDate(new LocalDateAttributeConverter().convertToEntityAttribute(contractUtilDate));
 			selectedContract.setClient(availableClient);
 			selectedContract.setManager(availableManager);
 			selectedContract = contractService.create(selectedContract);
@@ -130,12 +139,28 @@ public class ContractController implements Serializable {
 		this.availableClient = availableClient;
 	}
 
-	public Date getUtilDate() {
-		return utilDate;
+	public Date getContractUtilDate() {
+		return contractUtilDate;
 	}
 
-	public void setUtilDate(Date utilDate) {
-		this.utilDate = utilDate;
+	public void setContractUtilDate(Date contractUtilDate) {
+		this.contractUtilDate = contractUtilDate;
+	}
+
+	public Date getPaymentUtilDate() {
+		return paymentUtilDate;
+	}
+
+	public void setPaymentUtilDate(Date paymentUtilDate) {
+		this.paymentUtilDate = paymentUtilDate;
+	}
+
+	public Date getCloseUtilDate() {
+		return closeUtilDate;
+	}
+
+	public void setCloseUtilDate(Date closeUtilDate) {
+		this.closeUtilDate = closeUtilDate;
 	}
 
 	public Manager getAvailableManager() {
