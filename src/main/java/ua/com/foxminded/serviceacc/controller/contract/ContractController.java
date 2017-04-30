@@ -122,6 +122,11 @@ public class ContractController implements Serializable {
 
 	}
 
+	public void edit() {
+		contractStatus = getContractStatus();
+		availableManager = getAvailableManager();
+	}
+
 	public ContractStatus getContractStatus() {
 		return contractStatus;
 	}
