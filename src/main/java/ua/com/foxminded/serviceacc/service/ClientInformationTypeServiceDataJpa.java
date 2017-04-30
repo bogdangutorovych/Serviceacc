@@ -33,11 +33,6 @@ public class ClientInformationTypeServiceDataJpa implements ClientInformationTyp
     }
 
     @Override
-    public ClientInformationType findByTypeName(String contactTypeName) {
-        return clientInfoTypeRepository.findOneByTitle(contactTypeName);
-    }
-
-    @Override
     public List<ClientInformationType> findAll() {
         return clientInfoTypeRepository.findAll();
     }

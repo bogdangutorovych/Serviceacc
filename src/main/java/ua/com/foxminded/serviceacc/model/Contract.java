@@ -70,6 +70,22 @@ public class Contract {
 	@JoinColumn(name = "manager_rate")
 	private Money managerRate;
 
+	public LocalDate getPaymentDate() {
+		return paymentDate;
+	}
+
+	public void setPaymentDate(LocalDate paymentDate) {
+		this.paymentDate = paymentDate;
+	}
+
+	public LocalDate getCloseDate() {
+		return closeDate;
+	}
+
+	public void setCloseDate(LocalDate closeDate) {
+		this.closeDate = closeDate;
+	}
+
 	@Column(name = "active", nullable = false)
 	private boolean active = true;
 
@@ -168,4 +184,5 @@ public class Contract {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+
 }

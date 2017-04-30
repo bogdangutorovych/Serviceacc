@@ -12,6 +12,7 @@
             <span class="ui-separator"><span class="ui-icon ui-icon-grip-dotted-vertical"/></span>
 
             <p:commandButton id="btn_cancel" value="Cancel" update=":contentForm" icon="ui-icon-close"
+                             actionListener="#{clientController.setSelectedClient(null)}"
                              action='#{navController.setMainContent("client/clientList")}' immediate="true"/>
         </f:facet>
     </p:toolbar>
@@ -36,7 +37,7 @@
         <f:facet name="header">Client Information</f:facet>
 
         <p:column>
-           <p:outputLabel value="#{clientInfo.clientInformationType}" style="font-weight:bold" />
+           <p:outputLabel value="#{clientInfo.clientInformationType.title}" style="font-weight:bold" />
         </p:column>
 
         <p:column>

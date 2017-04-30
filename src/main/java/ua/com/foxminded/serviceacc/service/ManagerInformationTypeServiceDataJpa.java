@@ -33,11 +33,6 @@ public class ManagerInformationTypeServiceDataJpa implements ManagerInformationT
     }
 
     @Override
-    public ManagerInformationType findByTypeName(String typeName) {
-        return managerInformationTypeRepository.findOneByTitle(typeName);
-    }
-
-    @Override
     public List<ManagerInformationType> findAll() {
         return managerInformationTypeRepository.findAll();
     }

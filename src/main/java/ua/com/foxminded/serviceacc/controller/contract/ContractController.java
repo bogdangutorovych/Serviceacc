@@ -16,10 +16,12 @@ import org.springframework.stereotype.Controller;
 
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.Contract;
+import ua.com.foxminded.serviceacc.model.ContractStatus;
 import ua.com.foxminded.serviceacc.model.Manager;
 import ua.com.foxminded.serviceacc.model.Service;
 import ua.com.foxminded.serviceacc.service.ClientService;
 import ua.com.foxminded.serviceacc.service.ContractService;
+import ua.com.foxminded.serviceacc.service.ContractStatusService;
 import ua.com.foxminded.serviceacc.service.LocalDateAttributeConverter;
 import ua.com.foxminded.serviceacc.service.ManagerService;
 import ua.com.foxminded.serviceacc.service.ServiceService;
@@ -34,6 +36,9 @@ public class ContractController implements Serializable {
 
 	private Contract selectedContract;
 	private List<Contract> list;
+
+	private ContractStatus contractStatus;
+	private List<ContractStatus> availableStatuses = new ArrayList<>();
 
 	private Client availableClient;
 	private List<Client> availableClients = new ArrayList<>();
@@ -55,6 +60,7 @@ public class ContractController implements Serializable {
 	private ClientService clientService;
 	private ManagerService managerService;
 	private ServiceService serviceService;
+	private ContractStatusService contractStatusService;
 	// private MoneyService moneyService;
 
 	private Date contractUtilDate;
@@ -63,11 +69,12 @@ public class ContractController implements Serializable {
 
 	@Autowired
 	public ContractController(ContractService contractService, ClientService clientService,
-			ManagerService managerService, ServiceService serviceService) {
+			ManagerService managerService, ServiceService serviceService, ContractStatusService contractStatusService) {
 		this.contractService = contractService;
 		this.clientService = clientService;
 		this.managerService = managerService;
 		this.serviceService = serviceService;
+		this.contractStatusService = contractStatusService;
 	}
 
 	@PostConstruct
@@ -76,7 +83,8 @@ public class ContractController implements Serializable {
 		list = contractService.findAll();
 		availableClients = clientService.findAll();
 		availableManagers = managerService.findAll();
-		// availableServices = serviceService.findAll();
+		availableServices = serviceService.findAll();
+		availableStatuses = contractStatusService.findAll();
 	}
 
 	private void utilDateInit() {
@@ -101,6 +109,10 @@ public class ContractController implements Serializable {
 					.setContractDate(new LocalDateAttributeConverter().convertToEntityAttribute(contractUtilDate));
 			selectedContract.setClient(availableClient);
 			selectedContract.setManager(availableManager);
+			selectedContract.setService(availableService);
+			// contractStatus = new ContractStatus("PND", "Pending");
+			contractStatus = contractStatusService.findByStatusTitle("Pending");
+			selectedContract.setContractStatus(contractStatus);
 			selectedContract = contractService.create(selectedContract);
 			selectedContract.setNumber("Contract # " + selectedContract.getId());
 
@@ -108,6 +120,19 @@ public class ContractController implements Serializable {
 
 		list.add(contractService.update(selectedContract));
 
+	}
+
+	public void edit() {
+		contractStatus = getContractStatus();
+		availableManager = getAvailableManager();
+	}
+
+	public ContractStatus getContractStatus() {
+		return contractStatus;
+	}
+
+	public void setContractStatus(ContractStatus contractStatus) {
+		this.contractStatus = contractStatus;
 	}
 
 	public void onCancel() {
@@ -197,6 +222,14 @@ public class ContractController implements Serializable {
 
 	public void setAvailableClients(List<Client> availableClients) {
 		this.availableClients = availableClients;
+	}
+
+	public List<ContractStatus> getAvailableStatuses() {
+		return availableStatuses;
+	}
+
+	public void setAvailableStatuses(List<ContractStatus> availableStatuses) {
+		this.availableStatuses = availableStatuses;
 	}
 
 }

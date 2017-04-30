@@ -16,70 +16,82 @@ import org.hibernate.annotations.Parameter;
 @Table(name = "manager_info")
 public class ManagerInformation {
 
-	@Id
-	@GenericGenerator(name = "generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
-			@Parameter(name = "sequence_name", value = "manager_info_seq"),
-			@Parameter(name = "initial_value", value = "1"), @Parameter(name = "increment_size", value = "1") })
-	@GeneratedValue(generator = "generator")
-	@Column(name = "id", unique = true, nullable = false)
-	private Long id;
+    @Id
+    @GenericGenerator(name = "generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
+            @Parameter(name = "sequence_name", value = "manager_info_seq"),
+            @Parameter(name = "initial_value", value = "1"), @Parameter(name = "increment_size", value = "1") })
+    @GeneratedValue(generator = "generator")
+    @Column(name = "id", unique = true, nullable = false)
+    private Long id;
 
-	@Column(name = "content")
-	private String content;
+    @Column(name = "content")
+    private String content;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "info_type_id")
-	private ManagerInformationType managerInformationType;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "info_type_id")
+    private ManagerInformationType managerInformationType;
 
-	@Column(name = "active", nullable = false)
-	private boolean active = true;
+    @Column(name = "active", nullable = false)
+    private boolean active = true;
 
-	public ManagerInformation() {
-	}
+    @ManyToOne (fetch = FetchType.EAGER)
+    @JoinColumn (name = "manager_id")
+    private Manager manager; 
 
-	public ManagerInformation(String content, ManagerInformationType managerInformationType, boolean active) {
+    public Manager getManager() {
+        return manager;
+    }
 
-		this.content = content;
-		this.managerInformationType = managerInformationType;
-		this.active = active;
-	}
+    public void setManager(Manager manager) {
+        this.manager = manager;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public ManagerInformation() {
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public ManagerInformation(String content, ManagerInformationType managerInformationType, boolean active) {
 
-	public String getContent() {
-		return content;
-	}
+        this.content = content;
+        this.managerInformationType = managerInformationType;
+        this.active = active;
+    }
 
-	public void setContent(String content) {
-		this.content = content;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public ManagerInformationType getManagerInformationType() {
-		return managerInformationType;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setManagerInformationType(ManagerInformationType managerInformationType) {
-		this.managerInformationType = managerInformationType;
-	}
+    public String getContent() {
+        return content;
+    }
 
-	public boolean isActive() {
-		return active;
-	}
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-	public void setActive(boolean active) {
-		this.active = active;
-	}
+    public ManagerInformationType getManagerInformationType() {
+        return managerInformationType;
+    }
 
-	@Override
-	public String toString() {
-		return "ManagerInformation [id=" + id + ", content=" + content + ", managerInformationType="
-				+ managerInformationType + ", active=" + active + "]";
-	}
+    public void setManagerInformationType(ManagerInformationType managerInformationType) {
+        this.managerInformationType = managerInformationType;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    @Override
+    public String toString() {
+        return "ManagerInformation [id=" + id + ", content=" + content + ", managerInformationType="
+                + managerInformationType + ", active=" + active + "]";
+    }
 
 }
