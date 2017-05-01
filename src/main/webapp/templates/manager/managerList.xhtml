@@ -60,6 +60,9 @@
 		<p:column headerText="last name" sortBy="#{m.lastName}" filterBy="#{m.lastName}" filterMatchMode="contains">
 			<h:outputText value="#{m.lastName}" />
 		</p:column>
+		<p:column headerText="Day of birth">
+            <h:outputText value="#{m.birthday}" />
+        </p:column>
 
 	</p:dataTable>
 
