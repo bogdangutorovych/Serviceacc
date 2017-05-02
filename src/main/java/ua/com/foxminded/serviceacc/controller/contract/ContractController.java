@@ -1,7 +1,6 @@
 package ua.com.foxminded.serviceacc.controller.contract;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -35,10 +34,15 @@ public class ContractController implements Serializable {
 	private Contract selectedContract;
 	private List<Contract> list;
 
-	private List<Client> availableClients = new ArrayList<>();
-	private List<Manager> availableManagers = new ArrayList<>();
-	private List<Service> availableServices = new ArrayList<>();
-	private List<ContractStatus> availableStatuses = new ArrayList<>();
+	// private List<Client> availableClients = new ArrayList<>();
+	// private List<Manager> availableManagers = new ArrayList<>();
+	// private List<Service> availableServices = new ArrayList<>();
+	// private List<ContractStatus> availableStatuses = new ArrayList<>();
+
+	private List<Client> availableClients;
+	private List<Manager> availableManagers;
+	private List<Service> availableServices;
+	private List<ContractStatus> availableStatuses;
 
 	private ContractService contractService;
 	private ClientService clientService;
@@ -68,6 +72,10 @@ public class ContractController implements Serializable {
 	}
 
 	public void getActualLists() {
+		// availableClients = new ArrayList<>();
+		// availableManagers = new ArrayList<>();
+		// availableServices = new ArrayList<>();
+		// availableStatuses = new ArrayList<>();
 		availableClients = clientService.findAll();
 		availableManagers = managerService.findAll();
 		availableServices = serviceService.findAll();
@@ -76,22 +84,18 @@ public class ContractController implements Serializable {
 
 	public void onOk() {
 		if (selectedContract.getId() == null) {
-
 			selectedContract = contractService.create(selectedContract);
 			selectedContract.setNumber("Договор № " + selectedContract.getId());
-
+			ContractStatus contractStatus = contractStatusService.findByStatusTitle("Pending");
+			selectedContract.setContractStatus(contractStatus);
 			contractService.update(selectedContract);
 			list.add(selectedContract);
-			System.out.println(
-					selectedContract.getManager().getFirstName() + " " + selectedContract.getManager().getLastName());
 		}
-
-		// list.add(contractService.update(selectedContract));
-
 		Contract updated = contractService.update(selectedContract);
 		int elementNumber = list.indexOf(selectedContract);
 		list.set(elementNumber, updated);
 		selectedContract = updated;
+
 	}
 
 	public void delete() {

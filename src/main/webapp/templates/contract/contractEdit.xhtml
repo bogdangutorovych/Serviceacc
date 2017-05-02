@@ -59,16 +59,17 @@
 			value="#{contractController.selectedContract.client.firstName} #{contractController.selectedContract.client.lastName}"
 			disabled="true" />
 
-		<h:outputLabel for="manager" value="Ментор: " style="font-weight:bold" />	
+		<p:outputLabel for="manager" value="Ментор: " style="font-weight:bold" />
 		<p:selectOneMenu id="manager"
 			value="#{contractController.selectedContract.manager}"
 			converter="omnifaces.SelectItemsConverter">
+			<f:selectItem
+				itemLabel="#{contractController.selectedContract.manager}"
+				itemValue="#{contractController.selectedContract.manager}"
+				noSelectionOption="true" />
 			<f:selectItems value="#{contractController.availableManagers}" />
-			<p:inputText id="name"
-				value="#{contractController.selectedContract.manager}"
-				required="true" />
 		</p:selectOneMenu>
-		
+
 		<h:outputLabel for="status" value="Статус договора: "
 			style="font-weight:bold" />
 		<p:selectOneMenu id="status"
@@ -76,7 +77,7 @@
 			converter="omnifaces.SelectItemsConverter">
 			<f:selectItems value="#{contractController.availableStatuses}" />
 			<p:inputText id="title"
-				value="#{contractController.selectedContract.contractStatus.title}"
+				value="#{contractController.selectedContract.contractStatus}"
 				required="true" />
 		</p:selectOneMenu>
 
