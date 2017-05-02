@@ -33,13 +33,9 @@ public class ClientController implements Serializable {
 	private Client selectedClient;
 	private static List<Client> list;
 
-	// private List<ContractStatus> availableStatuses;
-	// private List<ClientLevelType> availableLevels;
 	private List<ClientInformation> clientInfo;
 
 	private final ClientService clientService;
-	// private final ContractStatusService cstService;
-	// private final ClientLevelTypeService cltService;
 	private final ClientInformationTypeService citService;
 	private final ClientInformationService ciService;
 
@@ -47,8 +43,6 @@ public class ClientController implements Serializable {
 	public ClientController(ClientService clientService, ClientInformationTypeService citService,
 			ClientInformationService ciService) {
 		this.clientService = clientService;
-		// this.cstService = cstService;
-		// this.cltService = cltService;
 		this.citService = citService;
 		this.ciService = ciService;
 	}
@@ -64,8 +58,6 @@ public class ClientController implements Serializable {
 	}
 
 	public void getActualLists() {
-		// availableStatuses = cstService.findAll();
-		// availableLevels = cltService.findAll();
 		clientInfo = getClientInformationList();
 	}
 
@@ -109,14 +101,6 @@ public class ClientController implements Serializable {
 	public List<Client> getList() {
 		return list;
 	}
-
-	// public List<ContractStatus> getAvailableStatuses() {
-	// return availableStatuses;
-	// }
-	//
-	// public List<ClientLevelType> getAvailableLevels() {
-	// return availableLevels;
-	// }
 
 	public ClientInformation getInfoByType(ClientInformationType clientInformationType) {
 

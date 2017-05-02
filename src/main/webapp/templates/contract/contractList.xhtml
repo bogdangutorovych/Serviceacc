@@ -17,7 +17,7 @@
 			<p:commandButton id="btn_edit" value="Редактировать"
 				update=":contentForm" icon="ui-icon-pencil"
 				disabled="#{contractController.selectedContract==null}"
-				actionListener="#{contractController.edit()}"
+				actionListener="#{contractController.getActualLists()}"
 				action='#{navController.setMainContent("contract/contractEdit")}' />
 
 			<span class="ui-separator"><span
@@ -53,6 +53,12 @@
 		<p:ajax event="rowUnselect" update="@form:btn_edit,@form:btn_delete"
 			immediate="true" />
 
+<!-- 		<p:column headerText="id" sortBy="#{c.id}" filterBy="#{c.id}"
+			filterMatchMode="contains">
+			<h:outputText value="#{c.id}" />
+		</p:column>
+		 -->
+		
 		<p:column headerText="дата договора" sortBy="#{c.contractDate}"
 			filterBy="#{c.contractDate}" filterMatchMode="contains">
 			<h:outputText value="#{c.contractDate}" />
@@ -70,7 +76,7 @@
 
 		<p:column headerText="статус" sortBy="#{c.contractStatus.title}"
 			filterBy="#{c.contractStatus.title}" filterMatchMode="contains">
-			<h:outputText value="#{c.contractStatus.title}" />
+			<h:outputText value="#{c.contractStatus}" />
 		</p:column>
 
 		<p:column headerText="клиент" sortBy="#{c.client}"

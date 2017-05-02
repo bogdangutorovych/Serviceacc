@@ -7,7 +7,7 @@
 	<p:toolbar>
 		<f:facet name="left">
 			<p:commandButton id="btn_ok" value="Ok" update=":contentForm"
-				icon="ui-icon-check" actionListener="#{contractController.edit()}"
+				icon="ui-icon-check" actionListener="#{contractController.onOk()}"
 				action='#{navController.setMainContent("contract/contractList")}' />
 			<span class="ui-separator"><span
 				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
@@ -59,18 +59,16 @@
 			value="#{contractController.selectedContract.client.firstName} #{contractController.selectedContract.client.lastName}"
 			disabled="true" />
 
-		<h:outputLabel for="manager" value="Ментор: "
-			style="font-weight:bold" />
+		<h:outputLabel for="manager" value="Ментор: " style="font-weight:bold" />	
 		<p:selectOneMenu id="manager"
 			value="#{contractController.selectedContract.manager}"
 			converter="omnifaces.SelectItemsConverter">
-			<f:selectItems value="#{contractController.availableManagers}"/>	
+			<f:selectItems value="#{contractController.availableManagers}" />
 			<p:inputText id="name"
-				value="#{contractController.selectedContract.manager.firstName}"
+				value="#{contractController.selectedContract.manager}"
 				required="true" />
 		</p:selectOneMenu>
-
-
+		
 		<h:outputLabel for="status" value="Статус договора: "
 			style="font-weight:bold" />
 		<p:selectOneMenu id="status"

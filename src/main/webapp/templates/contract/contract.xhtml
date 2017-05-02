@@ -22,17 +22,28 @@
 
 	<br />
 	<h:panelGrid columns="2" cellpadding="5">
-
+	
 		<h:outputLabel for="date" value="Дата договора: "
 			style="font-weight:bold" />
-		<p:calendar id="date" pattern="dd/MM/yyyy"
-			value="#{contractController.contractUtilDate}">
+		<p:calendar id="date" converter="localDateTimeConverter" 
+			value="#{contractController.selectedContract.contractDate}">
 		</p:calendar>
+		
+		<p:outputLabel for="status" value="Статус договора: " 
+		style="font-weight:bold" />
+		<p:selectOneMenu id="status"
+			value="#{contractController.selectedContract.contractStatus}"
+			converter="omnifaces.SelectItemsConverter">
+			<f:selectItem itemLabel="Pending" noSelectionOption="true" />
+			<f:selectItems value="#{contractController.availableStatuses}"
+				var="status" itemLabel="#{contractStatus.title}" itemValue="#{status}" />
+		</p:selectOneMenu>
+		
 
 		<p:outputLabel for="service" value="Услуга: "
 			style="font-weight:bold" />
 		<p:selectOneMenu id="service"
-			value="#{contractController.availableService}"
+			value="#{contractController.selectedContract.service}"
 			converter="omnifaces.SelectItemsConverter">
 			<f:selectItem itemLabel="Выбрать услугу..." noSelectionOption="true" />
 			<f:selectItems value="#{contractController.availableServices}"
@@ -41,7 +52,7 @@
 
 		<p:outputLabel for="client" value="Клиент: " style="font-weight:bold" />
 		<p:selectOneMenu id="client"
-			value="#{contractController.availableClient}"
+			value="#{contractController.selectedContract.client}"
 			converter="omnifaces.SelectItemsConverter">
 			<f:selectItem itemLabel="Выбрать клиента..." noSelectionOption="true" />
 			<f:selectItems value="#{contractController.availableClients}"
