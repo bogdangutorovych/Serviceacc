@@ -1,4 +1,4 @@
-package ua.com.foxminded.serviceacc.service;
+package ua.com.foxminded.serviceacc.converter;
 
 import java.sql.Date;
 import java.time.LocalDate;

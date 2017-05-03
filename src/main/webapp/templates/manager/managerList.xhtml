@@ -57,9 +57,12 @@
 		<p:column headerText="First name" sortBy="#{m.firstName}" filterBy="#{m.firstName}" filterMatchMode="contains">
 			<h:outputText value="#{m.firstName}" />
 		</p:column>
-		<p:column headerText="last name" sortBy="#{m.lastName}" filterBy="#{m.lastName}" filterMatchMode="contains">
+		<p:column headerText="Last name" sortBy="#{m.lastName}" filterBy="#{m.lastName}" filterMatchMode="contains">
 			<h:outputText value="#{m.lastName}" />
 		</p:column>
+		<p:column headerText="Day of birth">
+            <h:outputText value="#{m.birthday}" converter="localDateConverter" />
+        </p:column>
 
 	</p:dataTable>
 
