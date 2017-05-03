@@ -53,12 +53,12 @@
 		<p:ajax event="rowUnselect" update="@form:btn_edit,@form:btn_delete"
 			immediate="true" />
 
-<!-- 		<p:column headerText="id" sortBy="#{c.id}" filterBy="#{c.id}"
+		<!-- 		<p:column headerText="id" sortBy="#{c.id}" filterBy="#{c.id}"
 			filterMatchMode="contains">
 			<h:outputText value="#{c.id}" />
 		</p:column>
 		 -->
-		
+
 		<p:column headerText="дата договора" sortBy="#{c.contractDate}"
 			filterBy="#{c.contractDate}" filterMatchMode="contains">
 			<h:outputText value="#{c.contractDate}" />
@@ -68,10 +68,20 @@
 			filterBy="#{c.number}" filterMatchMode="contains">
 			<h:outputText value="#{c.number}" />
 		</p:column>
-
+		
 		<p:column headerText="услуга" sortBy="#{c.service}"
 			filterBy="#{c.service}" filterMatchMode="contains">
 			<h:outputText value="#{c.service}" />
+		</p:column>
+		
+		<p:column headerText="дата оплаты" sortBy="#{c.paymentDate}"
+			filterBy="#{c.paymentDate}" filterMatchMode="contains">
+			<h:outputText value="#{c.paymentDate}" />
+		</p:column>
+
+		<p:column headerText="дата закрытия" sortBy="#{c.closeDate}"
+			filterBy="#{c.closeDate}" filterMatchMode="contains">
+			<h:outputText value="#{c.closeDate}" />
 		</p:column>
 
 		<p:column headerText="статус" sortBy="#{c.contractStatus.title}"

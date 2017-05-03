@@ -24,38 +24,50 @@
 	<br />
 	<h:panelGrid columns="2" cellpadding="5">
 		<h:outputText for="id" value="ID:" style="font-weight:bold" />
-		<h:inputText id="id" value="#{contractController.selectedContract.id}"
+		<p:inputText id="id" value="#{contractController.selectedContract.id}"
 			disabled="true" />
 
 		<h:outputLabel for="date" value="Дата договора: "
 			style="font-weight:bold" />
-		<h:inputText id="date"
+		<p:inputText id="date"
 			value="#{contractController.selectedContract.contractDate}"
 			disabled="true" />
 
 		<h:outputLabel for="number" value="Номер: " style="font-weight:bold" />
-		<h:inputText id="number"
+		<p:inputText id="number"
 			value="#{contractController.selectedContract.number}" disabled="true" />
 
 		<h:outputLabel for="service" value="Услуга: " style="font-weight:bold" />
-		<h:inputText id="service"
+		<p:inputText id="service"
 			value="#{contractController.selectedContract.service}"
 			disabled="true" />
 
+		<h:outputLabel for="paymentDate" value="Дата оплаты: "
+			style="font-weight:bold" />
+		<p:calendar id="paymentDate" converter="localDateTimeConverter"
+			value="#{contractController.selectedContract.paymentDate}">
+		</p:calendar>
+
+		<h:outputLabel for="closeDate" value="Дата закрытия: "
+			style="font-weight:bold" />
+		<p:calendar id="closeDate" converter="localDateTimeConverter"
+			value="#{contractController.selectedContract.closeDate}">
+		</p:calendar>
+
 		<h:outputLabel for="clientRate" value="Ставка клиента: "
 			style="font-weight:bold" />
-		<h:inputText id="clientRate"
+		<p:inputText id="clientRate"
 			value="#{contractController.selectedContract.clientRate}"
 			disabled="true" />
 
 		<h:outputLabel for="managerRate" value="Ставка менеджера: "
 			style="font-weight:bold" />
-		<h:inputText id="managerRate"
+		<p:inputText id="managerRate"
 			value="#{contractController.selectedContract.managerRate}"
 			disabled="true" />
 
 		<h:outputLabel for="client" value="Клиент: " style="font-weight:bold" />
-		<h:inputText id="client"
+		<p:inputText id="client"
 			value="#{contractController.selectedContract.client.firstName} #{contractController.selectedContract.client.lastName}"
 			disabled="true" />
 
