@@ -75,10 +75,9 @@ public class ManagerController implements Serializable {
         Iterator<ManagerInformation> iteratorInfos = managerInfo.iterator();
         while(iteratorInfos.hasNext()){
             ManagerInformation info = iteratorInfos.next(); 
-            if (info.getContent().isEmpty() && info.getId() !=null) {
+            if (info.getContent().isEmpty()) {
                 managerInformationService.update(info);
                 managerInformationService.delete(info.getId());
-            } else if (info.getContent().isEmpty() && info.getId() == null) {
             } else {
                 managerInformationService.update(info);
             }

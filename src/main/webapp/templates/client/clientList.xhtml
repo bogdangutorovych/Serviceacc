@@ -59,13 +59,16 @@
 		<p:column headerText="First name" sortBy="#{c.firstName}" filterBy="#{c.firstName}" filterMatchMode="contains">
 			<h:outputText value="#{c.firstName}" />
 		</p:column>
-		<p:column headerText="last name" sortBy="#{c.lastName}" filterBy="#{c.lastName}" filterMatchMode="contains">
+		<p:column headerText="Last name" sortBy="#{c.lastName}" filterBy="#{c.lastName}" filterMatchMode="contains">
 			<h:outputText value="#{c.lastName}" />
 		</p:column>
-		<p:column headerText="status" sortBy="#{c.status}" filterBy="#{c.status}" filterMatchMode="contains">
+		<p:column headerText="Day of birth">
+            <h:outputText value="#{c.birthday}" converter="localDateConverter" />
+        </p:column>
+		<p:column headerText="Status" sortBy="#{c.status}" filterBy="#{c.status}" filterMatchMode="contains">
 			<h:outputText value="#{c.status.title}" />
 		</p:column>
-		<p:column headerText="level" sortBy="#{c.level}" filterBy="#{c.level}" filterMatchMode="contains">
+		<p:column headerText="Level" sortBy="#{c.level}" filterBy="#{c.level}" filterMatchMode="contains">
 			<h:outputText value="#{c.level.title}" />
 		</p:column>
 

@@ -83,10 +83,9 @@ public class ClientController implements Serializable {
         Iterator<ClientInformation> iteratorInfos = clientInfo.iterator();
         while (iteratorInfos.hasNext()) {
             ClientInformation info = iteratorInfos.next();
-            if (info.getContent().isEmpty() && info.getId() != null) {
+            if (info.getContent().isEmpty()) {
                 ciService.update(info);
                 ciService.delete(info.getId());
-            } else if (info.getContent().isEmpty() && info.getId() == null) {
             } else {
                 ciService.update(info);
             }
