@@ -32,7 +32,7 @@
 	</p:toolbar>
 
 	<br />
-	<p:dataTable id="contractList" editable="true"
+	<p:dataTable id="contractList" editable="true" 
 		tableStyle="table-layout:auto;width:100%;" emptyMessage="Нет данных"
 		var="c" value="#{contractController.list}"
 		rowKey="#{contractController.list.indexOf(c)}" selectionMode="single"
@@ -61,7 +61,7 @@
 
 		<p:column headerText="дата договора" sortBy="#{c.contractDate}"
 			filterBy="#{c.contractDate}" filterMatchMode="contains">
-			<h:outputText value="#{c.contractDate}" />
+			<h:outputText value="#{c.contractDate}" converter="localDateConverter" pattern="dd.MM.yyyy"/>
 		</p:column>
 
 		<p:column headerText="номер" sortBy="#{c.number}"
@@ -76,12 +76,12 @@
 		
 		<p:column headerText="дата оплаты" sortBy="#{c.paymentDate}"
 			filterBy="#{c.paymentDate}" filterMatchMode="contains">
-			<h:outputText value="#{c.paymentDate}" />
+			<h:outputText value="#{c.paymentDate}" converter="localDateConverter" pattern="dd.MM.yyyy"/>
 		</p:column>
 
 		<p:column headerText="дата закрытия" sortBy="#{c.closeDate}"
 			filterBy="#{c.closeDate}" filterMatchMode="contains">
-			<h:outputText value="#{c.closeDate}" />
+			<h:outputText value="#{c.closeDate}" converter="localDateConverter" pattern="dd.MM.yyyy"/>
 		</p:column>
 
 		<p:column headerText="статус" sortBy="#{c.contractStatus.title}"
@@ -89,13 +89,13 @@
 			<h:outputText value="#{c.contractStatus}" />
 		</p:column>
 
-		<p:column headerText="клиент" sortBy="#{c.client}"
+		<p:column headerText="клиент" sortBy="#{c.client}" 
 			filterBy="#{c.client}" filterMatchMode="contains"
 			converter="omnifaces.SelectItemsConverter">
 			<h:outputText value="#{c.client}" />
 		</p:column>
 
-		<p:column headerText="ментор" sortBy="#{c.manager}"
+		<p:column headerText="ментор" sortBy="#{c.manager}" 
 			filterBy="#{c.manager}" filterMatchMode="contains"
 			converter="omnifaces.SelectItemsConverter">
 			<h:outputText value="#{c.manager}" />

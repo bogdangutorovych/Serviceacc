@@ -29,7 +29,7 @@
 
 		<h:outputLabel for="date" value="Дата договора: "
 			style="font-weight:bold" />
-		<p:inputText id="date"
+		<p:inputText id="date" converter="localDateConverter" pattern="dd.MM.yyyy"
 			value="#{contractController.selectedContract.contractDate}"
 			disabled="true" />
 
@@ -44,13 +44,13 @@
 
 		<h:outputLabel for="paymentDate" value="Дата оплаты: "
 			style="font-weight:bold" />
-		<p:calendar id="paymentDate" converter="localDateTimeConverter"
+		<p:calendar id="paymentDate" converter="localDateConverter" pattern="dd.MM.yyyy"
 			value="#{contractController.selectedContract.paymentDate}">
 		</p:calendar>
 
 		<h:outputLabel for="closeDate" value="Дата закрытия: "
 			style="font-weight:bold" />
-		<p:calendar id="closeDate" converter="localDateTimeConverter"
+		<p:calendar id="closeDate" converter="localDateConverter" pattern="dd.MM.yyyy"
 			value="#{contractController.selectedContract.closeDate}">
 		</p:calendar>
 
