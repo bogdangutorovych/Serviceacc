@@ -14,10 +14,11 @@
 				<p:menuitem value="Менторы" icon="ui-icon-person"
 					update=":contentForm"
 					action='#{navController.setMainContent("manager/managerList")}' />
-				<p:menuitem value="Договора" icon="ui-icon-suitcase" update=":contentForm"
-							action='#{navController.setMainContent("contract/contractList")}'/>
+				<p:menuitem value="Договора" icon="ui-icon-suitcase"
+					update=":contentForm"
+					action='#{navController.setMainContent("contract/contractList")}' />
 				<p:menuitem value="Услуги" icon="ui-icon-gear" update=":contentForm"
-				action='#{navController.setMainContent("service/service")}'/>	
+					action='#{navController.setMainContent("service/service")}' />
 
 				<p:submenu label="Счета">
 					<p:menuitem value="Все счета" icon="ui-icon-document" />
@@ -50,6 +51,8 @@
 				<p:menuitem value="Типы услуг" icon="ui-icon-note"
 					update=":contentForm"
 					action='#{navController.setMainContent("catalogue/serviceType")}' />
+				<p:menuitem value="Money" icon="ui-icon-note" update=":contentForm"
+					action='#{navController.setMainContent("catalogue/money")}' />
 			</p:submenu>
 		</p:panelMenu>
 	</h:form>

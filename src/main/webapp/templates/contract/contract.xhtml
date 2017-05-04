@@ -25,10 +25,11 @@
 
 		<h:outputLabel for="date" value="Дата договора: "
 			style="font-weight:bold" />
-		<p:calendar id="date" converter="localDateConverter" pattern="dd.MM.yyyy"
+		<p:calendar id="date" converter="localDateConverter"
+			pattern="dd.MM.yyyy"
 			value="#{contractController.selectedContract.contractDate}">
 		</p:calendar>
-	
+
 		<p:outputLabel for="service" value="Услуга: " style="font-weight:bold" />
 		<p:selectOneMenu id="service"
 			value="#{contractController.selectedContract.service}"

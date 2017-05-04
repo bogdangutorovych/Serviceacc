@@ -18,62 +18,62 @@ import ua.com.foxminded.serviceacc.service.ContractStatusService;
 @ManagedBean
 @ViewScoped
 public class ContractStatusController implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private ContractStatus contractStatus;
+    private ContractStatus contractStatus;
 
-	private static List<ContractStatus> statusList;
+    private static List<ContractStatus> statusList;
 
-	private ContractStatusService statusService;
+    private ContractStatusService statusService;
 
-	@Autowired
-	public ContractStatusController(ContractStatusService statusService) {
-		this.statusService = statusService;
-	}
+    @Autowired
+    public ContractStatusController(ContractStatusService statusService) {
+        this.statusService = statusService;
+    }
 
-	@PostConstruct
-	public void init() {
-		statusList = statusService.findAll();
-	}
+    @PostConstruct
+    public void init() {
+        statusList = statusService.findAll();
+    }
 
-	public ContractStatusService getStatusService() {
-		return statusService;
-	}
+    public ContractStatusService getStatusService() {
+        return statusService;
+    }
 
-	public List<ContractStatus> getStatusList() {
-		return statusList;
-	}
+    public List<ContractStatus> getStatusList() {
+        return statusList;
+    }
 
-	public ContractStatus getContractStatus() {
-		return contractStatus;
-	}
+    public ContractStatus getContractStatus() {
+        return contractStatus;
+    }
 
-	public void setContractStatus(ContractStatus selected) {
-		this.contractStatus = selected;
-	}
+    public void setContractStatus(ContractStatus selected) {
+        this.contractStatus = selected;
+    }
 
-	public void add() {
-		contractStatus = new ContractStatus("", "");
-		statusList.add(contractStatus);
-	}
+    public void add() {
+        contractStatus = new ContractStatus("", "");
+        statusList.add(contractStatus);
+    }
 
-	public void delete() {
-		statusList.remove(contractStatus);
-		statusService.delete(contractStatus.getId());
-		contractStatus = null;
-	}
+    public void delete() {
+        statusList.remove(contractStatus);
+        statusService.delete(contractStatus.getId());
+        contractStatus = null;
+    }
 
-	public void onRowEdit(RowEditEvent event) {
-		statusService.save((ContractStatus) event.getObject());
-		contractStatus = null;
-	}
+    public void onRowEdit(RowEditEvent event) {
+        statusService.save((ContractStatus) event.getObject());
+        contractStatus = null;
+    }
 
-	public void onRowCancel(RowEditEvent event) {
-		ContractStatus status = (ContractStatus) event.getObject();
-		if (status.getId() == null) {
-			statusList.remove(status);
-			contractStatus = null;
-		}
-	}
+    public void onRowCancel(RowEditEvent event) {
+        ContractStatus status = (ContractStatus) event.getObject();
+        if (status.getId() == null) {
+            statusList.remove(status);
+            contractStatus = null;
+        }
+    }
 
 }

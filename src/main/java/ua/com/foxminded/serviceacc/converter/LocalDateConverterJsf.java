@@ -8,7 +8,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@FacesConverter(value="localDateConverter")
+@FacesConverter(value = "localDateConverter")
 public class LocalDateConverterJsf implements Converter {
 
     @Override

@@ -10,12 +10,12 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan("ua.com.foxminded.serviceacc")
 public class ServiceAccountingApplication extends SpringBootServletInitializer {
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(ServiceAccountingApplication.class);
-	}
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(ServiceAccountingApplication.class);
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.run(ServiceAccountingApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ServiceAccountingApplication.class, args);
+    }
 }

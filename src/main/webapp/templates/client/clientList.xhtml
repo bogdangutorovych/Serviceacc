@@ -13,8 +13,8 @@
 			<span class="ui-separator"><span
 				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
-			<p:commandButton id="btn_edit" value="Редактировать" update=":contentForm"
-				icon="ui-icon-pencil"
+			<p:commandButton id="btn_edit" value="Редактировать"
+				update=":contentForm" icon="ui-icon-pencil"
 				disabled="#{clientController.selectedClient==null}"
 				actionListener="#{clientController.getActualLists()}"
 				action='#{navController.setMainContent("client/client")}' />
@@ -22,8 +22,8 @@
 			<span class="ui-separator"><span
 				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
-			<p:commandButton id="btn_delete" value="Удалить" update=":contentForm"
-				icon="ui-icon-trash"
+			<p:commandButton id="btn_delete" value="Удалить"
+				update=":contentForm" icon="ui-icon-trash"
 				disabled="#{clientController.selectedClient==null}"
 				actionListener="#{clientController.delete()}" />
 
@@ -32,8 +32,8 @@
 
 	<br />
 
-	<p:dataTable id="clientList" editable="true"
-		emptyMessage="Нет данных" var="c" value="#{clientController.list}"
+	<p:dataTable id="clientList" editable="true" emptyMessage="Нет данных"
+		var="c" value="#{clientController.list}"
 		rowKey="#{clientController.list.indexOf(c)}" selectionMode="single"
 		selection="#{clientController.selectedClient}"
 		widgetVar="clientsTable">
@@ -52,21 +52,24 @@
 		<p:ajax event="rowUnselect" update="@form:btn_edit,@form:btn_delete"
 			immediate="true" />
 
-		<p:column headerText="id" sortBy="#{c.id}" filterBy="#{c.id}" filterMatchMode="contains">
+		<p:column headerText="id" sortBy="#{c.id}" filterBy="#{c.id}"
+			filterMatchMode="contains">
 			#{c.id}
 		</p:column>
 
-		<p:column headerText="Имя" sortBy="#{c.firstName}" filterBy="#{c.firstName}" filterMatchMode="contains">
+		<p:column headerText="Имя" sortBy="#{c.firstName}"
+			filterBy="#{c.firstName}" filterMatchMode="contains">
 			<h:outputText value="#{c.firstName}" />
 		</p:column>
-		
-		<p:column headerText="Фамилия" sortBy="#{c.lastName}" filterBy="#{c.lastName}" filterMatchMode="contains">
+
+		<p:column headerText="Фамилия" sortBy="#{c.lastName}"
+			filterBy="#{c.lastName}" filterMatchMode="contains">
 			<h:outputText value="#{c.lastName}" />
 		</p:column>
 
 		<p:column headerText="Day of birth">
-            <h:outputText value="#{c.birthday}" converter="localDateConverter" />
-        </p:column>
+			<h:outputText value="#{c.birthday}" converter="localDateConverter" />
+		</p:column>
 
 	</p:dataTable>
 
