@@ -11,33 +11,33 @@ import ua.com.foxminded.serviceacc.repository.MoneyRepository;
 @Service("moneyService")
 public class MoneyServiceDataJpa implements MoneyService {
 
-	@Autowired
-	MoneyRepository moneyRepository;
+    @Autowired
+    MoneyRepository moneyRepository;
 
-	@Override
-	public Money save(Money money) {
-		return moneyRepository.save(money);
-	}
+    @Override
+    public Money save(Money money) {
+        return moneyRepository.save(money);
+    }
 
-	@Override
-	public Money update(Money money) {
-		return moneyRepository.save(money);
-	}
+    @Override
+    public Money update(Money money) {
+        return moneyRepository.save(money);
+    }
 
-	@Override
-	public Money findById(Long moneyId) {
-		return moneyRepository.findOne(moneyId);
-	}
+    @Override
+    public Money findById(Long moneyId) {
+        return moneyRepository.findOne(moneyId);
+    }
 
-	@Override
-	public List<Money> findAll() {
-		return moneyRepository.findAll();
-	}
+    @Override
+    public List<Money> findAll() {
+        return moneyRepository.findAll();
+    }
 
-	@Override
-	public void delete(Long moneyId) {
-		moneyRepository.delete(moneyId);
+    @Override
+    public void delete(Long moneyId) {
+        moneyRepository.delete(moneyId);
 
-	}
+    }
 
 }

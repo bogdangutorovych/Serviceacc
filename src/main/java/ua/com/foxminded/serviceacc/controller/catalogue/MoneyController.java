@@ -20,76 +20,76 @@ import ua.com.foxminded.serviceacc.service.MoneyService;
 @ViewScoped
 public class MoneyController implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private Money selected;
+    private Money selected;
 
-	private List<Money> list;
-	private MoneyService moneyService;
+    private List<Money> list;
+    private MoneyService moneyService;
 
-	private List<CurrencyType> availableCurrencyType;
-	private CurrencyTypeService currencyTypeService;
+    private List<CurrencyType> availableCurrencyType;
+    private CurrencyTypeService currencyTypeService;
 
-	@Autowired
-	public MoneyController(MoneyService moneyService, CurrencyTypeService currencyTypeService) {
-		this.moneyService = moneyService;
-		this.currencyTypeService = currencyTypeService;
-	}
+    @Autowired
+    public MoneyController(MoneyService moneyService, CurrencyTypeService currencyTypeService) {
+        this.moneyService = moneyService;
+        this.currencyTypeService = currencyTypeService;
+    }
 
-	@PostConstruct
-	public void init() {
-		list = moneyService.findAll();
-	}
+    @PostConstruct
+    public void init() {
+        list = moneyService.findAll();
+    }
 
-	public void add() {
-		selected = new Money();
-		list.add(selected);
-	}
+    public void add() {
+        selected = new Money();
+        list.add(selected);
+    }
 
-	public void delete() {
-		list.remove(selected);
-		moneyService.delete(selected.getId());
-		selected = null;
-	}
+    public void delete() {
+        list.remove(selected);
+        moneyService.delete(selected.getId());
+        selected = null;
+    }
 
-	public Money getSelected() {
-		return selected;
-	}
+    public Money getSelected() {
+        return selected;
+    }
 
-	public void setSelected(Money selected) {
-		this.selected = selected;
-	}
+    public void setSelected(Money selected) {
+        this.selected = selected;
+    }
 
-	public List<Money> getList() {
-		return list;
-	}
+    public List<Money> getList() {
+        return list;
+    }
 
-	public void setList(List<Money> list) {
-		this.list = list;
-	}
+    public void setList(List<Money> list) {
+        this.list = list;
+    }
 
-	public MoneyService getMoneyService() {
-		return moneyService;
-	}
+    public MoneyService getMoneyService() {
+        return moneyService;
+    }
 
-	public void setMoneyService(MoneyService moneyService) {
-		this.moneyService = moneyService;
-	}
+    public void setMoneyService(MoneyService moneyService) {
+        this.moneyService = moneyService;
+    }
 
-	public List<CurrencyType> getAvailableCurrencyType() {
-		return availableCurrencyType;
-	}
+    public List<CurrencyType> getAvailableCurrencyType() {
+        return availableCurrencyType;
+    }
 
-	public void setAvailableCurrencyType(List<CurrencyType> availableCurrencyType) {
-		this.availableCurrencyType = availableCurrencyType;
-	}
+    public void setAvailableCurrencyType(List<CurrencyType> availableCurrencyType) {
+        this.availableCurrencyType = availableCurrencyType;
+    }
 
-	public CurrencyTypeService getCurrencyTypeService() {
-		return currencyTypeService;
-	}
+    public CurrencyTypeService getCurrencyTypeService() {
+        return currencyTypeService;
+    }
 
-	public void setCurrencyTypeService(CurrencyTypeService currencyTypeService) {
-		this.currencyTypeService = currencyTypeService;
-	}
+    public void setCurrencyTypeService(CurrencyTypeService currencyTypeService) {
+        this.currencyTypeService = currencyTypeService;
+    }
 
 }

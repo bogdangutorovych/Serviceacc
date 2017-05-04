@@ -18,61 +18,61 @@ import ua.com.foxminded.serviceacc.service.CurrencyTypeService;
 @ManagedBean
 @ViewScoped
 public class CurrencyTypeController implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private CurrencyType selected;
+    private CurrencyType selected;
 
-	private static List<CurrencyType> currencyList;
+    private static List<CurrencyType> currencyList;
 
-	private CurrencyTypeService currencyService;
+    private CurrencyTypeService currencyService;
 
-	@Autowired
-	public CurrencyTypeController(CurrencyTypeService currencyService) {
-		this.currencyService = currencyService;
-	}
+    @Autowired
+    public CurrencyTypeController(CurrencyTypeService currencyService) {
+        this.currencyService = currencyService;
+    }
 
-	@PostConstruct
-	public void init() {
-		currencyList = currencyService.findAll();
-	}
+    @PostConstruct
+    public void init() {
+        currencyList = currencyService.findAll();
+    }
 
-	public CurrencyTypeService getCurrensyService() {
-		return currencyService;
-	}
+    public CurrencyTypeService getCurrensyService() {
+        return currencyService;
+    }
 
-	public List<CurrencyType> getCurrencyList() {
-		return currencyList;
-	}
+    public List<CurrencyType> getCurrencyList() {
+        return currencyList;
+    }
 
-	public CurrencyType getSelected() {
-		return selected;
-	}
+    public CurrencyType getSelected() {
+        return selected;
+    }
 
-	public void setSelected(CurrencyType selected) {
-		this.selected = selected;
-	}
+    public void setSelected(CurrencyType selected) {
+        this.selected = selected;
+    }
 
-	public void add() {
-		selected = new CurrencyType("", "");
-		currencyList.add(selected);
-	}
+    public void add() {
+        selected = new CurrencyType("", "");
+        currencyList.add(selected);
+    }
 
-	public void delete() {
-		currencyList.remove(selected);
-		currencyService.delete(selected.getId());
-		selected = null;
-	}
+    public void delete() {
+        currencyList.remove(selected);
+        currencyService.delete(selected.getId());
+        selected = null;
+    }
 
-	public void onRowEdit(RowEditEvent event) {
-		currencyService.save((CurrencyType) event.getObject());
-		selected = null;
-	}
+    public void onRowEdit(RowEditEvent event) {
+        currencyService.save((CurrencyType) event.getObject());
+        selected = null;
+    }
 
-	public void onRowCancel(RowEditEvent event) {
-		CurrencyType currency = (CurrencyType) event.getObject();
-		if (currency.getId() == null) {
-			currencyList.remove(currency);
-		}
-	}
+    public void onRowCancel(RowEditEvent event) {
+        CurrencyType currency = (CurrencyType) event.getObject();
+        if (currency.getId() == null) {
+            currencyList.remove(currency);
+        }
+    }
 
 }

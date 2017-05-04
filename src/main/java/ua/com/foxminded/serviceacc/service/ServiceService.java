@@ -6,13 +6,13 @@ import ua.com.foxminded.serviceacc.model.Service;
 
 public interface ServiceService {
 
-	Service save(Service service);
+    Service save(Service service);
 
-	Service update(Service service);
+    Service update(Service service);
 
-	Service findById(Long serviceId);
+    Service findById(Long serviceId);
 
-	List<Service> findAll();
+    List<Service> findAll();
 
-	void delete(Long serviceId);
+    void delete(Long serviceId);
 }

@@ -28,129 +28,119 @@ import ua.com.foxminded.serviceacc.service.ServiceService;
 @ManagedBean
 public class ContractController implements Serializable {
 
-	private static Logger logger = LoggerFactory.getLogger(ContractController.class);
-	private static final long serialVersionUID = 1L;
+    private static Logger logger = LoggerFactory.getLogger(ContractController.class);
+    private static final long serialVersionUID = 1L;
 
-	private Contract selectedContract;
-	private List<Contract> list;
+    private Contract selectedContract;
+    private List<Contract> list;
 
-	// private List<Client> availableClients = new ArrayList<>();
-	// private List<Manager> availableManagers = new ArrayList<>();
-	// private List<Service> availableServices = new ArrayList<>();
-	// private List<ContractStatus> availableStatuses = new ArrayList<>();
+    private List<Client> availableClients;
+    private List<Manager> availableManagers;
+    private List<Service> availableServices;
+    private List<ContractStatus> availableStatuses;
 
-	private List<Client> availableClients;
-	private List<Manager> availableManagers;
-	private List<Service> availableServices;
-	private List<ContractStatus> availableStatuses;
+    private ContractService contractService;
+    private ClientService clientService;
+    private ManagerService managerService;
+    private ServiceService serviceService;
+    private ContractStatusService contractStatusService;
 
-	private ContractService contractService;
-	private ClientService clientService;
-	private ManagerService managerService;
-	private ServiceService serviceService;
-	private ContractStatusService contractStatusService;
-	// private MoneyService moneyService;
+    @Autowired
+    public ContractController(ContractService contractService, ClientService clientService,
+            ManagerService managerService, ServiceService serviceService, ContractStatusService contractStatusService) {
+        this.contractService = contractService;
+        this.clientService = clientService;
+        this.managerService = managerService;
+        this.serviceService = serviceService;
+        this.contractStatusService = contractStatusService;
+    }
 
-	@Autowired
-	public ContractController(ContractService contractService, ClientService clientService,
-			ManagerService managerService, ServiceService serviceService, ContractStatusService contractStatusService) {
-		this.contractService = contractService;
-		this.clientService = clientService;
-		this.managerService = managerService;
-		this.serviceService = serviceService;
-		this.contractStatusService = contractStatusService;
-	}
+    @PostConstruct
+    public void init() {
+        list = contractService.findAll();
+    }
 
-	@PostConstruct
-	public void init() {
-		list = contractService.findAll();
-	}
+    public void add() {
+        selectedContract = new Contract();
+        getActualLists();
+    }
 
-	public void add() {
-		selectedContract = new Contract();
-		getActualLists();
-	}
+    public void getActualLists() {
+        availableClients = clientService.findAll();
+        availableManagers = managerService.findAll();
+        availableServices = serviceService.findAll();
+        availableStatuses = contractStatusService.findAll();
+    }
 
-	public void getActualLists() {
-		// availableClients = new ArrayList<>();
-		// availableManagers = new ArrayList<>();
-		// availableServices = new ArrayList<>();
-		// availableStatuses = new ArrayList<>();
-		availableClients = clientService.findAll();
-		availableManagers = managerService.findAll();
-		availableServices = serviceService.findAll();
-		availableStatuses = contractStatusService.findAll();
-	}
+    public void onOk() {
+        if (selectedContract.getId() == null) {
+            selectedContract = contractService.create(selectedContract);
+            selectedContract.setNumber("Договор № " + selectedContract.getId());
+            ContractStatus contractStatus = contractStatusService.findByStatusTitle("Pending");
+            selectedContract.setContractStatus(contractStatus);
+            contractService.update(selectedContract);
+            list.add(selectedContract);
+        }
+        Contract updated = contractService.update(selectedContract);
+        int elementNumber = list.indexOf(selectedContract);
+        list.set(elementNumber, updated);
+        selectedContract = updated;
 
-	public void onOk() {
-		if (selectedContract.getId() == null) {
-			selectedContract = contractService.create(selectedContract);
-			selectedContract.setNumber("Договор № " + selectedContract.getId());
-			ContractStatus contractStatus = contractStatusService.findByStatusTitle("Pending");
-			selectedContract.setContractStatus(contractStatus);
-			contractService.update(selectedContract);
-			list.add(selectedContract);
-		}
-		Contract updated = contractService.update(selectedContract);
-		int elementNumber = list.indexOf(selectedContract);
-		list.set(elementNumber, updated);
-		selectedContract = updated;
+    }
 
-	}
+    public void delete() {
+        list.remove(selectedContract);
+        contractService.delete(selectedContract.getId());
+        selectedContract = null;
+    }
 
-	public void delete() {
-		list.remove(selectedContract);
-		contractService.delete(selectedContract.getId());
-		selectedContract = null;
-	}
+    public void onCancel() {
+        logger.info("onCancel");
+        selectedContract = null;
+    }
 
-	public void onCancel() {
-		logger.info("onCancel");
-		selectedContract = null;
-	}
+    public Contract getSelectedContract() {
+        return selectedContract;
+    }
 
-	public Contract getSelectedContract() {
-		return selectedContract;
-	}
+    public void setSelectedContract(Contract selectedContract) {
+        this.selectedContract = selectedContract;
+    }
 
-	public void setSelectedContract(Contract selectedContract) {
-		this.selectedContract = selectedContract;
-	}
+    public List<Contract> getList() {
+        return list;
+    }
 
-	public List<Contract> getList() {
-		return list;
-	}
+    public List<Client> getAvailableClients() {
+        return availableClients;
+    }
 
-	public List<Client> getAvailableClients() {
-		return availableClients;
-	}
+    public void setAvailableClients(List<Client> availableClients) {
+        this.availableClients = availableClients;
+    }
 
-	public void setAvailableClients(List<Client> availableClients) {
-		this.availableClients = availableClients;
-	}
+    public List<Manager> getAvailableManagers() {
+        return availableManagers;
+    }
 
-	public List<Manager> getAvailableManagers() {
-		return availableManagers;
-	}
+    public void setAvailableManagers(List<Manager> availableManagers) {
+        this.availableManagers = availableManagers;
+    }
 
-	public void setAvailableManagers(List<Manager> availableManagers) {
-		this.availableManagers = availableManagers;
-	}
+    public List<Service> getAvailableServices() {
+        return availableServices;
+    }
 
-	public List<Service> getAvailableServices() {
-		return availableServices;
-	}
+    public void setAvailableServices(List<Service> availableServices) {
+        this.availableServices = availableServices;
+    }
 
-	public void setAvailableServices(List<Service> availableServices) {
-		this.availableServices = availableServices;
-	}
+    public List<ContractStatus> getAvailableStatuses() {
+        return availableStatuses;
+    }
 
-	public List<ContractStatus> getAvailableStatuses() {
-		return availableStatuses;
-	}
-
-	public void setAvailableStatuses(List<ContractStatus> availableStatuses) {
-		this.availableStatuses = availableStatuses;
-	}
+    public void setAvailableStatuses(List<ContractStatus> availableStatuses) {
+        this.availableStatuses = availableStatuses;
+    }
 
 }

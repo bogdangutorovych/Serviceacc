@@ -11,25 +11,25 @@ import org.springframework.stereotype.Controller;
 @ViewScoped
 @ManagedBean
 public class ServiceController implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private String text;
+    private String text;
 
-	private Double input2 = new Double(0);
+    private Double input2 = new Double(0);
 
-	public Double getInput2() {
-		return input2;
-	}
+    public Double getInput2() {
+        return input2;
+    }
 
-	public void setInput2(Double input2) {
-		this.input2 = input2;
-	}
+    public void setInput2(Double input2) {
+        this.input2 = input2;
+    }
 
-	public String getText() {
-		return text;
-	}
+    public String getText() {
+        return text;
+    }
 
-	public void setText(String text) {
-		this.text = text;
-	}
+    public void setText(String text) {
+        this.text = text;
+    }
 }

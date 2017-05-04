@@ -6,13 +6,13 @@ import ua.com.foxminded.serviceacc.model.Money;
 
 public interface MoneyService {
 
-	Money save(Money money);
+    Money save(Money money);
 
-	Money update(Money money);
+    Money update(Money money);
 
-	Money findById(Long moneyId);
+    Money findById(Long moneyId);
 
-	List<Money> findAll();
+    List<Money> findAll();
 
-	void delete(Long moneyId);
+    void delete(Long moneyId);
 }

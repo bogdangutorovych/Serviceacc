@@ -15,17 +15,17 @@ import org.springframework.test.context.junit4.SpringRunner;
 @ActiveProfiles("test")
 public class ClientServiceTest {
 
-	@Autowired
-	ClientService clientService;
-	@Autowired
-	ContractStatusService contractStatusService;
-	@Autowired
-	ManagerService managerService;
-	@Autowired
-	CurrencyTypeService currencyTypeService;
+    @Autowired
+    ClientService clientService;
+    @Autowired
+    ContractStatusService contractStatusService;
+    @Autowired
+    ManagerService managerService;
+    @Autowired
+    CurrencyTypeService currencyTypeService;
 
-	@Test
-	public void findAllFetch() {
+    @Test
+    public void findAllFetch() {
 
-	}
+    }
 }
