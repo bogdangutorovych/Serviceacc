@@ -31,16 +31,15 @@
 		<p:inputText id="firstName"
 			value="#{clientController.selectedClient.firstName}" required="true" />
 
+
 		<h:outputLabel for="lastName" value="Фамилия: "
 			style="font-weight:bold" />
 		<p:inputText id="lastName"
 			value="#{clientController.selectedClient.lastName}" required="true" />
-
-		<p:outputLabel for="birthday" value="Day of birth: "
-			style="font-weight:bold" />
-		<p:calendar id="birthday" converter="localDateConverter"
-			pattern="dd.MM.yyyy" showOn="button"
-			value="#{clientController.selectedClient.birthday}" />
+        
+        <p:outputLabel for="birthday" value="Day of birth: " style="font-weight:bold"/>
+        <p:calendar id="birthday" converter="localDateConverter" pattern="dd.MM.yyyy" showOn="button" mask="99.99.9999"
+            value="#{clientController.selectedClient.birthday}" />
 
 	</h:panelGrid>
 
