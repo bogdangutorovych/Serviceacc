@@ -17,13 +17,9 @@ import org.springframework.stereotype.Controller;
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.ClientInformation;
 import ua.com.foxminded.serviceacc.model.ClientInformationType;
-import ua.com.foxminded.serviceacc.model.ClientLevelType;
-import ua.com.foxminded.serviceacc.model.ClientStatusType;
 import ua.com.foxminded.serviceacc.service.ClientInformationService;
 import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
-import ua.com.foxminded.serviceacc.service.ClientLevelTypeService;
 import ua.com.foxminded.serviceacc.service.ClientService;
-import ua.com.foxminded.serviceacc.service.ClientStatusTypeService;
 
 @Controller
 @ViewScoped
@@ -37,23 +33,16 @@ public class ClientController implements Serializable {
     private Client selectedClient;
     private static List<Client> list;
 
-    private List<ClientStatusType> availableStatuses;
-    private List<ClientLevelType> availableLevels;
     private List<ClientInformation> clientInfo;
 
     private final ClientService clientService;
-    private final ClientStatusTypeService cstService;
-    private final ClientLevelTypeService cltService;
     private final ClientInformationTypeService citService;
     private final ClientInformationService ciService;
 
     @Autowired
-    public ClientController(ClientService clientService, ClientStatusTypeService cstService,
-            ClientLevelTypeService cltService, ClientInformationTypeService citService,
+    public ClientController(ClientService clientService, ClientInformationTypeService citService,
             ClientInformationService ciService) {
         this.clientService = clientService;
-        this.cstService = cstService;
-        this.cltService = cltService;
         this.citService = citService;
         this.ciService = ciService;
     }
@@ -69,8 +58,6 @@ public class ClientController implements Serializable {
     }
 
     public void getActualLists() {
-        availableStatuses = cstService.findAll();
-        availableLevels = cltService.findAll();
         clientInfo = getClientInformationList();
     }
 
@@ -83,9 +70,10 @@ public class ClientController implements Serializable {
         Iterator<ClientInformation> iteratorInfos = clientInfo.iterator();
         while (iteratorInfos.hasNext()) {
             ClientInformation info = iteratorInfos.next();
-            if (info.getContent().isEmpty()) {
+            if (info.getContent().isEmpty() && info.getId() != null) {
                 ciService.update(info);
                 ciService.delete(info.getId());
+            } else if (info.getContent().isEmpty() && info.getId() == null) {
             } else {
                 ciService.update(info);
             }
@@ -112,14 +100,6 @@ public class ClientController implements Serializable {
 
     public List<Client> getList() {
         return list;
-    }
-
-    public List<ClientStatusType> getAvailableStatuses() {
-        return availableStatuses;
-    }
-
-    public List<ClientLevelType> getAvailableLevels() {
-        return availableLevels;
     }
 
     public ClientInformation getInfoByType(ClientInformationType clientInformationType) {
@@ -150,4 +130,5 @@ public class ClientController implements Serializable {
         }
         return clientInfo;
     }
+
 }

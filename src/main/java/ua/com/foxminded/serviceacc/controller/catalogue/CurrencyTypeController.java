@@ -25,7 +25,7 @@ public class CurrencyTypeController implements Serializable {
     private static List<CurrencyType> currencyList;
 
     private CurrencyTypeService currencyService;
-    
+
     @Autowired
     public CurrencyTypeController(CurrencyTypeService currencyService) {
         this.currencyService = currencyService;
@@ -33,8 +33,7 @@ public class CurrencyTypeController implements Serializable {
 
     @PostConstruct
     public void init() {
-    	currencyList = currencyService.findAll();
-//    	currencyList = new ArrayList(Currency.getAvailableCurrencies());
+        currencyList = currencyService.findAll();
     }
 
     public CurrencyTypeService getCurrensyService() {
@@ -54,12 +53,12 @@ public class CurrencyTypeController implements Serializable {
     }
 
     public void add() {
-        selected = new CurrencyType("","");
+        selected = new CurrencyType("", "");
         currencyList.add(selected);
     }
 
     public void delete() {
-    	currencyList.remove(selected);
+        currencyList.remove(selected);
         currencyService.delete(selected.getId());
         selected = null;
     }
@@ -70,9 +69,9 @@ public class CurrencyTypeController implements Serializable {
     }
 
     public void onRowCancel(RowEditEvent event) {
-    	CurrencyType currency = (CurrencyType) event.getObject();
+        CurrencyType currency = (CurrencyType) event.getObject();
         if (currency.getId() == null) {
-        	currencyList.remove(currency);
+            currencyList.remove(currency);
         }
     }
 

@@ -31,7 +31,7 @@ public class ClientInfosPersistTest {
     @Autowired
     ClientLevelTypeService clientLevelTypeService;
     @Autowired
-    ClientStatusTypeService clientStatusTypeService;
+    ContractStatusService clientStatusTypeService;
     @Autowired
     ManagerService managerService;
     @Autowired
@@ -44,7 +44,7 @@ public class ClientInfosPersistTest {
 
         String typeName = "Skype2";
         String typeCode = "SKP2";
-        //Save new type and check
+        // Save new type and check
         ClientInformationType skype1 = new ClientInformationType(typeCode, typeName);
         skype1.setActive(true);
         clientInformationTypeService.save(skype1);
@@ -53,7 +53,7 @@ public class ClientInfosPersistTest {
         Client client = ModelTestBuilder.buildTestClient();
         client.setActive(true);
         clientService.save(client);
-        
+
         ClientInformation info1 = new ClientInformation();
         info1.setClientInformationType(skype1);
         info1.setContent("oneone");
@@ -67,12 +67,12 @@ public class ClientInfosPersistTest {
         info2.setActive(true);
         info2.setClient(client);
         clientInformationService.save(info2);
-        
+
         assertThat(clientInformationService.findByClient(client), hasSize(2));
     }
 
     @Test
-    public void changeAndSaveInfosInClient(){
+    public void changeAndSaveInfosInClient() {
 
         ClientInformationType type1 = new ClientInformationType("001", "type1");
         type1.setActive(true);
@@ -80,22 +80,22 @@ public class ClientInfosPersistTest {
 
         Client client = buildTestClient();
         clientService.save(client);
-        
+
         ClientInformation info1 = buildTestClientInformation();
         info1.setContent("content1");
         info1.setClientInformationType(type1);
         info1.setClient(client);
         clientInformationService.save(info1);
-        
+
         ClientInformation info2 = buildTestClientInformation();
         info2.setContent("content2");
         info2.setClientInformationType(type1);
         info2.setClient(client);
         clientInformationService.save(info2);
-        
+
         info2.setClient(null);
         clientInformationService.update(info2);
-        
+
         assertThat(clientInformationService.findByClient(client), hasSize(1));
     }
 

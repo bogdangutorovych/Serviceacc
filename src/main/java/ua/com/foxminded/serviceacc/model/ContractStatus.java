@@ -9,16 +9,13 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
-/**
- * Created by andreb on 04.04.17. Represent information type
- */
 @Entity
-@Table(name = "client_info_type")
-public class ClientInformationType {
+@Table(name = "contract_status")
 
+public class ContractStatus {
     @Id
     @GenericGenerator(name = "generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
-            @Parameter(name = "sequence_name", value = "client_info_type_seq"),
+            @Parameter(name = "sequence_name", value = "contract_status_id_seq"),
             @Parameter(name = "initial_value", value = "1"), @Parameter(name = "increment_size", value = "1") })
     @GeneratedValue(generator = "generator")
     @Column(name = "id", unique = true, nullable = false)
@@ -27,16 +24,16 @@ public class ClientInformationType {
     @Column(name = "code", unique = true, nullable = false)
     private String code;
 
-    @Column(name = "title", unique = true, nullable = false)
+    @Column(name = "title", nullable = false)
     private String title;
 
     @Column(name = "active", nullable = false)
     private boolean active = true;
 
-    public ClientInformationType() {
+    public ContractStatus() {
     }
 
-    public ClientInformationType(String code, String title) {
+    public ContractStatus(String code, String title) {
         this.code = code;
         this.title = title;
     }
@@ -57,20 +54,20 @@ public class ClientInformationType {
         this.title = title;
     }
 
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
     public boolean isActive() {
         return active;
     }
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     @Override
@@ -85,14 +82,13 @@ public class ClientInformationType {
         if (o == null || getClass() != o.getClass())
             return false;
 
-        ClientInformationType that = (ClientInformationType) o;
+        ContractStatus that = (ContractStatus) o;
 
-        return title != null ? title.equals(that.title) : that.title == null;
-
+        return id != null ? id.equals(that.id) : that.id == null;
     }
 
     @Override
     public int hashCode() {
-        return title != null ? title.hashCode() : 0;
+        return id != null ? id.hashCode() : 0;
     }
 }

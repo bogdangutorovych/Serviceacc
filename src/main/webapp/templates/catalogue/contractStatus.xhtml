@@ -6,34 +6,36 @@
 
 	<p:toolbar>
 		<f:facet name="left">
-			<p:commandButton id="btn_add" value="New" update=":contentForm"
+			<p:commandButton id="btn_add" value="Добавить" update=":contentForm"
 				icon="ui-icon-document"
-				actionListener="#{currencyTypeController.add()}"
+				actionListener="#{contractStatusController.add()}"
 				oncomplete="jQuery('.ui-datatable-data tr').last().find('span.ui-icon-pencil').each(function(){jQuery(this).click()});" />
 
 			<span class="ui-separator"><span
 				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
-			<p:commandButton id="btn_delete" value="Delete" update=":contentForm"
-				icon="ui-icon-trash"
-				disabled="#{currencyTypeController.selected==null}"
-				actionListener="#{currencyTypeController.delete()}" />
+			<p:commandButton id="btn_delete" value="Удалить"
+				update=":contentForm" icon="ui-icon-trash"
+				disabled="#{contractStatusController.contractStatus==null}"
+				actionListener="#{contractStatusController.delete()}" />
 
 		</f:facet>
 	</p:toolbar>
 
 	<br />
 
-	<p:dataTable id="currencyTypeList" editable="true"
-		emptyMessage="No items yet" var="s"
-		value="#{currencyTypeController.currencyList}"
-		rowKey="#{currencyTypeController.currencyList.indexOf(s)}"
-		selectionMode="single" selection="#{currencyTypeController.selected}">
+	<p:dataTable id="contractStatusList" editable="true"
+		emptyMessage="Нет данных" var="s"
+		value="#{contractStatusController.statusList}"
+		rowKey="#{contractStatusController.statusList.indexOf(s)}"
+		selectionMode="single"
+		selection="#{contractStatusController.contractStatus}">
 
-		<f:facet name="header">Currency Types</f:facet>
-		<p:ajax event="rowEdit" listener="#{currencyTypeController.onRowEdit}" />
+		<f:facet name="header">Статусы договоров</f:facet>
+		<p:ajax event="rowEdit"
+			listener="#{contractStatusController.onRowEdit}" />
 		<p:ajax event="rowEditCancel"
-			listener="#{currencyTypeController.onRowCancel}" />
+			listener="#{contractStatusController.onRowCancel}" />
 		<p:ajax event="rowSelect" update="@form:btn_delete" immediate="true" />
 		<p:ajax event="rowUnselect" update="@form:btn_delete" immediate="true" />
 

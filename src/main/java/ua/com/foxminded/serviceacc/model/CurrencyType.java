@@ -13,58 +13,58 @@ import org.hibernate.annotations.Parameter;
 @Table(name = "currency_type")
 public class CurrencyType {
 
-	@Id
-	@GenericGenerator(name = "generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
-			@Parameter(name = "sequence_name", value = "currency_type_seq"),
-			@Parameter(name = "initial_value", value = "1"), @Parameter(name = "increment_size", value = "1") })
-	@GeneratedValue(generator = "generator")
-	@Column(name = "id", unique = true, nullable = false)
-	private Long id;
-	@Column(name = "code", unique = true, nullable = false)
-	private String code;
-	@Column(name = "title", nullable = false)
-	private String title;
-	@Column(name = "active", nullable = false)
-	private boolean active = true;
+    @Id
+    @GenericGenerator(name = "generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
+            @Parameter(name = "sequence_name", value = "currency_type_seq"),
+            @Parameter(name = "initial_value", value = "1"), @Parameter(name = "increment_size", value = "1") })
+    @GeneratedValue(generator = "generator")
+    @Column(name = "id", unique = true, nullable = false)
+    private Long id;
+    @Column(name = "code", unique = true, nullable = false)
+    private String code;
+    @Column(name = "title", nullable = false)
+    private String title;
+    @Column(name = "active", nullable = false)
+    private boolean active = true;
 
-	public CurrencyType() {
-	}
+    public CurrencyType() {
+    }
 
-	public CurrencyType(String code, String title) {
-		this.code = code;
-		this.title = title;
-	}
+    public CurrencyType(String code, String title) {
+        this.code = code;
+        this.title = title;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getCode() {
-		return code;
-	}
+    public String getCode() {
+        return code;
+    }
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public boolean isActive() {
-		return active;
-	}
+    public boolean isActive() {
+        return active;
+    }
 
-	public void setActive(boolean active) {
-		this.active = active;
-	}
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
 }

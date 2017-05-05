@@ -1,0 +1,101 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:toolbar>
+		<f:facet name="left">
+			<p:commandButton id="btn_ok" value="Ok" update=":contentForm"
+				icon="ui-icon-check" actionListener="#{contractController.onOk()}"
+				action='#{navController.setMainContent("contract/contractList")}' />
+			<span class="ui-separator"><span
+				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+
+			<p:commandButton id="btn_cancel" value="Cancel" update=":contentForm"
+				icon="ui-icon-close"
+				actionListener="#{contractController.onCancel()}"
+				action='#{navController.setMainContent("contract/contractList")}'
+				immediate="true" />
+		</f:facet>
+	</p:toolbar>
+
+
+	<br />
+	<h:panelGrid columns="2" cellpadding="5">
+		<h:outputText for="id" value="ID:" style="font-weight:bold" />
+		<p:inputText id="id" value="#{contractController.selectedContract.id}"
+			disabled="true" />
+
+		<h:outputLabel for="date" value="Дата договора: "
+			style="font-weight:bold" />
+		<p:inputText id="date" converter="localDateConverter"
+			pattern="dd.MM.yyyy"
+			value="#{contractController.selectedContract.contractDate}"
+			disabled="true" />
+
+		<h:outputLabel for="number" value="Номер: " style="font-weight:bold" />
+		<p:inputText id="number"
+			value="#{contractController.selectedContract.number}" disabled="true" />
+
+		<h:outputLabel for="service" value="Услуга: " style="font-weight:bold" />
+		<p:inputText id="service"
+			value="#{contractController.selectedContract.service}"
+			disabled="true" />
+
+		<h:outputLabel for="paymentDate" value="Дата оплаты: "
+			style="font-weight:bold" />
+		<p:calendar id="paymentDate" converter="localDateConverter"
+			pattern="dd.MM.yyyy"
+			value="#{contractController.selectedContract.paymentDate}">
+		</p:calendar>
+
+		<h:outputLabel for="closeDate" value="Дата закрытия: "
+			style="font-weight:bold" />
+		<p:calendar id="closeDate" converter="localDateConverter"
+			pattern="dd.MM.yyyy"
+			value="#{contractController.selectedContract.closeDate}">
+		</p:calendar>
+
+		<h:outputLabel for="clientRate" value="Ставка клиента: "
+			style="font-weight:bold" />
+		<p:inputText id="clientRate"
+			value="#{contractController.selectedContract.clientRate}"
+			disabled="true" />
+
+		<h:outputLabel for="managerRate" value="Ставка менеджера: "
+			style="font-weight:bold" />
+		<p:inputText id="managerRate"
+			value="#{contractController.selectedContract.managerRate}"
+			disabled="true" />
+
+		<h:outputLabel for="client" value="Клиент: " style="font-weight:bold" />
+		<p:inputText id="client"
+			value="#{contractController.selectedContract.client.firstName} #{contractController.selectedContract.client.lastName}"
+			disabled="true" />
+
+		<p:outputLabel for="manager" value="Ментор: " style="font-weight:bold" />
+		<p:selectOneMenu id="manager"
+			value="#{contractController.selectedContract.manager}"
+			converter="omnifaces.SelectItemsConverter">
+			<f:selectItem
+				itemLabel="#{contractController.selectedContract.manager}"
+				itemValue="#{contractController.selectedContract.manager}"
+				noSelectionOption="true" />
+			<f:selectItems value="#{contractController.availableManagers}" />
+		</p:selectOneMenu>
+
+		<h:outputLabel for="status" value="Статус договора: "
+			style="font-weight:bold" />
+		<p:selectOneMenu id="status"
+			value="#{contractController.selectedContract.contractStatus}"
+			converter="omnifaces.SelectItemsConverter">
+			<f:selectItems value="#{contractController.availableStatuses}" />
+			<p:inputText id="title"
+				value="#{contractController.selectedContract.contractStatus}"
+				required="true" />
+		</p:selectOneMenu>
+
+	</h:panelGrid>
+
+</ui:composition>

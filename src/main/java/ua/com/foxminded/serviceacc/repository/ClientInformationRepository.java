@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.ClientInformation;
 
-public interface ClientInformationRepository extends JpaRepository<ClientInformation, Long>, JpaSpecificationExecutor {
+public interface ClientInformationRepository extends JpaRepository<ClientInformation, Long> {
 
     List<ClientInformation> findByClient(Client client);
 }
