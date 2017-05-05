@@ -61,7 +61,7 @@ public class ModelTestBuilder {
         return clientStatusHistory;
     }
 
-    public static List<ContractStatus> buildListTestClientStatusType() {
+    public static List<ContractStatus> buildListTestСontractStatus() {
         List<ContractStatus> statuses = new ArrayList<>();
         ContractStatus active = new ContractStatus("001", ACTIVE);
         ContractStatus frozen = new ContractStatus("002", FROZEN);
