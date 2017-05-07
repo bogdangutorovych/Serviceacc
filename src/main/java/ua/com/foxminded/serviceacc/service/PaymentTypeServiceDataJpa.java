@@ -5,40 +5,40 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ua.com.foxminded.serviceacc.model.ServiceType;
-import ua.com.foxminded.serviceacc.repository.ServiceTypeRepository;
+import ua.com.foxminded.serviceacc.model.PaymentType;
+import ua.com.foxminded.serviceacc.repository.PaymentTypeRepository;
 
 /**
  * Created by andreb on 31.03.17.
  */
 @Service("paymentTypeService")
-public class PaymentTypeServiceDataJpa implements ServiceTypeService {
+public class PaymentTypeServiceDataJpa implements PaymentTypeService {
 
 	@Autowired
-	ServiceTypeRepository serviceTypeRepository;
+    PaymentTypeRepository serviceTypeRepository;
 
 	@Override
-	public ServiceType save(ServiceType serviceType) {
-		return serviceTypeRepository.save(serviceType);
+	public PaymentType save(PaymentType paymentType) {
+		return serviceTypeRepository.save(paymentType);
 	}
 
 	@Override
-	public ServiceType update(ServiceType serviceType) {
-		return serviceTypeRepository.save(serviceType);
+	public PaymentType update(PaymentType paymentType) {
+		return serviceTypeRepository.save(paymentType);
 	}
 
 	@Override
-	public ServiceType findById(Long serviceTypeId) {
-		return serviceTypeRepository.findOne(serviceTypeId);
+	public PaymentType findById(Long paymentTypeId) {
+		return serviceTypeRepository.findOne(paymentTypeId);
 	}
 
 	@Override
-	public void delete(Long serviceTypeId) {
-		serviceTypeRepository.delete(serviceTypeId);
+	public void delete(Long paymentTypeId) {
+		serviceTypeRepository.delete(paymentTypeId);
 	}
 
 	@Override
-	public List<ServiceType> findAll() {
+	public List<PaymentType> findAll() {
 		return serviceTypeRepository.findAll();
 	}
 }

@@ -31,10 +31,6 @@ public class Service {
     @JoinColumn(name = "money_id")
     private Money price;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "service_type_id")
-    private ServiceType type;
-
     @Column(name = "active", nullable = false)
     private boolean active = true;
 
@@ -42,10 +38,9 @@ public class Service {
 
     }
 
-    public Service(String name, Money price, ServiceType type) {
+    public Service(String name,String description, Money price) {
         this.name = name;
         this.price = price;
-        this.type = type;
     }
 
     public long getId() {
@@ -70,14 +65,6 @@ public class Service {
 
     public void setPrice(Money price) {
         this.price = price;
-    }
-
-    public ServiceType getType() {
-        return type;
-    }
-
-    public void setType(ServiceType type) {
-        this.type = type;
     }
 
     public boolean isActive() {
