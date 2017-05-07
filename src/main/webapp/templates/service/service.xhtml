@@ -35,7 +35,7 @@
 
         <p:dataTable var="price" value="#{serviceController.prices}">
             <p:column headerText="Amount">
-                <h:outputText value="#{price.amount}" />
+                <h:inputText value="#{price.amount}" style="width:100%"/>
             </p:column>
             <p:column headerText="Currency">
                 <h:outputText value="#{price.currency}" />
