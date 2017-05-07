@@ -28,7 +28,7 @@
         <p:inputText id="serviceName" value="#{serviceController.selectedService.name}" required="false"/>
 
         <h:outputLabel for="description" value="Description: " style="font-weight:bold"/>
-        <p:inputText id="description" value="#{serviceController.selectedService.description}" required="false"/>
+        <p:inputTextarea id="description" value="#{serviceController.selectedService.description}" required="false"/>
     </h:panelGrid>
 
     <h:panelGrid id="moneyTable" columns="2" cellpadding="5" >
@@ -56,7 +56,7 @@
     <h:panelGrid id="ratePanel" columns="3" cellpadding="5" >
 
         <h:outputLabel for="rate" value="Manager Rate: " style="font-weight:bold"/>
-        <p:inputText id="rate" value="#{serviceController.selectedService.managerRate.amount}" required="false"/>
+        <p:inputText id="rate" value="#{serviceController.selectedService.managerRate.amount}"/>
         <p:selectOneMenu id="rate_currency" value="#{serviceController.selectedService.managerRate.currency}"
                          converter="omnifaces.SelectItemsConverter">
             <f:selectItem itemLabel="Select currency..." noSelectionOption="true" />

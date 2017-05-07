@@ -83,4 +83,23 @@ public class Money {
     public String toString() {
         return "" + amount + " " + currency;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Money money = (Money) o;
+
+        if (currency != null ? !currency.equals(money.currency) : money.currency != null) return false;
+        return amount != null ? amount.equals(money.amount) : money.amount == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = currency != null ? currency.hashCode() : 0;
+        result = 31 * result + (amount != null ? amount.hashCode() : 0);
+        return result;
+    }
 }

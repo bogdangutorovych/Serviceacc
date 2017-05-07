@@ -110,4 +110,16 @@ public class Service {
     public void setActive(boolean active) {
         this.active = active;
     }
+
+    @Override
+    public String toString() {
+        return "Service{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", description='" + description + '\'' +
+            ", prices=" + prices +
+            ", managerRate=" + managerRate +
+            ", active=" + active +
+            '}';
+    }
 }

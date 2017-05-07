@@ -94,6 +94,7 @@ public class ServiceController implements Serializable {
         if (selectedService != null){
             prices.clear();
             prices.addAll(selectedService.getPrices());
+            prepareNewMoney();
         }
 
     }
@@ -102,17 +103,15 @@ public class ServiceController implements Serializable {
         return prices;
     }
 
-    public void setPrices(List<Money> prices) {
-        this.prices = prices;
-    }
-
     public List<Currency> getCurrencyList(){
         return currencyList;
     }
 
     public void prepareNewMoney(){
+
         newMoney = new Money();
         newMoney.setCurrency(Currency.getInstance("UAH"));
+
     }
 
     public Money getNewMoney() {
@@ -120,11 +119,11 @@ public class ServiceController implements Serializable {
     }
 
     public List<Money> getMoneyList(Set<Money> moneySet){
+        List<Money> tempPrices = null;
         if (moneySet != null){
-            return new ArrayList<Money>(moneySet);
-        }else{
-            return null;
+            tempPrices = new ArrayList<Money>(moneySet);
         }
+        return tempPrices;
     }
 
     public void removePrice(Money price){
