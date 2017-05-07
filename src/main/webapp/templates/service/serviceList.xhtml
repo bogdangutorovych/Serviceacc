@@ -1,0 +1,78 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:toolbar>
+        <f:facet name="left">
+            <p:commandButton id="btn_add" value="New" update=":contentForm"
+                             icon="ui-icon-document" actionListener="#{serviceController.addNewService()}"
+                             action='#{navController.setMainContent("service/service")}' />
+
+            <span class="ui-separator"><span
+                class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+
+            <p:commandButton id="btn_edit" value="Edit" update=":contentForm"
+                             icon="ui-icon-pencil"
+                             disabled="#{serviceController.selectedService==null}"
+                             actionListener="#{serviceController.onEdit()}"
+                             action='#{navController.setMainContent("service/service")}' />
+
+            <span class="ui-separator"><span
+                class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+
+            <p:commandButton id="btn_delete" value="Delete" update=":contentForm"
+                             icon="ui-icon-trash"
+                             disabled="#{serviceController.selectedService==null}"
+                             actionListener="#{serviceController.deleteService()}" />
+
+        </f:facet>
+    </p:toolbar>
+
+    <br />
+
+    <p:dataTable id="serviceList" editable="true"
+                 emptyMessage="No items yet" var="service" value="#{serviceController.serviceList}"
+                 rowKey="#{serviceController.serviceList.indexOf(service)}" selectionMode="single"
+                 selection="#{serviceController.selectedService}"
+                 widgetVar="servicesTable">
+
+        <f:facet name="header">
+            Services
+            <p:outputPanel>
+                <h:outputText value="Search all fields:" />
+                <p:inputText id="globalFilter" onkeyup="PF('servicesTable').filter()"
+                             style="width:150px" placeholder="Enter keyword" />
+            </p:outputPanel>
+        </f:facet>
+
+        <p:ajax event="rowSelect" update="@form:btn_edit,@form:btn_delete"
+                immediate="true" />
+        <p:ajax event="rowUnselect" update="@form:btn_edit,@form:btn_delete"
+                immediate="true" />
+
+        <p:column headerText="id" sortBy="#{service.id}" filterBy="#{service.id}" filterMatchMode="contains">
+            #{service.id}
+        </p:column>
+
+        <p:column headerText="Service name:" sortBy="#{service.name}" filterBy="#{service.name}" filterMatchMode="contains">
+            <h:outputText value="#{service.name}" />
+        </p:column>
+        <p:column headerText="Description:" sortBy="#{service.description}" filterBy="#{service.description}" filterMatchMode="contains">
+            <h:outputText value="#{service.description}" />
+        </p:column>
+        <p:column headerText="Price" sortBy="#{service.prices}" filterBy="#{service.prices}" filterMatchMode="contains">
+            <p:repeat value="#{serviceController.getMoneyList(service.prices)}" var="price" >
+                <h:outputText value="#{price}" />
+                <br />
+            </p:repeat>
+
+        </p:column>
+        <p:column headerText="Manager Rate:" sortBy="#{service.managerRate.amount}" filterBy="#{service.managerRate.amount}" filterMatchMode="contains">
+            <h:outputText value="#{service.managerRate}" />
+        </p:column>
+
+    </p:dataTable>
+
+</ui:composition>

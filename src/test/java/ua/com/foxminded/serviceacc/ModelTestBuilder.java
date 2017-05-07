@@ -1,8 +1,5 @@
 package ua.com.foxminded.serviceacc;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.ClientInformation;
 import ua.com.foxminded.serviceacc.model.ClientLevelType;
@@ -10,6 +7,10 @@ import ua.com.foxminded.serviceacc.model.ClientStatusHistory;
 import ua.com.foxminded.serviceacc.model.ContractStatus;
 import ua.com.foxminded.serviceacc.model.CurrencyType;
 import ua.com.foxminded.serviceacc.model.Manager;
+import ua.com.foxminded.serviceacc.model.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by andreb on 09.04.17.
@@ -86,6 +87,13 @@ public class ModelTestBuilder {
         types.add(new CurrencyType("UAH", HRYVNIA));
         types.add(new CurrencyType("RUB", RUBLE));
         return types;
+    }
+
+    public static Service buildTestService(){
+        Service service = new Service();
+        service.setName("Service1");
+
+        return service;
     }
 
 }
