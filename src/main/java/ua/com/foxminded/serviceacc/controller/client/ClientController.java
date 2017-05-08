@@ -64,7 +64,7 @@ public class ClientController implements Serializable {
     public void onOk() {
         //save or update client
         if (selectedClient.getId() == null) {
-            clientService.update(selectedClient);
+            clientService.save(selectedClient);
             list.add(selectedClient);
         }else{
             Client updated = clientService.update(selectedClient);

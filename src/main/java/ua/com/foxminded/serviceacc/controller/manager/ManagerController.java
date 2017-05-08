@@ -69,7 +69,7 @@ public class ManagerController implements Serializable {
 	public void onOk() {
         //save or update manager
 	    if(selectedManager.getId() == null) {
-            managerService.update(selectedManager);
+            managerService.save(selectedManager);
             managers.add(selectedManager);
         }else{
             Manager updated = managerService.update(selectedManager);
