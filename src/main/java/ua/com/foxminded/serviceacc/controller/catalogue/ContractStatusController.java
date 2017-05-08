@@ -58,8 +58,8 @@ public class ContractStatusController implements Serializable {
     }
 
     public void delete() {
-        statusList.remove(contractStatus);
         statusService.delete(contractStatus.getId());
+        statusList.remove(contractStatus);
         contractStatus = null;
     }
 

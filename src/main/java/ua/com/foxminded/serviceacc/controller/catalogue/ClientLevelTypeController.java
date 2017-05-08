@@ -22,7 +22,7 @@ public class ClientLevelTypeController implements Serializable {
 
 	private ClientLevelType selected;
 
-	private static List<ClientLevelType> LevelList;
+	private static List<ClientLevelType> levelList;
 
 	private ClientLevelTypeService cltService;
 
@@ -33,7 +33,7 @@ public class ClientLevelTypeController implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		LevelList = cltService.findAll();
+		levelList = cltService.findAll();
 	}
 
 	public ClientLevelTypeService getCltService() {
@@ -41,7 +41,7 @@ public class ClientLevelTypeController implements Serializable {
 	}
 
 	public List<ClientLevelType> getLevelList() {
-		return LevelList;
+		return levelList;
 	}
 
 	public ClientLevelType getSelected() {
@@ -54,12 +54,12 @@ public class ClientLevelTypeController implements Serializable {
 
 	public void add() {
 		selected = new ClientLevelType("", "");
-		LevelList.add(selected);
+		levelList.add(selected);
 	}
 
 	public void delete() {
-		LevelList.remove(selected);
 		cltService.delete(selected.getId());
+        levelList.remove(selected);
 		selected = null;
 	}
 
@@ -71,7 +71,7 @@ public class ClientLevelTypeController implements Serializable {
 	public void onRowCancel(RowEditEvent event) {
 		ClientLevelType level = (ClientLevelType) event.getObject();
 		if (level.getId() == null) {
-			LevelList.remove(level);
+			levelList.remove(level);
 			selected = null;
 		}
 	}

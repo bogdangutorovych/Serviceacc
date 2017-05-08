@@ -47,8 +47,8 @@ public class MoneyController implements Serializable {
     }
 
     public void delete() {
-        list.remove(selected);
         moneyService.delete(selected.getId());
+        list.remove(selected);
         selected = null;
     }
 

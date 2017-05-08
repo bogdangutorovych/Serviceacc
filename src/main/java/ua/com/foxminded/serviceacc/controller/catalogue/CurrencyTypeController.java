@@ -58,8 +58,8 @@ public class CurrencyTypeController implements Serializable {
     }
 
     public void delete() {
-        currencyList.remove(selected);
         currencyService.delete(selected.getId());
+        currencyList.remove(selected);
         selected = null;
     }
 

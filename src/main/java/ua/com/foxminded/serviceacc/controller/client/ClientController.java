@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import ua.com.foxminded.serviceacc.controller.catalogue.ConfigController;
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.ClientInformation;
 import ua.com.foxminded.serviceacc.model.ClientInformationType;
@@ -38,13 +39,15 @@ public class ClientController implements Serializable {
     private final ClientService clientService;
     private final ClientInformationTypeService clientInformationTypeService;
     private final ClientInformationService clientInformationService;
+    private final ConfigController configController;
 
     @Autowired
     public ClientController(ClientService clientService, ClientInformationTypeService clientInformationTypeService,
-            ClientInformationService clientInformationService) {
+            ClientInformationService clientInformationService, ConfigController configController) {
         this.clientService = clientService;
         this.clientInformationTypeService = clientInformationTypeService;
         this.clientInformationService = clientInformationService;
+        this.configController = configController;
     }
 
     @PostConstruct
@@ -67,10 +70,7 @@ public class ClientController implements Serializable {
             clientService.save(selectedClient);
             list.add(selectedClient);
         }else{
-            Client updated = clientService.update(selectedClient);
-            int i = list.indexOf(selectedClient);
-            list.set(i, updated);
-            selectedClient = updated;
+            clientService.update(selectedClient);
         }
 
         //Save or update informations
@@ -89,8 +89,9 @@ public class ClientController implements Serializable {
     }
 
     public void delete() {
-        list.remove(selectedClient);
+
         clientService.delete(selectedClient.getId());
+        list.remove(selectedClient);
         selectedClient = null;
     }
 
@@ -123,7 +124,7 @@ public class ClientController implements Serializable {
     }
 
     public List<ClientInformationType> getInfoTypeList() {
-        return clientInformationTypeService.findAll();
+        return configController.getClientInformationTypeList();
     }
 
     public List<ClientInformation> getClientInformationList() {

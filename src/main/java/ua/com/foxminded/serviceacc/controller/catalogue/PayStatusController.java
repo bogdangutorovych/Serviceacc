@@ -58,8 +58,8 @@ public class PayStatusController implements Serializable {
 	}
 
 	public void delete() {
-		payStatusList.remove(selected);
 		paymentTypeService.delete(selected.getId());
+        payStatusList.remove(selected);
 		selected = null;
 	}
 

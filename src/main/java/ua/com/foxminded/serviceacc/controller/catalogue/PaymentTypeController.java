@@ -58,9 +58,9 @@ public class PaymentTypeController implements Serializable {
 	}
 
 	public void delete() {
-		paymentTypeList.remove(selected);
 		paymentTypeService.delete(selected.getId());
-		selected = null;
+        paymentTypeList.remove(selected);
+        selected = null;
 	}
 
 	public void onRowEdit(RowEditEvent event) {
