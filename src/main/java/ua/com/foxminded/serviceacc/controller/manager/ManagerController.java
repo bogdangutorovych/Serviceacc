@@ -67,11 +67,18 @@ public class ManagerController implements Serializable {
 	}
 
 	public void onOk() {
+        //save or update manager
 	    if(selectedManager.getId() == null) {
             managerService.update(selectedManager);
             managers.add(selectedManager);
+        }else{
+            Manager updated = managerService.update(selectedManager);
+            int i = managers.indexOf(selectedManager);
+            managers.set(i, updated);
+            selectedManager = updated;
         }
 
+        //save or update information
         Iterator<ManagerInformation> iteratorInfos = managerInfo.iterator();
         while(iteratorInfos.hasNext()){
             ManagerInformation info = iteratorInfos.next();
@@ -82,10 +89,7 @@ public class ManagerController implements Serializable {
                 managerInformationService.update(info);
             }
         }
-        Manager updated = managerService.update(selectedManager);
-        int i = managers.indexOf(selectedManager);
-        managers.set(i, updated);
-        selectedManager = updated;
+
     }
 
 	public void setSelectedManager(Manager selectedManager) {

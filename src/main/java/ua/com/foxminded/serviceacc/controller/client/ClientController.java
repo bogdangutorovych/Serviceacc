@@ -36,15 +36,15 @@ public class ClientController implements Serializable {
     private List<ClientInformation> clientInfo;
 
     private final ClientService clientService;
-    private final ClientInformationTypeService citService;
-    private final ClientInformationService ciService;
+    private final ClientInformationTypeService clientInformationTypeService;
+    private final ClientInformationService clientInformationService;
 
     @Autowired
-    public ClientController(ClientService clientService, ClientInformationTypeService citService,
-            ClientInformationService ciService) {
+    public ClientController(ClientService clientService, ClientInformationTypeService clientInformationTypeService,
+            ClientInformationService clientInformationService) {
         this.clientService = clientService;
-        this.citService = citService;
-        this.ciService = ciService;
+        this.clientInformationTypeService = clientInformationTypeService;
+        this.clientInformationService = clientInformationService;
     }
 
     @PostConstruct
@@ -62,26 +62,30 @@ public class ClientController implements Serializable {
     }
 
     public void onOk() {
+        //save or update client
         if (selectedClient.getId() == null) {
             clientService.update(selectedClient);
             list.add(selectedClient);
+        }else{
+            Client updated = clientService.update(selectedClient);
+            int i = list.indexOf(selectedClient);
+            list.set(i, updated);
+            selectedClient = updated;
         }
 
+        //Save or update informations
         Iterator<ClientInformation> iteratorInfos = clientInfo.iterator();
         while (iteratorInfos.hasNext()) {
             ClientInformation info = iteratorInfos.next();
             if (info.getContent().isEmpty() && info.getId() != null) {
-                ciService.update(info);
-                ciService.delete(info.getId());
+                clientInformationService.update(info);
+                clientInformationService.delete(info.getId());
             } else if (info.getContent().isEmpty() && info.getId() == null) {
             } else {
-                ciService.update(info);
+                clientInformationService.update(info);
             }
         }
-        Client updated = clientService.update(selectedClient);
-        int i = list.indexOf(selectedClient);
-        list.set(i, updated);
-        selectedClient = updated;
+
     }
 
     public void delete() {
@@ -105,7 +109,7 @@ public class ClientController implements Serializable {
     public ClientInformation getInfoByType(ClientInformationType clientInformationType) {
 
         if (selectedClient.getId() != null) {
-            for (ClientInformation clientInfo : ciService.findByClient(selectedClient)) {
+            for (ClientInformation clientInfo : clientInformationService.findByClient(selectedClient)) {
                 if (clientInfo.getClientInformationType().equals(clientInformationType)) {
                     return clientInfo;
                 }
@@ -119,7 +123,7 @@ public class ClientController implements Serializable {
     }
 
     public List<ClientInformationType> getInfoTypeList() {
-        return citService.findAll();
+        return clientInformationTypeService.findAll();
     }
 
     public List<ClientInformation> getClientInformationList() {
