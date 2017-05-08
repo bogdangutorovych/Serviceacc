@@ -63,8 +63,8 @@ public class ClientController implements Serializable {
 
     public void onOk() {
         if (selectedClient.getId() == null) {
-            list.add(selectedClient);
             clientService.update(selectedClient);
+            list.add(selectedClient);
         }
 
         Iterator<ClientInformation> iteratorInfos = clientInfo.iterator();
