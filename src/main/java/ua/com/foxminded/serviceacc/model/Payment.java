@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
-import ua.com.foxminded.serviceacc.model.constant.PaymentType;
+import ua.com.foxminded.serviceacc.model.enums.PaymentType;
 
 @Entity
 @Table(name = "payment")
