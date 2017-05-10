@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,6 +15,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+
+import ua.com.foxminded.serviceacc.model.constant.PaymentType;
 
 @Entity
 @Table(name = "payment")
@@ -33,8 +37,8 @@ public class Payment {
 	@JoinColumn(name = "money_id")
 	private Money money;
 
-	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "payment_type_id")
+	@Enumerated (EnumType.STRING)
 	private PaymentType type;
 
 	@Column(name = "active", nullable = false)
