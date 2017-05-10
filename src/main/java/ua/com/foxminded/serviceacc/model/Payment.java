@@ -37,7 +37,7 @@ public class Payment {
 	@JoinColumn(name = "money_id")
 	private Money money;
 
-	@JoinColumn(name = "payment_type_id")
+	@JoinColumn(name = "payment_type")
 	@Enumerated (EnumType.STRING)
 	private PaymentType type;
 
