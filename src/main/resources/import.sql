@@ -5,13 +5,6 @@ INSERT INTO MANAGER (id, birth_day, first_name, last_name, active) VALUES
 (4, '1998-04-16', 'Diego', 'Maradona', true);
 ALTER SEQUENCE manager_id_seq RESTART WITH 5;
 
-INSERT INTO CLIENT_LEVEL_TYPE (id, title, active, code) VALUES
-(1, 'Applicant', true, 'APL'),
-(2, 'Beginner', true, 'BGN'),
-(3, 'Regular', true, 'REG'),
-(4, 'Graduate', true, 'GRD');
-ALTER SEQUENCE client_level_type_id_seq RESTART WITH 5;
-
 INSERT INTO CONTRACT_STATUS (id, title, active, code) VALUES
 (1, 'Active', true, 'ACT'),
 (2, 'Frozen', true, 'FRZ'),
