@@ -5,7 +5,6 @@ import java.util.List;
 
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.ClientInformation;
-import ua.com.foxminded.serviceacc.model.ClientStatusHistory;
 import ua.com.foxminded.serviceacc.model.ContractStatus;
 import ua.com.foxminded.serviceacc.model.CurrencyType;
 import ua.com.foxminded.serviceacc.model.Manager;
@@ -48,12 +47,6 @@ public class ModelTestBuilder {
     public static Manager buildTestManager() {
         Manager manager = new Manager();
         return manager;
-    }
-
-    public static ClientStatusHistory buildTestClientHistory(Client client, ContractStatus changedStatus) {
-        ClientStatusHistory clientStatusHistory = new ClientStatusHistory(changedStatus, java.time.LocalDate.now());
-
-        return clientStatusHistory;
     }
 
     public static List<ContractStatus> buildListTestСontractStatus() {
