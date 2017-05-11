@@ -4,11 +4,8 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -29,9 +26,9 @@ public class ClientStatusHistory {
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "client_status_type_id")
-    private ContractStatus statusChanged;
+    // @ManyToOne(fetch = FetchType.EAGER)
+    // @JoinColumn(name = "client_status_type_id")
+    // private ContractStatus statusChanged;
 
     @Column(name = "date_changed")
     private LocalDate dateChanged;
@@ -42,9 +39,11 @@ public class ClientStatusHistory {
     public ClientStatusHistory() {
     }
 
-    public ClientStatusHistory(ContractStatus statusChanged, LocalDate dateChanged) {
+    public ClientStatusHistory(LocalDate dateChanged) {
+        // public ClientStatusHistory(ContractStatus statusChanged, LocalDate
+        // dateChanged) {
 
-        this.statusChanged = statusChanged;
+        // this.statusChanged = statusChanged;
         this.dateChanged = dateChanged;
     }
 
@@ -56,13 +55,13 @@ public class ClientStatusHistory {
         this.id = id;
     }
 
-    public ContractStatus getStatusChanged() {
-        return statusChanged;
-    }
-
-    public void setStatusChanged(ContractStatus statusChanged) {
-        this.statusChanged = statusChanged;
-    }
+    // public ContractStatus getStatusChanged() {
+    // return statusChanged;
+    // }
+    //
+    // public void setStatusChanged(ContractStatus statusChanged) {
+    // this.statusChanged = statusChanged;
+    // }
 
     public LocalDate getDateChanged() {
         return dateChanged;

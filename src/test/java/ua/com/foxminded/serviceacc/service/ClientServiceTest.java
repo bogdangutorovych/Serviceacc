@@ -18,8 +18,6 @@ public class ClientServiceTest {
     @Autowired
     ClientService clientService;
     @Autowired
-    ContractStatusService contractStatusService;
-    @Autowired
     ManagerService managerService;
     @Autowired
     CurrencyTypeService currencyTypeService;

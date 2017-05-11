@@ -58,6 +58,7 @@
 		 	<p:outputLabel for="manager" value="Ментор: " style="font-weight:bold" />
 		<p:selectOneMenu id="manager"
 			value="#{contractController.selectedContract.manager}"
+			required="true" requiredMessage="Выберите ментора"
 			converter="omnifaces.SelectItemsConverter">
 			<f:selectItem itemLabel="Выбрать ментора..." noSelectionOption="true" />
 			<f:selectItems value="#{contractController.availableManagers}"

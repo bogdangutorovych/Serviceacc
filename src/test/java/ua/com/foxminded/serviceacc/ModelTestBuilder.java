@@ -1,16 +1,14 @@
 package ua.com.foxminded.serviceacc;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.ClientInformation;
 import ua.com.foxminded.serviceacc.model.ClientLevelType;
-import ua.com.foxminded.serviceacc.model.ClientStatusHistory;
-import ua.com.foxminded.serviceacc.model.ContractStatus;
 import ua.com.foxminded.serviceacc.model.CurrencyType;
 import ua.com.foxminded.serviceacc.model.Manager;
 import ua.com.foxminded.serviceacc.model.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by andreb on 09.04.17.
@@ -56,22 +54,24 @@ public class ModelTestBuilder {
         return manager;
     }
 
-    public static ClientStatusHistory buildTestClientHistory(Client client, ContractStatus changedStatus) {
-        ClientStatusHistory clientStatusHistory = new ClientStatusHistory(changedStatus, java.time.LocalDate.now());
+    // public static ClientStatusHistory buildTestClientHistory(Client client,
+    // ContractStatus changedStatus) {
+    // ClientStatusHistory clientStatusHistory = new
+    // ClientStatusHistory(changedStatus, java.time.LocalDate.now());
+    //
+    // return clientStatusHistory;
+    // }
 
-        return clientStatusHistory;
-    }
-
-    public static List<ContractStatus> buildListTestСontractStatus() {
-        List<ContractStatus> statuses = new ArrayList<>();
-        ContractStatus active = new ContractStatus("001", ACTIVE);
-        ContractStatus frozen = new ContractStatus("002", FROZEN);
-        ContractStatus pending = new ContractStatus("003", PENDING);
-        statuses.add(active);
-        statuses.add(frozen);
-        statuses.add(pending);
-        return statuses;
-    }
+    // public static List<ContractStatus> buildListTestСontractStatus() {
+    // List<ContractStatus> statuses = new ArrayList<>();
+    // ContractStatus active = new ContractStatus("001", ACTIVE);
+    // ContractStatus frozen = new ContractStatus("002", FROZEN);
+    // ContractStatus pending = new ContractStatus("003", PENDING);
+    // statuses.add(active);
+    // statuses.add(frozen);
+    // statuses.add(pending);
+    // return statuses;
+    // }
 
     public static List<ClientLevelType> buildListTestClientLevelType() {
         List<ClientLevelType> levels = new ArrayList<>();
@@ -89,7 +89,7 @@ public class ModelTestBuilder {
         return types;
     }
 
-    public static Service buildTestService(){
+    public static Service buildTestService() {
         Service service = new Service();
         service.setName("Service1");
 

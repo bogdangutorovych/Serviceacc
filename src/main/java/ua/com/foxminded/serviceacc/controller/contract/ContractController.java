@@ -2,6 +2,7 @@ package ua.com.foxminded.serviceacc.controller.contract;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -15,12 +16,11 @@ import org.springframework.stereotype.Controller;
 
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.Contract;
-import ua.com.foxminded.serviceacc.model.ContractStatus;
 import ua.com.foxminded.serviceacc.model.Manager;
 import ua.com.foxminded.serviceacc.model.Service;
+import ua.com.foxminded.serviceacc.model.enums.ContractStatus;
 import ua.com.foxminded.serviceacc.service.ClientService;
 import ua.com.foxminded.serviceacc.service.ContractService;
-import ua.com.foxminded.serviceacc.service.ContractStatusService;
 import ua.com.foxminded.serviceacc.service.ManagerService;
 import ua.com.foxminded.serviceacc.service.ServiceService;
 
@@ -44,16 +44,14 @@ public class ContractController implements Serializable {
     private ClientService clientService;
     private ManagerService managerService;
     private ServiceService serviceService;
-    private ContractStatusService contractStatusService;
 
     @Autowired
     public ContractController(ContractService contractService, ClientService clientService,
-            ManagerService managerService, ServiceService serviceService, ContractStatusService contractStatusService) {
+            ManagerService managerService, ServiceService serviceService) {
         this.contractService = contractService;
         this.clientService = clientService;
         this.managerService = managerService;
         this.serviceService = serviceService;
-        this.contractStatusService = contractStatusService;
     }
 
     @PostConstruct
@@ -70,46 +68,51 @@ public class ContractController implements Serializable {
         availableClients = clientService.findAll();
         availableManagers = managerService.findAll();
         availableServices = serviceService.findAll();
-        availableStatuses = contractStatusService.findAll();
+        availableStatuses = Arrays.asList(ContractStatus.values());
+
     }
 
     public void onOk() {
         if (selectedContract.getId() == null) {
             selectedContract = contractService.create(selectedContract);
             selectedContract.setNumber("" + selectedContract.getId());
-            ContractStatus defaultСontractStatus = contractStatusService.findByStatusTitle("Активирован");
-            selectedContract.setContractStatus(defaultСontractStatus);
+            selectedContract.setContractStatus(ContractStatus.Активирован);
             selectedContract.setPaymentDate(LocalDate.now().plusMonths(1));
         } else {
-            Contract currentContract = contractService.findById(selectedContract.getId());
-            ContractStatus currentContractStatus = currentContract.getContractStatus();
-            ContractStatus selectedContractStatus = selectedContract.getContractStatus();
-            if (!currentContractStatus.getTitle().equals(selectedContractStatus.getTitle())) {
-                switch (selectedContractStatus.getTitle()) {
-                case "В ожидании":
-
-                    break;
-
-                case "Активировать":
-                    if (selectedContract.getPaymentDate() == null) {
-                        selectedContract.setPaymentDate(LocalDate.now().plusMonths(1));
-                    }
-                    break;
-
-                case "Заморожен":
-                    selectedContract.setCloseDate(LocalDate.now());
-                    selectedContract.setManager(null);
-                    break;
-
-                case "Завершен":
-                    selectedContract.setCloseDate(LocalDate.now());
-                    selectedContract.setManager(null);
-                    break;
-
-                default:
-                    break;
-                }
-            }
+            // Contract currentContract =
+            // contractService.findById(selectedContract.getId());
+            // ContractStatus currentContractStatus =
+            // currentContract.getContractStatus();
+            // ContractStatus selectedContractStatus =
+            // selectedContract.getContractStatus();
+            // if
+            // (!currentContractStatus.getTitle().equals(selectedContractStatus.getTitle()))
+            // {
+            // switch (selectedContractStatus.getTitle()) {
+            // case "В ожидании":
+            //
+            // break;
+            //
+            // case "Активировать":
+            // if (selectedContract.getPaymentDate() == null) {
+            selectedContract.setPaymentDate(LocalDate.now().plusMonths(1));
+            // }
+            // break;
+            //
+            // case "Заморожен":
+            // selectedContract.setCloseDate(LocalDate.now());
+            // selectedContract.setManager(null);
+            // break;
+            //
+            // case "Завершен":
+            // selectedContract.setCloseDate(LocalDate.now());
+            // selectedContract.setManager(null);
+            // break;
+            //
+            // default:
+            // break;
+            // }
+            // }
         }
 
         contractService.update(selectedContract);

@@ -101,7 +101,7 @@
 		<p:column headerText="ментор" sortBy="#{c.manager}"
 			filterBy="#{c.manager}" filterMatchMode="contains"
 			converter="omnifaces.SelectItemsConverter">
-			<h:outputText value="#{empty c.manager ? 'Не назначен' : c.manager}"/>
+			<h:outputText value="#{c.manager}"/>
 		</p:column>
 
 	</p:dataTable>
