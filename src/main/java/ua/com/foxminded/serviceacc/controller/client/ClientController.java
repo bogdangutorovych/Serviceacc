@@ -19,7 +19,6 @@ import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.ClientInformation;
 import ua.com.foxminded.serviceacc.model.ClientInformationType;
 import ua.com.foxminded.serviceacc.service.ClientInformationService;
-import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
 import ua.com.foxminded.serviceacc.service.ClientService;
 
 @Controller
@@ -37,15 +36,12 @@ public class ClientController implements Serializable {
     private List<ClientInformation> clientInfo;
 
     private final ClientService clientService;
-    private final ClientInformationTypeService clientInformationTypeService;
     private final ClientInformationService clientInformationService;
     private final ConfigController configController;
 
     @Autowired
-    public ClientController(ClientService clientService, ClientInformationTypeService clientInformationTypeService,
-            ClientInformationService clientInformationService, ConfigController configController) {
+    public ClientController(ClientService clientService, ClientInformationService clientInformationService, ConfigController configController) {
         this.clientService = clientService;
-        this.clientInformationTypeService = clientInformationTypeService;
         this.clientInformationService = clientInformationService;
         this.configController = configController;
     }
@@ -65,15 +61,15 @@ public class ClientController implements Serializable {
     }
 
     public void onOk() {
-        //save or update client
+        // save or update client
         if (selectedClient.getId() == null) {
             clientService.save(selectedClient);
             list.add(selectedClient);
-        }else{
+        } else {
             clientService.update(selectedClient);
         }
 
-        //Save or update informations
+        // Save or update informations
         Iterator<ClientInformation> iteratorInfos = clientInfo.iterator();
         while (iteratorInfos.hasNext()) {
             ClientInformation info = iteratorInfos.next();
