@@ -36,7 +36,7 @@
 
 		<h:outputLabel for="number" value="Номер: " style="font-weight:bold" />
 		<p:inputText id="number"
-			value="#{contractController.selectedContract.number}" disabled="true" />
+			value="Договор № #{contractController.selectedContract.number}" disabled="true" />
 
 		<h:outputLabel for="service" value="Услуга: " style="font-weight:bold" />
 		<p:inputText id="service"
@@ -47,14 +47,16 @@
 			style="font-weight:bold" />
 		<p:calendar id="paymentDate" converter="localDateConverter"
 			pattern="dd.MM.yyyy"
-			value="#{contractController.selectedContract.paymentDate}">
+			value="#{contractController.selectedContract.paymentDate}"
+			showOn="button" mask="99.99.9999">
 		</p:calendar>
 
 		<h:outputLabel for="closeDate" value="Дата закрытия: "
 			style="font-weight:bold" />
 		<p:calendar id="closeDate" converter="localDateConverter"
 			pattern="dd.MM.yyyy"
-			value="#{contractController.selectedContract.closeDate}">
+			value="#{contractController.selectedContract.closeDate}"
+			showOn="button" mask="99.99.9999">
 		</p:calendar>
 
 		<h:outputLabel for="clientRate" value="Ставка клиента: "

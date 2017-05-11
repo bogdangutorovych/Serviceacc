@@ -26,14 +26,19 @@
 		<h:outputLabel for="date" value="Дата договора: "
 			style="font-weight:bold" />
 		<p:calendar id="date" converter="localDateConverter"
-			pattern="dd.MM.yyyy"
-			value="#{contractController.selectedContract.contractDate}">
+			pattern="dd.MM.yyyy" 
+			value="#{contractController.selectedContract.contractDate}"
+			showOn="button" mask="99.99.9999"
+			required="true" requiredMessage="Выберите дату договора">
+
 		</p:calendar>
+
 
 		<p:outputLabel for="service" value="Услуга: " style="font-weight:bold" />
 		<p:selectOneMenu id="service"
 			value="#{contractController.selectedContract.service}"
-			converter="omnifaces.SelectItemsConverter">
+			converter="omnifaces.SelectItemsConverter" >
+		<!-- 	required="true" requiredMessage="Выберите услугу" -->			
 			<f:selectItem itemLabel="Выбрать услугу..." noSelectionOption="true" />
 			<f:selectItems value="#{contractController.availableServices}"
 				var="service" itemLabel="#{service.name}" itemValue="#{service}" />
@@ -42,14 +47,15 @@
 		<p:outputLabel for="client" value="Клиент: " style="font-weight:bold" />
 		<p:selectOneMenu id="client"
 			value="#{contractController.selectedContract.client}"
+			required="true" requiredMessage="Выберите клиента"
 			converter="omnifaces.SelectItemsConverter">
 			<f:selectItem itemLabel="Выбрать клиента..." noSelectionOption="true" />
 			<f:selectItems value="#{contractController.availableClients}"
 				var="client" itemLabel="#{client.firstName} #{client.lastName}"
-				itemValue="#{client}" />
+				itemValue="#{client}"/>
 		</p:selectOneMenu>
 
-		<p:outputLabel for="manager" value="Ментор: " style="font-weight:bold" />
+		<!-- 	<p:outputLabel for="manager" value="Ментор: " style="font-weight:bold" />
 		<p:selectOneMenu id="manager"
 			value="#{contractController.selectedContract.manager}"
 			converter="omnifaces.SelectItemsConverter">
@@ -58,7 +64,7 @@
 				var="manager" itemLabel="#{manager.firstName} #{manager.lastName}"
 				itemValue="#{manager}" />
 		</p:selectOneMenu>
-
+ -->
 	</h:panelGrid>
 
 </ui:composition>

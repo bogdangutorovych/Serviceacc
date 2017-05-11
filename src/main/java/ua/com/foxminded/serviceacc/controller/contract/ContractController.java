@@ -1,6 +1,7 @@
 package ua.com.foxminded.serviceacc.controller.contract;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -75,16 +76,43 @@ public class ContractController implements Serializable {
     public void onOk() {
         if (selectedContract.getId() == null) {
             selectedContract = contractService.create(selectedContract);
-            selectedContract.setNumber("Договор № " + selectedContract.getId());
-            ContractStatus contractStatus = contractStatusService.findByStatusTitle("Pending");
-            selectedContract.setContractStatus(contractStatus);
-            contractService.update(selectedContract);
-            list.add(selectedContract);
+            selectedContract.setNumber("" + selectedContract.getId());
+            ContractStatus defaultСontractStatus = contractStatusService.findByStatusTitle("В ожидании");
+            selectedContract.setContractStatus(defaultСontractStatus);
+        } else {
+            Contract currentContract = contractService.findById(selectedContract.getId());
+            ContractStatus currentContractStatus = currentContract.getContractStatus();
+            ContractStatus selectedContractStatus = selectedContract.getContractStatus();
+            if (!currentContractStatus.getTitle().equals(selectedContractStatus.getTitle())) {
+                switch (selectedContractStatus.getTitle()) {
+                case "В ожидании":
+
+                    break;
+
+                case "Активировать":
+                    if (selectedContract.getPaymentDate() == null) {
+                        selectedContract.setPaymentDate(LocalDate.now().plusMonths(1));
+                    }
+                    break;
+
+                case "Заморожен":
+                    selectedContract.setCloseDate(LocalDate.now());
+                    selectedContract.setManager(null);
+                    break;
+
+                case "Завершен":
+                    selectedContract.setCloseDate(LocalDate.now());
+                    selectedContract.setManager(null);
+                    break;
+
+                default:
+                    break;
+                }
+            }
         }
-        Contract updated = contractService.update(selectedContract);
-        int elementNumber = list.indexOf(selectedContract);
-        list.set(elementNumber, updated);
-        selectedContract = updated;
+
+        contractService.update(selectedContract);
+        init();
 
     }
 
