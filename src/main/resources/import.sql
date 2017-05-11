@@ -5,13 +5,6 @@ INSERT INTO MANAGER (id, birth_day, first_name, last_name, active) VALUES
 (4, '1998-04-16', 'Diego', 'Maradona', true);
 ALTER SEQUENCE manager_id_seq RESTART WITH 5;
 
-INSERT INTO CONTRACT_STATUS (id, title, active, code) VALUES
-(1, 'Active', true, 'ACT'),
-(2, 'Frozen', true, 'FRZ'),
-(3, 'Pending', true, 'PND'),
-(4, 'Closed', true, 'CLZ');
-ALTER SEQUENCE contract_status_id_seq RESTART WITH 5;
-
 INSERT INTO CURRENCY_TYPE (id, title, active, code) VALUES
 (1, 'Dollar', true, 'USD'),
 (2, 'Hryvnia', true, 'UAH'),
@@ -30,11 +23,11 @@ INSERT INTO CLIENT (id, birth_day, first_name, last_name, active) VALUES
 (9, '1995-09-12', 'Vitaly', 'Klichko', true);
 ALTER SEQUENCE client_id_seq RESTART WITH 10;
 
-INSERT INTO CONTRACT (id, number, contract_date, client_id, manager_id, contract_status_id, active) VALUES
-(1, 'Contract # 1', '2017-01-01', 1, 2, 1, true),
-(2, 'Contract # 2', '2017-02-28', 2, 1, 2, true),
-(3, 'Contract # 3', '2017-04-25', 3, 1, 3, true),
-(4, 'Contract # 4', '2017-01-31', 3, 1, 4, true);
+INSERT INTO CONTRACT (id, number, contract_date, client_id, manager_id, contract_status, active) VALUES
+(1, 'Contract # 1', '2017-01-01', 1, 2, 'PENDING', true),
+(2, 'Contract # 2', '2017-02-28', 2, 1, 'ACTIVE', true),
+(3, 'Contract # 3', '2017-04-25', 3, 1, 'FROZEN', true),
+(4, 'Contract # 4', '2017-01-31', 3, 1, 'CLOSED', true);
 ALTER SEQUENCE contract_id_seq RESTART WITH 5;
 
 INSERT INTO CLIENT_INFO_TYPE (id, title, active, code) VALUES

@@ -5,7 +5,6 @@ import java.util.List;
 
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.ClientInformation;
-import ua.com.foxminded.serviceacc.model.ContractStatus;
 import ua.com.foxminded.serviceacc.model.CurrencyType;
 import ua.com.foxminded.serviceacc.model.Manager;
 
@@ -14,10 +13,6 @@ import ua.com.foxminded.serviceacc.model.Manager;
  *
  */
 public class ModelTestBuilder {
-
-    public static final String ACTIVE = "Active";
-    public static final String FROZEN = "Frozen";
-    public static final String PENDING = "Pending";
 
     public static final String MOBILE = "Mobile";
     public static final String EMAIL = "Email";
@@ -47,17 +42,6 @@ public class ModelTestBuilder {
     public static Manager buildTestManager() {
         Manager manager = new Manager();
         return manager;
-    }
-
-    public static List<ContractStatus> buildListTestСontractStatus() {
-        List<ContractStatus> statuses = new ArrayList<>();
-        ContractStatus active = new ContractStatus("001", ACTIVE);
-        ContractStatus frozen = new ContractStatus("002", FROZEN);
-        ContractStatus pending = new ContractStatus("003", PENDING);
-        statuses.add(active);
-        statuses.add(frozen);
-        statuses.add(pending);
-        return statuses;
     }
 
     public static List<CurrencyType> buildListTestCurrencyType() {

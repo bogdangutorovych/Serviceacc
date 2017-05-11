@@ -87,9 +87,9 @@
 				pattern="dd.MM.yyyy" />
 		</p:column>
 
-		<p:column headerText="статус" sortBy="#{c.contractStatus.title}"
-			filterBy="#{c.contractStatus.title}" filterMatchMode="contains">
-			<h:outputText value="#{c.contractStatus}" />
+		<p:column headerText="статус" sortBy="#{c.contractStatus}"
+			filterBy="#{c.contractStatus}" filterMatchMode="contains">
+			<h:outputText value="#{c.contractStatus.friendlyName}" />
 		</p:column>
 
 		<p:column headerText="клиент" sortBy="#{c.client}"

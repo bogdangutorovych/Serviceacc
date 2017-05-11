@@ -29,8 +29,6 @@ public class ClientInfosPersistTest {
     @Autowired
     ClientService clientService;
     @Autowired
-    ContractStatusService clientStatusTypeService;
-    @Autowired
     ManagerService managerService;
     @Autowired
     ClientInformationTypeService clientInformationTypeService;
