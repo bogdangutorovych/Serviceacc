@@ -77,8 +77,9 @@ public class ContractController implements Serializable {
         if (selectedContract.getId() == null) {
             selectedContract = contractService.create(selectedContract);
             selectedContract.setNumber("" + selectedContract.getId());
-            ContractStatus defaultСontractStatus = contractStatusService.findByStatusTitle("В ожидании");
+            ContractStatus defaultСontractStatus = contractStatusService.findByStatusTitle("Активирован");
             selectedContract.setContractStatus(defaultСontractStatus);
+            selectedContract.setPaymentDate(LocalDate.now().plusMonths(1));
         } else {
             Contract currentContract = contractService.findById(selectedContract.getId());
             ContractStatus currentContractStatus = currentContract.getContractStatus();

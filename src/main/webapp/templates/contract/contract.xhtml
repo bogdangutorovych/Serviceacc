@@ -30,9 +30,9 @@
 			value="#{contractController.selectedContract.contractDate}"
 			showOn="button" mask="99.99.9999"
 			required="true" requiredMessage="Выберите дату договора">
-
 		</p:calendar>
-
+		
+    
 
 		<p:outputLabel for="service" value="Услуга: " style="font-weight:bold" />
 		<p:selectOneMenu id="service"
@@ -55,7 +55,7 @@
 				itemValue="#{client}"/>
 		</p:selectOneMenu>
 
-		<!-- 	<p:outputLabel for="manager" value="Ментор: " style="font-weight:bold" />
+		 	<p:outputLabel for="manager" value="Ментор: " style="font-weight:bold" />
 		<p:selectOneMenu id="manager"
 			value="#{contractController.selectedContract.manager}"
 			converter="omnifaces.SelectItemsConverter">
@@ -64,7 +64,7 @@
 				var="manager" itemLabel="#{manager.firstName} #{manager.lastName}"
 				itemValue="#{manager}" />
 		</p:selectOneMenu>
- -->
+
 	</h:panelGrid>
 
 </ui:composition>
