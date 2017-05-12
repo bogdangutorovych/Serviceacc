@@ -5,12 +5,6 @@ INSERT INTO MANAGER (id, birth_day, first_name, last_name, active) VALUES
 (4, '1998-04-16', 'Diego', 'Maradona', true);
 ALTER SEQUENCE manager_id_seq RESTART WITH 5;
 
-INSERT INTO CURRENCY_TYPE (id, title, active, code) VALUES
-(1, 'Dollar', true, 'USD'),
-(2, 'Hryvnia', true, 'UAH'),
-(3, 'Ruble', true, 'RUB');
-ALTER SEQUENCE currency_type_seq RESTART WITH 4;
-
 INSERT INTO CLIENT (id, birth_day, first_name, last_name, active) VALUES
 (1, '1980-03-14', 'Robert', 'Levandovsky', true),
 (2, '1986-09-08', 'Michael', 'Phelps', true),

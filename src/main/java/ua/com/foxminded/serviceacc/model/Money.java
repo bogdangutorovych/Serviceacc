@@ -1,15 +1,18 @@
 package ua.com.foxminded.serviceacc.model;
 
-import java.util.Currency;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+
+import ua.com.foxminded.serviceacc.model.enums.CurrencyType;
 
 @Entity
 @Table(name = "money")
@@ -23,8 +26,9 @@ public class Money {
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "currency")
-    private Currency currency;
+    private CurrencyType currency;
 
     @Column(name = "amount")
     private Long amount;
@@ -35,7 +39,7 @@ public class Money {
     public Money() {
     }
 
-    public Money(Currency currency, Long amount) {
+    public Money(CurrencyType currency, Long amount) {
         this.currency = currency;
         this.amount = amount;
     }
@@ -48,11 +52,11 @@ public class Money {
         this.id = id;
     }
 
-    public Currency getCurrency() {
+    public CurrencyType getCurrency() {
         return currency;
     }
 
-    public void setCurrency(Currency currency) {
+    public void setCurrency(CurrencyType currency) {
         this.currency = currency;
     }
 
