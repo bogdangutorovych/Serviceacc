@@ -1,11 +1,7 @@
 package ua.com.foxminded.serviceacc;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.ClientInformation;
-import ua.com.foxminded.serviceacc.model.CurrencyType;
 import ua.com.foxminded.serviceacc.model.Manager;
 
 /**
@@ -43,13 +39,4 @@ public class ModelTestBuilder {
         Manager manager = new Manager();
         return manager;
     }
-
-    public static List<CurrencyType> buildListTestCurrencyType() {
-        List<CurrencyType> types = new ArrayList<>();
-        types.add(new CurrencyType("USD", DOLLAR));
-        types.add(new CurrencyType("UAH", HRYVNIA));
-        types.add(new CurrencyType("RUB", RUBLE));
-        return types;
-    }
-
 }
