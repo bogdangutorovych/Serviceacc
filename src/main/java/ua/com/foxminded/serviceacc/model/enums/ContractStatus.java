@@ -1,5 +1,16 @@
 package ua.com.foxminded.serviceacc.model.enums;
 
 public enum ContractStatus {
-    Активирован, Заморожен, Завершен;
+
+    ACTIVE("Активирован"), FROZEN("Заморожен"), CLOSED("Завершен");
+
+    private ContractStatus(String localizedName) {
+        this.localizedName = localizedName;
+    }
+
+    private String localizedName;
+
+    public String getLocalizedName() {
+        return localizedName;
+    }
 }

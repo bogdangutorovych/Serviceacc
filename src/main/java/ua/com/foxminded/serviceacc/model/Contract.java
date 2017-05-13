@@ -62,7 +62,6 @@ public class Contract {
     @JoinColumn(name = "service_id")
     private Service service;
 
-    // @OneToOne(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     @JoinColumn(name = "contract_status")
     private ContractStatus contractStatus;

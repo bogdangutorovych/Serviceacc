@@ -2,7 +2,6 @@ package ua.com.foxminded.serviceacc.controller.contract;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -68,16 +67,14 @@ public class ContractController implements Serializable {
         availableClients = clientService.findAll();
         availableManagers = managerService.findAll();
         availableServices = serviceService.findAll();
-        availableStatuses = Arrays.asList(ContractStatus.values());
-
     }
 
     public void onOk() {
         if (selectedContract.getId() == null) {
             selectedContract = contractService.create(selectedContract);
             selectedContract.setNumber("" + selectedContract.getId());
-            selectedContract.setContractStatus(ContractStatus.Активирован);
-            selectedContract.setPaymentDate(LocalDate.now().plusMonths(1));
+            // selectedContract.setContractStatus(ContractStatus.ACTIVE);
+            selectedContract.setPaymentDate(selectedContract.getContractDate().plusMonths(1));
         } else {
             // Contract currentContract =
             // contractService.findById(selectedContract.getId());

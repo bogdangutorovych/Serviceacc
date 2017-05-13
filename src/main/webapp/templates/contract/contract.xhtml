@@ -3,6 +3,8 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
+	
+	<p:importEnum type="ua.com.foxminded.serviceacc.model.enums.ContractStatus" var="ContractStatuses" />
 
 	<p:toolbar>
 		<f:facet name="left">
@@ -30,9 +32,7 @@
 			value="#{contractController.selectedContract.contractDate}"
 			showOn="button" mask="99.99.9999"
 			required="true" requiredMessage="Выберите дату договора">
-		</p:calendar>
-		
-    
+		</p:calendar>    
 
 		<p:outputLabel for="service" value="Услуга: " style="font-weight:bold" />
 		<p:selectOneMenu id="service"
@@ -65,6 +65,11 @@
 				var="manager" itemLabel="#{manager.firstName} #{manager.lastName}"
 				itemValue="#{manager}" />
 		</p:selectOneMenu>
+		
+		<f:selectItems value="#{ContractStatuses.ACTIVE}" var="statusEnum"
+                itemLabel="#{statusEnum.localizedName}" 
+                itemValue="#{contractController.selectedContract.contractStatus.localizedName}"/>
+            
 
 	</h:panelGrid>
 
