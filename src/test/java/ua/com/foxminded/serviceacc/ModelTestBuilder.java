@@ -3,6 +3,7 @@ package ua.com.foxminded.serviceacc;
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.ClientInformation;
 import ua.com.foxminded.serviceacc.model.Manager;
+import ua.com.foxminded.serviceacc.model.Service;
 
 /**
  * Created by andreb on 09.04.17.
@@ -38,5 +39,11 @@ public class ModelTestBuilder {
     public static Manager buildTestManager() {
         Manager manager = new Manager();
         return manager;
+    }
+
+    public static Service buildTestService(){
+        Service service = new Service();
+        service.setName("Service1");
+        return service;
     }
 }
