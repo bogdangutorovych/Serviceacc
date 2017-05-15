@@ -30,8 +30,8 @@ public class ClientInformationType {
     @Column(name = "title", unique = true, nullable = false)
     private String title;
 
-    @Column(name = "active", nullable = false)
-    private boolean active = true;
+    @Column(name = "is_deleted", nullable = false)
+    private boolean isDeleted = true;
 
     public ClientInformationType() {
     }
@@ -65,12 +65,12 @@ public class ClientInformationType {
         this.code = code;
     }
 
-    public boolean isActive() {
-        return active;
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     @Override

@@ -75,12 +75,12 @@ public class ServiceTest {
         Service service = buildTestService();
         serviceService.save(service);
         System.out.println("1: " + service.getId());
-        service.setActive(false);
+        service.setDeleted(true);
         assertNotNull(serviceService.findById(service.getId()));
         System.out.println("2: " + serviceService.update(service).getId());
         assertNull(serviceService.findById(service.getId()));
 
-        service.setActive(true);
+        service.setDeleted(false);
 
     }
 

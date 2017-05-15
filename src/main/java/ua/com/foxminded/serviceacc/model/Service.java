@@ -23,10 +23,10 @@ import org.hibernate.annotations.Where;
 
 @Entity
 @Table(name = "service")
-@SQLDelete(sql = "UPDATE service SET active = false WHERE id = ?")
+@SQLDelete(sql = "UPDATE service SET is_deleted = true WHERE id = ?")
 @Loader(namedQuery = "findServiceById")
-@NamedQuery(name = "findServiceById", query = "FROM Service WHERE id = ?1 AND active = true")
-@Where(clause = "active = true")
+@NamedQuery(name = "findServiceById", query = "FROM Service WHERE id = ?1 AND isDeleted = false")
+@Where(clause = "is_deleted = false")
 public class Service {
 
     @Id
@@ -50,8 +50,8 @@ public class Service {
     @JoinColumn(name = "rate_id")
     private Money managerRate = new Money();
 
-    @Column(name = "active", nullable = false)
-    private boolean active = true;
+    @Column(name = "is_deleted", nullable = false)
+    private boolean isDeleted = true;
 
     public Service() {
 
@@ -102,18 +102,18 @@ public class Service {
         this.managerRate = managerRate;
     }
 
-    public boolean isActive() {
-        return active;
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     @Override
     public String toString() {
         return "Service{" + "id=" + id + ", name='" + name + '\'' + ", description='" + description + '\'' + ", prices="
-                + prices + ", managerRate=" + managerRate + ", active=" + active + '}';
+                + prices + ", managerRate=" + managerRate + ", isDeleted=" + isDeleted + '}';
     }
 
 }

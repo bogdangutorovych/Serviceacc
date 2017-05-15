@@ -24,10 +24,10 @@ import ua.com.foxminded.serviceacc.model.enums.ContractStatus;
 
 @Entity
 @Table(name = "contract")
-@SQLDelete(sql = "UPDATE contract SET active = false WHERE id = ?")
+@SQLDelete(sql = "UPDATE contract SET is_deleted = true WHERE id = ?")
 @Loader(namedQuery = "findContractById")
-@NamedQuery(name = "findContractById", query = "FROM Contract WHERE id = ?1 AND active = true")
-@Where(clause = "active = true")
+@NamedQuery(name = "findContractById", query = "FROM Contract WHERE id = ?1 AND isDeleted = false")
+@Where(clause = "is_deleted = false")
 public class Contract {
 
     @Id
@@ -43,9 +43,6 @@ public class Contract {
 
     @Column(name = "contract_date")
     private LocalDate contractDate;
-
-    @Column(name = "payment_date")
-    private LocalDate paymentDate;
 
     @Column(name = "close_date")
     private LocalDate closeDate;
@@ -74,12 +71,15 @@ public class Contract {
     @JoinColumn(name = "manager_rate")
     private Money managerRate;
 
-    public LocalDate getPaymentDate() {
-        return paymentDate;
+    @Column(name = "is_deleted", nullable = false)
+    private boolean isDeleted;
+
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
-    public void setPaymentDate(LocalDate paymentDate) {
-        this.paymentDate = paymentDate;
+    public void setDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     public LocalDate getCloseDate() {
@@ -89,9 +89,6 @@ public class Contract {
     public void setCloseDate(LocalDate closeDate) {
         this.closeDate = closeDate;
     }
-
-    @Column(name = "active", nullable = false)
-    private boolean active = true;
 
     public Contract() {
 
@@ -157,7 +154,6 @@ public class Contract {
         this.service = service;
     }
 
-    // @Enumerated(EnumType.STRING)
     public ContractStatus getContractStatus() {
         return contractStatus;
     }
@@ -180,14 +176,6 @@ public class Contract {
 
     public void setManagerRate(Money managerRate) {
         this.managerRate = managerRate;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
     }
 
 }

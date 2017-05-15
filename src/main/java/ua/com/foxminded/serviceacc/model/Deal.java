@@ -18,10 +18,10 @@ import org.hibernate.annotations.Where;
 
 @Entity
 @Table(name = "deal")
-@SQLDelete(sql = "UPDATE Deal SET active = false WHERE id = ?")
+@SQLDelete(sql = "UPDATE Deal SET is_deleted = true WHERE id = ?")
 @Loader(namedQuery = "findDealById")
-@NamedQuery(name = "findDealById", query = "FROM Deal WHERE id = ?1 AND active = true")
-@Where(clause = "active = true")
+@NamedQuery(name = "findDealById", query = "FROM Deal WHERE id = ?1 AND isDeleted = false")
+@Where(clause = "is_deleted = false")
 public class Deal {
 
     @Id
@@ -40,8 +40,8 @@ public class Deal {
     @JoinColumn(name = "service_id")
     private Service service;
 
-    @Column(name = "active", nullable = false)
-    private boolean active = true;
+    @Column(name = "is_deleted", nullable = false)
+    private boolean isDeleted;
 
     public Deal() {
 
@@ -76,12 +76,12 @@ public class Deal {
         this.service = service;
     }
 
-    public boolean isActive() {
-        return active;
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
 }

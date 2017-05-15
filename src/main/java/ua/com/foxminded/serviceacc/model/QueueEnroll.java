@@ -17,7 +17,7 @@ import org.hibernate.annotations.SQLDelete;
 
 @Entity
 @Table(name = "queue_enroll")
-@SQLDelete(sql = "UPDATE queue_enroll SET active = false WHERE id = ?")
+@SQLDelete(sql = "UPDATE queue_enroll SET is_deleted = true WHERE id = ?")
 public class QueueEnroll {
 
     @Id
@@ -38,8 +38,8 @@ public class QueueEnroll {
     @Column(name = "novice", nullable = false)
     private boolean novice;
 
-    @Column(name = "active", nullable = false)
-    private boolean active = true;
+    @Column(name = "is_deleted", nullable = false)
+    private boolean isDeleted;
 
     public QueueEnroll() {
 
@@ -83,12 +83,12 @@ public class QueueEnroll {
         this.novice = novice;
     }
 
-    public boolean isActive() {
-        return active;
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
 }

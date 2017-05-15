@@ -18,10 +18,10 @@ import org.hibernate.annotations.Where;
 @Entity
 @Table(name = "client")
 
-@SQLDelete(sql = "UPDATE client SET active = false WHERE id = ?")
+@SQLDelete(sql = "UPDATE client SET is_deleted = true WHERE id = ?")
 @Loader(namedQuery = "findClientById")
-@NamedQuery(name = "findClientById", query = "FROM Client WHERE id = ?1 AND active = true")
-@Where(clause = "active = true")
+@NamedQuery(name = "findClientById", query = "FROM Client WHERE id = ?1 AND isDeleted = false")
+@Where(clause = "is_deleted = false")
 
 public class Client {
     @Id
@@ -41,17 +41,17 @@ public class Client {
     @Column(name = "birth_day")
     private LocalDate birthday;
 
-    @Column(name = "active", nullable = false)
-    private boolean active = true;
+    @Column(name = "is_deleted", nullable = false)
+    private boolean isDeleted;
 
     public Client() {
     }
 
-    public Client(String firstName, String lastName, LocalDate birthday, boolean active) {
+    public Client(String firstName, String lastName, LocalDate birthday, boolean isDeleted) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
-        this.active = active;
+        this.isDeleted = isDeleted;
     }
 
     public Long getId() {
@@ -86,16 +86,17 @@ public class Client {
         this.birthday = birthday;
     }
 
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
     @Override
     public String toString() {
         return firstName + " " + lastName;
     }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
 }

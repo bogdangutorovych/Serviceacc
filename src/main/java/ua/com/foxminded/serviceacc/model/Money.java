@@ -19,10 +19,10 @@ import ua.com.foxminded.serviceacc.model.enums.Currency;
 
 @Entity
 @Table(name = "money")
-@SQLDelete(sql = "UPDATE money SET active = false WHERE id = ?")
+@SQLDelete(sql = "UPDATE money SET is_deleted = true WHERE id = ?")
 @Loader(namedQuery = "findMoneyById")
-@NamedQuery(name = "findMoneyById", query = "FROM Money WHERE id = ?1 AND active = true")
-@Where(clause = "active = true")
+@NamedQuery(name = "findMoneyById", query = "FROM Money WHERE id = ?1 AND isDeleted = false")
+@Where(clause = "is_deleted = false")
 public class Money {
 
     @Id
@@ -40,8 +40,8 @@ public class Money {
     @Column(name = "amount")
     private Long amount;
 
-    @Column(name = "active", nullable = false)
-    private boolean active = true;
+    @Column(name = "is_deleted", nullable = false)
+    private boolean isDeleted;
 
     public Money() {
     }
@@ -75,12 +75,16 @@ public class Money {
         this.amount = amount;
     }
 
-    public boolean isActive() {
-        return active;
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override

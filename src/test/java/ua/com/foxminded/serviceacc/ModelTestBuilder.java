@@ -26,13 +26,13 @@ public class ModelTestBuilder {
 
     public static Client buildTestClient() {
         Client client = new Client();
-        client.setActive(true);
+        client.setDeleted(false);
         return client;
     }
 
     public static ClientInformation buildTestClientInformation() {
         ClientInformation infos = new ClientInformation();
-        infos.setActive(true);
+        infos.setDeleted(true);
         return infos;
     }
 

@@ -31,12 +31,12 @@ public class ManagerInformation {
     @JoinColumn(name = "info_type_id")
     private ManagerInformationType managerInformationType;
 
-    @Column(name = "active", nullable = false)
-    private boolean active = true;
+    @Column(name = "is_deleted", nullable = false)
+    private boolean isDeleted;
 
-    @ManyToOne (fetch = FetchType.EAGER)
-    @JoinColumn (name = "manager_id")
-    private Manager manager; 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "manager_id")
+    private Manager manager;
 
     public Manager getManager() {
         return manager;
@@ -49,11 +49,11 @@ public class ManagerInformation {
     public ManagerInformation() {
     }
 
-    public ManagerInformation(String content, ManagerInformationType managerInformationType, boolean active) {
+    public ManagerInformation(String content, ManagerInformationType managerInformationType, boolean isDeleted) {
 
         this.content = content;
         this.managerInformationType = managerInformationType;
-        this.active = active;
+        this.isDeleted = isDeleted;
     }
 
     public Long getId() {
@@ -80,18 +80,18 @@ public class ManagerInformation {
         this.managerInformationType = managerInformationType;
     }
 
-    public boolean isActive() {
-        return active;
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     @Override
     public String toString() {
         return "ManagerInformation [id=" + id + ", content=" + content + ", managerInformationType="
-                + managerInformationType + ", active=" + active + "]";
+                + managerInformationType + ", isDeleted=" + isDeleted + "]";
     }
 
 }

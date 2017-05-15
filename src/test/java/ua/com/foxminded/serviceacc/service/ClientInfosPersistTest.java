@@ -42,25 +42,25 @@ public class ClientInfosPersistTest {
         String typeCode = "SKP2";
         // Save new type and check
         ClientInformationType skype1 = new ClientInformationType(typeCode, typeName);
-        skype1.setActive(true);
+        skype1.setDeleted(false);
         clientInformationTypeService.save(skype1);
         assertThat(skype1.getTitle(), is(typeName));
 
         Client client = ModelTestBuilder.buildTestClient();
-        client.setActive(true);
+        client.setDeleted(false);
         clientService.save(client);
 
         ClientInformation info1 = new ClientInformation();
         info1.setClientInformationType(skype1);
         info1.setContent("oneone");
-        info1.setActive(true);
+        info1.setDeleted(false);
         info1.setClient(client);
         clientInformationService.save(info1);
 
         ClientInformation info2 = new ClientInformation();
         info2.setClientInformationType(skype1);
         info2.setContent("twotwo");
-        info2.setActive(true);
+        info2.setDeleted(false);
         info2.setClient(client);
         clientInformationService.save(info2);
 
@@ -71,7 +71,7 @@ public class ClientInfosPersistTest {
     public void changeAndSaveInfosInClient() {
 
         ClientInformationType type1 = new ClientInformationType("001", "type1");
-        type1.setActive(true);
+        type1.setDeleted(false);
         clientInformationTypeService.save(type1);
 
         Client client = buildTestClient();

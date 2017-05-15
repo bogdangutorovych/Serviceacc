@@ -46,14 +46,6 @@
 			value="#{contractController.selectedContract.service}"
 			disabled="true" />
 
-		<h:outputLabel for="paymentDate" value="Дата оплаты: "
-			style="font-weight:bold" />
-		<p:calendar id="paymentDate" converter="localDateConverter"
-			pattern="dd.MM.yyyy"
-			value="#{contractController.selectedContract.paymentDate}"
-			showOn="button" mask="99.99.9999">
-		</p:calendar>
-
 		<h:outputLabel for="closeDate" value="Дата закрытия: "
 			style="font-weight:bold" />
 		<p:calendar id="closeDate" converter="localDateConverter"

@@ -70,7 +70,6 @@ public class ContractController implements Serializable {
         if (selectedContract.getId() == null) {
             selectedContract = contractService.create(selectedContract);
             selectedContract.setNumber("" + selectedContract.getId());
-            selectedContract.setPaymentDate(selectedContract.getContractDate().plusMonths(1));
         }
 
         contractService.update(selectedContract);
