@@ -18,10 +18,10 @@ import org.hibernate.annotations.Where;
 @Entity
 @Table(name = "manager")
 
-@SQLDelete(sql = "UPDATE manager SET active = false WHERE id = ?")
+@SQLDelete(sql = "UPDATE manager SET is_deleted = true WHERE id = ?")
 @Loader(namedQuery = "findManagerById")
-@NamedQuery(name = "findManagerById", query = "FROM Manager WHERE id = ?1 AND active = true")
-@Where(clause = "active = true")
+@NamedQuery(name = "findManagerById", query = "FROM Manager WHERE id = ?1 AND isDeleted = false")
+@Where(clause = "is_deleted = false")
 
 public class Manager {
 
@@ -42,18 +42,18 @@ public class Manager {
     @Column(name = "birth_day")
     private LocalDate birthday;
 
-    @Column(name = "active", nullable = false)
-    private boolean active = true;
+    @Column(name = "is_deleted", nullable = false)
+    private boolean isDeleted = true;
 
     public Manager() {
 
     }
 
-    public Manager(String firstName, String lastName, LocalDate birthday, boolean active) {
+    public Manager(String firstName, String lastName, LocalDate birthday, boolean isDeleted) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
-        this.active = active;
+        this.isDeleted = isDeleted;
     }
 
     public Long getId() {
@@ -88,12 +88,12 @@ public class Manager {
         this.birthday = birthday;
     }
 
-    public boolean isActive() {
-        return active;
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     @Override

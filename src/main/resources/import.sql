@@ -1,8 +1,8 @@
-INSERT INTO MANAGER (id, birth_day, first_name, last_name, active) VALUES
-(1, '2000-01-01', 'Mihail', 'Sokolovsky', true),
-(2, '1990-02-12', 'Viktor', 'Gratchev', true),
-(3, '1995-03-13', 'Vitaly', 'Staruhin', true),
-(4, '1998-04-16', 'Diego', 'Maradona', true);
+INSERT INTO MANAGER (id, birth_day, first_name, last_name, is_deleted) VALUES
+(1, '2000-01-01', 'Mihail', 'Sokolovsky', false),
+(2, '1990-02-12', 'Viktor', 'Gratchev', false),
+(3, '1995-03-13', 'Vitaly', 'Staruhin', false),
+(4, '1998-04-16', 'Diego', 'Maradona', false);
 ALTER SEQUENCE manager_id_seq RESTART WITH 5;
 
 INSERT INTO CLIENT (id, birth_day, first_name, last_name, is_deleted) VALUES
@@ -24,12 +24,12 @@ INSERT INTO CONTRACT (id, number, contract_date, client_id, manager_id, contract
 (4, 'Contract # 4', '2017-01-31', 3, 1, 'CLOSED', true);
 ALTER SEQUENCE contract_id_seq RESTART WITH 5;
 
-INSERT INTO CLIENT_INFO_TYPE (id, title, active, code) VALUES
-(1, 'telephone', true, 'phone'),
-(2, 'e-mail', true, 'mail'),
-(3, 'site', true, 'site'),
-(4, 'skype', true, 'skype'),
-(5, 'city', true, 'city');
+INSERT INTO CLIENT_INFO_TYPE (id, title, is_deleted, code) VALUES
+(1, 'telephone', false, 'phone'),
+(2, 'e-mail', false, 'mail'),
+(3, 'site', false, 'site'),
+(4, 'skype', false, 'skype'),
+(5, 'city', false, 'city');
 ALTER SEQUENCE client_info_type_seq RESTART WITH 6;
 
 INSERT INTO MANAGER_INFO_TYPE (id, title, active, code) VALUES

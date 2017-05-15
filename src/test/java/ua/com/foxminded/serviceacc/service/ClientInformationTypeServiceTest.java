@@ -31,7 +31,7 @@ public class ClientInformationTypeServiceTest {
         String typeCode = "SKP";
         // Save new type and check
         ClientInformationType skype1 = new ClientInformationType(typeCode, typeName);
-        skype1.setActive(true);
+        skype1.setDeleted(true);
         clientInformationTypeService.save(skype1);
         assertThat(skype1.getTitle(), is(typeName));
     }

@@ -32,7 +32,7 @@ public class ModelTestBuilder {
 
     public static ClientInformation buildTestClientInformation() {
         ClientInformation infos = new ClientInformation();
-        infos.setActive(true);
+        infos.setDeleted(true);
         return infos;
     }
 
