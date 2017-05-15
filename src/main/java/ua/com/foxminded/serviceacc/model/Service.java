@@ -1,10 +1,7 @@
 package ua.com.foxminded.serviceacc.model;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Loader;
-import org.hibernate.annotations.Parameter;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,8 +14,12 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import java.util.HashSet;
-import java.util.Set;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Loader;
+import org.hibernate.annotations.Parameter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 @Entity
 @Table(name = "service")
@@ -31,7 +32,7 @@ public class Service {
     @Id
     @GenericGenerator(name = "generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
             @Parameter(name = "sequence_name", value = "service_id_seq"),
-            @Parameter(name = "initial_value", value = "100"), @Parameter(name = "increment_size", value = "50") })
+            @Parameter(name = "initial_value", value = "1"), @Parameter(name = "increment_size", value = "1") })
     @GeneratedValue(generator = "generator")
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
@@ -56,11 +57,9 @@ public class Service {
 
     }
 
-    public Service(String name, String description, Set<Money> prices, Money managerRate) {
+    public Service(String name, Set<Money> prices) {
         this.name = name;
-        this.description = description;
         this.prices = prices;
-        this.managerRate = managerRate;
     }
 
     public Long getId() {
@@ -113,13 +112,8 @@ public class Service {
 
     @Override
     public String toString() {
-        return "Service{" +
-            "id=" + id +
-            ", name='" + name + '\'' +
-            ", description='" + description + '\'' +
-            ", prices=" + prices +
-            ", managerRate=" + managerRate +
-            ", active=" + active +
-            '}';
+        return "Service{" + "id=" + id + ", name='" + name + '\'' + ", description='" + description + '\'' + ", prices="
+                + prices + ", managerRate=" + managerRate + ", active=" + active + '}';
     }
+
 }

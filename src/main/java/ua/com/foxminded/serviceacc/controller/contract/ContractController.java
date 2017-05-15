@@ -1,7 +1,6 @@
 package ua.com.foxminded.serviceacc.controller.contract;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -17,7 +16,6 @@ import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.Contract;
 import ua.com.foxminded.serviceacc.model.Manager;
 import ua.com.foxminded.serviceacc.model.Service;
-import ua.com.foxminded.serviceacc.model.enums.ContractStatus;
 import ua.com.foxminded.serviceacc.service.ClientService;
 import ua.com.foxminded.serviceacc.service.ContractService;
 import ua.com.foxminded.serviceacc.service.ManagerService;
@@ -37,7 +35,6 @@ public class ContractController implements Serializable {
     private List<Client> availableClients;
     private List<Manager> availableManagers;
     private List<Service> availableServices;
-    private List<ContractStatus> availableStatuses;
 
     private ContractService contractService;
     private ClientService clientService;
@@ -74,8 +71,6 @@ public class ContractController implements Serializable {
             selectedContract = contractService.create(selectedContract);
             selectedContract.setNumber("" + selectedContract.getId());
             selectedContract.setPaymentDate(selectedContract.getContractDate().plusMonths(1));
-        } else {
-            selectedContract.setPaymentDate(LocalDate.now().plusMonths(1));
         }
 
         contractService.update(selectedContract);
@@ -128,14 +123,6 @@ public class ContractController implements Serializable {
 
     public void setAvailableServices(List<Service> availableServices) {
         this.availableServices = availableServices;
-    }
-
-    public List<ContractStatus> getAvailableStatuses() {
-        return availableStatuses;
-    }
-
-    public void setAvailableStatuses(List<ContractStatus> availableStatuses) {
-        this.availableStatuses = availableStatuses;
     }
 
 }

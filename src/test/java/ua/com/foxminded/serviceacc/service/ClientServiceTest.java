@@ -19,8 +19,6 @@ public class ClientServiceTest {
     ClientService clientService;
     @Autowired
     ManagerService managerService;
-    @Autowired
-    CurrencyTypeService currencyTypeService;
 
     @Test
     public void findAllFetch() {

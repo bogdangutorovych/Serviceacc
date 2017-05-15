@@ -30,14 +30,6 @@
 				<p:menuitem value="Зарплата" icon="ui-icon-document" />
 			</p:submenu>
 			<p:submenu label="Настройки">
-				<p:menuitem value="Статусы договоров" icon="ui-icon-note"
-					update=":contentForm"
-					action='#{navController.setMainContent("catalogue/contractStatus")}' />
-				<p:menuitem value="Типы уровеней клиента" icon="ui-icon-note"
-					update=":contentForm"
-					action='#{navController.setMainContent("catalogue/clientLevelType")}' />
-				<p:menuitem value="Валюта" icon="ui-icon-note" update=":contentForm"
-					action='#{navController.setMainContent("catalogue/currencyType")}' />
 				<p:menuitem value="Типы доп.информации клиента" icon="ui-icon-note"
 					update=":contentForm"
 					action='#{navController.setMainContent("catalogue/clientInformationType")}' />
@@ -47,8 +39,6 @@
 				<p:menuitem value="Статусы оплат" icon="ui-icon-note"
 					update=":contentForm"
 					action='#{navController.setMainContent("catalogue/payStatus")}' />
-				<p:menuitem value="Money" icon="ui-icon-note" update=":contentForm"
-					action='#{navController.setMainContent("catalogue/money")}' />
 			</p:submenu>
 		</p:panelMenu>
 	</h:form>

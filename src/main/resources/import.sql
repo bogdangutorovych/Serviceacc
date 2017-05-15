@@ -5,19 +5,6 @@ INSERT INTO MANAGER (id, birth_day, first_name, last_name, active) VALUES
 (4, '1998-04-16', 'Diego', 'Maradona', true);
 ALTER SEQUENCE manager_id_seq RESTART WITH 5;
 
-INSERT INTO CLIENT_LEVEL_TYPE (id, title, active, code) VALUES
-(1, 'Applicant', true, 'APL'),
-(2, 'Beginner', true, 'BGN'),
-(3, 'Regular', true, 'REG'),
-(4, 'Graduate', true, 'GRD');
-ALTER SEQUENCE client_level_type_id_seq RESTART WITH 5;
-
-INSERT INTO CURRENCY_TYPE (id, title, active, code) VALUES
-(1, 'Dollar', true, 'USD'),
-(2, 'Hryvnia', true, 'UAH'),
-(3, 'Ruble', true, 'RUB');
-ALTER SEQUENCE currency_type_seq RESTART WITH 4;
-
 INSERT INTO CLIENT (id, birth_day, first_name, last_name, active) VALUES
 (1, '1980-03-14', 'Robert', 'Levandovsky', true),
 (2, '1986-09-08', 'Michael', 'Phelps', true),
@@ -30,12 +17,27 @@ INSERT INTO CLIENT (id, birth_day, first_name, last_name, active) VALUES
 (9, '1995-09-12', 'Vitaly', 'Klichko', true);
 ALTER SEQUENCE client_id_seq RESTART WITH 10;
 
-INSERT INTO CONTRACT (id, number, contract_date, client_id, manager_id, contract_status, active) VALUES
-(1, '1', '2017-01-01', 1, 2, 'ACTIVE', true),
-(2, '2', '2017-02-28', 2, 1, 'ACTIVE', true),
-(3, '3', '2017-04-25', 3, 3, 'FROZEN', true),
-(4, '4', '2017-01-31', 4, 3, 'CLOSED', true);
+INSERT INTO SERVICE (id, name, description, active) VALUES
+(1, 'менторинг', 'обучение студента идет на заданиях и анализе их выполнения', true),
+(2, 'группа', 'обучение в группе на реальном проекте', true);
+ALTER SEQUENCE service_id_seq RESTART WITH 3;
+
+INSERT INTO CONTRACT (id, number, contract_date, client_id,  service_id, manager_id, contract_status, active) VALUES
+(1, '1', '2017-01-01', 1, 1, 2, 'ACTIVE', true),
+(2, '2', '2017-02-28', 2, 2, 1, 'ACTIVE', true),
+(3, '3', '2017-04-25', 3, 1, 1, 'FROZEN', true),
+(4, '4', '2017-01-31', 3, 1, 1, 'CLOSED', true);
 ALTER SEQUENCE contract_id_seq RESTART WITH 5;
+
+INSERT INTO DEAL (id, client_id, service_id, active) VALUES
+(1, 5, 1, true),
+(2, 9, 2, true);
+ALTER SEQUENCE deal_id_seq RESTART WITH 3;
+
+INSERT INTO QUEUE_ENROLL (id, queue_enroll_date, deal_id, novice, active) VALUES
+(1, '2017-01-01', 1, true, true),
+(2, '2017-01-01', 2, true, true);
+ALTER SEQUENCE queue_enroll_id_seq RESTART WITH 3;
 
 INSERT INTO CLIENT_INFO_TYPE (id, title, active, code) VALUES
 (1, 'telephone', true, 'phone'),

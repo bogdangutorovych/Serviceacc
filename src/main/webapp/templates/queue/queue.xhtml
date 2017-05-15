@@ -54,8 +54,8 @@
 			immediate="true" />
 
 		<p:column headerText="дата" sortBy="DateEnroll"
-			filterBy="#{queue.DateEnroll}" filterMatchMode="contains">
-			<h:outputText value="#{queue.DateEnroll}"
+			filterBy="#{queue.dateEnroll}" filterMatchMode="contains">
+			<h:outputText value="#{queue.dateEnroll}"
 				converter="localDateConverter" pattern="dd.MM.yyyy" />
 		</p:column>
 
@@ -65,9 +65,9 @@
 			<h:outputText value="#{queue.deal.client}" />
 		</p:column>
 
-		<p:column headerText="услуга" sortBy="#{queue.deal.service}"
-			filterBy="#{queue.deal.service}" filterMatchMode="contains">
-			<h:outputText value="#{queue.deal.service}" />
+		<p:column headerText="услуга" sortBy="#{queue.deal.service.name}"
+			filterBy="#{queue.deal.service.name}" filterMatchMode="contains">
+			<h:outputText value="#{queue.deal.service.name}" />
 		</p:column>
 
 

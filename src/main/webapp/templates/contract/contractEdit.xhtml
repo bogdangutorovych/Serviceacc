@@ -3,8 +3,8 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-	
-	<p:importEnum type="ua.com.foxminded.serviceacc.model.enums.ContractStatus" var="ContractStatuses" />
+ 
+    <p:importEnum type="ua.com.foxminded.serviceacc.model.enums.ContractStatus" var="ContractStatuses" />
 
 	<p:toolbar>
 		<f:facet name="left">
@@ -90,7 +90,7 @@
 			value="#{contractController.selectedContract.contractStatus}"
 			converter="omnifaces.SelectItemsConverter">
 			<f:selectItems value="#{ContractStatuses.ALL_VALUES}" var="statusEnum"
-                itemLabel="#{statusEnum.localizedName}"/>
+			    itemLabel="#{statusEnum.friendlyName}"/>
 			<p:inputText id="title"
 				value="#{contractController.selectedContract.contractStatus}"
 				required="true" />
