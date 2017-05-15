@@ -41,10 +41,6 @@ public class Invoice {
     private Money price;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "pay_status_id")
-    private PayStatus status;
-
-    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "payment_id")
     private Payment payment;
 
@@ -54,12 +50,11 @@ public class Invoice {
     public Invoice() {
     }
 
-    public Invoice(String number, LocalDate date, Contract contract, Money price, PayStatus status, Payment payment) {
+    public Invoice(String number, LocalDate date, Contract contract, Money price, Payment payment) {
         this.number = number;
         this.date = date;
         this.contract = contract;
         this.price = price;
-        this.status = status;
         this.payment = payment;
     }
 
@@ -101,14 +96,6 @@ public class Invoice {
 
     public void setPrice(Money price) {
         this.price = price;
-    }
-
-    public PayStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(PayStatus status) {
-        this.status = status;
     }
 
     public Payment getPayment() {
