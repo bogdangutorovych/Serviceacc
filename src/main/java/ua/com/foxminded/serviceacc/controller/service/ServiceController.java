@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ua.com.foxminded.serviceacc.model.Money;
 import ua.com.foxminded.serviceacc.model.Service;
-import ua.com.foxminded.serviceacc.model.enums.CurrencyType;
+import ua.com.foxminded.serviceacc.model.enums.Currency;
 import ua.com.foxminded.serviceacc.service.ServiceService;
 
 import javax.annotation.PostConstruct;
@@ -104,8 +104,8 @@ public class ServiceController implements Serializable {
         return tempPrices;
     }
 
-    public CurrencyType[] getCurrencyTypes(){
-        return CurrencyType.values();
+    public Currency[] getCurrencyTypes(){
+        return Currency.values();
     }
 
     public Money getNewMoney() {

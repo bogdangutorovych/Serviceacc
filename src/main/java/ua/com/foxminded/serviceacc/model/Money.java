@@ -16,7 +16,7 @@ import org.hibernate.annotations.Parameter;
 
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
-import ua.com.foxminded.serviceacc.model.enums.CurrencyType;
+import ua.com.foxminded.serviceacc.model.enums.Currency;
 
 @Entity
 @Table(name = "money")
@@ -36,7 +36,7 @@ public class Money {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "currency")
-    private CurrencyType currency;
+    private Currency currency;
 
     @Column(name = "amount")
     private Long amount;
@@ -47,7 +47,7 @@ public class Money {
     public Money() {
     }
 
-    public Money(CurrencyType currency, Long amount) {
+    public Money(Currency currency, Long amount) {
         this.currency = currency;
         this.amount = amount;
     }
@@ -60,11 +60,11 @@ public class Money {
         this.id = id;
     }
 
-    public CurrencyType getCurrency() {
+    public Currency getCurrency() {
         return currency;
     }
 
-    public void setCurrency(CurrencyType currency) {
+    public void setCurrency(Currency currency) {
         this.currency = currency;
     }
 
