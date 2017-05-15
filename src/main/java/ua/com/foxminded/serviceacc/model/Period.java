@@ -52,5 +52,4 @@ public class Period {
     public void setDateTo(LocalDate dateTo) {
         this.dateTo = dateTo;
     }
-
 }

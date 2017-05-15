@@ -16,7 +16,6 @@ import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.Contract;
 import ua.com.foxminded.serviceacc.model.Manager;
 import ua.com.foxminded.serviceacc.model.Service;
-import ua.com.foxminded.serviceacc.model.enums.ContractStatus;
 import ua.com.foxminded.serviceacc.service.ClientService;
 import ua.com.foxminded.serviceacc.service.ContractService;
 import ua.com.foxminded.serviceacc.service.ManagerService;
@@ -71,7 +70,6 @@ public class ContractController implements Serializable {
         if (selectedContract.getId() == null) {
             selectedContract = contractService.create(selectedContract);
             selectedContract.setNumber("Договор № " + selectedContract.getId());
-            selectedContract.setContractStatus(ContractStatus.PENDING);
             contractService.update(selectedContract);
             list.add(selectedContract);
         }

@@ -18,7 +18,7 @@ INSERT INTO CLIENT (id, birth_day, first_name, last_name, active) VALUES
 ALTER SEQUENCE client_id_seq RESTART WITH 10;
 
 INSERT INTO CONTRACT (id, number, contract_date, client_id, manager_id, contract_status, active) VALUES
-(1, 'Contract # 1', '2017-01-01', 1, 2, 'PENDING', true),
+(1, 'Contract # 1', '2017-01-01', 1, 2, 'ACTIVE', true),
 (2, 'Contract # 2', '2017-02-28', 2, 1, 'ACTIVE', true),
 (3, 'Contract # 3', '2017-04-25', 3, 1, 'FROZEN', true),
 (4, 'Contract # 4', '2017-01-31', 3, 1, 'CLOSED', true);
