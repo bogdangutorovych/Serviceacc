@@ -67,14 +67,21 @@ public class ManagerController implements Serializable {
 	}
 
 	public void onOk() {
+        //save or update manager
 	    if(selectedManager.getId() == null) {
+            managerService.save(selectedManager);
             managers.add(selectedManager);
-            managerService.update(selectedManager);
+        }else{
+            Manager updated = managerService.update(selectedManager);
+            int i = managers.indexOf(selectedManager);
+            managers.set(i, updated);
+            selectedManager = updated;
         }
 
+        //save or update information
         Iterator<ManagerInformation> iteratorInfos = managerInfo.iterator();
         while(iteratorInfos.hasNext()){
-            ManagerInformation info = iteratorInfos.next(); 
+            ManagerInformation info = iteratorInfos.next();
             if (info.getContent().isEmpty()) {
                 managerInformationService.update(info);
                 managerInformationService.delete(info.getId());
@@ -82,10 +89,7 @@ public class ManagerController implements Serializable {
                 managerInformationService.update(info);
             }
         }
-        Manager updated = managerService.update(selectedManager);
-        int i = managers.indexOf(selectedManager);
-        managers.set(i, updated);
-        selectedManager = updated;
+
     }
 
 	public void setSelectedManager(Manager selectedManager) {
@@ -115,7 +119,7 @@ public class ManagerController implements Serializable {
 	public void setManagerInformationTypeList(List<ManagerInformationType> managerInformationTypeList) {
 		this.managerInformationTypeList = managerInformationTypeList;
 	}
-	
+
 	public ManagerInformation getInfoByType(ManagerInformationType managerInformationType) {
 
 	    if (selectedManager.getId() != null) {
@@ -131,15 +135,15 @@ public class ManagerController implements Serializable {
         managerInfo.setManager(selectedManager);
         return managerInfo;
     }
-	
+
 	public List<ManagerInformationType> getInfoTypeList(){ return managerInformationTypeService.findAll();}
-	
+
     public List<ManagerInformation> getManagerInformationList() {
         managerInfo = new ArrayList<>();
         for (ManagerInformationType type : getInfoTypeList()) {
             ManagerInformation info = getInfoByType(type);
             managerInfo.add(info);
-        } 
+        }
         return managerInfo;
     }
 

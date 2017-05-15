@@ -26,6 +26,9 @@ public class ClientInformationTypeController implements Serializable {
 
 	private ClientInformationTypeService clientInformationTypeService;
 
+    @Autowired
+    private ConfigController configController;
+
 	@Autowired
 	public ClientInformationTypeController(ClientInformationTypeService cltService) {
 		this.clientInformationTypeService = cltService;
@@ -33,7 +36,7 @@ public class ClientInformationTypeController implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		clientInformationTypeList = clientInformationTypeService.findAll();
+		clientInformationTypeList = configController.getClientInformationTypeList();
 	}
 
 	public ClientInformationTypeService getClientInformationTypeService() {
@@ -58,13 +61,13 @@ public class ClientInformationTypeController implements Serializable {
 	}
 
 	public void delete() {
-		clientInformationTypeList.remove(selected);
-		clientInformationTypeService.delete(selected.getId());
+        configController.deleteClientInformationType(selected.getId());
+        clientInformationTypeList.remove(selected);
 		selected = null;
 	}
 
 	public void onRowEdit(RowEditEvent event) {
-		clientInformationTypeService.save((ClientInformationType) event.getObject());
+		configController.saveClientInformationType((ClientInformationType) event.getObject());
 		selected = null;
 	}
 

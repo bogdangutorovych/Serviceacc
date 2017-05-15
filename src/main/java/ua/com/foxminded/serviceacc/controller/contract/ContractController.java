@@ -14,12 +14,10 @@ import org.springframework.stereotype.Controller;
 
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.Contract;
-import ua.com.foxminded.serviceacc.model.ContractStatus;
 import ua.com.foxminded.serviceacc.model.Manager;
 import ua.com.foxminded.serviceacc.model.Service;
 import ua.com.foxminded.serviceacc.service.ClientService;
 import ua.com.foxminded.serviceacc.service.ContractService;
-import ua.com.foxminded.serviceacc.service.ContractStatusService;
 import ua.com.foxminded.serviceacc.service.ManagerService;
 import ua.com.foxminded.serviceacc.service.ServiceService;
 
@@ -37,22 +35,19 @@ public class ContractController implements Serializable {
     private List<Client> availableClients;
     private List<Manager> availableManagers;
     private List<Service> availableServices;
-    private List<ContractStatus> availableStatuses;
 
     private ContractService contractService;
     private ClientService clientService;
     private ManagerService managerService;
     private ServiceService serviceService;
-    private ContractStatusService contractStatusService;
 
     @Autowired
     public ContractController(ContractService contractService, ClientService clientService,
-            ManagerService managerService, ServiceService serviceService, ContractStatusService contractStatusService) {
+            ManagerService managerService, ServiceService serviceService) {
         this.contractService = contractService;
         this.clientService = clientService;
         this.managerService = managerService;
         this.serviceService = serviceService;
-        this.contractStatusService = contractStatusService;
     }
 
     @PostConstruct
@@ -69,15 +64,12 @@ public class ContractController implements Serializable {
         availableClients = clientService.findAll();
         availableManagers = managerService.findAll();
         availableServices = serviceService.findAll();
-        availableStatuses = contractStatusService.findAll();
     }
 
     public void onOk() {
         if (selectedContract.getId() == null) {
             selectedContract = contractService.create(selectedContract);
             selectedContract.setNumber("Договор № " + selectedContract.getId());
-            ContractStatus contractStatus = contractStatusService.findByStatusTitle("Pending");
-            selectedContract.setContractStatus(contractStatus);
             contractService.update(selectedContract);
             list.add(selectedContract);
         }
@@ -133,14 +125,6 @@ public class ContractController implements Serializable {
 
     public void setAvailableServices(List<Service> availableServices) {
         this.availableServices = availableServices;
-    }
-
-    public List<ContractStatus> getAvailableStatuses() {
-        return availableStatuses;
-    }
-
-    public void setAvailableStatuses(List<ContractStatus> availableStatuses) {
-        this.availableStatuses = availableStatuses;
     }
 
 }

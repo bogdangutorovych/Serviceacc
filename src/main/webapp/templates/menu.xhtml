@@ -18,7 +18,7 @@
 					update=":contentForm"
 					action='#{navController.setMainContent("contract/contractList")}' />
 				<p:menuitem value="Услуги" icon="ui-icon-gear" update=":contentForm"
-					action='#{navController.setMainContent("service/service")}' />
+					action='#{navController.setMainContent("service/serviceList")}' />
 
 				<p:submenu label="Счета">
 					<p:menuitem value="Все счета" icon="ui-icon-document" />
@@ -28,31 +28,15 @@
 				<p:menuitem value="Зарплата" icon="ui-icon-document" />
 			</p:submenu>
 			<p:submenu label="Настройки">
-				<p:menuitem value="Статусы договоров" icon="ui-icon-note"
-					update=":contentForm"
-					action='#{navController.setMainContent("catalogue/contractStatus")}' />
-				<p:menuitem value="Типы уровеней клиента" icon="ui-icon-note"
-					update=":contentForm"
-					action='#{navController.setMainContent("catalogue/clientLevelType")}' />
-				<p:menuitem value="Валюта" icon="ui-icon-note" update=":contentForm"
-					action='#{navController.setMainContent("catalogue/currencyType")}' />
 				<p:menuitem value="Типы доп.информации клиента" icon="ui-icon-note"
 					update=":contentForm"
 					action='#{navController.setMainContent("catalogue/clientInformationType")}' />
 				<p:menuitem value="Типы доп.информации ментора" icon="ui-icon-note"
 					update=":contentForm"
 					action='#{navController.setMainContent("catalogue/managerInformationType")}' />
-				<p:menuitem value="Типы оплат" icon="ui-icon-note"
-					update=":contentForm"
-					action='#{navController.setMainContent("catalogue/paymentType")}' />
 				<p:menuitem value="Статусы оплат" icon="ui-icon-note"
 					update=":contentForm"
 					action='#{navController.setMainContent("catalogue/payStatus")}' />
-				<p:menuitem value="Типы услуг" icon="ui-icon-note"
-					update=":contentForm"
-					action='#{navController.setMainContent("catalogue/serviceType")}' />
-				<p:menuitem value="Money" icon="ui-icon-note" update=":contentForm"
-					action='#{navController.setMainContent("catalogue/money")}' />
 			</p:submenu>
 		</p:panelMenu>
 	</h:form>

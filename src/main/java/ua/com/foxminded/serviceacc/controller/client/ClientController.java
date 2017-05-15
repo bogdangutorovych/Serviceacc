@@ -14,11 +14,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import ua.com.foxminded.serviceacc.controller.catalogue.ConfigController;
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.ClientInformation;
 import ua.com.foxminded.serviceacc.model.ClientInformationType;
 import ua.com.foxminded.serviceacc.service.ClientInformationService;
-import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
 import ua.com.foxminded.serviceacc.service.ClientService;
 
 @Controller
@@ -36,15 +36,14 @@ public class ClientController implements Serializable {
     private List<ClientInformation> clientInfo;
 
     private final ClientService clientService;
-    private final ClientInformationTypeService citService;
-    private final ClientInformationService ciService;
+    private final ClientInformationService clientInformationService;
+    private final ConfigController configController;
 
     @Autowired
-    public ClientController(ClientService clientService, ClientInformationTypeService citService,
-            ClientInformationService ciService) {
+    public ClientController(ClientService clientService, ClientInformationService clientInformationService, ConfigController configController) {
         this.clientService = clientService;
-        this.citService = citService;
-        this.ciService = ciService;
+        this.clientInformationService = clientInformationService;
+        this.configController = configController;
     }
 
     @PostConstruct
@@ -62,31 +61,33 @@ public class ClientController implements Serializable {
     }
 
     public void onOk() {
+        // save or update client
         if (selectedClient.getId() == null) {
+            clientService.save(selectedClient);
             list.add(selectedClient);
+        } else {
             clientService.update(selectedClient);
         }
 
+        // Save or update informations
         Iterator<ClientInformation> iteratorInfos = clientInfo.iterator();
         while (iteratorInfos.hasNext()) {
             ClientInformation info = iteratorInfos.next();
             if (info.getContent().isEmpty() && info.getId() != null) {
-                ciService.update(info);
-                ciService.delete(info.getId());
+                clientInformationService.update(info);
+                clientInformationService.delete(info.getId());
             } else if (info.getContent().isEmpty() && info.getId() == null) {
             } else {
-                ciService.update(info);
+                clientInformationService.update(info);
             }
         }
-        Client updated = clientService.update(selectedClient);
-        int i = list.indexOf(selectedClient);
-        list.set(i, updated);
-        selectedClient = updated;
+
     }
 
     public void delete() {
-        list.remove(selectedClient);
+
         clientService.delete(selectedClient.getId());
+        list.remove(selectedClient);
         selectedClient = null;
     }
 
@@ -105,7 +106,7 @@ public class ClientController implements Serializable {
     public ClientInformation getInfoByType(ClientInformationType clientInformationType) {
 
         if (selectedClient.getId() != null) {
-            for (ClientInformation clientInfo : ciService.findByClient(selectedClient)) {
+            for (ClientInformation clientInfo : clientInformationService.findByClient(selectedClient)) {
                 if (clientInfo.getClientInformationType().equals(clientInformationType)) {
                     return clientInfo;
                 }
@@ -119,7 +120,7 @@ public class ClientController implements Serializable {
     }
 
     public List<ClientInformationType> getInfoTypeList() {
-        return citService.findAll();
+        return configController.getClientInformationTypeList();
     }
 
     public List<ClientInformation> getClientInformationList() {

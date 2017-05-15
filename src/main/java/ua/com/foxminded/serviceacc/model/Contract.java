@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,6 +19,8 @@ import org.hibernate.annotations.Loader;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
+
+import ua.com.foxminded.serviceacc.model.enums.ContractStatus;
 
 @Entity
 @Table(name = "contract")
@@ -58,8 +62,8 @@ public class Contract {
     @JoinColumn(name = "service_id")
     private Service service;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "contract_status_id")
+    @Enumerated(EnumType.STRING)
+    @JoinColumn(name = "contract_status")
     private ContractStatus contractStatus;
 
     @OneToOne(fetch = FetchType.EAGER)

@@ -1,35 +1,115 @@
 package ua.com.foxminded.serviceacc.controller.service;
 
-import java.io.Serializable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import ua.com.foxminded.serviceacc.model.Money;
+import ua.com.foxminded.serviceacc.model.Service;
+import ua.com.foxminded.serviceacc.model.enums.Currency;
+import ua.com.foxminded.serviceacc.service.ServiceService;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-
-import org.springframework.stereotype.Controller;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Controller
 @ViewScoped
 @ManagedBean
 public class ServiceController implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
-    private String text;
+    private static final Logger log = LoggerFactory.getLogger(ServiceController.class);
 
-    private Double input2 = new Double(0);
+    @Autowired
+    private ServiceService serviceService;
 
-    public Double getInput2() {
-        return input2;
+    private Service selectedService;
+    private List<Money> tempPrices = new ArrayList<>();
+    private Money newMoney = new Money();
+
+    @PostConstruct
+    public void init() {
     }
 
-    public void setInput2(Double input2) {
-        this.input2 = input2;
+    public void addNewService(){
+        selectedService = new Service();
+        tempPrices.clear();
     }
 
-    public String getText() {
-        return text;
+    public void deleteService(){
+        serviceService.delete(selectedService.getId());
+        log.debug("Delete Service: " + selectedService);
+        selectedService = null;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void onEdit(){
+        if (selectedService != null){
+            tempPrices.clear();
+            tempPrices.addAll(selectedService.getPrices());
+            prepareNewMoney();
+        }
     }
+
+    public void onOk(){
+        selectedService.getPrices().clear();
+        selectedService.getPrices().addAll(tempPrices);
+        serviceService.save(selectedService);
+        tempPrices.clear();
+        log.debug("onOk save Service: " + selectedService);
+    }
+
+    public void addPrice(){
+        if (newMoney != null){
+            tempPrices.add(newMoney);
+        }
+    }
+
+    public List<Money> convertMoneyListFromSet(Set<Money> moneySet){
+        if (moneySet != null){
+            return new ArrayList<Money>(moneySet);
+        }else{
+            return null;
+        }
+    }
+
+    public void removePrice(Money price){
+        tempPrices.remove(price);
+    }
+
+    public void prepareNewMoney(){
+        newMoney = new Money();
+    }
+
+    //Getters and Setters
+
+    public List<Service> getServiceList(){
+        return serviceService.findAll();
+    }
+
+    public Service getSelectedService() {
+        return selectedService;
+    }
+
+    public void setSelectedService(Service selectedService) {
+        this.selectedService = selectedService;
+    }
+
+    public List<Money> getTempPrices() {
+        return tempPrices;
+    }
+
+    public Currency[] getCurrencyTypes(){
+        return Currency.values();
+    }
+
+    public Money getNewMoney() {
+        return newMoney;
+    }
+
 }
