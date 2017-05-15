@@ -43,7 +43,7 @@ public class Manager {
     private LocalDate birthday;
 
     @Column(name = "is_deleted", nullable = false)
-    private boolean isDeleted = true;
+    private boolean isDeleted;
 
     public Manager() {
 

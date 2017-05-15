@@ -24,10 +24,10 @@ import ua.com.foxminded.serviceacc.model.enums.ContractStatus;
 
 @Entity
 @Table(name = "contract")
-@SQLDelete(sql = "UPDATE contract SET active = false WHERE id = ?")
+@SQLDelete(sql = "UPDATE contract SET is_deleted = false WHERE id = ?")
 @Loader(namedQuery = "findContractById")
-@NamedQuery(name = "findContractById", query = "FROM Contract WHERE id = ?1 AND active = true")
-@Where(clause = "active = true")
+@NamedQuery(name = "findContractById", query = "FROM Contract WHERE id = ?1 AND isDeleted = true")
+@Where(clause = "is_deleted = true")
 public class Contract {
 
     @Id
@@ -73,6 +73,17 @@ public class Contract {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "manager_rate")
     private Money managerRate;
+
+    @Column(name = "is_deleted", nullable = false)
+    private boolean isDeleted;
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
 
     public LocalDate getPaymentDate() {
         return paymentDate;
