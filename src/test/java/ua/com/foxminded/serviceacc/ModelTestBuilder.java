@@ -26,7 +26,7 @@ public class ModelTestBuilder {
 
     public static Client buildTestClient() {
         Client client = new Client();
-        client.setActive(true);
+        client.setDeleted(false);
         return client;
     }
 
@@ -41,7 +41,7 @@ public class ModelTestBuilder {
         return manager;
     }
 
-    public static Service buildTestService(){
+    public static Service buildTestService() {
         Service service = new Service();
         service.setName("Service1");
         return service;

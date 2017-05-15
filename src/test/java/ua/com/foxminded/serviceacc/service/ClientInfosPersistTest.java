@@ -47,7 +47,7 @@ public class ClientInfosPersistTest {
         assertThat(skype1.getTitle(), is(typeName));
 
         Client client = ModelTestBuilder.buildTestClient();
-        client.setActive(true);
+        client.setDeleted(false);
         clientService.save(client);
 
         ClientInformation info1 = new ClientInformation();

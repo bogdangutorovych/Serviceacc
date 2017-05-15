@@ -5,13 +5,13 @@ INSERT INTO MANAGER (id, birth_day, first_name, last_name, active) VALUES
 (4, '1998-04-16', 'Diego', 'Maradona', true);
 ALTER SEQUENCE manager_id_seq RESTART WITH 5;
 
-INSERT INTO CLIENT (id, birth_day, first_name, last_name, active) VALUES
-(1, '1980-03-14', 'Robert', 'Levandovsky', true),
-(2, '1986-09-08', 'Michael', 'Phelps', true),
-(3, '1991-01-14', 'Marten', 'Fourcade', true),
-(4, '1996-07-30', 'Rafael', 'Nadal', true),
-(5, '1997-05-20', 'Sergey', 'Bubka', true),
-(6, '1996-02-21', 'Arvidas', 'Sabonis', true),
+INSERT INTO CLIENT (id, birth_day, first_name, last_name, is_deleted) VALUES
+(1, '1980-03-14', 'Robert', 'Levandovsky', false),
+(2, '1986-09-08', 'Michael', 'Phelps', false),
+(3, '1991-01-14', 'Marten', 'Fourcade', false),
+(4, '1996-07-30', 'Rafael', 'Nadal', false),
+(5, '1997-05-20', 'Sergey', 'Bubka', false),
+(6, '1996-02-21', 'Arvidas', 'Sabonis', false),
 (7, '1986-03-25', 'Oksana', 'Bayul', true),
 (8, '1980-04-03', 'Steffy', 'Graf', false),
 (9, '1995-09-12', 'Vitaly', 'Klichko', true);
@@ -40,17 +40,17 @@ INSERT INTO MANAGER_INFO_TYPE (id, title, active, code) VALUES
 (5, 'city', true, 'city');
 ALTER SEQUENCE manager_info_type_seq RESTART WITH 6;
 
-INSERT INTO CLIENT_INFO (id, content, info_type_id, client_id, active) VALUES
-(1, '0503265566', 1, 1, true),
-(2, 'test@gmail.com', 2, 1, true),
-(3, 'www.test.ua', 3, 1, true),
-(4, 'testik', 4, 1, true),
-(5, 'Kyev', 5, 1, true),
-(6, '0936854214', 1, 2, true),
-(7, 'karamba@gmail.com', 2, 2, true),
-(8, null, 3, 2, true),
-(9, 'rocket56', 4, 2, true),
-(10, 'Kyev', 5, 2, true);
+INSERT INTO CLIENT_INFO (id, content, info_type_id, client_id, is_deleted) VALUES
+(1, '0503265566', 1, 1, false),
+(2, 'test@gmail.com', 2, 1, false),
+(3, 'www.test.ua', 3, 1, false),
+(4, 'testik', 4, 1, false),
+(5, 'Kyev', 5, 1, false),
+(6, '0936854214', 1, 2, false),
+(7, 'karamba@gmail.com', 2, 2, false),
+(8, null, 3, 2, false),
+(9, 'rocket56', 4, 2, false),
+(10, 'Kyev', 5, 2, false);
 ALTER SEQUENCE client_info_seq RESTART WITH 11;
 
 INSERT INTO MANAGER_INFO (id, content, info_type_id, manager_id, active) VALUES

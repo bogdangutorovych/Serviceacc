@@ -15,7 +15,7 @@ import org.hibernate.annotations.SQLDelete;
 
 @Entity
 @Table(name = "client_info")
-@SQLDelete(sql = "UPDATE client_info SET active = false WHERE id = ?")
+@SQLDelete(sql = "UPDATE client_info SET is_deleted = true WHERE id = ?")
 public class ClientInformation {
 
     @Id
@@ -33,8 +33,8 @@ public class ClientInformation {
     @JoinColumn(name = "info_type_id")
     private ClientInformationType clientInformationType;
 
-    @Column(name = "active", nullable = false)
-    private boolean active = true;
+    @Column(name = "is_deleted", nullable = false)
+    private boolean isDeleted = true;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
@@ -51,11 +51,11 @@ public class ClientInformation {
     public ClientInformation() {
     }
 
-    public ClientInformation(String content, ClientInformationType clientInformationType, boolean active) {
+    public ClientInformation(String content, ClientInformationType clientInformationType, boolean isDeleted) {
 
         this.content = content;
         this.clientInformationType = clientInformationType;
-        this.active = active;
+        this.isDeleted = isDeleted;
     }
 
     public Long getId() {
@@ -82,12 +82,12 @@ public class ClientInformation {
         this.clientInformationType = clientInformationType;
     }
 
-    public boolean isActive() {
-        return active;
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     @Override
