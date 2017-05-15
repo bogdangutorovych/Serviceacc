@@ -53,12 +53,6 @@
 		<p:ajax event="rowUnselect" update="@form:btn_edit,@form:btn_delete"
 			immediate="true" />
 
-		<!-- 		<p:column headerText="id" sortBy="#{c.id}" filterBy="#{c.id}"
-			filterMatchMode="contains">
-			<h:outputText value="#{c.id}" />
-		</p:column>
-		 -->
-
 		<p:column headerText="дата договора" sortBy="#{c.contractDate}"
 			filterBy="#{c.contractDate}" filterMatchMode="contains">
 			<h:outputText value="#{c.contractDate}"

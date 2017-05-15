@@ -13,4 +13,9 @@ public enum ContractStatus {
     public String getLocalizedName() {
         return localizedName;
     }
+
+    public void setLocalizedName(String localizedName) {
+        this.localizedName = localizedName;
+    }
+
 }

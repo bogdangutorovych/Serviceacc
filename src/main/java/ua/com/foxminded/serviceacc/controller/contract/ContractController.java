@@ -73,43 +73,9 @@ public class ContractController implements Serializable {
         if (selectedContract.getId() == null) {
             selectedContract = contractService.create(selectedContract);
             selectedContract.setNumber("" + selectedContract.getId());
-            // selectedContract.setContractStatus(ContractStatus.ACTIVE);
             selectedContract.setPaymentDate(selectedContract.getContractDate().plusMonths(1));
         } else {
-            // Contract currentContract =
-            // contractService.findById(selectedContract.getId());
-            // ContractStatus currentContractStatus =
-            // currentContract.getContractStatus();
-            // ContractStatus selectedContractStatus =
-            // selectedContract.getContractStatus();
-            // if
-            // (!currentContractStatus.getTitle().equals(selectedContractStatus.getTitle()))
-            // {
-            // switch (selectedContractStatus.getTitle()) {
-            // case "В ожидании":
-            //
-            // break;
-            //
-            // case "Активировать":
-            // if (selectedContract.getPaymentDate() == null) {
             selectedContract.setPaymentDate(LocalDate.now().plusMonths(1));
-            // }
-            // break;
-            //
-            // case "Заморожен":
-            // selectedContract.setCloseDate(LocalDate.now());
-            // selectedContract.setManager(null);
-            // break;
-            //
-            // case "Завершен":
-            // selectedContract.setCloseDate(LocalDate.now());
-            // selectedContract.setManager(null);
-            // break;
-            //
-            // default:
-            // break;
-            // }
-            // }
         }
 
         contractService.update(selectedContract);
