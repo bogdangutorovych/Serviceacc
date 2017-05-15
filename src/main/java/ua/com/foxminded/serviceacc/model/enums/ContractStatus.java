@@ -1,6 +1,7 @@
 package ua.com.foxminded.serviceacc.model.enums;
 
 public enum ContractStatus {
+
     ACTIVE("Активный"), FROZEN("Замороженный"), CLOSED("Закрытый");
 
     private ContractStatus(String friendlyName) {
@@ -11,6 +12,7 @@ public enum ContractStatus {
 
     public String getFriendlyName() {
         return friendlyName;
+
     }
 
 }

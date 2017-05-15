@@ -1,21 +1,23 @@
 package ua.com.foxminded.serviceacc.controller.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import ua.com.foxminded.serviceacc.model.Money;
-import ua.com.foxminded.serviceacc.model.Service;
-import ua.com.foxminded.serviceacc.model.enums.Currency;
-import ua.com.foxminded.serviceacc.service.ServiceService;
-
-import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+import ua.com.foxminded.serviceacc.model.Money;
+import ua.com.foxminded.serviceacc.model.Service;
+import ua.com.foxminded.serviceacc.model.enums.Currency;
+import ua.com.foxminded.serviceacc.service.ServiceService;
 
 @Controller
 @ViewScoped
@@ -37,26 +39,26 @@ public class ServiceController implements Serializable {
     public void init() {
     }
 
-    public void addNewService(){
+    public void addNewService() {
         selectedService = new Service();
         tempPrices.clear();
     }
 
-    public void deleteService(){
+    public void deleteService() {
         serviceService.delete(selectedService.getId());
         log.debug("Delete Service: " + selectedService);
         selectedService = null;
     }
 
-    public void onEdit(){
-        if (selectedService != null){
+    public void onEdit() {
+        if (selectedService != null) {
             tempPrices.clear();
             tempPrices.addAll(selectedService.getPrices());
             prepareNewMoney();
         }
     }
 
-    public void onOk(){
+    public void onOk() {
         selectedService.getPrices().clear();
         selectedService.getPrices().addAll(tempPrices);
         serviceService.save(selectedService);
@@ -64,31 +66,31 @@ public class ServiceController implements Serializable {
         log.debug("onOk save Service: " + selectedService);
     }
 
-    public void addPrice(){
-        if (newMoney != null){
+    public void addPrice() {
+        if (newMoney != null) {
             tempPrices.add(newMoney);
         }
     }
 
-    public List<Money> convertMoneyListFromSet(Set<Money> moneySet){
-        if (moneySet != null){
+    public List<Money> convertMoneyListFromSet(Set<Money> moneySet) {
+        if (moneySet != null) {
             return new ArrayList<Money>(moneySet);
-        }else{
+        } else {
             return null;
         }
     }
 
-    public void removePrice(Money price){
+    public void removePrice(Money price) {
         tempPrices.remove(price);
     }
 
-    public void prepareNewMoney(){
+    public void prepareNewMoney() {
         newMoney = new Money();
     }
 
-    //Getters and Setters
+    // Getters and Setters
 
-    public List<Service> getServiceList(){
+    public List<Service> getServiceList() {
         return serviceService.findAll();
     }
 
@@ -104,7 +106,7 @@ public class ServiceController implements Serializable {
         return tempPrices;
     }
 
-    public Currency[] getCurrencyTypes(){
+    public Currency[] getCurrencyTypes() {
         return Currency.values();
     }
 

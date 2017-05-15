@@ -1,0 +1,77 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:toolbar>
+
+		<f:facet name="left">
+			<p:commandButton id="btn_add" value="Добавить" update=":contentForm"
+				icon="ui-icon-document"
+				actionListener="#{queueEnrollController.add()}"
+				action='#{navController.setMainContent("queue/queueEnroll")}' />
+
+			<span class="ui-separator"><span
+				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+
+			<p:commandButton id="btn_edit" value="Редактировать"
+				update=":contentForm" icon="ui-icon-pencil"
+				disabled="#{queueEnrollController.selected==null}"
+				actionListener="#{queueEnrollController.getActualLists()}"
+				action='#{navController.setMainContent("queue/queueEnroll")}' />
+
+			<span class="ui-separator"><span
+				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+
+			<p:commandButton id="btn_delete" value="Удалить"
+				update=":contentForm" icon="ui-icon-trash"
+				disabled="#{queueEnrollController.selected==null}"
+				actionListener="#{queueEnrollController.delete()}" />
+
+		</f:facet>
+	</p:toolbar>
+
+	<br />
+	<p:dataTable id="queue" editable="true"
+		tableStyle="table-layout:auto;width:100%;" emptyMessage="Нет данных"
+		var="queue" value="#{queueEnrollController.list}"
+		rowKey="#{queueEnrollController.list.indexOf(queue)}"
+		selectionMode="single" selection="#{queueEnrollController.selected}"
+		widgetVar="queueTable">
+
+		<f:facet name="header" style="text-align:center">Очередь
+        <p:outputPanel>
+				<h:outputText value="Искать везде: " />
+				<p:inputText id="globalFilter" onkeyup="PF('queueTable').filter()"
+					style="width:150px" placeholder="Enter keyword" />
+			</p:outputPanel>
+		</f:facet>
+
+		<p:ajax event="rowSelect" update="@form:btn_edit,@form:btn_delete"
+			immediate="true" />
+		<p:ajax event="rowUnselect" update="@form:btn_edit,@form:btn_delete"
+			immediate="true" />
+
+		<p:column headerText="дата" sortBy="DateEnroll"
+			filterBy="#{queue.dateEnroll}" filterMatchMode="contains">
+			<h:outputText value="#{queue.dateEnroll}"
+				converter="localDateConverter" pattern="dd.MM.yyyy" />
+		</p:column>
+
+		<p:column headerText="клиент" sortBy="#{queue.deal.client}"
+			filterBy="#{queue.deal.client}" filterMatchMode="contains"
+			converter="omnifaces.SelectItemsConverter">
+			<h:outputText value="#{queue.deal.client}" />
+		</p:column>
+
+		<p:column headerText="услуга" sortBy="#{queue.deal.service.name}"
+			filterBy="#{queue.deal.service.name}" filterMatchMode="contains">
+			<h:outputText value="#{queue.deal.service.name}" />
+		</p:column>
+
+
+
+	</p:dataTable>
+
+</ui:composition>

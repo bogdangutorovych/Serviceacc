@@ -58,7 +58,9 @@ public class ServiceTest {
     }
 
     @Test
+
     public void deleteServiceTest() {
+
         Service service = buildTestService();
         serviceService.save(service);
 
@@ -68,6 +70,7 @@ public class ServiceTest {
     }
 
     @Test
+
     public void updateActiveTest() {
         Service service = buildTestService();
         serviceService.save(service);

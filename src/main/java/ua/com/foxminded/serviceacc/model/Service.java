@@ -115,4 +115,5 @@ public class Service {
         return "Service{" + "id=" + id + ", name='" + name + '\'' + ", description='" + description + '\'' + ", prices="
                 + prices + ", managerRate=" + managerRate + ", isDeleted=" + isDeleted + '}';
     }
+
 }
