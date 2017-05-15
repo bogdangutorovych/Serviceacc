@@ -24,10 +24,10 @@ import ua.com.foxminded.serviceacc.model.enums.ContractStatus;
 
 @Entity
 @Table(name = "contract")
-@SQLDelete(sql = "UPDATE contract SET is_deleted = false WHERE id = ?")
+@SQLDelete(sql = "UPDATE contract SET is_deleted = true WHERE id = ?")
 @Loader(namedQuery = "findContractById")
-@NamedQuery(name = "findContractById", query = "FROM Contract WHERE id = ?1 AND isDeleted = true")
-@Where(clause = "is_deleted = true")
+@NamedQuery(name = "findContractById", query = "FROM Contract WHERE id = ?1 AND isDeleted = false")
+@Where(clause = "is_deleted = false")
 public class Contract {
 
     @Id
@@ -43,9 +43,6 @@ public class Contract {
 
     @Column(name = "contract_date")
     private LocalDate contractDate;
-
-    @Column(name = "payment_date")
-    private LocalDate paymentDate;
 
     @Column(name = "close_date")
     private LocalDate closeDate;
@@ -85,14 +82,6 @@ public class Contract {
         this.isDeleted = isDeleted;
     }
 
-    public LocalDate getPaymentDate() {
-        return paymentDate;
-    }
-
-    public void setPaymentDate(LocalDate paymentDate) {
-        this.paymentDate = paymentDate;
-    }
-
     public LocalDate getCloseDate() {
         return closeDate;
     }
@@ -100,9 +89,6 @@ public class Contract {
     public void setCloseDate(LocalDate closeDate) {
         this.closeDate = closeDate;
     }
-
-    @Column(name = "active", nullable = false)
-    private boolean active = true;
 
     public Contract() {
 
@@ -190,14 +176,6 @@ public class Contract {
 
     public void setManagerRate(Money managerRate) {
         this.managerRate = managerRate;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
     }
 
 }

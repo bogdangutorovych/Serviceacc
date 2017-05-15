@@ -1,10 +1,7 @@
 package ua.com.foxminded.serviceacc.model;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Loader;
-import org.hibernate.annotations.Parameter;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,65 +14,69 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import java.util.HashSet;
-import java.util.Set;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Loader;
+import org.hibernate.annotations.Parameter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 @Entity
 @Table(name = "service")
-@SQLDelete(sql = "UPDATE service SET active = false WHERE id = ?")
+@SQLDelete(sql = "UPDATE service SET is_deleted = true WHERE id = ?")
 @Loader(namedQuery = "findServiceById")
-@NamedQuery(name = "findServiceById", query = "FROM Service WHERE id = ?1 AND active = true")
-@Where(clause = "active = true")
+@NamedQuery(name = "findServiceById", query = "FROM Service WHERE id = ?1 AND isDeleted = false")
+@Where(clause = "is_deleted = false")
 public class Service {
 
-	@Id
-	@GenericGenerator(name = "generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
-			@Parameter(name = "sequence_name", value = "service_id_seq"),
-			@Parameter(name = "initial_value", value = "1"), @Parameter(name = "increment_size", value = "1") })
-	@GeneratedValue(generator = "generator")
-	@Column(name = "id", unique = true, nullable = false)
-	private Long id;
+    @Id
+    @GenericGenerator(name = "generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
+            @Parameter(name = "sequence_name", value = "service_id_seq"),
+            @Parameter(name = "initial_value", value = "1"), @Parameter(name = "increment_size", value = "1") })
+    @GeneratedValue(generator = "generator")
+    @Column(name = "id", unique = true, nullable = false)
+    private Long id;
 
-	@Column(name = "name")
-	private String name;
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "description")
     private String description;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private Set<Money> prices = new HashSet<>();
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Money> prices = new HashSet<>();
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "rate_id")
     private Money managerRate = new Money();
 
-	@Column(name = "active", nullable = false)
-	private boolean active = true;
+    @Column(name = "is_deleted", nullable = false)
+    private boolean isDeleted = true;
 
-	public Service() {
+    public Service() {
 
-	}
+    }
 
-	public Service(String name, Set<Money> prices) {
-		this.name = name;
-		this.prices = prices;
-	}
+    public Service(String name, Set<Money> prices) {
+        this.name = name;
+        this.prices = prices;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getDescription() {
         return description;
@@ -86,12 +87,12 @@ public class Service {
     }
 
     public Set<Money> getPrices() {
-		return prices;
-	}
+        return prices;
+    }
 
-	public void setPrices(Set<Money> prices) {
-		this.prices = prices;
-	}
+    public void setPrices(Set<Money> prices) {
+        this.prices = prices;
+    }
 
     public Money getManagerRate() {
         return managerRate;
@@ -101,23 +102,17 @@ public class Service {
         this.managerRate = managerRate;
     }
 
-    public boolean isActive() {
-		return active;
-	}
+    public boolean isDeleted() {
+        return isDeleted;
+    }
 
-	public void setActive(boolean active) {
-		this.active = active;
-	}
+    public void setDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
 
     @Override
     public String toString() {
-        return "Service{" +
-            "id=" + id +
-            ", name='" + name + '\'' +
-            ", description='" + description + '\'' +
-            ", prices=" + prices +
-            ", managerRate=" + managerRate +
-            ", active=" + active +
-            '}';
+        return "Service{" + "id=" + id + ", name='" + name + '\'' + ", description='" + description + '\'' + ", prices="
+                + prices + ", managerRate=" + managerRate + ", isDeleted=" + isDeleted + '}';
     }
 }

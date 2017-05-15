@@ -75,12 +75,6 @@
 			<h:outputText value="#{c.service}" />
 		</p:column>
 
-		<p:column headerText="дата оплаты" sortBy="#{c.paymentDate}"
-			filterBy="#{c.paymentDate}" filterMatchMode="contains">
-			<h:outputText value="#{c.paymentDate}" converter="localDateConverter"
-				pattern="dd.MM.yyyy" />
-		</p:column>
-
 		<p:column headerText="дата закрытия" sortBy="#{c.closeDate}"
 			filterBy="#{c.closeDate}" filterMatchMode="contains">
 			<h:outputText value="#{c.closeDate}" converter="localDateConverter"

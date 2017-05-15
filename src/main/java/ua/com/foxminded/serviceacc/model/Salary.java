@@ -44,18 +44,21 @@ public class Salary {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Invoice> invoices = new HashSet<>();
 
-    @Column(name = "active", nullable = false)
-    private boolean active = true;
+    @Column(name = "is_deleted", nullable = false)
+    private boolean isDeleted;
 
     public Salary() {
 
     }
 
-    public Salary(LocalDate date, Manager manager, Money amount, Set<Invoice> invoices) {
+    public Salary(Long id, LocalDate date, Manager manager, Money amount, Set<Invoice> invoices, boolean isDeleted) {
+        super();
+        this.id = id;
         this.date = date;
         this.manager = manager;
         this.amount = amount;
         this.invoices = invoices;
+        this.isDeleted = isDeleted;
     }
 
     public long getId() {
@@ -98,11 +101,16 @@ public class Salary {
         this.invoices = invoices;
     }
 
-    public boolean isActive() {
-        return active;
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 }
