@@ -43,7 +43,7 @@ public class Salary {
     private Money amount;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Invoice> invoices = new HashSet<>();
+    private Set<SalaryItem> salaryItems = new HashSet<>();
 
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
@@ -52,13 +52,13 @@ public class Salary {
 
     }
 
-    public Salary(Long id, LocalDate date, Manager manager, Money amount, Set<Invoice> invoices, boolean isDeleted) {
+    public Salary(Long id, LocalDate date, Manager manager, Money amount, Set<SalaryItem> salaryItems, boolean isDeleted) {
         super();
         this.id = id;
         this.date = date;
         this.manager = manager;
         this.amount = amount;
-        this.invoices = invoices;
+        this.salaryItems = salaryItems;
         this.isDeleted = isDeleted;
     }
 
@@ -94,12 +94,12 @@ public class Salary {
         this.amount = amount;
     }
 
-    public Set<Invoice> getInvoices() {
-        return invoices;
+    public Set<SalaryItem> getSalaryItems() {
+        return salaryItems;
     }
 
-    public void setInvoices(Set<Invoice> invoices) {
-        this.invoices = invoices;
+    public void setSalaryItems(Set<SalaryItem> salaryItems) {
+        this.salaryItems = salaryItems;
     }
 
     public boolean isDeleted() {
