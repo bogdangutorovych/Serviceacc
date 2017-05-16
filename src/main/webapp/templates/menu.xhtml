@@ -15,7 +15,7 @@
 					action='#{navController.setMainContent("manager/managerList")}' />
 					<p:menuitem value="Очередь" icon="ui-icon-person"
                     update=":contentForm"
-                    action='#{navController.setMainContent("queue/queue")}' />
+                    action='#{navController.setMainContent("queue/queueRegisterList")}' />
 				<p:menuitem value="Договора" icon="ui-icon-suitcase"
 					update=":contentForm"
 					action='#{navController.setMainContent("contract/contractList")}' />
@@ -23,7 +23,9 @@
 					action='#{navController.setMainContent("service/serviceList")}' />
 
 				<p:submenu label="Счета">
-					<p:menuitem value="Все счета" icon="ui-icon-document" />
+					<p:menuitem value="Все счета" icon="ui-icon-document" 
+					update=":contentForm"
+                    action='#{navController.setMainContent("invoice/invoiceList")}' />
 					<p:menuitem value="Выставление счетов" icon="ui-icon-document" />
 				</p:submenu>
 				<p:menuitem value="Оплаты" icon="ui-icon-document" />
