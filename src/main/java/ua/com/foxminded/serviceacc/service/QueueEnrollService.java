@@ -2,17 +2,17 @@ package ua.com.foxminded.serviceacc.service;
 
 import java.util.List;
 
-import ua.com.foxminded.serviceacc.model.QueueEnroll;
+import ua.com.foxminded.serviceacc.model.QueueRegister;
 
 public interface QueueEnrollService {
 
-    QueueEnroll create(QueueEnroll queueEnroll);
+    QueueRegister create(QueueRegister queueEnroll);
 
-    QueueEnroll update(QueueEnroll queueEnroll);
+    QueueRegister update(QueueRegister queueEnroll);
 
-    QueueEnroll findById(Long queueEnrollId);
+    QueueRegister findById(Long queueEnrollId);
 
-    List<QueueEnroll> findAll();
+    List<QueueRegister> findAll();
 
     void delete(Long queueEnrollId);
 }

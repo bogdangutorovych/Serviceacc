@@ -43,7 +43,7 @@
 
 		<h:outputLabel for="service" value="Услуга: " style="font-weight:bold" />
 		<p:inputText id="service"
-			value="#{contractController.selectedContract.service}"
+			value="#{contractController.selectedContract.deal.service.name}"
 			disabled="true" />
 
 		<h:outputLabel for="closeDate" value="Дата закрытия: "
@@ -68,7 +68,7 @@
 
 		<h:outputLabel for="client" value="Клиент: " style="font-weight:bold" />
 		<p:inputText id="client"
-			value="#{contractController.selectedContract.client.firstName} #{contractController.selectedContract.client.lastName}"
+			value="#{contractController.selectedContract.deal.client.firstName} #{contractController.selectedContract.deal.client.lastName}"
 			disabled="true" />
 
 		<p:outputLabel for="manager" value="Ментор: " style="font-weight:bold" />

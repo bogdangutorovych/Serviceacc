@@ -3,37 +3,53 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
 <f:view contentType="text/html">
-<h:head>
-    <title>Service Accounting</title>
-    <!--<h:outputStylesheet name="style.css" library="" />-->
-    <h:outputScript name="jquery/jquery.js" library="primefaces" />
-    <ui:insert name="head" />
+	<h:head>
+		<title>Service Accounting</title>
+		<!--<h:outputStylesheet name="style.css" library="" />-->
+		<h:outputScript name="jquery/jquery.js" library="primefaces" />
+		<ui:insert name="head" />
 
-</h:head>
+	</h:head>
 
-<h:body>
-    <p:layout fullPage="true">
+	<h:body>
+		<p:layout fullPage="true">
 
-        <p:layoutUnit position="west" size="200" header="Menu" resizable="true" collapsible="true">
-            <ui:insert name="menu">
-                <ui:include src="/templates/menu.xhtml" />
-            </ui:insert>
-        </p:layoutUnit>
+			<p:layoutUnit position="west" size="200" header="Menu"
+				resizable="true" collapsible="true">
+				<ui:insert name="menu">
+					<ui:include src='#{navController.menu}' />
+				</ui:insert>
+			</p:layoutUnit>
 
-        <p:layoutUnit id="content" position="center">
-            <ui:insert name="content">
-                <h:form id="contentForm">
-                    <ui:include src="#{navController.mainContent}"/>
-                </h:form>
-            </ui:insert>
-        </p:layoutUnit>
-    </p:layout>
-</h:body>
+			<p:layoutUnit position="north" size="40" resizable="false"
+				collapsible="false">
+				<ui:insert name="header">
+					<ui:include src='#{navController.header}' />
+				</ui:insert>
+			</p:layoutUnit>
+
+			<p:layoutUnit id="content" position="center">
+				<ui:insert name="content">
+					<h:form id="contentForm">
+						<ui:include src="#{navController.mainContent}" />
+					</h:form>
+				</ui:insert>
+			</p:layoutUnit>
+
+			<p:layoutUnit position="south" size="40" resizable="false"
+				collapsible="false">
+				<ui:insert name="footer">
+					<ui:include src='#{navController.footer}' />
+				</ui:insert>
+			</p:layoutUnit>
+
+		</p:layout>
+	</h:body>
 </f:view>
 </html>

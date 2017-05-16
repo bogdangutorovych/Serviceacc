@@ -1,0 +1,13 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:composition>
+		<h:form id="headerForm">
+			<p:commandLink value="Foxminded" style="font-weight:bold"
+				update=":contentForm"
+				action='#{navController.setMainContent("client/clientList")}' />
+		</h:form>
+	</ui:composition>
+</ui:composition>

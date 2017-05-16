@@ -9,25 +9,25 @@
 		<f:facet name="left">
 			<p:commandButton id="btn_add" value="Добавить" update=":contentForm"
 				icon="ui-icon-document"
-				actionListener="#{queueEnrollController.add()}"
-				action='#{navController.setMainContent("queue/queueEnroll")}' />
+				actionListener="#{queueRegisterController.add()}"
+				action='#{navController.setMainContent("queue/queueRegister")}' />
 
 			<span class="ui-separator"><span
 				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
 			<p:commandButton id="btn_edit" value="Редактировать"
 				update=":contentForm" icon="ui-icon-pencil"
-				disabled="#{queueEnrollController.selected==null}"
-				actionListener="#{queueEnrollController.getActualLists()}"
-				action='#{navController.setMainContent("queue/queueEnroll")}' />
+				disabled="#{queueRegisterController.selected==null}"
+				actionListener="#{queueRegisterController.getActualLists()}"
+				action='#{navController.setMainContent("queue/queueRegister")}' />
 
 			<span class="ui-separator"><span
 				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
 			<p:commandButton id="btn_delete" value="Удалить"
 				update=":contentForm" icon="ui-icon-trash"
-				disabled="#{queueEnrollController.selected==null}"
-				actionListener="#{queueEnrollController.delete()}" />
+				disabled="#{queueRegisterController.selected==null}"
+				actionListener="#{queueRegisterController.delete()}" />
 
 		</f:facet>
 	</p:toolbar>
@@ -35,9 +35,9 @@
 	<br />
 	<p:dataTable id="queue" editable="true"
 		tableStyle="table-layout:auto;width:100%;" emptyMessage="Нет данных"
-		var="queue" value="#{queueEnrollController.list}"
-		rowKey="#{queueEnrollController.list.indexOf(queue)}"
-		selectionMode="single" selection="#{queueEnrollController.selected}"
+		var="queue" value="#{queueRegisterController.list}"
+		rowKey="#{queueRegisterController.list.indexOf(queue)}"
+		selectionMode="single" selection="#{queueRegisterController.selected}"
 		widgetVar="queueTable">
 
 		<f:facet name="header" style="text-align:center">Очередь
@@ -53,9 +53,9 @@
 		<p:ajax event="rowUnselect" update="@form:btn_edit,@form:btn_delete"
 			immediate="true" />
 
-		<p:column headerText="дата" sortBy="DateEnroll"
-			filterBy="#{queue.dateEnroll}" filterMatchMode="contains">
-			<h:outputText value="#{queue.dateEnroll}"
+		<p:column headerText="дата" sortBy="registerDate"
+			filterBy="#{queue.registerDate}" filterMatchMode="contains">
+			<h:outputText value="#{queue.registerDate}"
 				converter="localDateConverter" pattern="dd.MM.yyyy" />
 		</p:column>
 

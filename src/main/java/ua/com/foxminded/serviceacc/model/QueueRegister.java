@@ -16,39 +16,42 @@ import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.SQLDelete;
 
 @Entity
-@Table(name = "queue_enroll")
-@SQLDelete(sql = "UPDATE queue_enroll SET is_deleted = true WHERE id = ?")
-public class QueueEnroll {
+@Table(name = "queue_register")
+@SQLDelete(sql = "UPDATE queue_register SET is_deleted = true WHERE id = ?")
+public class QueueRegister {
 
     @Id
     @GenericGenerator(name = "generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
-            @Parameter(name = "sequence_name", value = "queue_enroll_id_seq"),
+            @Parameter(name = "sequence_name", value = "queue_register_id_seq"),
             @Parameter(name = "initial_value", value = "1"), @Parameter(name = "increment_size", value = "1") })
     @GeneratedValue(generator = "generator")
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @Column(name = "queue_enroll_date")
-    private LocalDate dateEnroll;
+    @Column(name = "register_date")
+    private LocalDate registerDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "deal_id")
     private Deal deal;
 
-    @Column(name = "novice", nullable = false)
-    private boolean novice;
+    @Column(name = "after_freezing", nullable = false)
+    private boolean afterFreezing;
 
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
 
-    public QueueEnroll() {
+    public QueueRegister() {
 
     }
 
-    public QueueEnroll(LocalDate queueEnrollDate, Deal deal, boolean novice) {
-        this.dateEnroll = queueEnrollDate;
+    public QueueRegister(Long id, LocalDate registerDate, Deal deal, boolean afterFreezing, boolean isDeleted) {
+        super();
+        this.id = id;
+        this.registerDate = registerDate;
         this.deal = deal;
-        this.novice = novice;
+        this.afterFreezing = afterFreezing;
+        this.isDeleted = isDeleted;
     }
 
     public Long getId() {
@@ -59,12 +62,12 @@ public class QueueEnroll {
         this.id = id;
     }
 
-    public LocalDate getDateEnroll() {
-        return dateEnroll;
+    public LocalDate getRegisterDate() {
+        return registerDate;
     }
 
-    public void setDateEnroll(LocalDate dateEnroll) {
-        this.dateEnroll = dateEnroll;
+    public void setRegisterDate(LocalDate registerDate) {
+        this.registerDate = registerDate;
     }
 
     public Deal getDeal() {
@@ -75,12 +78,12 @@ public class QueueEnroll {
         this.deal = deal;
     }
 
-    public boolean isNovice() {
-        return novice;
+    public boolean isAfterFreezing() {
+        return afterFreezing;
     }
 
-    public void setNovice(boolean novice) {
-        this.novice = novice;
+    public void setAfterFreezing(boolean afterFreezing) {
+        this.afterFreezing = afterFreezing;
     }
 
     public boolean isDeleted() {
