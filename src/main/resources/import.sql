@@ -12,7 +12,7 @@ INSERT INTO CLIENT (id, birth_day, first_name, last_name, is_deleted) VALUES
 (4, '1996-07-30', 'Rafael', 'Nadal', false),
 (5, '1997-05-20', 'Sergey', 'Bubka', false),
 (6, '1996-02-21', 'Arvidas', 'Sabonis', false),
-(7, '1986-03-25', 'Oksana', 'Bayul', true),
+(7, '1986-03-25', 'Oksana', 'Bayul', false),
 (8, '1980-04-03', 'Steffy', 'Graf', false),
 (9, '1995-09-12', 'Vitaly', 'Klichko', true);
 ALTER SEQUENCE client_id_seq RESTART WITH 10;
@@ -36,17 +36,19 @@ ALTER SEQUENCE service_id_seq RESTART WITH 3;
 INSERT INTO SERVICE_PRICES (service_id, prices_id) VALUES
 (1, 1),(1, 2),(1, 3),(2, 4),(2, 5),(2, 6);
 
-INSERT INTO CONTRACT (id, number, contract_date, client_id,  service_id, manager_id, contract_status, is_deleted) VALUES
-(1, '1', '2017-01-01', 1, 1, 2, 'ACTIVE', false),
-(2, '2', '2017-02-28', 2, 2, 1, 'ACTIVE', false),
-(3, '3', '2017-04-25', 3, 1, 1, 'FROZEN', false),
-(4, '4', '2017-01-31', 3, 1, 1, 'CLOSED', false);
-ALTER SEQUENCE contract_id_seq RESTART WITH 5;
-
 INSERT INTO DEAL (id, client_id, service_id, is_deleted) VALUES
 (1, 5, 1, false),
-(2, 8, 2, false);
-ALTER SEQUENCE deal_id_seq RESTART WITH 3;
+(2, 6, 2, false),
+(3, 7, 1, false),
+(4, 8, 2, false);
+ALTER SEQUENCE deal_id_seq RESTART WITH 5;
+
+INSERT INTO CONTRACT (id, number, contract_date, deal_id, manager_id, contract_status, is_deleted, is_trial) VALUES
+(1, '1', '2017-01-01', 1, 1, 'ACTIVE', false, false),
+(2, '2', '2017-02-28', 2, 2, 'ACTIVE', false, false),
+(3, '3', '2017-04-25', 3, 3, 'FROZEN', false, false),
+(4, '4', '2017-01-31', 4, 3, 'CLOSED', false, false);
+ALTER SEQUENCE contract_id_seq RESTART WITH 5;
 
 INSERT INTO QUEUE_ENROLL (id, queue_enroll_date, deal_id, novice, is_deleted) VALUES
 (1, '2017-01-01', 1, true, false),

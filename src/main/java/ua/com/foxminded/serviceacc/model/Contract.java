@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -47,64 +48,31 @@ public class Contract {
     @Column(name = "close_date")
     private LocalDate closeDate;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "client_id")
-    private Client client;
-
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "manager_id")
-    private Manager manager;
-
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "service_id")
-    private Service service;
-
     @Enumerated(EnumType.STRING)
     @JoinColumn(name = "contract_status")
     private ContractStatus contractStatus;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "deal_id")
+    private Deal deal;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_rate")
     private Money clientRate;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "manager_id")
+    private Manager manager;
+
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "manager_rate")
     private Money managerRate;
 
+    @Column(name = "is_trial", nullable = false)
+    private boolean isTrial;
+
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
-
-    public boolean isDeleted() {
-        return isDeleted;
-    }
-
-    public void setDeleted(boolean isDeleted) {
-        this.isDeleted = isDeleted;
-    }
-
-    public LocalDate getCloseDate() {
-        return closeDate;
-    }
-
-    public void setCloseDate(LocalDate closeDate) {
-        this.closeDate = closeDate;
-    }
-
-    public Contract() {
-
-    }
-
-    public Contract(String number, LocalDate date, Client client, Manager manager, Service service,
-            ContractStatus contractStatus, Money clientRate, Money managerRate) {
-        this.number = number;
-        this.contractDate = date;
-        this.client = client;
-        this.manager = manager;
-        this.service = service;
-        this.clientRate = clientRate;
-        this.managerRate = managerRate;
-        this.contractStatus = contractStatus;
-    }
 
     public Long getId() {
         return id;
@@ -130,28 +98,12 @@ public class Contract {
         this.contractDate = contractDate;
     }
 
-    public Client getClient() {
-        return client;
+    public LocalDate getCloseDate() {
+        return closeDate;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public Manager getManager() {
-        return manager;
-    }
-
-    public void setManager(Manager manager) {
-        this.manager = manager;
-    }
-
-    public Service getService() {
-        return service;
-    }
-
-    public void setService(Service service) {
-        this.service = service;
+    public void setCloseDate(LocalDate closeDate) {
+        this.closeDate = closeDate;
     }
 
     public ContractStatus getContractStatus() {
@@ -162,12 +114,28 @@ public class Contract {
         this.contractStatus = contractStatus;
     }
 
+    public Deal getDeal() {
+        return deal;
+    }
+
+    public void setDeal(Deal deal) {
+        this.deal = deal;
+    }
+
     public Money getClientRate() {
         return clientRate;
     }
 
     public void setClientRate(Money clientRate) {
         this.clientRate = clientRate;
+    }
+
+    public Manager getManager() {
+        return manager;
+    }
+
+    public void setManager(Manager manager) {
+        this.manager = manager;
     }
 
     public Money getManagerRate() {
@@ -178,4 +146,38 @@ public class Contract {
         this.managerRate = managerRate;
     }
 
+    public boolean isTrial() {
+        return isTrial;
+    }
+
+    public void setTrial(boolean isTrial) {
+        this.isTrial = isTrial;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public Contract(Long id, String number, LocalDate contractDate, LocalDate closeDate, ContractStatus contractStatus,
+            Deal deal, Money clientRate, Manager manager, Money managerRate, boolean isTrial, boolean isDeleted) {
+        super();
+        this.id = id;
+        this.number = number;
+        this.contractDate = contractDate;
+        this.closeDate = closeDate;
+        this.contractStatus = contractStatus;
+        this.deal = deal;
+        this.clientRate = clientRate;
+        this.manager = manager;
+        this.managerRate = managerRate;
+        this.isTrial = isTrial;
+        this.isDeleted = isDeleted;
+    }
+
+    public Contract() {
+    }
 }
