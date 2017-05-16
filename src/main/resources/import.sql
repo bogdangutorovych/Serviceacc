@@ -17,10 +17,18 @@ INSERT INTO CLIENT (id, birth_day, first_name, last_name, is_deleted) VALUES
 (9, '1995-09-12', 'Vitaly', 'Klichko', true);
 ALTER SEQUENCE client_id_seq RESTART WITH 10;
 
-INSERT INTO SERVICE (id, name, description, is_deleted) VALUES
-(1, 'менторинг', 'обучение студента идет на заданиях и анализе их выполнения', false),
-(2, 'группа', 'обучение в группе на реальном проекте', false);
+INSERT INTO MONEY (id, amount, currency, is_deleted) VALUES
+(1, 3000, 'UAH', false),
+(2, 120, 'USD', false),
+(3, 100, 'EUR', false),
+(4, 1500, 'UAH', false);
+ALTER SEQUENCE service_id_seq RESTART WITH 5;
+
+INSERT INTO SERVICE (id, name, description, rate_id, is_deleted) VALUES
+(1, 'менторинг', 'обучение студента идет на заданиях и анализе их выполнения', 4, false),
+(2, 'группа', 'обучение в группе на реальном проекте', 4, false);
 ALTER SEQUENCE service_id_seq RESTART WITH 3;
+
 
 INSERT INTO CONTRACT (id, number, contract_date, client_id,  service_id, manager_id, contract_status, is_deleted) VALUES
 (1, '1', '2017-01-01', 1, 1, 2, 'ACTIVE', false),
