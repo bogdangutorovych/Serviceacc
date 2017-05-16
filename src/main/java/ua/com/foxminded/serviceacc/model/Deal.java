@@ -44,7 +44,6 @@ public class Deal {
     private boolean isDeleted;
 
     public Deal() {
-
     }
 
     public Deal(Client client, Service service) {

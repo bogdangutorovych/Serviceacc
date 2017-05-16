@@ -9,7 +9,7 @@ import ua.com.foxminded.serviceacc.model.QueueRegister;
 import ua.com.foxminded.serviceacc.repository.QueueEnrollRepository;
 
 @Service("queueEnrollService")
-public class QueueEnrollDataJpa implements QueueEnrollService {
+public class QueueEnrollDataJpa implements QueueRegisterService {
 
     @Autowired
     QueueEnrollRepository queueEnrollRepository;

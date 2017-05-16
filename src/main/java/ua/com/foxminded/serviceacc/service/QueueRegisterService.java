@@ -4,15 +4,15 @@ import java.util.List;
 
 import ua.com.foxminded.serviceacc.model.QueueRegister;
 
-public interface QueueEnrollService {
+public interface QueueRegisterService {
 
-    QueueRegister create(QueueRegister queueEnroll);
+    QueueRegister create(QueueRegister queueRegister);
 
-    QueueRegister update(QueueRegister queueEnroll);
+    QueueRegister update(QueueRegister queueRegister);
 
-    QueueRegister findById(Long queueEnrollId);
+    QueueRegister findById(Long queueRegisterId);
 
     List<QueueRegister> findAll();
 
-    void delete(Long queueEnrollId);
+    void delete(Long queueRegisterId);
 }

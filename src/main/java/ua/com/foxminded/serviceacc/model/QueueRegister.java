@@ -42,7 +42,6 @@ public class QueueRegister {
     private boolean isDeleted;
 
     public QueueRegister() {
-
     }
 
     public QueueRegister(Long id, LocalDate registerDate, Deal deal, boolean afterFreezing, boolean isDeleted) {

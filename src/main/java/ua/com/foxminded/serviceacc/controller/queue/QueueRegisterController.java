@@ -15,7 +15,7 @@ import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.QueueRegister;
 import ua.com.foxminded.serviceacc.model.Service;
 import ua.com.foxminded.serviceacc.service.ClientService;
-import ua.com.foxminded.serviceacc.service.QueueEnrollService;
+import ua.com.foxminded.serviceacc.service.QueueRegisterService;
 import ua.com.foxminded.serviceacc.service.ServiceService;
 
 @Controller
@@ -33,20 +33,20 @@ public class QueueRegisterController implements Serializable {
     private List<Client> availableClients;
     private List<Service> availableServices;
 
-    private QueueEnrollService queueEnrollService;
+    private QueueRegisterService queueRegisterService;
     private ClientService clientService;
     private ServiceService serviceService;
 
-    public QueueRegisterController(QueueEnrollService queueEnrollService, ClientService clientService,
+    public QueueRegisterController(QueueRegisterService queueRegisterService, ClientService clientService,
             ServiceService serviceService) {
-        this.queueEnrollService = queueEnrollService;
+        this.queueRegisterService = queueRegisterService;
         this.clientService = clientService;
         this.serviceService = serviceService;
     }
 
     @PostConstruct
     public void init() {
-        list = queueEnrollService.findAll();
+        list = queueRegisterService.findAll();
     }
 
     public void add() {
@@ -61,17 +61,17 @@ public class QueueRegisterController implements Serializable {
 
     public void onOk() {
         if (selected.getId() == null) {
-            selected = queueEnrollService.create(selected);
+            selected = queueRegisterService.create(selected);
         }
 
-        queueEnrollService.update(selected);
+        queueRegisterService.update(selected);
         init();
 
     }
 
     public void delete() {
         list.remove(selected);
-        queueEnrollService.delete(selected.getId());
+        queueRegisterService.delete(selected.getId());
         selected = null;
     }
 
@@ -111,12 +111,12 @@ public class QueueRegisterController implements Serializable {
         this.availableServices = availableServices;
     }
 
-    public QueueEnrollService getQueueEnrollService() {
-        return queueEnrollService;
+    public QueueRegisterService getQueueRegisterService() {
+        return queueRegisterService;
     }
 
-    public void setQueueEnrollService(QueueEnrollService queueEnrollService) {
-        this.queueEnrollService = queueEnrollService;
+    public void setQueueRegisterService(QueueRegisterService queueRegisterService) {
+        this.queueRegisterService = queueRegisterService;
     }
 
     public ClientService getClientService() {
