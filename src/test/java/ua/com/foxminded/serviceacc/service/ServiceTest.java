@@ -61,11 +61,12 @@ public class ServiceTest {
 
     public void deleteServiceTest() {
 
+        int size = serviceService.findAll().size();
         Service service = buildTestService();
         serviceService.save(service);
-
+        assertThat(serviceService.findAll().size(), is(size + 1));
         serviceService.delete(service.getId());
-        assertThat(serviceService.findAll(), hasSize(0));
+        assertThat(serviceService.findAll(), hasSize(size));
 
     }
 
@@ -74,10 +75,9 @@ public class ServiceTest {
     public void updateActiveTest() {
         Service service = buildTestService();
         serviceService.save(service);
-        System.out.println("1: " + service.getId());
         service.setDeleted(true);
         assertNotNull(serviceService.findById(service.getId()));
-        System.out.println("2: " + serviceService.update(service).getId());
+        serviceService.update(service);
         assertNull(serviceService.findById(service.getId()));
 
         service.setDeleted(false);
