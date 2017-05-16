@@ -53,7 +53,7 @@ ALTER SEQUENCE contract_id_seq RESTART WITH 5;
 INSERT INTO QUEUE_REGISTER (id, register_date, deal_id, after_freezing, is_deleted) VALUES
 (1, '2017-01-01', 1, false, false),
 (2, '2017-01-01', 2, false, false);
-ALTER SEQUENCE queue_enroll_id_seq RESTART WITH 3;
+ALTER SEQUENCE queue_register_id_seq RESTART WITH 3;
 
 INSERT INTO CLIENT_INFO_TYPE (id, title, is_deleted, code) VALUES
 (1, 'telephone', false, 'phone'),

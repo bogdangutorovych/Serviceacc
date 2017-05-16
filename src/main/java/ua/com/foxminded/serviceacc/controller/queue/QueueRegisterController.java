@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 
 import ua.com.foxminded.serviceacc.model.Client;
+import ua.com.foxminded.serviceacc.model.Deal;
 import ua.com.foxminded.serviceacc.model.QueueRegister;
 import ua.com.foxminded.serviceacc.model.Service;
 import ua.com.foxminded.serviceacc.service.ClientService;
@@ -52,6 +53,7 @@ public class QueueRegisterController implements Serializable {
     public void add() {
         selected = new QueueRegister();
         getActualLists();
+        selected.setDeal(new Deal());
     }
 
     public void getActualLists() {
@@ -66,7 +68,6 @@ public class QueueRegisterController implements Serializable {
 
         queueRegisterService.update(selected);
         init();
-
     }
 
     public void delete() {

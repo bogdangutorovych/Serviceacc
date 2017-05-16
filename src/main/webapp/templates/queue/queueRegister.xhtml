@@ -8,7 +8,7 @@
         <f:facet name="left">
             <p:commandButton id="btn_ok" value="Ok" update=":contentForm"
                 icon="ui-icon-check" actionListener="#{queueRegisterController.onOk()}"
-                action='#{navController.setMainContent("queue/queueItem")}' />
+                action='#{navController.setMainContent("queue/queue")}' />
             <span class="ui-separator"><span
                 class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
@@ -35,9 +35,9 @@
         <p:outputLabel for="service" value="Услуга: " style="font-weight:bold" />
         <p:selectOneMenu id="service"
             value="#{queueRegisterController.selected.deal.service}"
-            converter="omnifaces.SelectItemsConverter" >
-        <!--    required="true" requiredMessage="Выберите услугу" -->           
-            <f:selectItem itemLabel="Выбрать услугу..." noSelectionOption="true" />
+            converter="omnifaces.SelectItemsConverter" 
+            required="true" requiredMessage="Выберите услугу" >   
+            <f:selectItem itemLabel="#{queueRegisterController.selected.deal.service.name}" noSelectionOption="true" />
             <f:selectItems value="#{queueRegisterController.availableServices}"
                 var="service" itemLabel="#{service.name}" itemValue="#{service}" />
         </p:selectOneMenu>
@@ -47,7 +47,7 @@
             value="#{queueRegisterController.selected.deal.client}"
             required="true" requiredMessage="Выберите клиента"
             converter="omnifaces.SelectItemsConverter">
-            <f:selectItem itemLabel="Выбрать клиента..." noSelectionOption="true" />
+            <f:selectItem itemLabel="#{queueRegisterController.selected.deal.client}" noSelectionOption="true" />
             <f:selectItems value="#{queueRegisterController.availableClients}"
                 var="client" itemLabel="#{client.firstName} #{client.lastName}"
                 itemValue="#{client}"/>
