@@ -7,14 +7,14 @@
     <p:toolbar>
         <f:facet name="left">
             <p:commandButton id="btn_ok" value="Ok" update=":contentForm"
-                icon="ui-icon-check" actionListener="#{queueEnrollController.onOk()}"
+                icon="ui-icon-check" actionListener="#{queueRegisterController.onOk()}"
                 action='#{navController.setMainContent("queue/queueItem")}' />
             <span class="ui-separator"><span
                 class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
             <p:commandButton id="btn_cancel" value="Cancel" update=":contentForm"
                 icon="ui-icon-close"
-                actionListener="#{queueEnrollController.onCancel()}"
+                actionListener="#{queueRegisterController.onCancel()}"
                 action='#{navController.setMainContent("queue/queue")}'
                 immediate="true" />
         </f:facet>
@@ -27,28 +27,28 @@
             style="font-weight:bold" />
         <p:calendar id="date" converter="localDateConverter"
             pattern="dd.MM.yyyy" 
-            value="#{queueEnrollController.selected.dateEnroll}"
+            value="#{queueRegisterController.selected.registerDate}"
             showOn="button" mask="99.99.9999"
             required="true" requiredMessage="Выберите дату">
         </p:calendar>    
 
         <p:outputLabel for="service" value="Услуга: " style="font-weight:bold" />
         <p:selectOneMenu id="service"
-            value="#{queueEnrollController.selected.deal.service}"
+            value="#{queueRegisterController.selected.deal.service}"
             converter="omnifaces.SelectItemsConverter" >
         <!--    required="true" requiredMessage="Выберите услугу" -->           
             <f:selectItem itemLabel="Выбрать услугу..." noSelectionOption="true" />
-            <f:selectItems value="#{queueEnrollController.availableServices}"
+            <f:selectItems value="#{queueRegisterController.availableServices}"
                 var="service" itemLabel="#{service.name}" itemValue="#{service}" />
         </p:selectOneMenu>
 
         <p:outputLabel for="client" value="Клиент: " style="font-weight:bold" />
         <p:selectOneMenu id="client"
-            value="#{queueEnrollController.selected.deal.client}"
+            value="#{queueRegisterController.selected.deal.client}"
             required="true" requiredMessage="Выберите клиента"
             converter="omnifaces.SelectItemsConverter">
             <f:selectItem itemLabel="Выбрать клиента..." noSelectionOption="true" />
-            <f:selectItems value="#{queueEnrollController.availableClients}"
+            <f:selectItems value="#{queueRegisterController.availableClients}"
                 var="client" itemLabel="#{client.firstName} #{client.lastName}"
                 itemValue="#{client}"/>
         </p:selectOneMenu>

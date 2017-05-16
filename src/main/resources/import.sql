@@ -50,9 +50,9 @@ INSERT INTO CONTRACT (id, number, contract_date, deal_id, manager_id, contract_s
 (4, '4', '2017-01-31', 4, 3, 'CLOSED', false, false);
 ALTER SEQUENCE contract_id_seq RESTART WITH 5;
 
-INSERT INTO QUEUE_ENROLL (id, queue_enroll_date, deal_id, novice, is_deleted) VALUES
-(1, '2017-01-01', 1, true, false),
-(2, '2017-01-01', 2, true, false);
+INSERT INTO QUEUE_REGISTER (id, register_date, deal_id, after_freezing, is_deleted) VALUES
+(1, '2017-01-01', 1, false, false),
+(2, '2017-01-01', 2, false, false);
 ALTER SEQUENCE queue_enroll_id_seq RESTART WITH 3;
 
 INSERT INTO CLIENT_INFO_TYPE (id, title, is_deleted, code) VALUES
