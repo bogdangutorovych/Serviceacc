@@ -2,8 +2,6 @@ package ua.com.foxminded.serviceacc.controller.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import ua.com.foxminded.serviceacc.model.Money;
 import ua.com.foxminded.serviceacc.model.Service;
 import ua.com.foxminded.serviceacc.model.enums.Currency;
