@@ -11,13 +11,15 @@ import ua.com.foxminded.serviceacc.service.ServiceService;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by andreb on 17.05.17.
  */
-@Controller
+@Named
 @ViewScoped
 @ManagedBean
 public class ServiceListController implements Serializable {
@@ -28,7 +30,7 @@ public class ServiceListController implements Serializable {
     private final ServiceService serviceService;
     private List<Service> serviceList;
 
-    @Autowired
+    @Inject
     public ServiceListController(ServiceService serviceService) {
         this.serviceService = serviceService;
     }

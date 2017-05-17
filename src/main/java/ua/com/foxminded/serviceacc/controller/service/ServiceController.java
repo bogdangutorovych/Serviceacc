@@ -11,12 +11,14 @@ import ua.com.foxminded.serviceacc.service.ServiceService;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-@Controller
+@Named
 @ViewScoped
 @ManagedBean
 public class ServiceController implements Serializable {
@@ -30,7 +32,7 @@ public class ServiceController implements Serializable {
     private List<Money> tempPrices = new ArrayList<>();
     private Money newMoney = new Money();
 
-    @Autowired
+    @Inject
     public ServiceController(ServiceService serviceService) {
         this.serviceService = serviceService;
     }
