@@ -96,3 +96,27 @@ INSERT INTO MANAGER_INFO (id, content, info_type_id, manager_id, is_deleted) VAL
 (9, 'rocket56', 4, 2, false),
 (10, 'Kyev', 5, 3, false);
 ALTER SEQUENCE manager_info_seq RESTART WITH 11;
+
+INSERT INTO PAYMENT (id, date, money_id, payment_type, is_deleted) VALUES
+(1, '2017-01-14', 1, 'CASH', false),
+(2, '2017-02-14', 1, 'BANK', false),
+(3, '2017-03-14', 1, 'UNISTREAM', false);
+ALTER SEQUENCE manager_info_seq RESTART WITH 4;
+
+INSERT INTO PERIOD (id, date_from, date_to) VALUES
+(1, '2017-01-14', '2017-02-13'),
+(2, '2017-02-12', '2017-03-11'),
+(3, '2017-03-04', '2017-04-03'),
+(4, '2017-04-25', '2017-05-24'),
+(5, '2017-05-09', '2017-06-08');
+ALTER SEQUENCE manager_info_seq RESTART WITH 6;
+
+INSERT INTO INVOICE (id, number, date, contract_id, money_id, invoice_type, payment_id, period_id, is_deleted) VALUES
+(1, 'inv# 1', '2017-01-01', 1, 1, 'NEW', NULL, 1, false),
+(2, 'inv# 2', '2017-02-01', 2, 1, 'NEW', NULL, 2, false),
+(3, 'inv# 3', '2017-03-01', 3, 1, 'PAID', 1, 3, false),
+(4, 'inv# 4', '2017-04-01', 4, 1, 'PAID', 2, 4, false),
+(5, 'inv# 5', '2017-05-01', 4, 1, 'CLOSED', 3, 5, false);
+ALTER SEQUENCE manager_info_seq RESTART WITH 6;
+
+

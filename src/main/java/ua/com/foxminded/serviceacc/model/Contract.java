@@ -2,6 +2,7 @@ package ua.com.foxminded.serviceacc.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -52,7 +53,7 @@ public class Contract {
     @JoinColumn(name = "contract_status")
     private ContractStatus contractStatus;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "deal_id")
     private Deal deal;
 

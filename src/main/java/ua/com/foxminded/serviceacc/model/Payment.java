@@ -37,9 +37,9 @@ public class Payment {
     @JoinColumn(name = "money_id")
     private Money money;
 
-    @JoinColumn(name = "payment_type")
     @Enumerated(EnumType.STRING)
-    private PaymentType type;
+    @JoinColumn(name = "payment_type")
+    private PaymentType paymentType;
 
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
@@ -53,7 +53,7 @@ public class Payment {
         this.id = id;
         this.date = date;
         this.money = money;
-        this.type = type;
+        this.paymentType = type;
         this.isDeleted = isDeleted;
     }
 
@@ -82,11 +82,11 @@ public class Payment {
     }
 
     public PaymentType getType() {
-        return type;
+        return paymentType;
     }
 
     public void setType(PaymentType type) {
-        this.type = type;
+        this.paymentType = type;
     }
 
     public boolean isDeleted() {

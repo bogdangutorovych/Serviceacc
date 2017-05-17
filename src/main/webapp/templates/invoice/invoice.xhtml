@@ -25,7 +25,7 @@
 	<br />
 	<h:panelGrid columns="2" cellpadding="5">
 
-		<h:outputLabel for="date" vaClue="Дата договора: "
+		<h:outputLabel for="date" value="Дата договора: "
 			style="font-weight:bold" />
 		<p:calendar id="date" converter="localDateConverter"
 			pattern="dd.MM.yyyy" 
@@ -36,7 +36,7 @@
 
 		<p:outputLabel for="service" value="Услуга: " style="font-weight:bold" />
 		<p:selectOneMenu id="service"
-			value="#{contractController.selectedContract.deal.service}"
+			value="#{contractController.selectedContract.service}"
 			converter="omnifaces.SelectItemsConverter" >
 		<!-- 	required="true" requiredMessage="Выберите услугу" -->			
 			<f:selectItem itemLabel="Выбрать услугу..." noSelectionOption="true" />
@@ -46,7 +46,7 @@
 
 		<p:outputLabel for="client" value="Клиент: " style="font-weight:bold" />
 		<p:selectOneMenu id="client"
-			value="#{contractController.selectedContract.deal.client}"
+			value="#{contractController.selectedContract.client}"
 			required="true" requiredMessage="Выберите клиента"
 			converter="omnifaces.SelectItemsConverter">
 			<f:selectItem itemLabel="Выбрать клиента..." noSelectionOption="true" />
