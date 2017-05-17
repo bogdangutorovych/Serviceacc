@@ -26,7 +26,9 @@
 			<p:commandButton id="btn_delete" value="Delete" update=":contentForm"
 				icon="ui-icon-trash"
 				disabled="#{serviceController.selectedService==null}"
-				actionListener="#{serviceListController.deleteService(serviceController.selectedService)}" />
+				actionListener="#{serviceListController.deleteService(serviceController.selectedService)}" >
+                <f:actionListener binding="#{serviceListController.updateServiceListFromDB()}" />
+            </p:commandButton>
 
 		</f:facet>
 	</p:toolbar>

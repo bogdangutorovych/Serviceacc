@@ -7,12 +7,16 @@
         <f:facet name="left">
             <p:commandButton id="btn_ok" value="Ok" update=":contentForm" icon="ui-icon-check"
                              actionListener="#{serviceController.onOk()}"
-                             action='#{navController.setMainContent("service/serviceList")}'/>
+                             action='#{navController.setMainContent("service/serviceList")}'>
+                <f:actionListener binding="#{serviceListController.updateServiceListFromDB()}" />
+            </p:commandButton>
             <span class="ui-separator"><span
                 class="ui-icon ui-icon-grip-dotted-vertical" /></span>
             <p:commandButton id="btn_cancel" value="Cancel" update=":contentForm" icon="ui-icon-close"
                              actionListener="#{serviceController.setSelectedService(null)}"
-                             action='#{navController.setMainContent("service/serviceList")}' immediate="true"/>
+                             action='#{navController.setMainContent("service/serviceList")}' immediate="true">
+                <f:actionListener binding="#{serviceListController.updateServiceListFromDB()}" />
+            </p:commandButton>
         </f:facet>
     </p:toolbar>
     <br/>
