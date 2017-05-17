@@ -7,34 +7,32 @@
 	<p:toolbar>
 
 		<f:facet name="left">
-			<p:commandButton id="btn_add" value="Добавить" update=":contentForm"
-				icon="ui-icon-document" actionListener="#{invoiceController.add()}"
-				action='#{navController.setMainContent("invoice/invoice")}' />
 
 			<span class="ui-separator"><span
 				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
 			<p:commandButton id="btn_edit" value="Редактировать"
 				update=":contentForm" icon="ui-icon-pencil"
-				disabled="#{invoice==null}"
-				action='#{navController.setMainContent("invoice/invoice")}' />
+				disabled="#{invoiceController.selected == null}"
+				action='#{navController.setMainContent("invoice/invoiceEdit")}'/> 
 
 			<span class="ui-separator"><span
 				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
 			<p:commandButton id="btn_delete" value="Удалить"
 				update=":contentForm" icon="ui-icon-trash"
-				disabled="#{invoice==null}"
-				actionListener="#{invoiceController.delete()}" />
+				disabled="#{invoiceController.selected==null}"
+				actionListener="#{invoiceListController.delete(invoiceController.selected)}" 
+				action = "#{invoiceController.clearSelected()}" />
 
 		</f:facet>
 	</p:toolbar>
 
 	<br />
-	<p:dataTable id="queue" editable="true"
+	<p:dataTable id="invoice" editable="true"
 		tableStyle="table-layout:auto;width:100%;" emptyMessage="Нет данных"
 		var="invoice" value="#{invoiceListController.list}"
-		rowKey="#{invoiceListController.list.indexOf(queue)}"
+		rowKey="#{invoiceListController.list.indexOf(invoice)}"
 		selectionMode="single" selection="#{invoiceController.selected}"
 		widgetVar="invoiceTable">
 

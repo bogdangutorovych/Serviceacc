@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 
 import ua.com.foxminded.serviceacc.model.Invoice;
-import ua.com.foxminded.serviceacc.service.ContractService;
 import ua.com.foxminded.serviceacc.service.InvoiceService;
 
 @Controller
@@ -27,16 +26,19 @@ public class InvoiceListController implements Serializable {
     private List<Invoice> list;
 
     private InvoiceService invoiceService;
-    private ContractService contractService;
 
-    public InvoiceListController(InvoiceService invoiceService, ContractService contractService) {
+    public InvoiceListController(InvoiceService invoiceService) {
         this.invoiceService = invoiceService;
-        this.contractService = contractService;
     }
 
     @PostConstruct
     public void init() {
         list = invoiceService.findAll();
+    }
+
+    public void delete(Invoice invoice) {
+        invoiceService.delete(invoice.getId());
+        list.remove(invoice);
     }
 
     public List<Invoice> getList() {
@@ -53,14 +55,6 @@ public class InvoiceListController implements Serializable {
 
     public void setInvoiceService(InvoiceService invoiceService) {
         this.invoiceService = invoiceService;
-    }
-
-    public ContractService getContractService() {
-        return contractService;
-    }
-
-    public void setContractService(ContractService contractService) {
-        this.contractService = contractService;
     }
 
 }
