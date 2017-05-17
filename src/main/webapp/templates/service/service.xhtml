@@ -33,26 +33,26 @@
                 <h:outputText value="#{price.currency}" />
             </p:column>
             <p:column style="width:38px">
-                <p:commandButton id="btn_remove_price" icon="ui-icon-close" update="@form"
+                <p:commandButton id="btn_remove_price" icon="ui-icon-close" update=":contentForm:moneyTable"
                                  actionListener="#{serviceController.removePrice(price)}"/>
             </p:column>
         </p:dataTable>
         <f:facet name="footer">
             <p:commandButton id="btn_add_price" value="add" style=" align-self: baseline"
                              actionListener="#{serviceController.prepareNewMoney()}"
-                             oncomplete="PF('dlg').show();" update="@form"/>
+                             oncomplete="PF('dlg').show();" update="dialog"/>
         </f:facet>
     </h:panelGrid>
     <h:panelGrid id="ratePanel" columns="3" cellpadding="5" >
         <h:outputLabel for="rate" value="Manager Rate: " style="font-weight:bold"/>
         <p:inputText id="rate" value="#{serviceController.selectedService.managerRate.amount}" required="false"/>
         <p:selectOneMenu id="rate_currency" value="#{serviceController.selectedService.managerRate.currency}"
-                         converter="omnifaces.SelectItemsConverter">
+                         converter="omnifaces.SelectItemsConverter" required="false">
             <f:selectItem itemLabel="Select currency..." noSelectionOption="true" />
             <f:selectItems value="#{serviceController.currencyTypes}" />
         </p:selectOneMenu>
     </h:panelGrid>
-    <p:dialog header="Add new price" widgetVar="dlg" resizable="false" dynamic="true" >
+    <p:dialog id="dialog" header="Add new price" widgetVar="dlg" resizable="false" dynamic="true" >
         <h:panelGrid columns="2" cellpadding="5">
             <h:outputLabel for="amount" value="Amount:" />
             <p:inputText id="amount" value="#{serviceController.newMoney.amount}" label="amount" />
@@ -63,8 +63,10 @@
                 <f:selectItems value="#{serviceController.currencyTypes}" />
             </p:selectOneMenu>
             <f:facet name="footer">
-                <p:commandButton value="Confirm" update="moneyTable" actionListener="#{serviceController.addPrice()}"
+                <p:commandButton value="Save" update=":contentForm:moneyTable"
+                                 actionListener="#{serviceController.addPrice()}"
                                  oncomplete="PF('dlg').hide();" />
+                <p:commandButton value="Cancel" oncomplete="PF('dlg').hide();" />
             </f:facet>
         </h:panelGrid>
     </p:dialog>

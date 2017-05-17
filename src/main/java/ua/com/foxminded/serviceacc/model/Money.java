@@ -28,7 +28,7 @@ public class Money {
     @Id
     @GenericGenerator(name = "generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
             @Parameter(name = "sequence_name", value = "money_id_seq"),
-            @Parameter(name = "initial_value", value = "100"), @Parameter(name = "increment_size", value = "50") })
+            @Parameter(name = "initial_value", value = "100"), @Parameter(name = "increment_size", value = "1") })
     @GeneratedValue(generator = "generator")
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
