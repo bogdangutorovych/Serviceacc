@@ -8,8 +8,7 @@
 
 		<f:facet name="left">
 			<p:commandButton id="btn_add" value="Добавить" update=":contentForm"
-				icon="ui-icon-document"
-				actionListener="#{invoiceController.add()}"
+				icon="ui-icon-document" actionListener="#{invoiceController.add()}"
 				action='#{navController.setMainContent("invoice/invoice")}' />
 
 			<span class="ui-separator"><span
@@ -18,7 +17,6 @@
 			<p:commandButton id="btn_edit" value="Редактировать"
 				update=":contentForm" icon="ui-icon-pencil"
 				disabled="#{invoice==null}"
-				actionListener="#{invoiceController.getActualLists()}"
 				action='#{navController.setMainContent("invoice/invoice")}' />
 
 			<span class="ui-separator"><span
@@ -40,7 +38,7 @@
 		selectionMode="single" selection="#{invoiceController.selected}"
 		widgetVar="invoiceTable">
 
-		<f:facet name="header" style="text-align:center">Очередь
+		<f:facet name="header" style="text-align:center">Счета
         <p:outputPanel>
 				<h:outputText value="Искать везде: " />
 				<p:inputText id="globalFilter" onkeyup="PF('invoiceTable').filter()"
@@ -55,42 +53,53 @@
 
 		<p:column headerText="Номер счета" sortBy="number"
 			filterBy="#{invoice.number}" filterMatchMode="contains">
-			<h:outputText value="#{invoice.number}"/>
+			<h:outputText value="#{invoice.number}" />
 		</p:column>
-		
-		<p:column headerText="дата" sortBy="date"
-            filterBy="#{invoice.date}" filterMatchMode="contains">
-            <h:outputText value="#{invoice.date}"
-                converter="localDateConverter" pattern="dd.MM.yyyy" />
-        </p:column>
 
-		<p:column headerText="Номер контракта" sortBy="#{invoice.contract.number}"
+		<p:column headerText="Дата счета" sortBy="date"
+			filterBy="#{invoice.date}" filterMatchMode="contains">
+			<h:outputText value="#{invoice.date}" converter="localDateConverter"
+				pattern="dd.MM.yyyy" />
+		</p:column>
+
+		<p:column headerText="Номер контракта"
+			sortBy="#{invoice.contract.number}"
 			filterBy="#{invoice.contract.number}" filterMatchMode="contains"
 			converter="omnifaces.SelectItemsConverter">
 			<h:outputText value="#{invoice.contract.number}" />
+		</p:column>
+
+		<p:column headerText="Клиент"
+			sortBy="#{invoice.contract.deal.client}"
+			filterBy="#{invoice.contract.deal.client}" filterMatchMode="contains"
+			converter="omnifaces.SelectItemsConverter">
+			<h:outputText value="#{invoice.contract.deal.client}" />
 		</p:column>
 
 		<p:column headerText="Сумма" sortBy="#{invoice.price.amount}"
 			filterBy="#{invoice.price.amount}" filterMatchMode="contains">
 			<h:outputText value="#{invoice.price.amount}" />
 		</p:column>
-		
+
 		<p:column headerText="Тип счета" sortBy="#{invoice.invoiceType}"
-            filterBy="#{invoice.invoiceType}" filterMatchMode="contains">
-            <h:outputText value="#{invoice.invoiceType}" />
-        </p:column>
-        
-        <p:column headerText="Дата оплаты" sortBy="#{invoice.payment.date}"
-            filterBy="#{invoice.payment.date}" filterMatchMode="contains">
-            <h:outputText value="#{invoice.payment.date}" 
-             converter="localDateConverter" pattern="dd.MM.yyyy"/>
-        </p:column>
-        
-        <p:column headerText="Период" sortBy="#{invoice.period.dateFrom} - #{invoice.period.dateTo}"
-            filterBy="#{invoice.period.dateFrom} - #{invoice.period.dateTo}" filterMatchMode="contains">
-            <h:outputText value="#{invoice.period.dateFrom} - #{invoice.period.dateTo}" />
-        </p:column>
-		
+			filterBy="#{invoice.invoiceType}" filterMatchMode="contains">
+			<h:outputText value="#{invoice.invoiceType}" />
+		</p:column>
+
+		<p:column headerText="Дата оплаты" sortBy="#{invoice.payment.date}"
+			filterBy="#{invoice.payment.date}" filterMatchMode="contains">
+			<h:outputText value="#{invoice.payment.date}"
+				converter="localDateConverter" pattern="dd.MM.yyyy" />
+		</p:column>
+
+		<p:column headerText="Период"
+			sortBy="#{invoice.period.dateFrom} - #{invoice.period.dateTo}"
+			filterBy="#{invoice.period.dateFrom} - #{invoice.period.dateTo}"
+			filterMatchMode="contains">
+			<h:outputText
+				value="#{invoice.period.dateFrom} - #{invoice.period.dateTo}" />
+		</p:column>
+
 	</p:dataTable>
 
 </ui:composition>

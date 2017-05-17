@@ -39,16 +39,6 @@ public class InvoiceListController implements Serializable {
         list = invoiceService.findAll();
     }
 
-    public void add() {
-        getActualLists();
-
-    }
-
-    public void getActualLists() {
-        // availableClients = contractService.findAll();
-        // availableServices = serviceService.findAll();
-    }
-
     public List<Invoice> getList() {
         return list;
     }

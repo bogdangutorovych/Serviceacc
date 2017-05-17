@@ -1,9 +1,7 @@
 package ua.com.foxminded.serviceacc.controller.invoice;
 
 import java.io.Serializable;
-import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -25,7 +23,6 @@ public class InvoiceController implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Invoice selected;
-    private List<Invoice> list;
 
     private InvoiceService invoiceService;
     private ContractService contractService;
@@ -35,20 +32,8 @@ public class InvoiceController implements Serializable {
         this.contractService = contractService;
     }
 
-    @PostConstruct
-    public void init() {
-        list = invoiceService.findAll();
-    }
-
     public void add() {
         selected = new Invoice();
-        getActualLists();
-
-    }
-
-    public void getActualLists() {
-        // availableClients = contractService.findAll();
-        // availableServices = serviceService.findAll();
     }
 
     public void onOk() {
@@ -57,11 +42,9 @@ public class InvoiceController implements Serializable {
         }
 
         invoiceService.update(selected);
-        init();
     }
 
     public void delete() {
-        list.remove(selected);
         invoiceService.delete(selected.getId());
         selected = null;
     }
@@ -76,14 +59,6 @@ public class InvoiceController implements Serializable {
 
     public void setSelected(Invoice selected) {
         this.selected = selected;
-    }
-
-    public List<Invoice> getList() {
-        return list;
-    }
-
-    public void setList(List<Invoice> list) {
-        this.list = list;
     }
 
     public InvoiceService getInvoiceService() {
