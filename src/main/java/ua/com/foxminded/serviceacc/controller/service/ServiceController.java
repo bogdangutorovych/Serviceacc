@@ -44,12 +44,6 @@ public class ServiceController implements Serializable {
         tempPrices.clear();
     }
 
-    public void deleteService(){
-        serviceService.delete(selectedService.getId());
-        log.debug("Delete Service: " + selectedService);
-        selectedService = null;
-    }
-
     public void onEdit(){
         if (selectedService != null){
             tempPrices.clear();
@@ -89,10 +83,6 @@ public class ServiceController implements Serializable {
     }
 
     //Getters and Setters
-
-    public List<Service> getServiceList(){
-        return serviceService.findAll();
-    }
 
     public Service getSelectedService() {
         return selectedService;
