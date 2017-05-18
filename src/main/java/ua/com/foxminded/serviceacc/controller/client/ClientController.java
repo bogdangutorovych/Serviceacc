@@ -18,8 +18,10 @@ import ua.com.foxminded.serviceacc.controller.catalogue.ConfigController;
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.ClientInformation;
 import ua.com.foxminded.serviceacc.model.ClientInformationType;
+import ua.com.foxminded.serviceacc.model.Deal;
 import ua.com.foxminded.serviceacc.service.ClientInformationService;
 import ua.com.foxminded.serviceacc.service.ClientService;
+import ua.com.foxminded.serviceacc.service.DealService;
 
 @Named
 @ViewScoped
@@ -32,18 +34,20 @@ public class ClientController implements Serializable {
 
     private Client selectedClient;
 
-
     private List<ClientInformation> clientInfo;
+    private List<Deal> clientDeals;
 
     private final ClientService clientService;
     private final ClientInformationService clientInformationService;
     private final ConfigController configController;
+    private final DealService dealService;
 
     @Inject
-    public ClientController(ClientService clientService, ClientInformationService clientInformationService, ConfigController configController) {
+    public ClientController(ClientService clientService, ClientInformationService clientInformationService, ConfigController configController, DealService dealService) {
         this.clientService = clientService;
         this.clientInformationService = clientInformationService;
         this.configController = configController;
+        this.dealService = dealService;
     }
 
     @PostConstruct
@@ -57,6 +61,7 @@ public class ClientController implements Serializable {
 
     public void getActualLists() {
         clientInfo = getClientInformationList();
+        clientDeals = getClientDealList();
     }
 
     public void onOk() {
@@ -118,6 +123,10 @@ public class ClientController implements Serializable {
     public Client getSelectedClient() {
         return selectedClient;
     }
-
+    
+    public List<Deal> getClientDealList() {
+        clientDeals = dealService.findByClient(selectedClient);
+        return clientDeals;
+    }
 
 }

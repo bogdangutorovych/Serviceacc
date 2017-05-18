@@ -40,8 +40,9 @@ INSERT INTO DEAL (id, client_id, service_id, is_deleted) VALUES
 (1, 5, 1, false),
 (2, 6, 2, false),
 (3, 7, 1, false),
-(4, 8, 2, false);
-ALTER SEQUENCE deal_id_seq RESTART WITH 5;
+(4, 8, 2, false),
+(5, 8, 1, false);;
+ALTER SEQUENCE deal_id_seq RESTART WITH 6;
 
 INSERT INTO CONTRACT (id, number, contract_date, deal_id, manager_id, contract_status, is_deleted, is_trial) VALUES
 (1, '1', '2017-01-01', 1, 1, 'ACTIVE', false, false),

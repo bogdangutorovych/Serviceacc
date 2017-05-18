@@ -61,5 +61,18 @@
 		</p:column>
 
 	</p:dataTable>
+	
+	<p:dataTable id="clientDealList" editable="false"
+        emptyMessage="Нет данных" var="clientDeal"
+        value="#{clientController.clientDealList}">
+
+        <f:facet name="header">Deals</f:facet>
+
+        <p:column>
+            <p:outputLabel value="#{clientDeal.service.name}"
+                style="font-weight:bold" />
+        </p:column>
+
+    </p:dataTable>
 
 </ui:composition>
