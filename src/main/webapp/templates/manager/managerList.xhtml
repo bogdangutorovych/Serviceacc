@@ -32,8 +32,8 @@
 	<br />
 
 	<p:dataTable id="managerList" editable="true"
-		emptyMessage="No items yet" var="m" value="#{managerController.list}"
-		rowKey="#{managerController.list.indexOf(m)}" selectionMode="single"
+		emptyMessage="No items yet" var="manager" value="#{managerController.list}"
+		rowKey="#{managerController.list.indexOf(manager)}" selectionMode="single"
 		selection="#{managerController.selectedManager}"
 		widgetVar="managersTable">
 
@@ -50,18 +50,14 @@
 		<p:ajax event="rowUnselect" update="@form:btn_edit,@form:btn_delete"
 			immediate="true" />
 
-		<p:column headerText="id" sortBy="#{m.id}" filterBy="#{m.id}" filterMatchMode="contains">
-			#{m.id}
+		<p:column headerText="First name" sortBy="#{m.firstName}" filterBy="#{manager.firstName}" filterMatchMode="contains">
+			<h:outputText value="#{manager.firstName}" />
 		</p:column>
-
-		<p:column headerText="First name" sortBy="#{m.firstName}" filterBy="#{m.firstName}" filterMatchMode="contains">
-			<h:outputText value="#{m.firstName}" />
-		</p:column>
-		<p:column headerText="Last name" sortBy="#{m.lastName}" filterBy="#{m.lastName}" filterMatchMode="contains">
-			<h:outputText value="#{m.lastName}" />
+		<p:column headerText="Last name" sortBy="#{manager.lastName}" filterBy="#{manager.lastName}" filterMatchMode="contains">
+			<h:outputText value="#{manager.lastName}" />
 		</p:column>
 		<p:column headerText="Day of birth">
-            <h:outputText value="#{m.birthday}" converter="localDateConverter" />
+            <h:outputText value="#{manager.birthday}" converter="localDateConverter" />
         </p:column>
 
 	</p:dataTable>

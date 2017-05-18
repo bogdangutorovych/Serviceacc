@@ -22,8 +22,8 @@
     <br/>
 
     <p:dataTable id="managerInformationTypeList" editable="true" emptyMessage="No items yet"
-                 var="s" value="#{managerInformationTypeController.managerInformationTypeList}"
-                 rowKey="#{managerInformationTypeController.managerInformationTypeList.indexOf(s)}"
+                 var="managerInfoType" value="#{managerInformationTypeController.managerInformationTypeList}"
+                 rowKey="#{managerInformationTypeController.managerInformationTypeList.indexOf(managerInfoType)}"
                  selectionMode="single" selection="#{managerInformationTypeController.selected}">
 
         <f:facet name="header">Manager Information Types</f:facet>
@@ -32,29 +32,25 @@
         <p:ajax event="rowSelect" update="@form:btn_delete" immediate="true"/>
         <p:ajax event="rowUnselect" update="@form:btn_delete" immediate="true"/>
 
-        <p:column headerText="id" sortBy="#{s.id}">
-            #{s.id}
-        </p:column>
-
-        <p:column headerText="code" sortBy="#{s.code}">
+        <p:column headerText="code" sortBy="#{managerInfoType.code}">
             <p:cellEditor>
                 <f:facet name="output">
                     <span style="display: inline-block; width: 100%; height: 100%">
-                        <h:outputText value="#{s.code}" />
+                        <h:outputText value="#{managerInfoType.code}" />
                     </span>
                 </f:facet>
-                <f:facet name="input"><p:inputText value="#{s.code}" style="width:100%" label="Code"/></f:facet>
+                <f:facet name="input"><p:inputText value="#{managerInfoType.code}" style="width:100%" label="Code"/></f:facet>
             </p:cellEditor>
         </p:column>
 
-        <p:column headerText="title" sortBy="#{s.title}">
+        <p:column headerText="title" sortBy="#{managerInfoType.title}">
             <p:cellEditor>
                 <f:facet name="output">
                     <span style="display: inline-block; width: 100%; height: 100%">
-                        <h:outputText value="#{s.title}" />
+                        <h:outputText value="#{managerInfoType.title}" />
                     </span>
                 </f:facet>
-                <f:facet name="input"><p:inputText value="#{s.title}" style="width:100%" label="Title"/></f:facet>
+                <f:facet name="input"><p:inputText value="#{managerInfoType.title}" style="width:100%" label="Title"/></f:facet>
             </p:cellEditor>
         </p:column>
 

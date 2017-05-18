@@ -9,9 +9,6 @@ import javax.faces.bean.SessionScoped;
 public class NavController {
 
     private String mainContent = "/templates/client/clientList.xhtml";
-    public String footer = "/templates/footer.xhtml";
-    public String header = "/templates/header.xhtml";
-    public String menu = "/templates/menu.xhtml";
 
     public String getMainContent() {
         return mainContent;
@@ -20,17 +17,5 @@ public class NavController {
     public void setMainContent(String mainContent) {
         this.mainContent = "/templates/" + mainContent + ".xhtml";
     }
-
-    public String getFooter() {
-        return footer;
-    }
-
-    public String getHeader() {
-        return header;
-    }
-
-    public String getMenu() {
-        return menu;
-    }
-
+    
 }

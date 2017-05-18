@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.Contract;
+import ua.com.foxminded.serviceacc.model.Deal;
 import ua.com.foxminded.serviceacc.model.Manager;
 import ua.com.foxminded.serviceacc.model.Service;
 import ua.com.foxminded.serviceacc.service.ClientService;
@@ -66,6 +67,7 @@ public class ContractController implements Serializable {
 
     public void add() {
         selectedContract = new Contract();
+        selectedContract.setDeal(new Deal());
         getActualLists();
     }
 

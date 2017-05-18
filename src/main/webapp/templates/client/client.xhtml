@@ -8,7 +8,9 @@
 		<f:facet name="left">
 			<p:commandButton id="btn_ok" value="Ok" update=":contentForm"
 				icon="ui-icon-check" actionListener="#{clientController.onOk()}"
-				action='#{navController.setMainContent("client/clientList")}' />
+				action='#{navController.setMainContent("client/clientList")}' >
+                <f:actionListener binding="#{clientListController.updateClientListFromDB()}" />
+            </p:commandButton>
 			<span class="ui-separator"><span
 				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
@@ -16,17 +18,15 @@
 				icon="ui-icon-close"
 				actionListener="#{clientController.setSelectedClient(null)}"
 				action='#{navController.setMainContent("client/clientList")}'
-				immediate="true" />
+				immediate="true" >
+                <f:actionListener binding="#{clientListController.updateClientListFromDB()}" />
+            </p:commandButton>
 		</f:facet>
 	</p:toolbar>
 
 	<br />
 
 	<h:panelGrid columns="2" cellpadding="5">
-		<h:outputText for="id" value="ID:" style="font-weight:bold" />
-		<h:inputText id="id" value="#{clientController.selectedClient.id}"
-			disabled="true" />
-
 		<h:outputLabel for="firstName" value="Имя: " style="font-weight:bold" />
 		<p:inputText id="firstName"
 			value="#{clientController.selectedClient.firstName}" required="true" />
@@ -34,7 +34,7 @@
 		<h:outputLabel for="lastName" value="Фамилия: "
 			style="font-weight:bold" />
         <p:inputText id="lastName" value="#{clientController.selectedClient.lastName}" required="true"/>
-        
+
         <p:outputLabel for="birthday" value="Day of birth: " style="font-weight:bold"/>
         <p:calendar id="birthday" converter="localDateConverter" pattern="dd.MM.yyyy" showOn="button" mask="99.99.9999"
             value="#{clientController.selectedClient.birthday}" />
@@ -57,5 +57,18 @@
 		</p:column>
 
 	</p:dataTable>
+	
+	<p:dataTable id="clientDealList" editable="false"
+        emptyMessage="Нет данных" var="clientDeal"
+        value="#{clientController.clientDealList}">
+
+        <f:facet name="header">Deals</f:facet>
+
+        <p:column>
+            <p:outputLabel value="#{clientDeal.service.name}"
+                style="font-weight:bold" />
+        </p:column>
+
+    </p:dataTable>
 
 </ui:composition>
