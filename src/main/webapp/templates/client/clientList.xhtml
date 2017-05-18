@@ -56,11 +56,6 @@
 		<p:ajax event="rowUnselect" update="@form:btn_edit,@form:btn_delete"
 			immediate="true" />
 
-		<p:column headerText="id" sortBy="#{client.id}" filterBy="#{client.id}"
-                  filterMatchMode="contains">
-			#{client.id}
-		</p:column>
-
 		<p:column headerText="Имя" sortBy="#{client.firstName}"
                   filterBy="#{client.firstName}" filterMatchMode="contains">
 			<h:outputText value="#{client.firstName}" />
