@@ -31,7 +31,7 @@ public class ServiceDataJpa implements ServiceService {
 
     @Override
     public List<ua.com.foxminded.serviceacc.model.Service> findAll() {
-        return serviceRepository.findAll();
+        return serviceRepository.findAllByOrderByIdAsc();
     }
 
     @Override

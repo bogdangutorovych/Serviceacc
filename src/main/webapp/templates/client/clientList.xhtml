@@ -27,9 +27,8 @@
 				update=":contentForm" icon="ui-icon-trash"
 				disabled="#{clientController.selectedClient==null}"
 				actionListener="#{clientListController.deleteClient(clientController.selectedClient)}" >
-                <f:actionListener binding="#{clientListController.updateClientListFromDB()}" />
-                <f:actionListener binding="#{clientController.setSelectedClient(null)}" />
 
+                <f:actionListener binding="#{clientListController.updateClientListFromDB()}" />
             </p:commandButton>
 
 		</f:facet>

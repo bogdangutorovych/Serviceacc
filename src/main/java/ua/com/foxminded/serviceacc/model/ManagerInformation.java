@@ -11,9 +11,11 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+import org.hibernate.annotations.SQLDelete;
 
 @Entity
 @Table(name = "manager_info")
+@SQLDelete(sql = "UPDATE manager_info SET is_deleted = true WHERE id = ?")
 public class ManagerInformation {
 
     @Id
@@ -86,6 +88,25 @@ public class ManagerInformation {
 
     public void setDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ManagerInformation that = (ManagerInformation) o;
+
+        if (content != null ? !content.equals(that.content) : that.content != null) return false;
+        return managerInformationType != null ? managerInformationType.equals(that.managerInformationType) : that.managerInformationType == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = content != null ? content.hashCode() : 0;
+        result = 31 * result + (managerInformationType != null ? managerInformationType.hashCode() : 0);
+        return result;
     }
 
     @Override

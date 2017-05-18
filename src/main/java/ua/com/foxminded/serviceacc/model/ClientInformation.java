@@ -34,7 +34,7 @@ public class ClientInformation {
     private ClientInformationType clientInformationType;
 
     @Column(name = "is_deleted", nullable = false)
-    private boolean isDeleted = true;
+    private boolean isDeleted;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
