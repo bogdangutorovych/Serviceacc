@@ -15,4 +15,9 @@ public interface InvoiceService {
     List<Invoice> findAll();
 
     void delete(Long invoiceId);
+
+    List<Invoice> findInvoicesByContractId(Long contractId);
+
+    Invoice findMaxDateInvoice(Long contractID);
+
 }

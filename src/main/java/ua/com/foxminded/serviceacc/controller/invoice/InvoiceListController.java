@@ -1,9 +1,6 @@
 package ua.com.foxminded.serviceacc.controller.invoice;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -16,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import ua.com.foxminded.serviceacc.model.Contract;
 import ua.com.foxminded.serviceacc.model.Invoice;
+import ua.com.foxminded.serviceacc.model.Period;
 import ua.com.foxminded.serviceacc.service.InvoiceService;
 
 @Named
@@ -41,22 +39,19 @@ public class InvoiceListController implements Serializable {
     }
 
     public List<Invoice> findAllIssuedInvoices(Contract contract) {
-        List<Invoice> invoices = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getContract().getId() == contract.getId()) {
-                invoices.add(list.get(i));
-            }
-        }
-        return invoices;
-    }
-
-    public Invoice findMaxDateInvoice(List<Invoice> invoices) {
-        return Collections.max(invoices, Comparator.comparing(c -> c.getDate()));
+        return invoiceService.findInvoicesByContractId(contract.getId());
     }
 
     public Invoice findLatestInvoice(Contract contract) {
-        List<Invoice> invoices = findAllIssuedInvoices(contract);
-        return findMaxDateInvoice(invoices);
+        return invoiceService.findMaxDateInvoice(contract.getId());
+    }
+
+    public Period findNextPayPeriod(Contract contract) {
+        Period nextPayPeriod = new Period();
+        Invoice latestInvoice = findLatestInvoice(contract);
+        nextPayPeriod.setDateFrom(latestInvoice.getPeriod().getDateTo().plusDays(1));
+        nextPayPeriod.setDateTo(latestInvoice.getPeriod().getDateTo().plusMonths(1));
+        return nextPayPeriod;
     }
 
     public void delete(Invoice invoice) {
