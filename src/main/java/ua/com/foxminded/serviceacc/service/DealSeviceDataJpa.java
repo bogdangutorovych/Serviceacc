@@ -2,8 +2,7 @@ package ua.com.foxminded.serviceacc.service;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ua.com.foxminded.serviceacc.model.Client;
@@ -13,7 +12,7 @@ import ua.com.foxminded.serviceacc.repository.DealRepository;
 @Service("dealService")
 public class DealSeviceDataJpa implements DealService {
     
-    @Inject
+    @Autowired
     DealRepository dealRepository;
 
     @Override

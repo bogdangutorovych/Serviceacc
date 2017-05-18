@@ -2,8 +2,7 @@ package ua.com.foxminded.serviceacc.service;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ua.com.foxminded.serviceacc.model.Period;
@@ -12,7 +11,7 @@ import ua.com.foxminded.serviceacc.repository.PeriodRepository;
 @Service("periodService")
 public class PeriodServiceDataJpa implements PeriodService {
 
-    @Inject
+    @Autowired
     PeriodRepository periodRepository;
 
     @Override

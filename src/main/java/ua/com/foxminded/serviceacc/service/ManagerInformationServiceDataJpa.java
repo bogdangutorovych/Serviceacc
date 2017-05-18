@@ -2,8 +2,7 @@ package ua.com.foxminded.serviceacc.service;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ua.com.foxminded.serviceacc.model.Manager;
@@ -13,7 +12,7 @@ import ua.com.foxminded.serviceacc.repository.ManagerInformationRepository;
 @Service("managerInformationService")
 public class ManagerInformationServiceDataJpa implements ManagerInformationService {
 
-    @Inject
+    @Autowired
     ManagerInformationRepository managerInformationRepository;
     
     @Override
