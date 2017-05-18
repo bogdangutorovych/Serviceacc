@@ -39,6 +39,6 @@ public class ClientServiceDataJpa implements ClientService {
 
 	@Override
 	public List<Client> findAll() {
-		return clientRepository.findAll();
+		return clientRepository.findAllByOrderByIdAsc();
 	}
 }

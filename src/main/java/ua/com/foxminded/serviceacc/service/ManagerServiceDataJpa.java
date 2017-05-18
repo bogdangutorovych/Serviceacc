@@ -34,7 +34,7 @@ public class ManagerServiceDataJpa implements ManagerService {
 
     @Override
     public List<Manager> findAll() {
-        return managerRepository.findAll();
+        return managerRepository.findAllByOrderByIdAsc();
     }
 
     @Override
