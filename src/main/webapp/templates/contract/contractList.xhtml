@@ -53,15 +53,15 @@
 		<p:ajax event="rowUnselect" update="@form:btn_edit,@form:btn_delete"
 			immediate="true" />
 
+		<p:column headerText="номер" sortBy="#{c.number}"
+			filterBy="#{c.number}" filterMatchMode="contains">
+			<h:outputText value="#{c.number}" />
+		</p:column>
+
 		<p:column headerText="дата договора" sortBy="#{c.contractDate}"
 			filterBy="#{c.contractDate}" filterMatchMode="contains">
 			<h:outputText value="#{c.contractDate}"
 				converter="localDateConverter" pattern="dd.MM.yyyy" />
-		</p:column>
-
-		<p:column headerText="номер" sortBy="#{c.number}"
-			filterBy="#{c.number}" filterMatchMode="contains">
-			<h:outputText value="#{c.number}" />
 		</p:column>
 
 		<p:column headerText="услуга" sortBy="#{c.deal.service.name}"
@@ -69,10 +69,9 @@
 			<h:outputText value="#{c.deal.service.name}" />
 		</p:column>
 
-		<p:column headerText="дата закрытия" sortBy="#{c.closeDate}"
-			filterBy="#{c.closeDate}" filterMatchMode="contains">
-			<h:outputText value="#{c.closeDate}" converter="localDateConverter"
-				pattern="dd.MM.yyyy" />
+		<p:column headerText="Тип контракта" sortBy="#{c.contractType}"
+			filterBy="#{c.contractType}" filterMatchMode="contains">
+			<h:outputText value="#{c.contractType}" />
 		</p:column>
 
 		<p:column headerText="статус" sortBy="#{c.contractStatus}"
@@ -80,24 +79,31 @@
 			<h:outputText value="#{c.contractStatus.friendlyName}" />
 		</p:column>
 
-		<p:column headerText="клиент" sortBy="#{c.deal.client}"
-			filterBy="#{c.deal.client}" filterMatchMode="contains"
-			converter="omnifaces.SelectItemsConverter">
+		<p:column headerText="Клиент" sortBy="#{c.deal.client}"
+			filterBy="#{c.deal.client}" filterMatchMode="contains">
 			<h:outputText value="#{c.deal.client}" />
 		</p:column>
 
-		<p:column headerText="ментор" sortBy="#{c.manager}"
-			filterBy="#{c.manager}" filterMatchMode="contains"
-			converter="omnifaces.SelectItemsConverter">
-			<h:outputText value="#{c.manager}" />
+		<p:column headerText="Сумма" sortBy="#{c.clientRate.amount}"
+			filterBy="#{c.clientRate.amount}" filterMatchMode="contains">
+			<h:outputText value="#{c.clientRate.amount}" />
 		</p:column>
-		
-		<p:column headerText="Выставление счета" >
-            <p:commandButton id="btn_add" value="сформировать счет" update=":contentForm"
-                icon="ui-icon-document" 
-                actionListener="#{invoiceController.add(c)}"
-                action='#{navController.setMainContent("invoice/invoice")}' />
-        </p:column>	
+
+		<p:column headerText="Последняя дата выставления счета"
+			sortBy="#{invoiceListController.findLatestInvoice(c).date}"
+			filterBy="#{invoiceListController.findLatestInvoice(c).date}"
+			filterMatchMode="contains">
+			<h:outputText
+				value="#{invoiceListController.findLatestInvoice(c).date}"
+				converter="localDateConverter" pattern="dd.MM.yyyy" />
+		</p:column>
+
+		<p:column headerText="Выставление счета">
+			<p:commandButton id="btn_add" value="сформировать счет"
+				update=":contentForm" icon="ui-icon-document"
+				actionListener="#{invoiceController.add(c)}"
+				action='#{navController.setMainContent("invoice/invoice")}' />
+		</p:column>
 
 	</p:dataTable>
 
