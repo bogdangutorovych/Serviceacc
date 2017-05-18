@@ -23,6 +23,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import ua.com.foxminded.serviceacc.model.enums.ContractStatus;
+import ua.com.foxminded.serviceacc.model.enums.ContractType;
 
 @Entity
 @Table(name = "contract")
@@ -53,6 +54,10 @@ public class Contract {
     @JoinColumn(name = "contract_status")
     private ContractStatus contractStatus;
 
+    @Enumerated(EnumType.STRING)
+    @JoinColumn(name = "contract_type")
+    private ContractType contractType;
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "deal_id")
     private Deal deal;
@@ -77,6 +82,14 @@ public class Contract {
 
     public Long getId() {
         return id;
+    }
+
+    public ContractType getContractType() {
+        return contractType;
+    }
+
+    public void setContractType(ContractType contractType) {
+        this.contractType = contractType;
     }
 
     public void setId(Long id) {
