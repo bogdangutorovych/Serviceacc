@@ -40,4 +40,14 @@ public class InvoiceServiceDataJpa implements InvoiceService {
 
     }
 
+    @Override
+    public List<Invoice> findInvoicesByContractId(Long contractId) {
+        return invoiceRepository.findInvoicesByContractId(contractId);
+    }
+
+    @Override
+    public Invoice findMaxDateInvoice(Long contractID) {
+        return invoiceRepository.findMaxDateInvoice(contractID);
+    }
+
 }

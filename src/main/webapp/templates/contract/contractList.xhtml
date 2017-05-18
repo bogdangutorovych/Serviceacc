@@ -98,6 +98,11 @@
 				converter="localDateConverter" pattern="dd.MM.yyyy" />
 		</p:column>
 
+		<p:column headerText="След.период начисления" sortBy="#{invoiceListController.findNextPayPeriod(c).dateFrom} - #{invoiceListController.findNextPayPeriod(c).dateTo}"
+			filterBy="#{invoiceListController.findNextPayPeriod(c).dateFrom} - #{invoiceListController.findNextPayPeriod(c).dateTo}" filterMatchMode="contains">
+			<h:outputText value="#{invoiceListController.findNextPayPeriod(c).dateFrom} - #{invoiceListController.findNextPayPeriod(c).dateTo}" />
+		</p:column>
+
 		<p:column headerText="Выставление счета">
 			<p:commandButton id="btn_add" value="сформировать счет"
 				update=":contentForm" icon="ui-icon-document"
