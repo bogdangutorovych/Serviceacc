@@ -28,6 +28,7 @@
 				disabled="#{clientController.selectedClient==null}"
 				actionListener="#{clientListController.deleteClient(clientController.selectedClient)}" >
                 <f:actionListener binding="#{clientListController.updateClientListFromDB()}" />
+                <f:actionListener binding="#{clientController.setSelectedClient(null)}" />
 
             </p:commandButton>
 
