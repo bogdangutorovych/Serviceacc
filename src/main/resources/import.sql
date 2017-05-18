@@ -43,11 +43,11 @@ INSERT INTO DEAL (id, client_id, service_id, is_deleted) VALUES
 (4, 8, 2, false);
 ALTER SEQUENCE deal_id_seq RESTART WITH 5;
 
-INSERT INTO CONTRACT (id, number, contract_date, deal_id, manager_id, contract_status, is_deleted, is_trial) VALUES
-(1, '1', '2017-01-01', 1, 1, 'ACTIVE', false, false),
-(2, '2', '2017-02-28', 2, 2, 'ACTIVE', false, false),
-(3, '3', '2017-04-25', 3, 3, 'FROZEN', false, false),
-(4, '4', '2017-01-31', 4, 3, 'CLOSED', false, false);
+INSERT INTO CONTRACT (id, number, contract_date, deal_id, client_rate, manager_rate, manager_id, contract_status, is_deleted, is_trial) VALUES
+(1, '1', '2017-01-01', 1, 1, 7, 1, 'ACTIVE', false, false),
+(2, '2', '2017-02-28', 2, 1, 7, 2, 'ACTIVE', false, false),
+(3, '3', '2017-04-25', 3, 1, 7, 3, 'FROZEN', false, false),
+(4, '4', '2017-01-31', 4, 1, 7, 3, 'CLOSED', false, false);
 ALTER SEQUENCE contract_id_seq RESTART WITH 5;
 
 INSERT INTO QUEUE_REGISTER (id, register_date, deal_id, after_freezing, is_deleted) VALUES
@@ -101,7 +101,7 @@ INSERT INTO PAYMENT (id, date, money_id, payment_type, is_deleted) VALUES
 (1, '2017-01-14', 1, 'CASH', false),
 (2, '2017-02-14', 1, 'BANK', false),
 (3, '2017-03-14', 1, 'UNISTREAM', false);
-ALTER SEQUENCE manager_info_seq RESTART WITH 4;
+ALTER SEQUENCE payment_id_seq RESTART WITH 4;
 
 INSERT INTO PERIOD (id, date_from, date_to) VALUES
 (1, '2017-01-14', '2017-02-13'),
@@ -109,7 +109,7 @@ INSERT INTO PERIOD (id, date_from, date_to) VALUES
 (3, '2017-03-04', '2017-04-03'),
 (4, '2017-04-25', '2017-05-24'),
 (5, '2017-05-09', '2017-06-08');
-ALTER SEQUENCE manager_info_seq RESTART WITH 6;
+ALTER SEQUENCE period_id_seq RESTART WITH 6;
 
 INSERT INTO INVOICE (id, number, date, contract_id, money_id, invoice_type, payment_id, period_id, is_deleted) VALUES
 (1, 'inv# 1', '2017-01-01', 1, 1, 'NEW', NULL, 1, false),
@@ -117,6 +117,6 @@ INSERT INTO INVOICE (id, number, date, contract_id, money_id, invoice_type, paym
 (3, 'inv# 3', '2017-03-01', 3, 1, 'PAID', 1, 3, false),
 (4, 'inv# 4', '2017-04-01', 4, 1, 'PAID', 2, 4, false),
 (5, 'inv# 5', '2017-05-01', 4, 1, 'CLOSED', 3, 5, false);
-ALTER SEQUENCE manager_info_seq RESTART WITH 6;
+ALTER SEQUENCE invoice_id_seq RESTART WITH 6;
 
 

@@ -37,6 +37,15 @@ public class ContractController implements Serializable {
     private List<Service> availableServices;
 
     private ContractService contractService;
+
+    public ContractService getContractService() {
+        return contractService;
+    }
+
+    public void setContractService(ContractService contractService) {
+        this.contractService = contractService;
+    }
+
     private ClientService clientService;
     private ManagerService managerService;
     private ServiceService serviceService;
