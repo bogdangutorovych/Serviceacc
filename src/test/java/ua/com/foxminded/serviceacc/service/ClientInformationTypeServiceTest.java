@@ -3,9 +3,10 @@ package ua.com.foxminded.serviceacc.service;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
+import javax.inject.Inject;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -20,9 +21,9 @@ import ua.com.foxminded.serviceacc.model.ClientInformationType;
 @ActiveProfiles("test")
 public class ClientInformationTypeServiceTest {
 
-    @Autowired
+    @Inject
     ClientService clientService;
-    @Autowired
+    @Inject
     ClientInformationTypeService clientInformationTypeService;
 
     @Test

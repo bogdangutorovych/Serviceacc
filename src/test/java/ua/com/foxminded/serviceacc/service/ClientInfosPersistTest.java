@@ -6,9 +6,10 @@ import static org.junit.Assert.assertThat;
 import static ua.com.foxminded.serviceacc.ModelTestBuilder.buildTestClient;
 import static ua.com.foxminded.serviceacc.ModelTestBuilder.buildTestClientInformation;
 
+import javax.inject.Inject;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -26,13 +27,13 @@ import ua.com.foxminded.serviceacc.model.ClientInformationType;
 @ActiveProfiles("test")
 public class ClientInfosPersistTest {
 
-    @Autowired
+    @Inject
     ClientService clientService;
-    @Autowired
+    @Inject
     ManagerService managerService;
-    @Autowired
+    @Inject
     ClientInformationTypeService clientInformationTypeService;
-    @Autowired
+    @Inject
     ClientInformationService clientInformationService;
 
     @Test
