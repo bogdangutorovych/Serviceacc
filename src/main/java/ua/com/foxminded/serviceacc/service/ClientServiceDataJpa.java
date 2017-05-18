@@ -2,7 +2,8 @@ package ua.com.foxminded.serviceacc.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Service;
 
 import ua.com.foxminded.serviceacc.model.Client;
@@ -14,7 +15,7 @@ import ua.com.foxminded.serviceacc.repository.ClientRepository;
 @Service("clientService")
 public class ClientServiceDataJpa implements ClientService {
 
-	@Autowired
+    @Inject
 	ClientRepository clientRepository;
 
 	@Override

@@ -2,7 +2,8 @@ package ua.com.foxminded.serviceacc.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Service;
 
 import ua.com.foxminded.serviceacc.model.Contract;
@@ -11,7 +12,7 @@ import ua.com.foxminded.serviceacc.repository.ContractRepository;
 @Service("contractService")
 public class ContractServiceDataJpa implements ContractService {
 
-    @Autowired
+    @Inject
     ContractRepository contractRepository;
 
     @Override

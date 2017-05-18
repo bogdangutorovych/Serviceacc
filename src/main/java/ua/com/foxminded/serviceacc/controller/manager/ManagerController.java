@@ -8,11 +8,11 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 
 import ua.com.foxminded.serviceacc.model.Manager;
 import ua.com.foxminded.serviceacc.model.ManagerInformation;
@@ -21,7 +21,7 @@ import ua.com.foxminded.serviceacc.service.ManagerInformationService;
 import ua.com.foxminded.serviceacc.service.ManagerInformationTypeService;
 import ua.com.foxminded.serviceacc.service.ManagerService;
 
-@Controller
+@Named
 @ViewScoped
 @ManagedBean
 public class ManagerController implements Serializable {
@@ -40,7 +40,7 @@ public class ManagerController implements Serializable {
 	private ManagerInformationTypeService managerInformationTypeService;
 	private ManagerInformationService managerInformationService;
 
-	@Autowired
+	@Inject
 	public ManagerController(ManagerService managerService,
 			ManagerInformationTypeService managerInformationTypeService,
 			ManagerInformationService managerInformationService) {

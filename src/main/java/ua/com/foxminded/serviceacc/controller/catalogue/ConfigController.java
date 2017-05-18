@@ -4,9 +4,9 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.inject.Inject;
+import javax.inject.Named;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.context.annotation.ApplicationScope;
 
 import ua.com.foxminded.serviceacc.model.ClientInformationType;
@@ -17,12 +17,12 @@ import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
  * For holding information all time application is up
  *
  */
-@Controller
+@Named
 @ManagedBean
 @ApplicationScope
 public class ConfigController {
 
-    @Autowired
+    @Inject
     ClientInformationTypeService clientInformationTypeService;
 
     private List<ClientInformationType> clientInformationTypeList;

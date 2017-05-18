@@ -6,15 +6,15 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.primefaces.event.RowEditEvent;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 
 import ua.com.foxminded.serviceacc.model.ManagerInformationType;
 import ua.com.foxminded.serviceacc.service.ManagerInformationTypeService;
 
-@Controller
+@Named
 @ManagedBean
 @ViewScoped
 public class ManagerInformationTypeController implements Serializable {
@@ -26,7 +26,7 @@ public class ManagerInformationTypeController implements Serializable {
 
 	private ManagerInformationTypeService managerInformationTypeService;
 
-	@Autowired
+	@Inject
 	public ManagerInformationTypeController(ManagerInformationTypeService cltService) {
 		this.managerInformationTypeService = cltService;
 	}
