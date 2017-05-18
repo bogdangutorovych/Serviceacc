@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +15,7 @@ import ua.com.foxminded.serviceacc.model.Invoice;
 import ua.com.foxminded.serviceacc.service.InvoiceService;
 
 @Controller
-@ViewScoped
+@RequestScoped
 @ManagedBean
 public class InvoiceListController implements Serializable {
 

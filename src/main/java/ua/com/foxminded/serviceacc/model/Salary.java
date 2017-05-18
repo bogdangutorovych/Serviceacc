@@ -52,7 +52,8 @@ public class Salary {
 
     }
 
-    public Salary(Long id, LocalDate date, Manager manager, Money amount, Set<SalaryItem> salaryItems, boolean isDeleted) {
+    public Salary(Long id, LocalDate date, Manager manager, Money amount, Set<SalaryItem> salaryItems,
+            boolean isDeleted) {
         super();
         this.id = id;
         this.date = date;
