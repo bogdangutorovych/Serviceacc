@@ -18,12 +18,7 @@ public class ManagerInformationTypeServiceDataJpa implements ManagerInformationT
     ManagerInformationTypeRepository managerInformationTypeRepository;
 
     @Override
-    public ManagerInformationType save(ManagerInformationType managerInformationType) {
-        return managerInformationTypeRepository.save(managerInformationType);
-    }
-
-    @Override
-    public ManagerInformationType update(ManagerInformationType managerInformationType) {
+    public ManagerInformationType saveOrUpdate(ManagerInformationType managerInformationType) {
         return managerInformationTypeRepository.save(managerInformationType);
     }
 

@@ -32,7 +32,7 @@ public class ClientInformationTypeServiceTest {
         // Save new type and check
         ClientInformationType skype1 = new ClientInformationType(typeCode, typeName);
         skype1.setDeleted(true);
-        clientInformationTypeService.save(skype1);
+        clientInformationTypeService.saveOrUpdate(skype1);
         assertThat(skype1.getTitle(), is(typeName));
     }
 }

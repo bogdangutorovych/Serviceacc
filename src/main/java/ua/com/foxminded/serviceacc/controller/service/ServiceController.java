@@ -55,9 +55,9 @@ public class ServiceController implements Serializable {
     public void onOk(){
         selectedService.getPrices().clear();
         selectedService.getPrices().addAll(tempPrices);
-        serviceService.save(selectedService);
+        serviceService.saveOrUpdate(selectedService);
         tempPrices.clear();
-        log.debug("onOk save Service: " + selectedService);
+        log.debug("onOk saveOrUpdate Service: " + selectedService);
     }
 
     public void addPrice(){

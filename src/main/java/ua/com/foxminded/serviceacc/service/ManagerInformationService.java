@@ -7,9 +7,7 @@ import ua.com.foxminded.serviceacc.model.ManagerInformation;
 
 public interface ManagerInformationService {
 
-    ManagerInformation save(ManagerInformation managerInformation);
-
-    ManagerInformation update(ManagerInformation managerInformation);
+    ManagerInformation saveOrUpdate(ManagerInformation managerInformation);
 
     ManagerInformation findById(Long managerInformationId);
 

@@ -18,12 +18,7 @@ public class ClientInformationTypeServiceDataJpa implements ClientInformationTyp
     ClientInformationTypeRepository clientInfoTypeRepository;
 
     @Override
-    public ClientInformationType save(ClientInformationType clientInformationType) {
-        return clientInfoTypeRepository.save(clientInformationType);
-    }
-
-    @Override
-    public ClientInformationType update(ClientInformationType clientInformationType) {
+    public ClientInformationType saveOrUpdate(ClientInformationType clientInformationType) {
         return clientInfoTypeRepository.save(clientInformationType);
     }
 

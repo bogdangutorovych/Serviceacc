@@ -33,11 +33,7 @@ public class PaymentController implements Serializable {
     }
 
     public void onOk() {
-        if (selected.getId() == null) {
-            selected = paymentService.create(selected);
-        }
-
-        paymentService.update(selected);
+        selected = paymentService.saveOrUpdate(selected);
     }
 
     public void clearSelected() {

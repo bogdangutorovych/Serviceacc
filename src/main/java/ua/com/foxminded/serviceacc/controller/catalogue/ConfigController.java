@@ -38,11 +38,7 @@ public class ConfigController {
 
     public void setClientInformationTypeList(List<ClientInformationType> newClientTypeListType){
         for(ClientInformationType type : newClientTypeListType){
-            if (type.getId() == null){
-                clientInformationTypeService.save(type);
-            }else{
-                clientInformationTypeService.update(type);
-            }
+                clientInformationTypeService.saveOrUpdate(type);
         }
 
         this.clientInformationTypeList = clientInformationTypeService.findAll();
@@ -50,14 +46,14 @@ public class ConfigController {
 
     public ClientInformationType saveClientInformationType(ClientInformationType type){
 
-        clientInformationTypeService.save(type);
+        clientInformationTypeService.saveOrUpdate(type);
         clientInformationTypeList = clientInformationTypeService.findAll();
         return type;
     }
 
     public ClientInformationType updateClientInformationType(ClientInformationType forUpdateType){
 
-        clientInformationTypeService.update(forUpdateType);
+        clientInformationTypeService.saveOrUpdate(forUpdateType);
         clientInformationTypeList = clientInformationTypeService.findAll();
         return forUpdateType;
     }

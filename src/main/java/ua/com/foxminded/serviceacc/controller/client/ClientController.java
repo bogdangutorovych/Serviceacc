@@ -64,19 +64,15 @@ public class ClientController implements Serializable {
     }
 
     public void onOk() {
-        // save or update client
-        if (selectedClient.getId() == null) {
-            clientService.save(selectedClient);
-        } else {
-            clientService.update(selectedClient);
-        }
+        // saveOrUpdate or update client
+        clientService.saveOrUpdate(selectedClient);
 
         // Save or update informations
         Iterator<ClientInformation> iteratorInfos = clientInfo.iterator();
         while (iteratorInfos.hasNext()) {
             ClientInformation info = iteratorInfos.next();
             if (!info.getContent().isEmpty()) {
-                clientInformationService.save(info);
+                clientInformationService.saveOrUpdate(info);
             } else if (info.getContent().isEmpty() && info.getId() != null) {
                 clientInformationService.delete(info.getId());
             }

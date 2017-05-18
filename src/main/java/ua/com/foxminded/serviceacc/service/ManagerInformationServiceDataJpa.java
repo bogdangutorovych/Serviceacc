@@ -14,14 +14,9 @@ public class ManagerInformationServiceDataJpa implements ManagerInformationServi
 
     @Autowired
     ManagerInformationRepository managerInformationRepository;
-    
-    @Override
-    public ManagerInformation save(ManagerInformation managerInformation) {
-        return managerInformationRepository.save(managerInformation);
-    }
 
     @Override
-    public ManagerInformation update(ManagerInformation managerInformation) {
+    public ManagerInformation saveOrUpdate(ManagerInformation managerInformation) {
         return managerInformationRepository.save(managerInformation);
     }
 

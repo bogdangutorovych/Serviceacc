@@ -14,12 +14,7 @@ public class ServiceDataJpa implements ServiceService {
     ServiceRepository serviceRepository;
 
     @Override
-    public ua.com.foxminded.serviceacc.model.Service save(ua.com.foxminded.serviceacc.model.Service service) {
-        return serviceRepository.save(service);
-    }
-
-    @Override
-    public ua.com.foxminded.serviceacc.model.Service update(ua.com.foxminded.serviceacc.model.Service service) {
+    public ua.com.foxminded.serviceacc.model.Service saveOrUpdate(ua.com.foxminded.serviceacc.model.Service service) {
         return serviceRepository.save(service);
     }
 

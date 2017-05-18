@@ -6,9 +6,7 @@ import ua.com.foxminded.serviceacc.model.Service;
 
 public interface ServiceService {
 
-    Service save(Service service);
-
-    Service update(Service service);
+    Service saveOrUpdate(Service service);
 
     Service findById(Long serviceId);
 
