@@ -27,6 +27,7 @@
 				actionListener="#{managerListController.deleteManager(managerController.selectedManager)}" >
 
                 <f:actionListener binding="#{managerListController.updateManagerListFromDB()}" />
+                <f:actionListener binding="#{managerController.selectedManager = null}" />
             </p:commandButton>
 
 		</f:facet>
