@@ -6,10 +6,10 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Named;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
 
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.Deal;
@@ -19,7 +19,7 @@ import ua.com.foxminded.serviceacc.service.ClientService;
 import ua.com.foxminded.serviceacc.service.QueueRegisterService;
 import ua.com.foxminded.serviceacc.service.ServiceService;
 
-@Controller
+@Named
 @ViewScoped
 @ManagedBean
 public class QueueRegisterController implements Serializable {
@@ -62,11 +62,7 @@ public class QueueRegisterController implements Serializable {
     }
 
     public void onOk() {
-        if (selected.getId() == null) {
-            selected = queueRegisterService.create(selected);
-        }
-
-        queueRegisterService.update(selected);
+        selected = queueRegisterService.save(selected);
         init();
     }
 

@@ -11,17 +11,12 @@ import ua.com.foxminded.serviceacc.repository.DealRepository;
 
 @Service("dealService")
 public class DealSeviceDataJpa implements DealService {
-    
+
     @Autowired
     DealRepository dealRepository;
 
     @Override
     public Deal save(Deal deal) {
-        return dealRepository.save(deal);
-    }
-
-    @Override
-    public Deal update(Deal deal) {
         return dealRepository.save(deal);
     }
 

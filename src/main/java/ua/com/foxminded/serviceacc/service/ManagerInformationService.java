@@ -9,8 +9,6 @@ public interface ManagerInformationService {
 
     ManagerInformation save(ManagerInformation managerInformation);
 
-    ManagerInformation update(ManagerInformation managerInformation);
-
     ManagerInformation findById(Long managerInformationId);
 
     List<ManagerInformation> findAll();

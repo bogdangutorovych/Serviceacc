@@ -4,18 +4,17 @@ import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Named;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
 
 import ua.com.foxminded.serviceacc.model.Contract;
 import ua.com.foxminded.serviceacc.model.Invoice;
-import ua.com.foxminded.serviceacc.model.Payment;
 import ua.com.foxminded.serviceacc.model.Period;
 import ua.com.foxminded.serviceacc.service.InvoiceService;
 
-@Controller
+@Named
 @ViewScoped
 @ManagedBean
 public class InvoiceController implements Serializable {
@@ -26,7 +25,6 @@ public class InvoiceController implements Serializable {
 
     private Invoice selected;
     private Period period;
-    private Payment payment;
     private InvoiceService invoiceService;
 
     public InvoiceController(InvoiceService invoiceService) {
@@ -37,22 +35,12 @@ public class InvoiceController implements Serializable {
         init();
         selected.setContract(contract);
         selected.setPeriod(period);
-        selected.setPayment(payment);
         selected.setPrice(contract.getClientRate());
     }
 
     public void init() {
         selected = new Invoice();
         period = new Period();
-        payment = new Payment();
-    }
-
-    public void onEdit() {
-        if (payment == null) {
-            payment = new Payment();
-        } else {
-            selected.setPayment(payment);
-        }
     }
 
     public void onOk() {
@@ -61,6 +49,7 @@ public class InvoiceController implements Serializable {
             selected.setNumber("inv# " + selected.getId());
         }
         invoiceService.update(selected);
+        selected = invoiceService.save(selected);
     }
 
     public void clearSelected() {

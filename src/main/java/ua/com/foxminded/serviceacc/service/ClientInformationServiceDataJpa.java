@@ -21,11 +21,6 @@ public class ClientInformationServiceDataJpa implements ClientInformationService
     }
 
     @Override
-    public ClientInformation update(ClientInformation clientInformation) {
-        return clientInformationRepository.save(clientInformation);
-    }
-
-    @Override
     public ClientInformation findById(Long clientInformationId) {
         return clientInformationRepository.findOne(clientInformationId);
     }

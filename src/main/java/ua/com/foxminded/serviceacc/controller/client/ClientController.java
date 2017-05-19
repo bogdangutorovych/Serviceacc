@@ -29,7 +29,6 @@ import ua.com.foxminded.serviceacc.service.DealService;
 public class ClientController implements Serializable {
 
     private static final Logger log = LoggerFactory.getLogger(ClientController.class);
-
     private static final long serialVersionUID = 1L;
 
     private Client selectedClient;
@@ -66,25 +65,18 @@ public class ClientController implements Serializable {
 
     public void onOk() {
         // save or update client
-        if (selectedClient.getId() == null) {
-            clientService.save(selectedClient);
-        } else {
-            clientService.update(selectedClient);
-        }
+        clientService.save(selectedClient);
 
         // Save or update informations
         Iterator<ClientInformation> iteratorInfos = clientInfo.iterator();
         while (iteratorInfos.hasNext()) {
             ClientInformation info = iteratorInfos.next();
-            if (info.getContent().isEmpty() && info.getId() != null) {
-                clientInformationService.update(info);
+            if (!info.getContent().isEmpty()) {
+                clientInformationService.save(info);
+            } else if (info.getContent().isEmpty() && info.getId() != null) {
                 clientInformationService.delete(info.getId());
-            } else if (info.getContent().isEmpty() && info.getId() == null) {
-            } else {
-                clientInformationService.update(info);
             }
         }
-
     }
 
     public ClientInformation getInfoByType(ClientInformationType clientInformationType) {
@@ -123,7 +115,7 @@ public class ClientController implements Serializable {
     public Client getSelectedClient() {
         return selectedClient;
     }
-    
+
     public List<Deal> getClientDealList() {
         clientDeals = dealService.findByClient(selectedClient);
         return clientDeals;

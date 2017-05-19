@@ -15,12 +15,7 @@ public class PaymentServiceDataJpa implements PaymentService {
     PaymentRepository paymentRepository;
 
     @Override
-    public Payment create(Payment payment) {
-        return paymentRepository.save(payment);
-    }
-
-    @Override
-    public Payment update(Payment payment) {
+    public Payment save(Payment payment) {
         return paymentRepository.save(payment);
     }
 

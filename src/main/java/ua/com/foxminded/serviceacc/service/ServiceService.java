@@ -8,8 +8,6 @@ public interface ServiceService {
 
     Service save(Service service);
 
-    Service update(Service service);
-
     Service findById(Long serviceId);
 
     List<Service> findAll();

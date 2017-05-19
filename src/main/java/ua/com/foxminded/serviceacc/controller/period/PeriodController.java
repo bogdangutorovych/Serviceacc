@@ -4,15 +4,15 @@ import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Named;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
 
 import ua.com.foxminded.serviceacc.model.Period;
 import ua.com.foxminded.serviceacc.service.PeriodService;
 
-@Controller
+@Named
 @ViewScoped
 @ManagedBean
 public class PeriodController implements Serializable {
@@ -33,11 +33,7 @@ public class PeriodController implements Serializable {
     }
 
     public void onOk() {
-        if (selected.getId() == null) {
-            selected = periodService.create(selected);
-        }
-
-        periodService.update(selected);
+            selected = periodService.save(selected);
     }
 
     public void clearSelected() {

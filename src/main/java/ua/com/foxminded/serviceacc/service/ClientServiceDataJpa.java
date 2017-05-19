@@ -14,16 +14,11 @@ import ua.com.foxminded.serviceacc.repository.ClientRepository;
 @Service("clientService")
 public class ClientServiceDataJpa implements ClientService {
 
-	@Autowired
+    @Autowired
 	ClientRepository clientRepository;
 
 	@Override
 	public Client save(Client client) {
-		return clientRepository.save(client);
-	}
-
-	@Override
-	public Client update(Client client) {
 		return clientRepository.save(client);
 	}
 
@@ -39,6 +34,6 @@ public class ClientServiceDataJpa implements ClientService {
 
 	@Override
 	public List<Client> findAll() {
-		return clientRepository.findAll();
+		return clientRepository.findAllByOrderByIdAsc();
 	}
 }

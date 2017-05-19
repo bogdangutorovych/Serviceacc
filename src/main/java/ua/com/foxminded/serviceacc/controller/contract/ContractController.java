@@ -6,11 +6,11 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.Contract;
@@ -24,7 +24,7 @@ import ua.com.foxminded.serviceacc.service.ContractService;
 import ua.com.foxminded.serviceacc.service.ManagerService;
 import ua.com.foxminded.serviceacc.service.ServiceService;
 
-@Controller
+@Named
 @ViewScoped
 @ManagedBean
 public class ContractController implements Serializable {
@@ -53,7 +53,7 @@ public class ContractController implements Serializable {
     private ManagerService managerService;
     private ServiceService serviceService;
 
-    @Autowired
+    @Inject
     public ContractController(ContractService contractService, ClientService clientService,
             ManagerService managerService, ServiceService serviceService) {
         this.contractService = contractService;
@@ -89,11 +89,13 @@ public class ContractController implements Serializable {
 
     public void onOk() {
         if (selectedContract.getId() == null) {
-            selectedContract = contractService.create(selectedContract);
+            selectedContract = contractService.save(selectedContract);
             selectedContract.setNumber("" + selectedContract.getId());
+        }else{
+            contractService.save(selectedContract);
         }
 
-        contractService.update(selectedContract);
+
         init();
 
     }

@@ -23,18 +23,13 @@ public class ManagerServiceDataJpa implements ManagerService {
     }
 
     @Override
-    public Manager update(Manager manager) {
-        return managerRepository.save(manager);
-    }
-
-    @Override
     public Manager findById(Long managerId) {
         return managerRepository.findOne(managerId);
     }
 
     @Override
     public List<Manager> findAll() {
-        return managerRepository.findAll();
+        return managerRepository.findAllByOrderByIdAsc();
     }
 
     @Override

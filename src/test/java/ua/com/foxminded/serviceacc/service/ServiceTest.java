@@ -52,7 +52,7 @@ public class ServiceTest {
         serviceService.save(service);
 
         service.setName(changed);
-        serviceService.update(service);
+        serviceService.save(service);
         Service fetched = serviceService.findById(service.getId());
         assertThat(fetched.getName(), is(changed));
     }
@@ -77,7 +77,7 @@ public class ServiceTest {
         serviceService.save(service);
         service.setDeleted(true);
         assertNotNull(serviceService.findById(service.getId()));
-        serviceService.update(service);
+        serviceService.save(service);
         assertNull(serviceService.findById(service.getId()));
 
         service.setDeleted(false);

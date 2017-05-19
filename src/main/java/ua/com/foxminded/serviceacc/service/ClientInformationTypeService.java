@@ -11,8 +11,6 @@ public interface ClientInformationTypeService {
 
     ClientInformationType save(ClientInformationType clientInformationType);
 
-    ClientInformationType update(ClientInformationType clientInformationType);
-
     ClientInformationType findById(Long clientInformationTypeId);
 
     List<ClientInformationType> findAll();

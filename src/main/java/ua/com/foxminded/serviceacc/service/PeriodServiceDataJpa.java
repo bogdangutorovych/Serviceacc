@@ -15,12 +15,7 @@ public class PeriodServiceDataJpa implements PeriodService {
     PeriodRepository periodRepository;
 
     @Override
-    public Period create(Period period) {
-        return periodRepository.save(period);
-    }
-
-    @Override
-    public Period update(Period period) {
+    public Period save(Period period) {
         return periodRepository.save(period);
     }
 

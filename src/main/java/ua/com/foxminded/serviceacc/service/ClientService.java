@@ -11,8 +11,6 @@ public interface ClientService {
 
 	Client save(Client client);
 
-	Client update(Client client);
-
 	Client findById(Long clientId);
 
 	List<Client> findAll();

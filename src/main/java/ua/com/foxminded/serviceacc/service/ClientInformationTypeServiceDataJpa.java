@@ -23,11 +23,6 @@ public class ClientInformationTypeServiceDataJpa implements ClientInformationTyp
     }
 
     @Override
-    public ClientInformationType update(ClientInformationType clientInformationType) {
-        return clientInfoTypeRepository.save(clientInformationType);
-    }
-
-    @Override
     public ClientInformationType findById(Long contactTypeId) {
         return clientInfoTypeRepository.findOne(contactTypeId);
     }
