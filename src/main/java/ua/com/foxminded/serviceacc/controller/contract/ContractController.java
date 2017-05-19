@@ -79,10 +79,10 @@ public class ContractController implements Serializable {
 
     public void onOk() {
         if (selectedContract.getId() == null) {
-            selectedContract = contractService.saveOrUpdate(selectedContract);
+            selectedContract = contractService.save(selectedContract);
             selectedContract.setNumber("" + selectedContract.getId());
         }else{
-            contractService.saveOrUpdate(selectedContract);
+            contractService.save(selectedContract);
         }
 
 

@@ -9,7 +9,7 @@ import ua.com.foxminded.serviceacc.model.Client;
  */
 public interface ClientService {
 
-	Client saveOrUpdate(Client client);
+	Client save(Client client);
 
 	Client findById(Long clientId);
 

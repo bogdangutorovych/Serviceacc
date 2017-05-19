@@ -6,7 +6,7 @@ import ua.com.foxminded.serviceacc.model.Invoice;
 
 public interface InvoiceService {
 
-    Invoice saveOrUpdate(Invoice invoice);
+    Invoice save(Invoice invoice);
 
     Invoice findById(Long invoiceId);
 

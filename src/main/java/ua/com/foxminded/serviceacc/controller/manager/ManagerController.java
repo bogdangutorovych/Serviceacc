@@ -58,15 +58,15 @@ public class ManagerController implements Serializable {
 	}
 
 	public void onOk() {
-        //saveOrUpdate or update manager
-        managerService.saveOrUpdate(selectedManager);
+        //save or update manager
+        managerService.save(selectedManager);
 
         //save Or Update information, delete empty values
         Iterator<ManagerInformation> iteratorInfos = managerInfo.iterator();
         while(iteratorInfos.hasNext()){
             ManagerInformation info = iteratorInfos.next();
             if (!info.getContent().isEmpty()) {
-                managerInformationService.saveOrUpdate(info);
+                managerInformationService.save(info);
             } else if (info.getContent().isEmpty() && info.getId() != null){
                 managerInformationService.delete(info.getId());
             }

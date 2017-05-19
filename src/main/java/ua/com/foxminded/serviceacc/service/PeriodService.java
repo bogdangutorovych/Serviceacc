@@ -6,7 +6,7 @@ import ua.com.foxminded.serviceacc.model.Period;
 
 public interface PeriodService {
 
-    Period saveOrUpdate(Period period);
+    Period save(Period period);
 
     Period findById(Long periodId);
 

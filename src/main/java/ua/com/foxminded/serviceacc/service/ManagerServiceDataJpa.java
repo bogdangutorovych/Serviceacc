@@ -18,7 +18,7 @@ public class ManagerServiceDataJpa implements ManagerService {
     ManagerRepository managerRepository;
 
     @Override
-    public Manager saveOrUpdate(Manager manager) {
+    public Manager save(Manager manager) {
         return managerRepository.save(manager);
     }
 

@@ -62,7 +62,7 @@ public class QueueRegisterController implements Serializable {
     }
 
     public void onOk() {
-        selected = queueRegisterService.saveOrUpdate(selected);
+        selected = queueRegisterService.save(selected);
         init();
     }
 

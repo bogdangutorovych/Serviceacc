@@ -7,7 +7,7 @@ import ua.com.foxminded.serviceacc.model.Deal;
 
 public interface DealService {
 
-    Deal saveOrUpdate(Deal deal);
+    Deal save(Deal deal);
 
     Deal findById(Long DealId);
 

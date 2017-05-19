@@ -15,7 +15,7 @@ public class InvoiceServiceDataJpa implements InvoiceService {
     InvoiceRepository invoiceRepository;
 
     @Override
-    public Invoice saveOrUpdate(Invoice invoice) {
+    public Invoice save(Invoice invoice) {
         return invoiceRepository.save(invoice);
     }
 

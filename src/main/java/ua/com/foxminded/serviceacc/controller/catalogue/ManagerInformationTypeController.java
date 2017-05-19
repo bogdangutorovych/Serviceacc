@@ -64,7 +64,7 @@ public class ManagerInformationTypeController implements Serializable {
 	}
 
 	public void onRowEdit(RowEditEvent event) {
-		managerInformationTypeService.saveOrUpdate((ManagerInformationType) event.getObject());
+		managerInformationTypeService.save((ManagerInformationType) event.getObject());
 		selected = null;
 	}
 

@@ -6,7 +6,7 @@ import ua.com.foxminded.serviceacc.model.QueueRegister;
 
 public interface QueueRegisterService {
 
-    QueueRegister saveOrUpdate(QueueRegister queueRegister);
+    QueueRegister save(QueueRegister queueRegister);
 
     QueueRegister findById(Long queueRegisterId);
 

@@ -39,7 +39,7 @@ public class ServiceTest {
     public void saveServiceTest() {
         Service service = buildTestService();
         int sizeBefore = serviceService.findAll().size();
-        serviceService.saveOrUpdate(service);
+        serviceService.save(service);
         assertThat(serviceService.findAll(), hasSize(sizeBefore + 1));
     }
 
@@ -49,10 +49,10 @@ public class ServiceTest {
         String changed = "Service2";
 
         Service service = buildTestService();
-        serviceService.saveOrUpdate(service);
+        serviceService.save(service);
 
         service.setName(changed);
-        serviceService.saveOrUpdate(service);
+        serviceService.save(service);
         Service fetched = serviceService.findById(service.getId());
         assertThat(fetched.getName(), is(changed));
     }
@@ -63,7 +63,7 @@ public class ServiceTest {
 
         int size = serviceService.findAll().size();
         Service service = buildTestService();
-        serviceService.saveOrUpdate(service);
+        serviceService.save(service);
         assertThat(serviceService.findAll().size(), is(size + 1));
         serviceService.delete(service.getId());
         assertThat(serviceService.findAll(), hasSize(size));
@@ -74,10 +74,10 @@ public class ServiceTest {
 
     public void updateActiveTest() {
         Service service = buildTestService();
-        serviceService.saveOrUpdate(service);
+        serviceService.save(service);
         service.setDeleted(true);
         assertNotNull(serviceService.findById(service.getId()));
-        serviceService.saveOrUpdate(service);
+        serviceService.save(service);
         assertNull(serviceService.findById(service.getId()));
 
         service.setDeleted(false);
@@ -95,7 +95,7 @@ public class ServiceTest {
         service.getPrices().add(USD);
 
         System.out.println(service.getId());
-        serviceService.saveOrUpdate(service);
+        serviceService.save(service);
         System.out.println(service.getId());
         assertThat(serviceService.findById(service.getId()).getPrices(), hasSize(2));
 

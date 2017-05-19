@@ -6,7 +6,7 @@ import ua.com.foxminded.serviceacc.model.Payment;
 
 public interface PaymentService {
 
-    Payment saveOrUpdate(Payment payment);
+    Payment save(Payment payment);
 
     Payment findById(Long paymentId);
 

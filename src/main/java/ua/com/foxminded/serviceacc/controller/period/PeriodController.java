@@ -33,7 +33,7 @@ public class PeriodController implements Serializable {
     }
 
     public void onOk() {
-            selected = periodService.saveOrUpdate(selected);
+            selected = periodService.save(selected);
     }
 
     public void clearSelected() {

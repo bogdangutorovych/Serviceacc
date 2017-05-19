@@ -6,7 +6,7 @@ import ua.com.foxminded.serviceacc.model.Contract;
 
 public interface ContractService {
 
-    Contract saveOrUpdate(Contract contract);
+    Contract save(Contract contract);
 
     Contract findById(Long contractId);
 

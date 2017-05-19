@@ -9,7 +9,7 @@ import ua.com.foxminded.serviceacc.model.ClientInformationType;
  */
 public interface ClientInformationTypeService {
 
-    ClientInformationType saveOrUpdate(ClientInformationType clientInformationType);
+    ClientInformationType save(ClientInformationType clientInformationType);
 
     ClientInformationType findById(Long clientInformationTypeId);
 

@@ -16,7 +16,7 @@ public class ClientInformationServiceDataJpa implements ClientInformationService
     ClientInformationRepository clientInformationRepository;
 
     @Override
-    public ClientInformation saveOrUpdate(ClientInformation clientInformation) {
+    public ClientInformation save(ClientInformation clientInformation) {
         return clientInformationRepository.save(clientInformation);
     }
 

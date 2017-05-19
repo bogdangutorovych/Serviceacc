@@ -44,7 +44,7 @@ public class InvoiceController implements Serializable {
     }
 
     public void onOk() {
-        selected = invoiceService.saveOrUpdate(selected);
+        selected = invoiceService.save(selected);
     }
 
     public void clearSelected() {

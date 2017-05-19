@@ -16,7 +16,7 @@ public class DealSeviceDataJpa implements DealService {
     DealRepository dealRepository;
 
     @Override
-    public Deal saveOrUpdate(Deal deal) {
+    public Deal save(Deal deal) {
         return dealRepository.save(deal);
     }
 

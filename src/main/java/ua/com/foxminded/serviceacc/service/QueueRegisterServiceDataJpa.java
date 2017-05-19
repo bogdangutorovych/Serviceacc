@@ -15,7 +15,7 @@ public class QueueRegisterServiceDataJpa implements QueueRegisterService {
     QueueRegisterRepository queueRegisterRepository;
 
     @Override
-    public QueueRegister saveOrUpdate(QueueRegister queueRegister) {
+    public QueueRegister save(QueueRegister queueRegister) {
         return queueRegisterRepository.save(queueRegister);
     }
 
