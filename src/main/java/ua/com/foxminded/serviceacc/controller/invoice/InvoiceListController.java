@@ -47,8 +47,11 @@ public class InvoiceListController implements Serializable {
     }
 
     public Period findNextPayPeriod(Contract contract) {
-        Period nextPayPeriod = new Period();
         Invoice latestInvoice = findLatestInvoice(contract);
+        if (latestInvoice == null) {
+            return null;
+        }
+        Period nextPayPeriod = new Period();
         nextPayPeriod.setDateFrom(latestInvoice.getPeriod().getDateTo().plusDays(1));
         nextPayPeriod.setDateTo(latestInvoice.getPeriod().getDateTo().plusMonths(1));
         return nextPayPeriod;

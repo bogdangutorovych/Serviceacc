@@ -62,7 +62,7 @@ public class Contract {
     @JoinColumn(name = "deal_id")
     private Deal deal;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "client_rate")
     private Money clientRate;
 
@@ -160,11 +160,11 @@ public class Contract {
         this.managerRate = managerRate;
     }
 
-    public boolean isTrial() {
+    public boolean getIsTrial() {
         return isTrial;
     }
 
-    public void setTrial(boolean isTrial) {
+    public void setIsTrial(boolean isTrial) {
         this.isTrial = isTrial;
     }
 

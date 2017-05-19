@@ -52,4 +52,10 @@ public class Period {
     public void setDateTo(LocalDate dateTo) {
         this.dateTo = dateTo;
     }
+
+    @Override
+    public String toString() {
+        return dateFrom + " - " + dateTo;
+    }
+
 }

@@ -3,8 +3,17 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-	
-	<p:importEnum type="ua.com.foxminded.serviceacc.model.enums.ContractStatus" var="ContractStatuses" />
+
+	<p:importEnum
+		type="ua.com.foxminded.serviceacc.model.enums.ContractStatus"
+		var="ContractStatuses" />
+	<p:importEnum
+		type="ua.com.foxminded.serviceacc.model.enums.ContractType"
+		var="ContractTypes" />
+
+	<p:importEnum
+		type="ua.com.foxminded.serviceacc.model.enums.Currency"
+		var="Currencies" />
 
 	<p:toolbar>
 		<f:facet name="left">
@@ -28,21 +37,38 @@
 		<h:outputLabel for="date" value="Дата договора: "
 			style="font-weight:bold" />
 		<p:calendar id="date" converter="localDateConverter"
-			pattern="dd.MM.yyyy" 
+			pattern="dd.MM.yyyy"
 			value="#{contractController.selectedContract.contractDate}"
-			showOn="button" mask="99.99.9999"
-			required="true" requiredMessage="Выберите дату договора">
-		</p:calendar>    
+			showOn="button" mask="99.99.9999" required="true"
+			requiredMessage="Выберите дату договора">
+		</p:calendar>
 
 		<p:outputLabel for="service" value="Услуга: " style="font-weight:bold" />
 		<p:selectOneMenu id="service"
 			value="#{contractController.selectedContract.deal.service}"
-			converter="omnifaces.SelectItemsConverter" >
-		<!-- 	required="true" requiredMessage="Выберите услугу" -->			
+			converter="omnifaces.SelectItemsConverter" required="true"
+			requiredMessage="Выберите услугу">
 			<f:selectItem itemLabel="Выбрать услугу..." noSelectionOption="true" />
 			<f:selectItems value="#{contractController.availableServices}"
 				var="service" itemLabel="#{service.name}" itemValue="#{service}" />
 		</p:selectOneMenu>
+        
+        <h:outputLabel for="amount" value="Сумма договора: "
+            style="font-weight:bold" />
+        <p:inputText id="number" value="#{contractController.selectedContract.clientRate.amount}"
+            disabled="false" />
+        
+        <p:outputLabel for="currency" value="Валюта договора: "
+            style="font-weight:bold" />
+        <p:selectOneMenu id="currency"
+            value="#{contractController.selectedContract.clientRate.currency}"
+            required="true" requiredMessage="Выберите валюту"
+            converter="omnifaces.SelectItemsConverter">
+            <f:selectItem itemLabel="Выбрать валюту договора..."
+                noSelectionOption="true" />
+            <f:selectItems value="#{Currencies.ALL_VALUES}"
+                var="currencyEnum" itemLabel="#{currencyEnum}" />
+        </p:selectOneMenu>
 
 		<p:outputLabel for="client" value="Клиент: " style="font-weight:bold" />
 		<p:selectOneMenu id="client"
@@ -52,10 +78,10 @@
 			<f:selectItem itemLabel="Выбрать клиента..." noSelectionOption="true" />
 			<f:selectItems value="#{contractController.availableClients}"
 				var="client" itemLabel="#{client.firstName} #{client.lastName}"
-				itemValue="#{client}"/>
+				itemValue="#{client}" />
 		</p:selectOneMenu>
 
-		 	<p:outputLabel for="manager" value="Ментор: " style="font-weight:bold" />
+		<p:outputLabel for="manager" value="Ментор: " style="font-weight:bold" />
 		<p:selectOneMenu id="manager"
 			value="#{contractController.selectedContract.manager}"
 			required="true" requiredMessage="Выберите ментора"
@@ -65,6 +91,36 @@
 				var="manager" itemLabel="#{manager.firstName} #{manager.lastName}"
 				itemValue="#{manager}" />
 		</p:selectOneMenu>
+
+		<p:outputLabel for="contractStatus" value="Статус договора: "
+			style="font-weight:bold" />
+		<p:selectOneMenu id="contractStatus"
+			value="#{contractController.selectedContract.contractStatus}"
+			required="true" requiredMessage="Выберите статус договора"
+			converter="omnifaces.SelectItemsConverter">
+			<f:selectItem itemLabel="Выбрать статус договора..."
+				noSelectionOption="true" />
+			<f:selectItems value="#{ContractStatuses.ALL_VALUES}"
+				var="statusEnum" itemLabel="#{statusEnum}" />
+		</p:selectOneMenu>
+
+		<p:outputLabel for="contractType" value="Тип договора: "
+			style="font-weight:bold" />
+		<p:selectOneMenu id="contractType"
+			value="#{contractController.selectedContract.contractType}"
+			required="true" requiredMessage="Выберите тип договора"
+			converter="omnifaces.SelectItemsConverter">
+			<f:selectItem itemLabel="Выбрать тип договора..."
+				noSelectionOption="true" />
+			<f:selectItems value="#{ContractTypes.ALL_VALUES}" var="typesEnum"
+				itemLabel="#{typesEnum}" />
+		</p:selectOneMenu>
+ 
+        <h:outputText value="Пробный период" />
+        <p:selectBooleanCheckbox value="#{contractController.selectedContract.isTrial}">
+            <p:ajax update=":contentForm" listener="#{contractController.selectedContract.isTrial}" />
+        </p:selectBooleanCheckbox>
+   
 
 	</h:panelGrid>
 

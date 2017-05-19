@@ -98,9 +98,9 @@
 				converter="localDateConverter" pattern="dd.MM.yyyy" />
 		</p:column>
 
-		<p:column headerText="След.период начисления" sortBy="#{invoiceListController.findNextPayPeriod(c).dateFrom} - #{invoiceListController.findNextPayPeriod(c).dateTo}"
-			filterBy="#{invoiceListController.findNextPayPeriod(c).dateFrom} - #{invoiceListController.findNextPayPeriod(c).dateTo}" filterMatchMode="contains">
-			<h:outputText value="#{invoiceListController.findNextPayPeriod(c).dateFrom} - #{invoiceListController.findNextPayPeriod(c).dateTo}" />
+		<p:column headerText="След.период начисления" sortBy="#{invoiceListController.findNextPayPeriod(c)}"
+			filterBy="#{invoiceListController.findNextPayPeriod(c)}" filterMatchMode="contains">
+			<h:outputText value="#{invoiceListController.findNextPayPeriod(c)}" />
 		</p:column>
 
 		<p:column headerText="Выставление счета">

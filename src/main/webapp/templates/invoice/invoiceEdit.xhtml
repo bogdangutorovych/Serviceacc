@@ -45,7 +45,7 @@
 		<h:outputLabel for="contractNumber" value="Номер договора: "
 			style="font-weight:bold" />
 		<p:inputText id="contractNumber"
-			value="#{invoiceController.selected.contract.number}" disabled="true" />
+			value="#{invoiceController.selected.contract.number}"  disabled="true" />
 
 
 		<h:outputLabel for="client" value="Клиент: " style="font-weight:bold" />
@@ -68,9 +68,13 @@
 				value="#{invoiceController.selected.invoiceType}" required="true" />
 		</p:selectOneMenu>
 
-		<h:outputLabel for="paymentDate" value="Дата оплаты: " style="font-weight:bold" />
-        <p:inputText id="paymentDate"
-            value="#{invoiceController.selected.payment.date}" disabled="true" />
+		<h:outputLabel for="paymentDate" value="Дата оплаты: "
+			style="font-weight:bold" />
+		<p:calendar id="paymentDate" converter="localDateConverter"
+			pattern="dd.MM.yyyy"
+			value="#{invoiceController.selected.payment.date}" showOn="button"
+			mask="99.99.9999">
+		</p:calendar>
 
 		<h:outputLabel for="dateFrom" value="Период с: "
 			style="font-weight:bold" />

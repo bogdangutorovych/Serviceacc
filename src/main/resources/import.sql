@@ -50,7 +50,7 @@ INSERT INTO CONTRACT (id, number, contract_date, deal_id, client_rate, manager_r
 (3, '3', '2017-04-25', 3, 1, 7, 3, 'FROZEN', false, false, 'POSTPAID'),
 (4, '4', '2017-04-30', 4, 1, 7, 3, 'CLOSED', false, false, 'PREPAID'),
 (5, '5', '2017-05-10', 4, 1, 7, 3, 'ACTIVE', false, false, 'PREPAID');
-ALTER SEQUENCE contract_id_seq RESTART WITH 5;
+ALTER SEQUENCE contract_id_seq RESTART WITH 6;
 
 INSERT INTO QUEUE_REGISTER (id, register_date, deal_id, after_freezing, is_deleted) VALUES
 (1, '2017-01-01', 1, false, false),
@@ -113,7 +113,7 @@ INSERT INTO PERIOD (id, date_from, date_to) VALUES
 (5, '2017-05-09', '2017-06-08'),
 (6, '2017-06-09', '2017-07-08'),
 (7, '2017-07-09', '2017-08-08');
-ALTER SEQUENCE period_id_seq RESTART WITH 6;
+ALTER SEQUENCE period_id_seq RESTART WITH 8;
 
 INSERT INTO INVOICE (id, number, date, contract_id, money_id, invoice_type, payment_id, period_id, is_deleted) VALUES
 (1, 'inv# 1', '2017-01-01', 1, 1, 'NEW', NULL, 1, false),
@@ -123,4 +123,4 @@ INSERT INTO INVOICE (id, number, date, contract_id, money_id, invoice_type, paym
 (5, 'inv# 5', '2017-02-01', 5, 1, 'PAID', 3, 5, false),
 (6, 'inv# 6', '2017-03-01', 5, 1, 'PAID', 3, 6, false),
 (7, 'inv# 7', '2017-04-01', 5, 1, 'PAID', 3, 7, false);
-ALTER SEQUENCE invoice_id_seq RESTART WITH 6;
+ALTER SEQUENCE invoice_id_seq RESTART WITH 8;

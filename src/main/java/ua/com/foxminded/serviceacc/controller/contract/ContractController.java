@@ -16,7 +16,9 @@ import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.Contract;
 import ua.com.foxminded.serviceacc.model.Deal;
 import ua.com.foxminded.serviceacc.model.Manager;
+import ua.com.foxminded.serviceacc.model.Money;
 import ua.com.foxminded.serviceacc.model.Service;
+import ua.com.foxminded.serviceacc.model.enums.Currency;
 import ua.com.foxminded.serviceacc.service.ClientService;
 import ua.com.foxminded.serviceacc.service.ContractService;
 import ua.com.foxminded.serviceacc.service.ManagerService;
@@ -67,8 +69,16 @@ public class ContractController implements Serializable {
 
     public void add() {
         selectedContract = new Contract();
-        selectedContract.setDeal(new Deal());
+        setDefaultValues();
         getActualLists();
+    }
+
+    public void setDefaultValues() {
+        Money clientRate = new Money();
+        clientRate.setCurrency(Currency.UAH);
+        clientRate.setAmount(3000l);
+        selectedContract.setClientRate(clientRate);
+        selectedContract.setDeal(new Deal());
     }
 
     public void getActualLists() {
