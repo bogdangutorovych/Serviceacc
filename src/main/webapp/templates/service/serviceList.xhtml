@@ -27,9 +27,10 @@
 				icon="ui-icon-trash"
 				disabled="#{serviceController.selectedService==null}"
 				actionListener="#{serviceListController.deleteService(serviceController.selectedService)}" >
-                <f:actionListener binding="#{serviceListController.updateServiceListFromDB()}" />
-            </p:commandButton>
 
+                <f:actionListener binding="#{serviceListController.updateServiceListFromDB()}" />
+                <f:actionListener binding="#{serviceController.selectedService = null}" />
+            </p:commandButton>
 		</f:facet>
 	</p:toolbar>
 

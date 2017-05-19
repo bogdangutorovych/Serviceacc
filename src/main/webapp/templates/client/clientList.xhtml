@@ -29,6 +29,7 @@
 				actionListener="#{clientListController.deleteClient(clientController.selectedClient)}" >
 
                 <f:actionListener binding="#{clientListController.updateClientListFromDB()}" />
+                <f:actionListener binding="#{clientController.selectedClient = null}" />
             </p:commandButton>
 
 		</f:facet>
