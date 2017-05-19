@@ -194,4 +194,8 @@ public class Contract {
 
     public Contract() {
     }
+
+    public String showSumAndCurrency() {
+        return (clientRate.getAmount() + " " + clientRate.getCurrency());
+    }
 }

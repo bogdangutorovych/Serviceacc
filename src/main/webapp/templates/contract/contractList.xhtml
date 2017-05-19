@@ -89,9 +89,9 @@
 			<h:outputText value="#{c.deal.client}" />
 		</p:column>
 
-		<p:column headerText="Сумма" sortBy="#{c.clientRate.amount}"
-			filterBy="#{c.clientRate.amount}" filterMatchMode="contains">
-			<h:outputText value="#{c.clientRate.amount}" />
+		<p:column headerText="Сумма" sortBy="#{c.showSumAndCurrency()}"
+			filterBy="#{c.showSumAndCurrency()}" filterMatchMode="contains">
+			<h:outputText value="#{c.showSumAndCurrency()}" />
 		</p:column>
 
 		<p:column headerText="Последняя дата выставления счета"
