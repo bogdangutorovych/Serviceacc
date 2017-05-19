@@ -13,8 +13,8 @@ import ua.com.foxminded.serviceacc.model.ClientInformationType;
 import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
 
 /**
- * Created by andreb on 08.05.17.
- * For holding information all time application is up
+ * Created by andreb on 08.05.17. For holding information all time application
+ * is up
  *
  */
 @Controller
@@ -32,40 +32,39 @@ public class ConfigController {
         clientInformationTypeList = clientInformationTypeService.findAll();
     }
 
-    public List<ClientInformationType> getClientInformationTypeList(){
+    public List<ClientInformationType> getClientInformationTypeList() {
         return clientInformationTypeList;
     }
 
-    public void setClientInformationTypeList(List<ClientInformationType> newClientTypeListType){
-        for(ClientInformationType type : newClientTypeListType){
-            if (type.getId() == null){
+    public void setClientInformationTypeList(List<ClientInformationType> newClientTypeListType) {
+        for (ClientInformationType type : newClientTypeListType) {
+            if (type.getId() == null) {
                 clientInformationTypeService.save(type);
-            }else{
-                clientInformationTypeService.update(type);
+            } else {
+                clientInformationTypeService.save(type);
             }
         }
 
         this.clientInformationTypeList = clientInformationTypeService.findAll();
     }
 
-    public ClientInformationType saveClientInformationType(ClientInformationType type){
+    public ClientInformationType saveClientInformationType(ClientInformationType type) {
 
         clientInformationTypeService.save(type);
         clientInformationTypeList = clientInformationTypeService.findAll();
         return type;
     }
 
-    public ClientInformationType updateClientInformationType(ClientInformationType forUpdateType){
+    public ClientInformationType updateClientInformationType(ClientInformationType forUpdateType) {
 
-        clientInformationTypeService.update(forUpdateType);
+        clientInformationTypeService.save(forUpdateType);
         clientInformationTypeList = clientInformationTypeService.findAll();
         return forUpdateType;
     }
 
-    public void deleteClientInformationType(Long typeId){
+    public void deleteClientInformationType(Long typeId) {
         clientInformationTypeService.delete(typeId);
         clientInformationTypeList = clientInformationTypeService.findAll();
     }
-
 
 }

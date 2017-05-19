@@ -76,8 +76,13 @@
 
 		<p:column headerText="статус" sortBy="#{c.contractStatus}"
 			filterBy="#{c.contractStatus}" filterMatchMode="contains">
-			<h:outputText value="#{c.contractStatus.friendlyName}" />
+			<h:outputText value="#{c.contractStatus}" />
 		</p:column>
+		
+		<p:column headerText="Пробный период" sortBy="#{c.isTrial}"
+            filterBy="#{c.isTrial}" filterMatchMode="contains">
+            <h:outputText value="#{c.isTrial}" />
+        </p:column>
 
 		<p:column headerText="Клиент" sortBy="#{c.deal.client}"
 			filterBy="#{c.deal.client}" filterMatchMode="contains">
