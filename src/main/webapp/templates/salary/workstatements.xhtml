@@ -1,0 +1,104 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    
+    <h:panelGrid columns="2" cellpadding="5">
+        <h:outputLabel for="start_date" value="Акт с: "
+            style="font-weight:bold" />
+        <p:calendar id="start_date" converter="localDateConverter"
+            pattern="dd.MM.yyyy" 
+            value="#{workStatementController.newWorkStatement.period.dateFrom}"
+            showOn="button" mask="99.99.9999"
+            required="true" requiredMessage="Выберите дату">
+        </p:calendar> 
+        
+        <h:outputLabel for="end_date" value="по: "
+            style="font-weight:bold" />
+        <p:calendar id="end_date" converter="localDateConverter"
+            pattern="dd.MM.yyyy" 
+            value="#{workStatementController.newWorkStatement.period.dateTo}"
+            showOn="button" mask="99.99.9999"
+            required="true" requiredMessage="Выберите дату">
+        </p:calendar> 
+        
+        <h:outputLabel for="manager" value="Ментор: " style="font-weight:bold" />
+        <p:selectOneMenu id="manager"
+            value="#{workStatementController.newWorkStatement.manager}"
+            required="true" requiredMessage="Выберите ментора"
+            converter="omnifaces.SelectItemsConverter">
+            <f:selectItem itemLabel="Выбрать ментора..." noSelectionOption="true" />
+            <f:selectItems value="#{workStatementController.managers}"
+                var="manager" itemLabel="#{manager.firstName} #{manager.lastName}"
+                itemValue="#{manager}" />
+        </p:selectOneMenu>
+        
+        <h:outputLabel for="invoice" value="Инвойс: " style="font-weight:bold" />
+        <p:selectOneMenu id="invoice"
+            value="#{workStatementController.newWorkStatement.invoice}"
+            required="true" requiredMessage="Выберите инвойс"
+            update=":invoiceType"
+            converter="omnifaces.SelectItemsConverter">
+            <f:selectItem itemLabel="Выбрать инвойс..." noSelectionOption="true" />
+            <f:selectItems value="#{workStatementController.invoices}"
+                var="invoice" itemLabel="#{invoice.number} #{invoice.invoiceType}"
+                itemValue="#{invoice}" />
+        </p:selectOneMenu>
+        
+        <h:outputLabel value="Статус инвойса:  " style="font-weight:bold" />
+        <h:outputLabel id="invoiceType" value="#{workStatementController.newWorkStatement.invoice.invoiceType}" />
+        
+        <h:outputLabel for="clientSpending" value="Ставка клиента: "
+            style="font-weight:bold" />
+        <p:inputText id="clientSpending"
+            value="#{workStatementController.newWorkStatement.clientSpending.amount}" />
+            
+        <h:outputLabel for="managerEarning" value="Ставка клиента: "
+            style="font-weight:bold" />
+        <p:inputText id="managerEarning"
+            value="#{workStatementController.newWorkStatement.managerEarning.amount}" />
+    </h:panelGrid>
+    
+    <p:toolbar>
+        <f:facet name="left">
+            <p:commandButton id="btn_add" value="Добавить"
+                icon="ui-icon-check" actionListener="#{workStatementController.onAdd()}" update=":contentForm" />
+            <span class="ui-separator"><span
+                class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+        </f:facet>
+    </p:toolbar>
+    
+    <br/>
+    <p:dataTable id="workStatementList" 
+        tableStyle="table-layout:auto;width:100%;" emptyMessage="Нет данных"
+        var="workStatement" value="#{workStatementController.workStatements}">
+            
+        <p:column headerText="Менеджер"
+            converter="omnifaces.SelectItemsConverter">
+            <h:outputText value="#{workStatement.manager.firstName} #{workStatement.manager.lastName}" />
+        </p:column>
+        
+        <p:column headerText="Инвойс"
+            converter="omnifaces.SelectItemsConverter">
+            <h:outputText value="#{workStatement.invoice.number}" />
+        </p:column>
+
+        <p:column headerText="Дата акта">
+            <h:outputText value="#{workStatement.period.dateFrom}" 
+                converter="localDateConverter"
+                pattern="dd.MM.yyyy" />
+            <h:outputLabel value=" - "/>
+             <h:outputText value="#{workStatement.period.dateTo}" 
+                converter="localDateConverter"
+                pattern="dd.MM.yyyy" />
+        </p:column>    
+        <p:column headerText="Оплата клиента">
+            <h:outputText value="#{workStatement.clientSpending.amount}" />
+        </p:column>    
+
+        <p:column headerText="Оплата ментору">
+            <h:outputText value="#{workStatement.managerEarning.amount}" />
+        </p:column>    
+    </p:dataTable>
+</ui:composition>

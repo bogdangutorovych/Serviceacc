@@ -1,5 +1,6 @@
 package ua.com.foxminded.serviceacc.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,39 +17,43 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 @Entity
-@Table(name = "salary_item")
+@Table(name = "work_statement")
 
-@SQLDelete(sql = "UPDATE salary_item SET is_deleted = true WHERE id = ?")
+@SQLDelete(sql = "UPDATE work_statement SET is_deleted = true WHERE id = ?")
 @Where(clause = "is_deleted = false")
-public class SalaryItem {
+public class WorkStatement {
     @Id
     @GenericGenerator(name = "generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator", parameters = {
-            @Parameter(name = "sequence_name", value = "salaryitem_id_seq"),
+            @Parameter(name = "sequence_name", value = "workstatement_id_seq"),
             @Parameter(name = "initial_value", value = "50"), @Parameter(name = "increment_size", value = "50") })
     @GeneratedValue(generator = "generator")
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "manager_id")
     private Manager manager;
     
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "earnings")
-    private Money earnings;
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "client_spending")
+    private Money clientSpending;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "contract_id")
-    private Contract contract;
+    @OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinColumn(name ="manager_earning")
+    private Money managerEarning;
     
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "period")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "invoice_id")
+    private Invoice invoice;
+    
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "period_id")
     private Period period;
     
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
 
-    public SalaryItem() {
+    public WorkStatement() {
     }
 
     public Long getId() {
@@ -67,22 +72,6 @@ public class SalaryItem {
         this.manager = manager;
     }
 
-    public Money getEarnings() {
-        return earnings;
-    }
-
-    public void setEarnings(Money earnings) {
-        this.earnings = earnings;
-    }
-
-    public Contract getContract() {
-        return contract;
-    }
-
-    public void setContract(Contract contract) {
-        this.contract = contract;
-    }
-
     public Period getPeriod() {
         return period;
     }
@@ -97,5 +86,29 @@ public class SalaryItem {
 
     public void setDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
+    }
+
+    public Money getClientSpending() {
+        return clientSpending;
+    }
+
+    public void setClientSpending(Money clientSpending) {
+        this.clientSpending = clientSpending;
+    }
+
+    public Money getManagerEarning() {
+        return managerEarning;
+    }
+
+    public void setManagerEarning(Money managerEarning) {
+        this.managerEarning = managerEarning;
+    }
+
+    public Invoice getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
     }
 }

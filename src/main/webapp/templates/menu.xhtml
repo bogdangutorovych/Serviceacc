@@ -21,7 +21,6 @@
 					action='#{navController.setMainContent("contract/contractList")}' />
 				<p:menuitem value="Услуги" icon="ui-icon-gear" update=":contentForm"
 					action='#{navController.setMainContent("service/serviceList")}' />
-
 				<p:submenu label="Счета">
 					<p:menuitem value="Все счета" icon="ui-icon-document"
 						update=":contentForm"
@@ -30,8 +29,20 @@
 						update=":contentForm"
 						action='#{navController.setMainContent("contract/contractsForInvoicesIssue")}' />
 				</p:submenu>
+				<p:submenu label="Зарплата">
+				    <p:menuitem value="Все зарплаты" icon="ui-icon-document" 
+				        update=":contentForm"
+				        action='#{navController.setMainContent("invoice/invoiceList")}'/>
+				    <p:menuitem value="Расчет зарплат" icon="ui-icon-document" 
+				        update=":contentForm"
+				        action='#{navController.setMainContent("invoice/invoiceList")}'
+				        actionListener="#{salariesCalculationController.calculateSalaries}" />
+                    <p:menuitem value="Акты" icon="ui-icon-document" 
+                        update=":contentForm"
+                        action='#{navController.setMainContent("salary/workstatements")}' 
+                        actionListener="#{workStatementController.prepareData}"/>
+				</p:submenu>
 				<p:menuitem value="Оплаты" icon="ui-icon-document" />
-				<p:menuitem value="Зарплата" icon="ui-icon-document" />
 			</p:submenu>
 			<p:submenu label="Настройки">
 				<p:menuitem value="Типы доп.информации клиента" icon="ui-icon-note"
