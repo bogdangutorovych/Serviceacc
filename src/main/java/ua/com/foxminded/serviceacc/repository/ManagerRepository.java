@@ -18,10 +18,10 @@ public interface ManagerRepository extends JpaRepository<Manager, Long> {
 
     List<Manager> findAllByOrderByIdAsc();
 
-    @Query("SELECT c " + fromContractByManager)
+    @Query("SELECT distinct c " + fromContractByManager)
     List<Client> findAllByManager(Manager manager);
 
-    @Query("SELECT count(c) " + fromContractByManager)
+    @Query("SELECT count(distinct c) " + fromContractByManager)
     int countClientByManager(Manager manager);
 
 }
