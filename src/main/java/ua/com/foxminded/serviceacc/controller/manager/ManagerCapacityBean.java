@@ -32,7 +32,7 @@ public class ManagerCapacityBean implements Serializable{
     private final ManagerInformationService managerInformationService;
 
     private ManagerInformationType clientsLimitType;
-    private final String titleForLimitType = "client limit";
+    private final String titleForLimitType = "clients limit"; // common title content for Clients Limit By Manager
 
     @Inject
     public ManagerCapacityBean(ManagerService managerService,
@@ -50,20 +50,28 @@ public class ManagerCapacityBean implements Serializable{
 
     /*
      *  This method do calculate of workload by manager
+     *  Return array of 2 numbers: current load and capacity count by manager2
      */
-    public int[] workload(Manager manager){
+    public String workload(Manager manager){
         int[] workload = new int[2];
         ManagerInformation capacity = managerInformationService.findByTypeAndManager(clientsLimitType, manager);
-        int capacityCount = 0;
+        log.debug("workload capacity: " + capacity);
+        int capacityCount = -1;
+
         try{
-            capacityCount = Integer.parseInt(capacity.getContent());
+            if(capacity != null){
+                capacityCount = Integer.parseInt(capacity.getContent());
+            }
         }catch(NumberFormatException e){
-            capacityCount = -1;
+            capacityCount = -2;
         }
         workload[1] = capacityCount;
         int currentLoad = managerService.countClient(manager);
+        log.debug("Current load: " + currentLoad);
+        log.debug("Clients: " + managerService.findClients(manager));
         workload[0] = currentLoad;
-        return workload;
+        log.debug("Workload: " + workload);
+        return workload[0] + "/" + workload[1];
     }
 
 
