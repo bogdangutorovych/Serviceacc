@@ -63,4 +63,20 @@
 
 	</p:dataTable>
 
+    <h:panelGrid columns="2" cellpadding="5">
+
+        <p:dataTable id="clientsListByManager" editable="true" emptyMessage="No items yet"
+                     var="client" value="#{managerCapacityBean.fetchClients(managerController.selectedManager)}">
+
+            <f:facet name="header">Clients</f:facet>
+
+            <p:column>
+                <p:outputLabel value="#{client}" style="font-weight:bold" />
+            </p:column>
+
+        </p:dataTable>
+
+    </h:panelGrid>
+
+
 </ui:composition>

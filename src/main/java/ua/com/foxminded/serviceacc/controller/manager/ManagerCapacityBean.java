@@ -2,6 +2,7 @@ package ua.com.foxminded.serviceacc.controller.manager;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.Manager;
 import ua.com.foxminded.serviceacc.model.ManagerInformation;
 import ua.com.foxminded.serviceacc.model.ManagerInformationType;
@@ -15,6 +16,7 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by andreb on 21.05.17.
@@ -68,11 +70,16 @@ public class ManagerCapacityBean implements Serializable{
         workload[1] = capacityCount;
         int currentLoad = managerService.countClient(manager);
         log.debug("Current load: " + currentLoad);
-        log.debug("Clients: " + managerService.findClients(manager));
+//        log.debug("Clients: " + managerService.findClients(manager));
         workload[0] = currentLoad;
         log.debug("Workload: " + workload);
         return workload[0] + "/" + workload[1];
     }
 
+    public List<Client> fetchClients(Manager manager){
+        List<Client> clients = managerService.findClients(manager);
+        log.debug("Fetch Clients by Manager: " + clients);
+        return clients;
+    }
 
 }
