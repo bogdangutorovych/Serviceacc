@@ -46,6 +46,8 @@ public class ManagerListController implements Serializable{
         managerList = managerService.findAll();
     }
 
+
+
     public List<Manager> getManagerList() {
         return managerList;
     }

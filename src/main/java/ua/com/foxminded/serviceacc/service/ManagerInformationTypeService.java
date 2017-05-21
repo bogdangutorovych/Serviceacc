@@ -16,4 +16,6 @@ public interface ManagerInformationTypeService {
     List<ManagerInformationType> findAll();
 
     void delete(Long typeId);
+
+    ManagerInformationType findByTitle(String title);
 }

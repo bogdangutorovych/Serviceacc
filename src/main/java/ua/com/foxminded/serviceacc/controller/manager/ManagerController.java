@@ -101,6 +101,8 @@ public class ManagerController implements Serializable {
         return managerInfo;
     }
 
+
+
 	public void setSelectedManager(Manager selectedManager) {
 		this.selectedManager = selectedManager;
 	}

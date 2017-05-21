@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import ua.com.foxminded.serviceacc.model.Manager;
 import ua.com.foxminded.serviceacc.model.ManagerInformation;
+import ua.com.foxminded.serviceacc.model.ManagerInformationType;
 import ua.com.foxminded.serviceacc.repository.ManagerInformationRepository;
 
 @Service("managerInformationService")
@@ -38,6 +39,11 @@ public class ManagerInformationServiceDataJpa implements ManagerInformationServi
     @Override
     public void delete(Long managerInformationId) {
         managerInformationRepository.delete(managerInformationId);
+    }
+
+    @Override
+    public ManagerInformation findByTypeAndManager(ManagerInformationType type, Manager manager) {
+        return managerInformationRepository.findOneByManagerInformationTypeAndManager(type, manager);
     }
 
 }
