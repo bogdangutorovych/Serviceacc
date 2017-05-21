@@ -36,4 +36,9 @@ public class ManagerInformationTypeServiceDataJpa implements ManagerInformationT
     public void delete(Long typeId) {
         managerInformationTypeRepository.delete(typeId);
     }
+
+    @Override
+    public ManagerInformationType findByTitle(String title) {
+        return managerInformationTypeRepository.findOneByTitle(title);
+    }
 }

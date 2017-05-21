@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.Manager;
 import ua.com.foxminded.serviceacc.repository.ManagerRepository;
 
@@ -35,5 +36,15 @@ public class ManagerServiceDataJpa implements ManagerService {
     @Override
     public void delete(Long managerId) {
         managerRepository.delete(managerId);
+    }
+
+    @Override
+    public List<Client> findClients(Manager manager) {
+        return managerRepository.findAllByManager(manager);
+    }
+
+    @Override
+    public int countClient(Manager manager) {
+        return managerRepository.countClientByManager(manager);
     }
 }
