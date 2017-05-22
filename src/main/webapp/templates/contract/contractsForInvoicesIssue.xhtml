@@ -18,8 +18,7 @@
 			<p:commandButton id="btn_delete" value="Удалить"
 				update=":contentForm" icon="ui-icon-trash"
 				disabled="#{contractController.selected==null}"
-				actionListener="#{contractController.delete()}"
-				action="#{contractListController.removeFromList(contractController.selected)}" />
+				actionListener="#{contractController.delete()}" />
 
 		</f:facet>
 	</p:toolbar>
@@ -28,8 +27,8 @@
 	<p:dataTable id="contractList" editable="true"
 		tableStyle="table-layout:auto;width:100%;" emptyMessage="Нет данных"
 		var="c" value="#{contractListController.list}"
-		rowKey="#{contractListController.list.indexOf(c)}"
-		selectionMode="single" selection="#{contractController.selected}"
+		rowKey="#{contractListController.list.indexOf(c)}" selectionMode="single"
+		selection="#{contractController.selected}"
 		widgetVar="contractTable">
 
 		<f:facet name="header" style="text-align:center">Договора
@@ -71,26 +70,41 @@
 			filterBy="#{c.contractStatus}" filterMatchMode="contains">
 			<h:outputText value="#{c.contractStatus}" />
 		</p:column>
-
+		
 		<p:column headerText="Пробный период" sortBy="#{c.isTrial}"
-			filterBy="#{c.isTrial}" filterMatchMode="contains">
-			<h:outputText value="#{c.isTrial}" />
-		</p:column>
+            filterBy="#{c.isTrial}" filterMatchMode="contains">
+            <h:outputText value="#{c.isTrial}" />
+        </p:column>
 
 		<p:column headerText="Клиент" sortBy="#{c.deal.client}"
 			filterBy="#{c.deal.client}" filterMatchMode="contains">
 			<h:outputText value="#{c.deal.client}" />
 		</p:column>
 
-		<p:column headerText="Ментор" sortBy="#{c.manager}"
-			filterBy="#{c.manager}" filterMatchMode="contains">
-			<h:outputText value="#{c.manager}" />
+		<p:column headerText="Сумма" sortBy="#{c.clientRate.showSumAndCurrency()}"
+			filterBy="#{c.clientRate.showSumAndCurrency()}" filterMatchMode="contains">
+			<h:outputText value="#{c.clientRate.showSumAndCurrency()}" />
 		</p:column>
 
-		<p:column headerText="Сумма" sortBy="#{c.showSumAndCurrency()}"
-			filterBy="#{c.clientRate.showSumAndCurrency()}"
+		<p:column headerText="Последняя дата выставления счета"
+			sortBy="#{invoiceListController.findLatestInvoice(c).date}"
+			filterBy="#{invoiceListController.findLatestInvoice(c).date}"
 			filterMatchMode="contains">
-			<h:outputText value="#{c.clientRate.showSumAndCurrency()}" />
+			<h:outputText
+				value="#{invoiceListController.findLatestInvoice(c).date}"
+				converter="localDateConverter" pattern="dd.MM.yyyy" />
+		</p:column>
+
+		<p:column headerText="След.период начисления" sortBy="#{invoiceListController.findNextPayPeriod(c)}"
+			filterBy="#{invoiceListController.findNextPayPeriod(c)}" filterMatchMode="contains">
+			<h:outputText value="#{invoiceListController.findNextPayPeriod(c)}" />
+		</p:column>
+
+		<p:column headerText="Выставление счета">
+			<p:commandButton id="btn_add" value="сформировать счет"
+				update=":contentForm" icon="ui-icon-document"
+				actionListener="#{invoiceController.add(c)}"
+				action='#{navController.setMainContent("invoice/invoice")}' />
 		</p:column>
 
 	</p:dataTable>

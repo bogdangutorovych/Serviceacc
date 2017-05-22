@@ -74,9 +74,9 @@
 			<h:outputText value="#{invoice.contract.deal.client}" />
 		</p:column>
 
-		<p:column headerText="Сумма" sortBy="#{invoice.price.amount}"
-			filterBy="#{invoice.price.amount}" filterMatchMode="contains">
-			<h:outputText value="#{invoice.price.amount}" />
+		<p:column headerText="Сумма" sortBy="#{invoice.price.showSumAndCurrency()}"
+			filterBy="#{invoice.price.showSumAndCurrency()}" filterMatchMode="contains">
+			<h:outputText value="#{invoice.price.showSumAndCurrency()}" />
 		</p:column>
 
 		<p:column headerText="Тип счета" sortBy="#{invoice.invoiceType}"

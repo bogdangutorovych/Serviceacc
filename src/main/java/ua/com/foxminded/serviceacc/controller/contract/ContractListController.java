@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -16,7 +16,7 @@ import ua.com.foxminded.serviceacc.model.Contract;
 import ua.com.foxminded.serviceacc.service.ContractService;
 
 @Named
-@ViewScoped
+@RequestScoped
 @ManagedBean
 public class ContractListController implements Serializable {
 
@@ -34,6 +34,10 @@ public class ContractListController implements Serializable {
     @PostConstruct
     public void init() {
         list = contractService.findAll();
+    }
+
+    public void removeFromList(Contract contract) {
+        list.remove(contract);
     }
 
     public List<Contract> getList() {

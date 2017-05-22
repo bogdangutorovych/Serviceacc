@@ -46,6 +46,10 @@ public class Money {
     public Money() {
     }
 
+    public String showSumAndCurrency() {
+        return (getAmount() + " " + getCurrency());
+    }
+
     public Money(Currency currency, Long amount) {
         this.currency = currency;
         this.amount = amount;
@@ -98,7 +102,6 @@ public class Money {
         if (currency != money.currency)
             return false;
         return amount != null ? amount.equals(money.amount) : money.amount == null;
-
     }
 
     @Override
