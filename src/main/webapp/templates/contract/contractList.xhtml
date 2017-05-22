@@ -18,8 +18,7 @@
 			<p:commandButton id="btn_delete" value="Удалить"
 				update=":contentForm" icon="ui-icon-trash"
 				disabled="#{contractController.selected==null}"
-				actionListener="#{contractController.delete()}"
-				action="#{contractListController.removeFromList(contractController.selected)}" />
+				action="#{contractListController.delete(contractController.selected)}" />
 
 		</f:facet>
 	</p:toolbar>

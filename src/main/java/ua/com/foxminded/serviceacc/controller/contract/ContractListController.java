@@ -36,7 +36,8 @@ public class ContractListController implements Serializable {
         list = contractService.findAll();
     }
 
-    public void removeFromList(Contract contract) {
+    public void delete(Contract contract) {
+        contractService.delete(contract.getId());
         list.remove(contract);
     }
 

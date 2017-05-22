@@ -48,11 +48,6 @@ public class ContractController implements Serializable {
         selected = null;
     }
 
-    public void delete() {
-        contractService.delete(selected.getId());
-        selected = null;
-    }
-
     public Contract getSelected() {
         return selected;
     }

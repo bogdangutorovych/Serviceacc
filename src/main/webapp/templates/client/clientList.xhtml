@@ -16,7 +16,6 @@
 			<p:commandButton id="btn_edit" value="Редактировать"
 				update=":contentForm" icon="ui-icon-pencil"
 				disabled="#{clientController.selectedClient==null}"
-				actionListener="#{clientController.getActualLists()}"
 				action='#{navController.setMainContent("client/client")}' />
 
 
@@ -27,9 +26,6 @@
 				update=":contentForm" icon="ui-icon-trash"
 				disabled="#{clientController.selectedClient==null}"
 				actionListener="#{clientListController.deleteClient(clientController.selectedClient)}" >
-
-                <f:actionListener binding="#{clientListController.updateClientListFromDB()}" />
-                <f:actionListener binding="#{clientController.selectedClient = null}" />
             </p:commandButton>
 
 		</f:facet>
