@@ -7,16 +7,9 @@
 	<p:toolbar>
 
 		<f:facet name="left">
-			<p:commandButton id="btn_add" value="Добавить" update=":contentForm"
-				icon="ui-icon-document" actionListener="#{contractController.add()}"
-				action='#{navController.setMainContent("contract/contract")}' />
-
-			<span class="ui-separator"><span
-				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
-
 			<p:commandButton id="btn_edit" value="Редактировать"
 				update=":contentForm" icon="ui-icon-pencil"
-				disabled="#{contractController.selectedContract==null}"
+				disabled="#{contractController.selected==null}"
 				actionListener="#{contractController.getActualLists()}"
 				action='#{navController.setMainContent("contract/contractEdit")}' />
 
@@ -25,7 +18,7 @@
 
 			<p:commandButton id="btn_delete" value="Удалить"
 				update=":contentForm" icon="ui-icon-trash"
-				disabled="#{contractController.selectedContract==null}"
+				disabled="#{contractController.selected==null}"
 				actionListener="#{contractController.delete()}" />
 
 		</f:facet>
@@ -34,9 +27,9 @@
 	<br />
 	<p:dataTable id="contractList" editable="true"
 		tableStyle="table-layout:auto;width:100%;" emptyMessage="Нет данных"
-		var="c" value="#{contractController.list}"
-		rowKey="#{contractController.list.indexOf(c)}" selectionMode="single"
-		selection="#{contractController.selectedContract}"
+		var="c" value="#{contractListController.list}"
+		rowKey="#{contractListController.list.indexOf(c)}" selectionMode="single"
+		selection="#{contractController.selected}"
 		widgetVar="contractTable">
 
 		<f:facet name="header" style="text-align:center">Договора

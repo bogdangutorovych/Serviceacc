@@ -11,8 +11,7 @@
 		type="ua.com.foxminded.serviceacc.model.enums.ContractType"
 		var="ContractTypes" />
 
-	<p:importEnum
-		type="ua.com.foxminded.serviceacc.model.enums.Currency"
+	<p:importEnum type="ua.com.foxminded.serviceacc.model.enums.Currency"
 		var="Currencies" />
 
 	<p:toolbar>
@@ -43,43 +42,34 @@
 			requiredMessage="Выберите дату договора">
 		</p:calendar>
 
-		<p:outputLabel for="service" value="Услуга: " style="font-weight:bold" />
-		<p:selectOneMenu id="service"
-			value="#{contractController.selectedContract.deal.service}"
-			converter="omnifaces.SelectItemsConverter" required="true"
-			requiredMessage="Выберите услугу">
-			<f:selectItem itemLabel="Выбрать услугу..." noSelectionOption="true" />
-			<f:selectItems value="#{contractController.availableServices}"
-				var="service" itemLabel="#{service.name}" itemValue="#{service}" />
-		</p:selectOneMenu>
-        
-        <h:outputLabel for="amount" value="Сумма договора: "
-            style="font-weight:bold" />
-        <p:inputText id="number" value="#{contractController.selectedContract.clientRate.amount}"
-            disabled="false" />
-        
-        <p:outputLabel for="currency" value="Валюта договора: "
-            style="font-weight:bold" />
-        <p:selectOneMenu id="currency"
-            value="#{contractController.selectedContract.clientRate.currency}"
-            required="true" requiredMessage="Выберите валюту"
-            converter="omnifaces.SelectItemsConverter">
-            <f:selectItem itemLabel="Выбрать валюту договора..."
-                noSelectionOption="true" />
-            <f:selectItems value="#{Currencies.ALL_VALUES}"
-                var="currencyEnum" itemLabel="#{currencyEnum}" />
-        </p:selectOneMenu>
+		<h:outputLabel for="service" value="Услуга: " style="font-weight:bold" />
+		<p:inputText id="service"
+			value="#{contractController.selectedContract.deal.service.name}"
+			disabled="true" />
 
-		<p:outputLabel for="client" value="Клиент: " style="font-weight:bold" />
-		<p:selectOneMenu id="client"
-			value="#{contractController.selectedContract.deal.client}"
-			required="true" requiredMessage="Выберите клиента"
+		<h:outputLabel for="amount" value="Сумма договора: "
+			style="font-weight:bold" />
+		<p:inputText id="amount"
+			value="#{contractController.selectedContract.clientRate.amount}"
+			disabled="false" />
+
+		<p:outputLabel for="currency" value="Валюта договора: "
+			style="font-weight:bold" />
+		<p:selectOneMenu id="currency"
+			value="#{contractController.selectedContract.clientRate.currency}"
+			required="true" requiredMessage="Выберите валюту"
 			converter="omnifaces.SelectItemsConverter">
-			<f:selectItem itemLabel="Выбрать клиента..." noSelectionOption="true" />
-			<f:selectItems value="#{contractController.availableClients}"
-				var="client" itemLabel="#{client.firstName} #{client.lastName}"
-				itemValue="#{client}" />
+			<f:selectItem itemLabel="Выбрать валюту договора..."
+				noSelectionOption="true" />
+			<f:selectItems value="#{Currencies.ALL_VALUES}" var="currencyEnum"
+				itemLabel="#{currencyEnum}" />
 		</p:selectOneMenu>
+
+		<h:outputLabel for="client" value="Клиент: "
+			style="font-weight:bold" />
+		<p:inputText id="number"
+			value="#{contractController.selectedContract.deal.client}"
+			disabled="true" />
 
 		<p:outputLabel for="manager" value="Ментор: " style="font-weight:bold" />
 		<p:selectOneMenu id="manager"
@@ -115,12 +105,14 @@
 			<f:selectItems value="#{ContractTypes.ALL_VALUES}" var="typesEnum"
 				itemLabel="#{typesEnum}" />
 		</p:selectOneMenu>
- 
-        <h:outputText value="Пробный период" />
-        <p:selectBooleanCheckbox value="#{contractController.selectedContract.isTrial}">
-            <p:ajax update=":contentForm" listener="#{contractController.selectedContract.isTrial}" />
-        </p:selectBooleanCheckbox>
-   
+
+		<h:outputText value="Пробный период" />
+		<p:selectBooleanCheckbox
+			value="#{contractController.selectedContract.isTrial}">
+			<p:ajax update=":contentForm"
+				listener="#{contractController.selectedContract.isTrial}" />
+		</p:selectBooleanCheckbox>
+
 
 	</h:panelGrid>
 

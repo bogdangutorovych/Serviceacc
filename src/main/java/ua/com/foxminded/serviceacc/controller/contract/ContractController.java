@@ -16,9 +16,7 @@ import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.Contract;
 import ua.com.foxminded.serviceacc.model.Deal;
 import ua.com.foxminded.serviceacc.model.Manager;
-import ua.com.foxminded.serviceacc.model.Money;
 import ua.com.foxminded.serviceacc.model.Service;
-import ua.com.foxminded.serviceacc.model.enums.Currency;
 import ua.com.foxminded.serviceacc.service.ClientService;
 import ua.com.foxminded.serviceacc.service.ContractService;
 import ua.com.foxminded.serviceacc.service.ManagerService;
@@ -32,23 +30,13 @@ public class ContractController implements Serializable {
     private static Logger logger = LoggerFactory.getLogger(ContractController.class);
     private static final long serialVersionUID = 1L;
 
-    private Contract selectedContract;
-    private List<Contract> list;
+    private Contract selected;
 
     private List<Client> availableClients;
     private List<Manager> availableManagers;
     private List<Service> availableServices;
 
     private ContractService contractService;
-
-    public ContractService getContractService() {
-        return contractService;
-    }
-
-    public void setContractService(ContractService contractService) {
-        this.contractService = contractService;
-    }
-
     private ClientService clientService;
     private ManagerService managerService;
     private ServiceService serviceService;
@@ -64,21 +52,12 @@ public class ContractController implements Serializable {
 
     @PostConstruct
     public void init() {
-        list = contractService.findAll();
     }
 
-    public void add() {
-        selectedContract = new Contract();
-        setDefaultValues();
+    public void addFromDeal(Deal deal) {
+        selected = new Contract();
+        selected.setDeal(deal);
         getActualLists();
-    }
-
-    public void setDefaultValues() {
-        Money clientRate = new Money();
-        clientRate.setCurrency(Currency.UAH);
-        clientRate.setAmount(3000l);
-        selectedContract.setClientRate(clientRate);
-        selectedContract.setDeal(new Deal());
     }
 
     public void getActualLists() {
@@ -88,35 +67,29 @@ public class ContractController implements Serializable {
     }
 
     public void onOk() {
-        if (selectedContract.getId() == null) {
-            selectedContract = contractService.save(selectedContract);
-            selectedContract.setNumber("contr# " + selectedContract.getId());
+        if (selected.getId() == null) {
+            selected = contractService.save(selected);
+            selected.setNumber("contr# " + selected.getId());
         }
-        contractService.save(selectedContract);
-        init();
-    }
-
-    public void delete() {
-        list.remove(selectedContract);
-        contractService.delete(selectedContract.getId());
-        selectedContract = null;
+        contractService.save(selected);
     }
 
     public void onCancel() {
         logger.info("onCancel");
-        selectedContract = null;
+        selected = null;
     }
 
-    public Contract getSelectedContract() {
-        return selectedContract;
+    public void delete() {
+        contractService.delete(selected.getId());
+        selected = null;
     }
 
-    public void setSelectedContract(Contract selectedContract) {
-        this.selectedContract = selectedContract;
+    public Contract getSelected() {
+        return selected;
     }
 
-    public List<Contract> getList() {
-        return list;
+    public void setSelected(Contract selected) {
+        this.selected = selected;
     }
 
     public List<Client> getAvailableClients() {
@@ -141,6 +114,14 @@ public class ContractController implements Serializable {
 
     public void setAvailableServices(List<Service> availableServices) {
         this.availableServices = availableServices;
+    }
+
+    public ContractService getContractService() {
+        return contractService;
+    }
+
+    public void setContractService(ContractService contractService) {
+        this.contractService = contractService;
     }
 
 }

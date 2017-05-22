@@ -58,7 +58,7 @@ public class Contract {
     @JoinColumn(name = "contract_type")
     private ContractType contractType;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "deal_id")
     private Deal deal;
 
