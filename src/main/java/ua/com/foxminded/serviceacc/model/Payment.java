@@ -57,7 +57,7 @@ public class Payment {
         this.isDeleted = isDeleted;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

@@ -1,21 +1,20 @@
 package ua.com.foxminded.serviceacc.controller.invoice;
 
 import java.io.Serializable;
-import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Named;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
 
+import ua.com.foxminded.serviceacc.model.Contract;
 import ua.com.foxminded.serviceacc.model.Invoice;
-import ua.com.foxminded.serviceacc.service.ContractService;
+import ua.com.foxminded.serviceacc.model.Period;
 import ua.com.foxminded.serviceacc.service.InvoiceService;
 
-@Controller
+@Named
 @ViewScoped
 @ManagedBean
 public class InvoiceController implements Serializable {
@@ -25,44 +24,34 @@ public class InvoiceController implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Invoice selected;
-    private List<Invoice> list;
-
+    private Period period;
     private InvoiceService invoiceService;
-    private ContractService contractService;
 
-    public InvoiceController(InvoiceService invoiceService, ContractService contractService) {
+    public InvoiceController(InvoiceService invoiceService) {
         this.invoiceService = invoiceService;
-        this.contractService = contractService;
     }
 
-    @PostConstruct
+    public void add(Contract contract) {
+        init();
+        selected.setContract(contract);
+        selected.setPeriod(period);
+        selected.setPrice(contract.getClientRate());
+    }
+
     public void init() {
-        list = invoiceService.findAll();
-    }
-
-    public void add() {
         selected = new Invoice();
-        getActualLists();
-
-    }
-
-    public void getActualLists() {
-        // availableClients = contractService.findAll();
-        // availableServices = serviceService.findAll();
+        period = new Period();
     }
 
     public void onOk() {
         if (selected.getId() == null) {
-            selected = invoiceService.create(selected);
+            selected = invoiceService.save(selected);
+            selected.setNumber("inv# " + selected.getId());
         }
-
-        invoiceService.update(selected);
-        init();
+        invoiceService.save(selected);
     }
 
-    public void delete() {
-        list.remove(selected);
-        invoiceService.delete(selected.getId());
+    public void clearSelected() {
         selected = null;
     }
 
@@ -78,28 +67,12 @@ public class InvoiceController implements Serializable {
         this.selected = selected;
     }
 
-    public List<Invoice> getList() {
-        return list;
-    }
-
-    public void setList(List<Invoice> list) {
-        this.list = list;
-    }
-
     public InvoiceService getInvoiceService() {
         return invoiceService;
     }
 
     public void setInvoiceService(InvoiceService invoiceService) {
         this.invoiceService = invoiceService;
-    }
-
-    public ContractService getContractService() {
-        return contractService;
-    }
-
-    public void setContractService(ContractService contractService) {
-        this.contractService = contractService;
     }
 
 }

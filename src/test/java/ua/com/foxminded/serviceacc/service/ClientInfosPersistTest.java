@@ -90,7 +90,7 @@ public class ClientInfosPersistTest {
         clientInformationService.save(info2);
 
         info2.setClient(null);
-        clientInformationService.update(info2);
+        clientInformationService.save(info2);
 
         assertThat(clientInformationService.findByClient(client), hasSize(1));
     }

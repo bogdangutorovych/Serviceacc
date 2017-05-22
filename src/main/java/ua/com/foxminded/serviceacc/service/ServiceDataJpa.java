@@ -19,18 +19,13 @@ public class ServiceDataJpa implements ServiceService {
     }
 
     @Override
-    public ua.com.foxminded.serviceacc.model.Service update(ua.com.foxminded.serviceacc.model.Service service) {
-        return serviceRepository.save(service);
-    }
-
-    @Override
     public ua.com.foxminded.serviceacc.model.Service findById(Long serviceId) {
         return serviceRepository.findOne(serviceId);
     }
 
     @Override
     public List<ua.com.foxminded.serviceacc.model.Service> findAll() {
-        return serviceRepository.findAll();
+        return serviceRepository.findAllByOrderByIdAsc();
     }
 
     @Override

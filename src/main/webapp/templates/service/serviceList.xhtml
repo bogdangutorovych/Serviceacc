@@ -26,8 +26,11 @@
 			<p:commandButton id="btn_delete" value="Delete" update=":contentForm"
 				icon="ui-icon-trash"
 				disabled="#{serviceController.selectedService==null}"
-				actionListener="#{serviceController.deleteService()}" />
+				actionListener="#{serviceListController.deleteService(serviceController.selectedService)}" >
 
+                <f:actionListener binding="#{serviceListController.updateServiceListFromDB()}" />
+                <f:actionListener binding="#{serviceController.selectedService = null}" />
+            </p:commandButton>
 		</f:facet>
 	</p:toolbar>
 
@@ -35,7 +38,7 @@
 
 	<p:dataTable id="serviceList" editable="true"
 		emptyMessage="No items yet" var="service"
-		value="#{serviceController.serviceList}" rowKey="#{service.id}"
+		value="#{serviceListController.serviceList}" rowKey="#{service.id}"
 		selectionMode="single"
 		selection="#{serviceController.selectedService}"
 		widgetVar="servicesTable">
@@ -70,12 +73,12 @@
 		</p:column>
 		<p:column headerText="Price" sortBy="#{service.prices}"
 			filterBy="#{service.prices}" filterMatchMode="contains">
-			<p:repeat
+			<ui:repeat
 				value="#{serviceController.convertMoneyListFromSet(service.prices)}"
 				var="money">
 				<h:outputText value="#{money.amount} #{ money.currency}" />
 				<br />
-			</p:repeat>
+			</ui:repeat>
 		</p:column>
 		<p:column headerText="Manager Rate:"
 			sortBy="#{service.managerRate.amount}"

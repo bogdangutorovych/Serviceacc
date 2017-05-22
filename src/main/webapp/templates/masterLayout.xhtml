@@ -23,14 +23,14 @@
 			<p:layoutUnit position="west" size="200" header="Menu"
 				resizable="true" collapsible="true">
 				<ui:insert name="menu">
-					<ui:include src='#{navController.menu}' />
+					<ui:include src="/templates/menu.xhtml" />
 				</ui:insert>
 			</p:layoutUnit>
 
 			<p:layoutUnit position="north" size="40" resizable="false"
 				collapsible="false">
 				<ui:insert name="header">
-					<ui:include src='#{navController.header}' />
+					<ui:include src="/templates/header.xhtml" />
 				</ui:insert>
 			</p:layoutUnit>
 
@@ -45,7 +45,7 @@
 			<p:layoutUnit position="south" size="40" resizable="false"
 				collapsible="false">
 				<ui:insert name="footer">
-					<ui:include src='#{navController.footer}' />
+					<ui:include src="/templates/footer.xhtml" />
 				</ui:insert>
 			</p:layoutUnit>
 

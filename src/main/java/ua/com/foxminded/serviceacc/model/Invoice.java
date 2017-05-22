@@ -49,11 +49,11 @@ public class Invoice {
     @JoinColumn(name = "invoice_type")
     private InvoiceType invoiceType;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = javax.persistence.CascadeType.ALL)
     @JoinColumn(name = "payment_id")
     private Payment payment;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = javax.persistence.CascadeType.ALL)
     @JoinColumn(name = "period_id")
     private Period period;
 

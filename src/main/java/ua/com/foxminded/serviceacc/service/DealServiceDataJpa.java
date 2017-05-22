@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.Deal;
 import ua.com.foxminded.serviceacc.repository.DealRepository;
 
@@ -16,11 +17,6 @@ public class DealServiceDataJpa implements DealService {
 
     @Override
     public Deal save(Deal deal) {
-        return dealRepository.save(deal);
-    }
-
-    @Override
-    public Deal update(Deal deal) {
         return dealRepository.save(deal);
     }
 
@@ -37,7 +33,10 @@ public class DealServiceDataJpa implements DealService {
     @Override
     public void delete(Long dealId) {
         dealRepository.delete(dealId);
-
     }
 
+    @Override
+    public List<Deal> findByClient(Client client) {
+        return dealRepository.findByClient(client);
+    }
 }

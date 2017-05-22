@@ -25,66 +25,63 @@
 
 	<br />
 	<h:panelGrid columns="2" cellpadding="5">
-		<h:outputText for="id" value="ID:" style="font-weight:bold" />
-		<p:inputText id="id" value="#{contractController.selectedContract.id}"
-			disabled="true" />
 
 		<h:outputLabel for="date" value="Дата договора: "
 			style="font-weight:bold" />
 		<p:inputText id="date" converter="localDateConverter"
 			pattern="dd.MM.yyyy"
-			value="#{contractController.selectedContract.contractDate}"
+			value="#{contractController.selected.contractDate}"
 			disabled="true" />
 
 		<h:outputLabel for="number" value="Номер: " style="font-weight:bold" />
 		<p:inputText id="number"
-			value="Договор № #{contractController.selectedContract.number}"
+			value="Договор № #{contractController.selected.number}"
 			disabled="true" />
 
 		<h:outputLabel for="service" value="Услуга: " style="font-weight:bold" />
 		<p:inputText id="service"
-			value="#{contractController.selectedContract.deal.service.name}"
+			value="#{contractController.selected.deal.service.name}"
 			disabled="true" />
 
 		<h:outputLabel for="closeDate" value="Дата закрытия: "
 			style="font-weight:bold" />
 		<p:calendar id="closeDate" converter="localDateConverter"
 			pattern="dd.MM.yyyy"
-			value="#{contractController.selectedContract.closeDate}"
+			value="#{contractController.selected.closeDate}"
 			showOn="button" mask="99.99.9999">
 		</p:calendar>
 
 		<h:outputLabel for="clientRate" value="Ставка клиента: "
 			style="font-weight:bold" />
 		<p:inputText id="clientRate"
-			value="#{contractController.selectedContract.clientRate}"
+			value="#{contractController.selected.clientRate}"
 			disabled="true" />
 
 		<h:outputLabel for="managerRate" value="Ставка менеджера: "
 			style="font-weight:bold" />
 		<p:inputText id="managerRate"
-			value="#{contractController.selectedContract.managerRate}"
+			value="#{contractController.selected.managerRate}"
 			disabled="true" />
 
 		<h:outputLabel for="client" value="Клиент: " style="font-weight:bold" />
 		<p:inputText id="client"
-			value="#{contractController.selectedContract.deal.client.firstName} #{contractController.selectedContract.deal.client.lastName}"
+			value="#{contractController.selected.deal.client.firstName} #{contractController.selected.deal.client.lastName}"
 			disabled="true" />
 
 		<p:outputLabel for="manager" value="Ментор: " style="font-weight:bold" />
 		<p:inputText id="manager"
-            value="#{contractController.selectedContract.manager}"
+            value="#{contractController.selected.manager}"
             converter="omnifaces.SelectItemsConverter" disabled="true"/>
 
 		<h:outputLabel for="status" value="Статус договора: "
 			style="font-weight:bold" />
 		<p:selectOneMenu id="status"
-			value="#{contractController.selectedContract.contractStatus}"
+			value="#{contractController.selected.contractStatus}"
 			converter="omnifaces.SelectItemsConverter">
 			<f:selectItems value="#{ContractStatuses.ALL_VALUES}" var="statusEnum"
 			    itemLabel="#{statusEnum.friendlyName}"/>
 			<p:inputText id="title"
-				value="#{contractController.selectedContract.contractStatus}"
+				value="#{contractController.selected.contractStatus}"
 				required="true" />
 		</p:selectOneMenu>
 

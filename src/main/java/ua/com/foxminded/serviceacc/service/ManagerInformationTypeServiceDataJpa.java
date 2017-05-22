@@ -23,11 +23,6 @@ public class ManagerInformationTypeServiceDataJpa implements ManagerInformationT
     }
 
     @Override
-    public ManagerInformationType update(ManagerInformationType managerInformationType) {
-        return managerInformationTypeRepository.save(managerInformationType);
-    }
-
-    @Override
     public ManagerInformationType findById(Long typeId) {
         return managerInformationTypeRepository.findOne(typeId);
     }

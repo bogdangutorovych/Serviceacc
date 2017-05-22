@@ -8,47 +8,49 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 
 import ua.com.foxminded.serviceacc.controller.catalogue.ConfigController;
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.ClientInformation;
 import ua.com.foxminded.serviceacc.model.ClientInformationType;
+import ua.com.foxminded.serviceacc.model.Deal;
 import ua.com.foxminded.serviceacc.service.ClientInformationService;
 import ua.com.foxminded.serviceacc.service.ClientService;
+import ua.com.foxminded.serviceacc.service.DealService;
 
-@Controller
+@Named
 @ViewScoped
 @ManagedBean
 public class ClientController implements Serializable {
 
     private static final Logger log = LoggerFactory.getLogger(ClientController.class);
-
     private static final long serialVersionUID = 1L;
 
     private Client selectedClient;
-    private static List<Client> list;
 
     private List<ClientInformation> clientInfo;
+    private List<Deal> clientDeals;
 
     private final ClientService clientService;
     private final ClientInformationService clientInformationService;
     private final ConfigController configController;
+    private final DealService dealService;
 
-    @Autowired
-    public ClientController(ClientService clientService, ClientInformationService clientInformationService, ConfigController configController) {
+    @Inject
+    public ClientController(ClientService clientService, ClientInformationService clientInformationService, ConfigController configController, DealService dealService) {
         this.clientService = clientService;
         this.clientInformationService = clientInformationService;
         this.configController = configController;
+        this.dealService = dealService;
     }
 
     @PostConstruct
     public void init() {
-        list = clientService.findAll();
     }
 
     public void add() {
@@ -58,49 +60,23 @@ public class ClientController implements Serializable {
 
     public void getActualLists() {
         clientInfo = getClientInformationList();
+        clientDeals = getClientDealList();
     }
 
     public void onOk() {
         // save or update client
-        if (selectedClient.getId() == null) {
-            clientService.save(selectedClient);
-            list.add(selectedClient);
-        } else {
-            clientService.update(selectedClient);
-        }
+        clientService.save(selectedClient);
 
         // Save or update informations
         Iterator<ClientInformation> iteratorInfos = clientInfo.iterator();
         while (iteratorInfos.hasNext()) {
             ClientInformation info = iteratorInfos.next();
-            if (info.getContent().isEmpty() && info.getId() != null) {
-                clientInformationService.update(info);
+            if (!info.getContent().isEmpty()) {
+                clientInformationService.save(info);
+            } else if (info.getContent().isEmpty() && info.getId() != null) {
                 clientInformationService.delete(info.getId());
-            } else if (info.getContent().isEmpty() && info.getId() == null) {
-            } else {
-                clientInformationService.update(info);
             }
         }
-
-    }
-
-    public void delete() {
-
-        clientService.delete(selectedClient.getId());
-        list.remove(selectedClient);
-        selectedClient = null;
-    }
-
-    public void setSelectedClient(Client selectedClient) {
-        this.selectedClient = selectedClient;
-    }
-
-    public Client getSelectedClient() {
-        return selectedClient;
-    }
-
-    public List<Client> getList() {
-        return list;
     }
 
     public ClientInformation getInfoByType(ClientInformationType clientInformationType) {
@@ -130,6 +106,19 @@ public class ClientController implements Serializable {
             clientInfo.add(info);
         }
         return clientInfo;
+    }
+
+    public void setSelectedClient(Client selectedClient) {
+        this.selectedClient = selectedClient;
+    }
+
+    public Client getSelectedClient() {
+        return selectedClient;
+    }
+
+    public List<Deal> getClientDealList() {
+        clientDeals = dealService.findByClient(selectedClient);
+        return clientDeals;
     }
 
 }

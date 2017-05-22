@@ -17,12 +17,10 @@ import org.hibernate.annotations.Where;
 
 @Entity
 @Table(name = "manager")
-
 @SQLDelete(sql = "UPDATE manager SET is_deleted = true WHERE id = ?")
 @Loader(namedQuery = "findManagerById")
 @NamedQuery(name = "findManagerById", query = "FROM Manager WHERE id = ?1 AND isDeleted = false")
 @Where(clause = "is_deleted = false")
-
 public class Manager {
 
     @Id

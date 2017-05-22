@@ -15,12 +15,7 @@ public class ContractServiceDataJpa implements ContractService {
     ContractRepository contractRepository;
 
     @Override
-    public Contract create(Contract contract) {
-        return contractRepository.save(contract);
-    }
-
-    @Override
-    public Contract update(Contract contract) {
+    public Contract save(Contract contract) {
         return contractRepository.save(contract);
     }
 

@@ -1,27 +1,20 @@
 package ua.com.foxminded.serviceacc.controller.contract;
 
 import java.io.Serializable;
-import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 
-import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.Contract;
-import ua.com.foxminded.serviceacc.model.Manager;
-import ua.com.foxminded.serviceacc.model.Service;
-import ua.com.foxminded.serviceacc.service.ClientService;
+import ua.com.foxminded.serviceacc.model.Deal;
 import ua.com.foxminded.serviceacc.service.ContractService;
-import ua.com.foxminded.serviceacc.service.ManagerService;
-import ua.com.foxminded.serviceacc.service.ServiceService;
 
-@Controller
+@Named
 @ViewScoped
 @ManagedBean
 public class ContractController implements Serializable {
@@ -29,99 +22,46 @@ public class ContractController implements Serializable {
     private static Logger logger = LoggerFactory.getLogger(ContractController.class);
     private static final long serialVersionUID = 1L;
 
-    private Contract selectedContract;
-    private List<Contract> list;
-
-    private List<Client> availableClients;
-    private List<Manager> availableManagers;
-    private List<Service> availableServices;
-
+    private Contract selected;
     private ContractService contractService;
-    private ClientService clientService;
-    private ManagerService managerService;
-    private ServiceService serviceService;
 
-    @Autowired
-    public ContractController(ContractService contractService, ClientService clientService,
-            ManagerService managerService, ServiceService serviceService) {
+    @Inject
+    public ContractController(ContractService contractService) {
         this.contractService = contractService;
-        this.clientService = clientService;
-        this.managerService = managerService;
-        this.serviceService = serviceService;
     }
 
-    @PostConstruct
-    public void init() {
-        list = contractService.findAll();
-    }
-
-    public void add() {
-        selectedContract = new Contract();
-        getActualLists();
-    }
-
-    public void getActualLists() {
-        availableClients = clientService.findAll();
-        availableManagers = managerService.findAll();
-        availableServices = serviceService.findAll();
+    public void addFromDeal(Deal deal) {
+        selected = new Contract();
+        selected.setDeal(deal);
     }
 
     public void onOk() {
-        if (selectedContract.getId() == null) {
-            selectedContract = contractService.create(selectedContract);
-            selectedContract.setNumber("" + selectedContract.getId());
+        if (selected.getId() == null) {
+            selected = contractService.save(selected);
+            selected.setNumber("contr# " + selected.getId());
         }
-
-        contractService.update(selectedContract);
-        init();
-
-    }
-
-    public void delete() {
-        list.remove(selectedContract);
-        contractService.delete(selectedContract.getId());
-        selectedContract = null;
+        contractService.save(selected);
     }
 
     public void onCancel() {
         logger.info("onCancel");
-        selectedContract = null;
+        selected = null;
     }
 
-    public Contract getSelectedContract() {
-        return selectedContract;
+    public Contract getSelected() {
+        return selected;
     }
 
-    public void setSelectedContract(Contract selectedContract) {
-        this.selectedContract = selectedContract;
+    public void setSelected(Contract selected) {
+        this.selected = selected;
     }
 
-    public List<Contract> getList() {
-        return list;
+    public ContractService getContractService() {
+        return contractService;
     }
 
-    public List<Client> getAvailableClients() {
-        return availableClients;
-    }
-
-    public void setAvailableClients(List<Client> availableClients) {
-        this.availableClients = availableClients;
-    }
-
-    public List<Manager> getAvailableManagers() {
-        return availableManagers;
-    }
-
-    public void setAvailableManagers(List<Manager> availableManagers) {
-        this.availableManagers = availableManagers;
-    }
-
-    public List<Service> getAvailableServices() {
-        return availableServices;
-    }
-
-    public void setAvailableServices(List<Service> availableServices) {
-        this.availableServices = availableServices;
+    public void setContractService(ContractService contractService) {
+        this.contractService = contractService;
     }
 
 }

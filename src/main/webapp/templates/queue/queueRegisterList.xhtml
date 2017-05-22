@@ -69,6 +69,14 @@
 			filterBy="#{queue.deal.service.name}" filterMatchMode="contains">
 			<h:outputText value="#{queue.deal.service.name}" />
 		</p:column>
+		
+		<p:column headerText="Договор">
+            <p:commandButton id="btn_add" value="Сформировать договор"
+                update=":contentForm" icon="ui-icon-document"
+                actionListener="#{contractController.add(queue.deal)}"
+                action='#{navController.setMainContent("contract/contract")}' />
+        </p:column>
+		
 	</p:dataTable>
 
 </ui:composition>

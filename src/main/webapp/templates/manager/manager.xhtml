@@ -8,7 +8,10 @@
 		<f:facet name="left">
 			<p:commandButton id="btn_ok" value="Ok" update=":contentForm"
 				icon="ui-icon-check" actionListener="#{managerController.onOk()}"
-				action='#{navController.setMainContent("manager/managerList")}' />
+				action='#{navController.setMainContent("manager/managerList")}' >
+
+                <f:actionListener binding="#{managerListController.updateManagerListFromDB()}" />
+            </p:commandButton>
 			<span class="ui-separator"><span
 				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
@@ -16,16 +19,16 @@
 				icon="ui-icon-close"
 				actionListener="#{managerController.setSelectedManager(null)}"
 				action='#{navController.setMainContent("manager/managerList")}'
-				immediate="true" />
+				immediate="true" >
+
+                <f:actionListener binding="#{managerListController.updateManagerListFromDB()}" />
+            </p:commandButton>
 		</f:facet>
 	</p:toolbar>
 
 	<br />
 
 	<h:panelGrid columns="2" cellpadding="5">
-		<h:outputText for="id" value="ID:" style="font-weight:bold" />
-		<h:inputText id="id" value="#{managerController.selectedManager.id}"
-			disabled="true" />
 
 		<h:outputLabel for="firstName" value="First name: "
 			style="font-weight:bold" />
@@ -37,15 +40,15 @@
 			style="font-weight:bold" />
 		<p:inputText id="lastName"
 			value="#{managerController.selectedManager.lastName}" required="true" />
-			
-		<p:outputLabel for="birthday" value="Day of birth: " 
+
+		<p:outputLabel for="birthday" value="Day of birth: "
 		    style="font-weight:bold"/>
-        <p:calendar id="birthday" converter="localDateConverter" pattern="dd.MM.yyyy" showOn="button" mask="99.99.9999" 
+        <p:calendar id="birthday" converter="localDateConverter" pattern="dd.MM.yyyy" showOn="button" mask="99.99.9999"
             value="#{managerController.selectedManager.birthday}" />
 
 	</h:panelGrid>
 
-	<p:dataTable id="ManagerInfoList" editable="true" emptyMessage="No items yet" 
+	<p:dataTable id="ManagerInfoList" editable="true" emptyMessage="No items yet"
 	             var="managerInfo" value="#{managerController.managerInformationList}">
 
 		<f:facet name="header">Manager Information</f:facet>
@@ -57,7 +60,7 @@
         <p:column>
            <p:inputText value="#{managerInfo.content}" />
         </p:column>
-        
+
 	</p:dataTable>
 
 </ui:composition>

@@ -22,8 +22,8 @@
     <br/>
 
     <p:dataTable id="payStatusList" editable="true" emptyMessage="No items yet"
-                 var="s" value="#{payStatusController.payStatusList}"
-                 rowKey="#{payStatusController.payStatusList.indexOf(s)}"
+                 var="payStatus" value="#{payStatusController.payStatusList}"
+                 rowKey="#{payStatusController.payStatusList.indexOf(payStatus)}"
                  selectionMode="single" selection="#{payStatusController.selected}">
 
         <f:facet name="header">Pay Statuses</f:facet>
@@ -32,29 +32,25 @@
         <p:ajax event="rowSelect" update="@form:btn_delete" immediate="true"/>
         <p:ajax event="rowUnselect" update="@form:btn_delete" immediate="true"/>
 
-        <p:column headerText="id" sortBy="#{s.id}">
-            #{s.id}
-        </p:column>
-
-        <p:column headerText="code" sortBy="#{s.code}">
+        <p:column headerText="code" sortBy="#{payStatus.code}">
             <p:cellEditor>
                 <f:facet name="output">
                     <span style="display: inline-block; width: 100%; height: 100%">
-                        <h:outputText value="#{s.code}" />
+                        <h:outputText value="#{payStatus.code}" />
                     </span>
                 </f:facet>
-                <f:facet name="input"><p:inputText value="#{s.code}" style="width:100%" label="Code"/></f:facet>
+                <f:facet name="input"><p:inputText value="#{payStatus.code}" style="width:100%" label="Code"/></f:facet>
             </p:cellEditor>
         </p:column>
 
-        <p:column headerText="title" sortBy="#{s.title}">
+        <p:column headerText="title" sortBy="#{payStatus.title}">
             <p:cellEditor>
                 <f:facet name="output">
                     <span style="display: inline-block; width: 100%; height: 100%">
-                        <h:outputText value="#{s.title}" />
+                        <h:outputText value="#{payStatus.title}" />
                     </span>
                 </f:facet>
-                <f:facet name="input"><p:inputText value="#{s.title}" style="width:100%" label="Title"/></f:facet>
+                <f:facet name="input"><p:inputText value="#{payStatus.title}" style="width:100%" label="Title"/></f:facet>
             </p:cellEditor>
         </p:column>
 

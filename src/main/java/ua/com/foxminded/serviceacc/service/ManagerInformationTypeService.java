@@ -11,8 +11,6 @@ public interface ManagerInformationTypeService {
 
     ManagerInformationType save(ManagerInformationType managerInformationType);
 
-    ManagerInformationType update(ManagerInformationType managerInformationType);
-
     ManagerInformationType findById(Long typeId);
 
     List<ManagerInformationType> findAll();

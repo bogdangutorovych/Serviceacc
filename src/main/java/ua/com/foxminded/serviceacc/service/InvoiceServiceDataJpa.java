@@ -15,12 +15,7 @@ public class InvoiceServiceDataJpa implements InvoiceService {
     InvoiceRepository invoiceRepository;
 
     @Override
-    public Invoice create(Invoice invoice) {
-        return invoiceRepository.save(invoice);
-    }
-
-    @Override
-    public Invoice update(Invoice invoice) {
+    public Invoice save(Invoice invoice) {
         return invoiceRepository.save(invoice);
     }
 
@@ -38,6 +33,16 @@ public class InvoiceServiceDataJpa implements InvoiceService {
     public void delete(Long invoiceId) {
         invoiceRepository.delete(invoiceId);
 
+    }
+
+    @Override
+    public List<Invoice> findInvoicesByContractId(Long contractId) {
+        return invoiceRepository.findInvoicesByContractId(contractId);
+    }
+
+    @Override
+    public Invoice findMaxDateInvoice(Long contractID) {
+        return invoiceRepository.findMaxDateInvoice(contractID);
     }
 
 }

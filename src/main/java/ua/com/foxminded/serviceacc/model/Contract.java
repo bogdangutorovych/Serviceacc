@@ -2,6 +2,7 @@ package ua.com.foxminded.serviceacc.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -22,6 +23,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import ua.com.foxminded.serviceacc.model.enums.ContractStatus;
+import ua.com.foxminded.serviceacc.model.enums.ContractType;
 
 @Entity
 @Table(name = "contract")
@@ -52,11 +54,15 @@ public class Contract {
     @JoinColumn(name = "contract_status")
     private ContractStatus contractStatus;
 
+    @Enumerated(EnumType.STRING)
+    @JoinColumn(name = "contract_type")
+    private ContractType contractType;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "deal_id")
     private Deal deal;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "client_rate")
     private Money clientRate;
 
@@ -76,6 +82,14 @@ public class Contract {
 
     public Long getId() {
         return id;
+    }
+
+    public ContractType getContractType() {
+        return contractType;
+    }
+
+    public void setContractType(ContractType contractType) {
+        this.contractType = contractType;
     }
 
     public void setId(Long id) {
@@ -146,11 +160,11 @@ public class Contract {
         this.managerRate = managerRate;
     }
 
-    public boolean isTrial() {
+    public boolean getIsTrial() {
         return isTrial;
     }
 
-    public void setTrial(boolean isTrial) {
+    public void setIsTrial(boolean isTrial) {
         this.isTrial = isTrial;
     }
 

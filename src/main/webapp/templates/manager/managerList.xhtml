@@ -24,7 +24,11 @@
 			<p:commandButton id="btn_delete" value="Delete" update=":contentForm"
 				icon="ui-icon-trash"
 				disabled="#{managerController.selectedManager==null}"
-				actionListener="#{managerController.delete()}" />
+				actionListener="#{managerListController.deleteManager(managerController.selectedManager)}" >
+
+                <f:actionListener binding="#{managerListController.updateManagerListFromDB()}" />
+                <f:actionListener binding="#{managerController.selectedManager = null}" />
+            </p:commandButton>
 
 		</f:facet>
 	</p:toolbar>
@@ -32,8 +36,8 @@
 	<br />
 
 	<p:dataTable id="managerList" editable="true"
-		emptyMessage="No items yet" var="m" value="#{managerController.list}"
-		rowKey="#{managerController.list.indexOf(m)}" selectionMode="single"
+		emptyMessage="No items yet" var="manager" value="#{managerListController.managerList}"
+		rowKey="#{managerListController.managerList.indexOf(manager)}" selectionMode="single"
 		selection="#{managerController.selectedManager}"
 		widgetVar="managersTable">
 
@@ -50,18 +54,18 @@
 		<p:ajax event="rowUnselect" update="@form:btn_edit,@form:btn_delete"
 			immediate="true" />
 
-		<p:column headerText="id" sortBy="#{m.id}" filterBy="#{m.id}" filterMatchMode="contains">
-			#{m.id}
+		<p:column headerText="id" sortBy="#{manager.id}" filterBy="#{manager.id}" filterMatchMode="contains">
+			#{manager.id}
 		</p:column>
 
-		<p:column headerText="First name" sortBy="#{m.firstName}" filterBy="#{m.firstName}" filterMatchMode="contains">
-			<h:outputText value="#{m.firstName}" />
+		<p:column headerText="First name" sortBy="#{manager.firstName}" filterBy="#{manager.firstName}" filterMatchMode="contains">
+			<h:outputText value="#{manager.firstName}" />
 		</p:column>
-		<p:column headerText="Last name" sortBy="#{m.lastName}" filterBy="#{m.lastName}" filterMatchMode="contains">
-			<h:outputText value="#{m.lastName}" />
+		<p:column headerText="Last name" sortBy="#{manager.lastName}" filterBy="#{manager.lastName}" filterMatchMode="contains">
+			<h:outputText value="#{manager.lastName}" />
 		</p:column>
 		<p:column headerText="Day of birth">
-            <h:outputText value="#{m.birthday}" converter="localDateConverter" />
+            <h:outputText value="#{manager.birthday}" converter="localDateConverter" />
         </p:column>
 
 	</p:dataTable>

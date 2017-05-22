@@ -17,7 +17,6 @@ import org.hibernate.annotations.Where;
 
 @Entity
 @Table(name = "client")
-
 @SQLDelete(sql = "UPDATE client SET is_deleted = true WHERE id = ?")
 @Loader(namedQuery = "findClientById")
 @NamedQuery(name = "findClientById", query = "FROM Client WHERE id = ?1 AND isDeleted = false")

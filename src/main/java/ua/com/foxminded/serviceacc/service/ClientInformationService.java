@@ -9,8 +9,6 @@ public interface ClientInformationService {
 
     ClientInformation save(ClientInformation clientInformation);
 
-    ClientInformation update(ClientInformation clientInformation);
-
     ClientInformation findById(Long clientInformationId);
 
     List<ClientInformation> findAll();
