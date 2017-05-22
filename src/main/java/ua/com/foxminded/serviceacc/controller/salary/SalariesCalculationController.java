@@ -14,4 +14,8 @@ public class SalariesCalculationController {
     public void calculateSalaries() {
         log.info("calculateSalaries");
     }
+    
+    public void onView() {
+        
+    }
 }
