@@ -97,7 +97,7 @@
 
 		<p:column headerText="След.период начисления" sortBy="#{invoiceListController.findNextPayPeriod(c)}"
 			filterBy="#{invoiceListController.findNextPayPeriod(c)}" filterMatchMode="contains">
-			<h:outputText value="#{invoiceListController.findNextPayPeriod(c)}" />
+			<h:outputText value="#{invoiceListController.findNextPayPeriod(c).showPeriod()}" />
 		</p:column>
 
 		<p:column headerText="Выставление счета">

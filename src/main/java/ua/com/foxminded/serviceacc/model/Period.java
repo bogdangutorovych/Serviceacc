@@ -1,6 +1,7 @@
 package ua.com.foxminded.serviceacc.model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,6 +32,14 @@ public class Period {
 
     public Long getId() {
         return id;
+    }
+
+    public Period() {
+    }
+
+    public String showPeriod() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        return (dateFrom.format(formatter) + " - " + dateTo.format(formatter));
     }
 
     public void setId(Long id) {

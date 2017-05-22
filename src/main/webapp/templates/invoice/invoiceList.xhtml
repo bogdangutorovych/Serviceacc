@@ -91,11 +91,11 @@
 		</p:column>
 
 		<p:column headerText="Период"
-			sortBy="#{invoice.period}"
-			filterBy="#{invoice.period}"
+			sortBy="#{invoice.period.showPeriod()}"
+			filterBy="#{invoice.period.showPeriod()}"
 			filterMatchMode="contains">
 			<h:outputText
-				value="#{invoice.period}" />
+				value="#{invoice.period.showPeriod()}" />
 		</p:column>
 
 	</p:dataTable>
