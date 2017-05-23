@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 
 import org.slf4j.Logger;
@@ -21,7 +21,7 @@ import ua.com.foxminded.serviceacc.service.QueueRegisterService;
 import ua.com.foxminded.serviceacc.service.ServiceService;
 
 @Named
-@RequestScoped
+@ViewScoped
 @ManagedBean
 public class QueueRegisterController implements Serializable {
 
@@ -71,8 +71,8 @@ public class QueueRegisterController implements Serializable {
     }
 
     public void delete() {
-        list.remove(selected);
         queueRegisterService.delete(selected.getId());
+        list.remove(selected);
         selected = null;
     }
 
