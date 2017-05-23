@@ -3,23 +3,18 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-	
-	
-	   <p:importEnum type="ua.com.foxminded.serviceacc.model.enums.Currency"
-        var="Currencies" />
 
 	<p:toolbar>
 		<f:facet name="left">
 			<p:commandButton id="btn_ok" value="Ok" update=":contentForm"
-				icon="ui-icon-check"
-				actionListener="#{queueRegisterController.onOk()}"
-				action='#{navController.setMainContent("client/client")}' />
+				icon="ui-icon-check" 
+				actionListener='#{dealController.onOk()}'
+				action='#{navController.setMainContent("client/client")}'/>
 			<span class="ui-separator"><span
 				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
 			<p:commandButton id="btn_cancel" value="Cancel" update=":contentForm"
-				icon="ui-icon-close"
-				actionListener="#{queueRegisterController.onCancel()}"
+				icon="ui-icon-close" actionListener="#{dealController.onCancel()}"
 				action='#{navController.setMainContent("client/client")}'
 				immediate="true" />
 		</f:facet>
@@ -29,19 +24,18 @@
 	<h:panelGrid columns="2" cellpadding="5">
 
 		<h:outputLabel for="client" value="Клиент: " style="font-weight:bold" />
-		<p:inputText id="number"
-			value="#{clientController.selectedClient}"
+		<p:inputText id="number" value="#{clientController.selectedClient}"
 			disabled="true" />
 
 		<p:outputLabel for="service" value="Услуга: " style="font-weight:bold" />
-		<p:selectOneMenu id="service" value="#{dealController.selected.service}"
+		<p:selectOneMenu id="service"
+			value="#{dealController.selected.service}"
 			converter="omnifaces.SelectItemsConverter" required="true"
 			requiredMessage="Выберите услугу">
-			<f:selectItem itemLabel="Выберите услугу..." noSelectionOption="true" />
+			<f:selectItem itemLabel="#{dealController.showDefaultServiceNameValue()}" noSelectionOption="true" />
 			<f:selectItems value="#{serviceListController.serviceList}"
 				var="service" itemLabel="#{service.name}" itemValue="#{service}" />
 		</p:selectOneMenu>
-		
 
 	</h:panelGrid>
 

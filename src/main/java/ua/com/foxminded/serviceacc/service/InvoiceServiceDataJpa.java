@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ua.com.foxminded.serviceacc.model.Contract;
 import ua.com.foxminded.serviceacc.model.Invoice;
 import ua.com.foxminded.serviceacc.repository.InvoiceRepository;
 
@@ -36,8 +37,8 @@ public class InvoiceServiceDataJpa implements InvoiceService {
     }
 
     @Override
-    public List<Invoice> findInvoicesByContractId(Long contractId) {
-        return invoiceRepository.findInvoicesByContractId(contractId);
+    public List<Invoice> findByContract(Contract contract) {
+        return invoiceRepository.findByContract(contract);
     }
 
     @Override

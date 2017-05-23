@@ -1,11 +1,12 @@
 package ua.com.foxminded.serviceacc.controller.queue;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
 
 import org.slf4j.Logger;
@@ -20,7 +21,7 @@ import ua.com.foxminded.serviceacc.service.QueueRegisterService;
 import ua.com.foxminded.serviceacc.service.ServiceService;
 
 @Named
-@ViewScoped
+@RequestScoped
 @ManagedBean
 public class QueueRegisterController implements Serializable {
 
@@ -50,10 +51,12 @@ public class QueueRegisterController implements Serializable {
         list = queueRegisterService.findAll();
     }
 
-    public void add() {
+    public void add(Deal deal) {
         selected = new QueueRegister();
         getActualLists();
-        selected.setDeal(new Deal());
+        selected.setDeal(deal);
+        selected.setRegisterDate(LocalDate.now());
+        queueRegisterService.save(selected);
     }
 
     public void getActualLists() {

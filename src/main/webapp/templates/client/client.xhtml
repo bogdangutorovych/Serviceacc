@@ -9,8 +9,6 @@
 			<p:commandButton id="btn_ok" value="Ok" update=":contentForm"
 				icon="ui-icon-check" actionListener="#{clientController.onOk()}"
 				action='#{navController.setMainContent("client/clientList")}'>
-				<f:actionListener
-					binding="#{clientListController.updateClientListFromDB()}" />
 			</p:commandButton>
 			<span class="ui-separator"><span
 				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
@@ -20,8 +18,6 @@
 				actionListener="#{clientController.setSelectedClient(null)}"
 				action='#{navController.setMainContent("client/clientList")}'
 				immediate="true">
-				<f:actionListener
-					binding="#{clientListController.updateClientListFromDB()}" />
 			</p:commandButton>
 		</f:facet>
 	</p:toolbar>
@@ -62,44 +58,52 @@
 		</p:column>
 
 	</p:dataTable>
-	
-	   <p:toolbar>
-        <f:facet name="left"> Заявки: 
-            <p:commandButton id="btn_deal_create" value="Добавить" update=":contentForm"
-                icon="ui-icon-check" 
-                actionListener="#{dealController.add(clientController.selectedClient)}"
-                action='#{navController.setMainContent("deal/deal")}'>
-            </p:commandButton>
-            <span class="ui-separator"><span
-                class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
-            <p:commandButton id="btn_deal_update" value="Редактировать" update=":contentForm"
-                icon="ui-icon-close"
-                actionListener="#{clientController.setSelectedClient(null)}"
-                action='#{navController.setMainContent("deal/deal")}'
-                immediate="true">
-            </p:commandButton>
-            
-            <span class="ui-separator"><span
-                class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+	<p:toolbar>
+		<f:facet name="left"> Заявки: 
+            <p:commandButton id="btn_deal_create" value="Добавить"
+				update=":contentForm" icon="ui-icon-check"
+				actionListener="#{dealController.add(clientController.selectedClient)}"
+				action='#{navController.setMainContent("deal/deal")}'>
+				<f:actionListener binding="#{moneyController.add()}" />
+			</p:commandButton>
+			<span class="ui-separator"><span
+				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
-            <p:commandButton id="btn_deal_delete" value="Удалить" update=":contentForm"
-                icon="ui-icon-close"
-                actionListener="#{clientController.setSelectedClient(null)}"
-                immediate="true">
-            </p:commandButton>
-        </f:facet>
-    </p:toolbar>
-	
-	<p:dataTable id="clientDealList" editable="false"
-		emptyMessage="Нет данных" var="clientDeal"
-		value="#{clientController.clientDealList}">
+			<p:commandButton id="btn_deal_update" value="Просмотр"
+				update=":contentForm" icon="ui-icon-close"
+				disabled="#{dealController.selected==null}"
+				action='#{navController.setMainContent("deal/viewDeal")}'
+				immediate="true">
+			</p:commandButton>
 
-		<p:column>
-			<p:outputLabel value="#{clientDeal.service.name}"
-				style="font-weight:bold" />
+			<span class="ui-separator"><span
+				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+
+			<p:commandButton id="btn_deal_delete" value="Удалить"
+				update=":contentForm" icon="ui-icon-close"
+				disabled="#{dealController.selected==null}"
+				actionListener="#{clientController.removeDealFromClient(dealController.selected)}"
+				immediate="true">
+			</p:commandButton>
+		</f:facet>
+	</p:toolbar>
+
+	<p:dataTable id="deals" editable="true"
+		tableStyle="table-layout:auto;width:100%;" emptyMessage="Нет данных"
+		var="deal" value="#{clientController.clientDeals}"
+		rowKey="#{deal.id}"
+		selectionMode="single" selection="#{dealController.selected}">
+
+		<p:ajax event="rowSelect" update="@form:btn_deal_update,@form:btn_deal_delete"
+			immediate="true" />
+		<p:ajax event="rowUnselect" update="@form:btn_deal_update,@form:btn_deal_delete"
+			immediate="true" />
+
+		<p:column headerText="Сделка"
+			converter="omnifaces.SelectItemsConverter">
+			<h:outputText value="#{deal.service.name}" />
 		</p:column>
 
 	</p:dataTable>
-
 </ui:composition>

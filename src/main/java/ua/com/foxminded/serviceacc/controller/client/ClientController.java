@@ -42,7 +42,8 @@ public class ClientController implements Serializable {
     private final DealService dealService;
 
     @Inject
-    public ClientController(ClientService clientService, ClientInformationService clientInformationService, ConfigController configController, DealService dealService) {
+    public ClientController(ClientService clientService, ClientInformationService clientInformationService,
+            ConfigController configController, DealService dealService) {
         this.clientService = clientService;
         this.clientInformationService = clientInformationService;
         this.configController = configController;
@@ -51,6 +52,7 @@ public class ClientController implements Serializable {
 
     @PostConstruct
     public void init() {
+        clientDeals = dealService.findByClient(selectedClient);
     }
 
     public void add() {
@@ -58,9 +60,13 @@ public class ClientController implements Serializable {
         getActualLists();
     }
 
+    public void removeDealFromClient(Deal deal) {
+        dealService.delete(deal.getId());
+        clientDeals.remove(deal);
+    }
+
     public void getActualLists() {
         clientInfo = getClientInformationList();
-        clientDeals = getClientDealList();
     }
 
     public void onOk() {
@@ -116,9 +122,12 @@ public class ClientController implements Serializable {
         return selectedClient;
     }
 
-    public List<Deal> getClientDealList() {
-        clientDeals = dealService.findByClient(selectedClient);
-        return clientDeals;
+    public List<Deal> getClientDeals() {
+        return dealService.findByClient(selectedClient);
+    }
+
+    public void setClientDeals(List<Deal> clientDeals) {
+        this.clientDeals = clientDeals;
     }
 
 }

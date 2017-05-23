@@ -39,7 +39,7 @@ public class InvoiceListController implements Serializable {
     }
 
     public List<Invoice> findAllIssuedInvoices(Contract contract) {
-        return invoiceService.findInvoicesByContractId(contract.getId());
+        return invoiceService.findByContract(contract);
     }
 
     public Invoice findLatestInvoice(Contract contract) {

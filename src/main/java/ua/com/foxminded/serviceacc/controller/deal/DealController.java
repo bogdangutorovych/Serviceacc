@@ -2,6 +2,7 @@ package ua.com.foxminded.serviceacc.controller.deal;
 
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.Deal;
+import ua.com.foxminded.serviceacc.model.Money;
 import ua.com.foxminded.serviceacc.model.Service;
 import ua.com.foxminded.serviceacc.service.DealService;
 
@@ -25,20 +27,36 @@ public class DealController implements Serializable {
 
     private Deal selected;
     private DealService dealService;
+    private Money price;
 
     public DealController(DealService dealService) {
         this.dealService = dealService;
     }
 
+    @PostConstruct
+    public void init() {
+        selected = new Deal();
+
+    }
+
     public void add(Client client) {
         selected = new Deal();
+        price = new Money();
         selected.setClient(client);
         selected.setService(new Service());
     }
 
+    public String showDefaultServiceNameValue() {
+        if (selected.getService().getName() == null) {
+            return "Выберите услугу";
+        }
+        return selected.getService().getName();
+    }
+
     public void onOk() {
         if (selected.getId() == null) {
-            selected = dealService.save(selected);
+            selected.getService().getPrices().add(price);
+            dealService.save(selected);
         }
         dealService.save(selected);
     }
@@ -65,6 +83,14 @@ public class DealController implements Serializable {
 
     public void setDealService(DealService dealService) {
         this.dealService = dealService;
+    }
+
+    public Money getPrice() {
+        return price;
+    }
+
+    public void setPrice(Money price) {
+        this.price = price;
     }
 
 }

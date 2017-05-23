@@ -9,12 +9,12 @@ public interface DealService {
 
     Deal save(Deal deal);
 
-    Deal findById(Long DealId);
+    Deal findById(Long dealId);
 
     List<Deal> findAll();
 
     List<Deal> findByClient(Client client);
 
-    void delete(Long DealId);
+    void delete(Long dealId);
 
 }

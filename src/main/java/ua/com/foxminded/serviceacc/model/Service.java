@@ -1,6 +1,5 @@
 package ua.com.foxminded.serviceacc.model;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -10,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -44,11 +44,14 @@ public class Service {
     private String description;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<Money> prices = new HashSet<>();
+    @JoinTable(name = "service_prices", joinColumns = {
+            @JoinColumn(name = "service_id", referencedColumnName = "id") }, inverseJoinColumns = {
+                    @JoinColumn(name = "price_id", referencedColumnName = "id") })
+    private Set<Money> prices;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "rate_id")
-    private Money managerRate = new Money();
+    @JoinColumn(name = "manager_rate_id")
+    private Money managerRate;
 
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;

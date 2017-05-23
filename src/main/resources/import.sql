@@ -34,12 +34,12 @@ INSERT INTO MONEY (id, amount, currency, is_deleted) VALUES
 (14, 3000, 'UAH', false);
 ALTER SEQUENCE money_id_seq RESTART WITH 15;
 
-INSERT INTO SERVICE (id, name, description, rate_id, is_deleted) VALUES
+INSERT INTO SERVICE (id, name, description, manager_rate_id, is_deleted) VALUES
 (1, 'менторинг', 'обучение студента идет на заданиях и анализе их выполнения', 7, false),
 (2, 'группа', 'обучение в группе на реальном проекте', 8, false);
 ALTER SEQUENCE service_id_seq RESTART WITH 3;
 
-INSERT INTO SERVICE_PRICES (service_id, prices_id) VALUES
+INSERT INTO SERVICE_PRICES (service_id, price_id) VALUES
 (1, 1),(1, 2),(1, 3),(2, 4),(2, 5),(2, 6);
 
 INSERT INTO DEAL (id, client_id, service_id, is_deleted) VALUES
