@@ -49,6 +49,11 @@
 		<h:outputLabel for="amount" value="Сумма: " style="font-weight:bold" />
 		<p:inputText id="amount"
 			value="#{invoiceController.selected.price.amount}" disabled="false" />
+			
+			<h:outputLabel for="currency" value="Валюта: " style="font-weight:bold" />
+        <p:inputText id="currency"
+            value="#{invoiceController.selected.price.currency}" disabled="true" />
+
 
 		<h:outputLabel for="invoiceType" value="Тип счета: "
 			style="font-weight:bold" />

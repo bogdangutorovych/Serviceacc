@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 
 import ua.com.foxminded.serviceacc.model.Contract;
 import ua.com.foxminded.serviceacc.model.Invoice;
-import ua.com.foxminded.serviceacc.model.Period;
 import ua.com.foxminded.serviceacc.service.InvoiceService;
 
 @Named
@@ -40,21 +39,6 @@ public class InvoiceListController implements Serializable {
 
     public List<Invoice> findAllIssuedInvoices(Contract contract) {
         return invoiceService.findByContract(contract);
-    }
-
-    public Invoice findLatestInvoice(Contract contract) {
-        return invoiceService.findMaxDateInvoice(contract.getId());
-    }
-
-    public Period findNextPayPeriod(Contract contract) {
-        Invoice latestInvoice = findLatestInvoice(contract);
-        if (latestInvoice == null) {
-            return null;
-        }
-        Period nextPayPeriod = new Period();
-        nextPayPeriod.setDateFrom(latestInvoice.getPeriod().getDateTo().plusDays(1));
-        nextPayPeriod.setDateTo(latestInvoice.getPeriod().getDateTo().plusMonths(1));
-        return nextPayPeriod;
     }
 
     public void delete(Invoice invoice) {

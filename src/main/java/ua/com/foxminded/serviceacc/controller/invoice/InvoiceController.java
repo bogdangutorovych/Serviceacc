@@ -1,6 +1,7 @@
 package ua.com.foxminded.serviceacc.controller.invoice;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -35,7 +36,24 @@ public class InvoiceController implements Serializable {
         init();
         selected.setContract(contract);
         selected.setPeriod(period);
+        selected.setDate(LocalDate.now());
+        selected.setPeriod(findNextPayPeriod(contract));
         selected.setPrice(contract.getClientRate());
+    }
+
+    public Invoice findLatestInvoice(Contract contract) {
+        return invoiceService.findMaxDateInvoice(contract.getId());
+    }
+
+    public Period findNextPayPeriod(Contract contract) {
+        Invoice latestInvoice = findLatestInvoice(contract);
+        if (latestInvoice == null) {
+            return null;
+        }
+        Period nextPayPeriod = new Period();
+        nextPayPeriod.setDateFrom(latestInvoice.getPeriod().getDateTo().plusDays(1));
+        nextPayPeriod.setDateTo(latestInvoice.getPeriod().getDateTo().plusMonths(1));
+        return nextPayPeriod;
     }
 
     public void init() {

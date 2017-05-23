@@ -47,6 +47,10 @@ public class ContractController implements Serializable {
         contractService.save(selected);
     }
 
+    public void delete() {
+        contractService.delete(selected.getId());
+    }
+
     public void onCancel() {
         logger.info("onCancel");
         selected = null;

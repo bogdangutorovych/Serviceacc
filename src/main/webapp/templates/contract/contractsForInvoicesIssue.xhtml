@@ -7,19 +7,11 @@
 	<p:toolbar>
 
 		<f:facet name="left">
-			<p:commandButton id="btn_edit" value="Редактировать"
-				update=":contentForm" icon="ui-icon-pencil"
-				disabled="#{contractController.selected==null}"
-				action='#{navController.setMainContent("contract/contractEdit")}' />
-
-			<span class="ui-separator"><span
-				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
-
-			<p:commandButton id="btn_delete" value="Удалить"
+			<p:commandButton id="btn_create_invoice" value="Сформировать счет"
 				update=":contentForm" icon="ui-icon-trash"
 				disabled="#{contractController.selected==null}"
-				actionListener="#{contractController.delete()}" />
-
+				actionListener="#{invoiceController.add(contractController.selected)}"
+				action='#{navController.setMainContent("invoice/invoice")}' />
 		</f:facet>
 	</p:toolbar>
 
@@ -27,8 +19,8 @@
 	<p:dataTable id="contractList" editable="true"
 		tableStyle="table-layout:auto;width:100%;" emptyMessage="Нет данных"
 		var="c" value="#{contractListController.list}"
-		rowKey="#{contractListController.list.indexOf(c)}" selectionMode="single"
-		selection="#{contractController.selected}"
+		rowKey="#{contractListController.list.indexOf(c)}"
+		selectionMode="single" selection="#{contractController.selected}"
 		widgetVar="contractTable">
 
 		<f:facet name="header" style="text-align:center">Договора
@@ -40,9 +32,9 @@
 			</p:outputPanel>
 		</f:facet>
 
-		<p:ajax event="rowSelect" update="@form:btn_edit,@form:btn_delete"
+		<p:ajax event="rowSelect" update="@form:btn_create_invoice"
 			immediate="true" />
-		<p:ajax event="rowUnselect" update="@form:btn_edit,@form:btn_delete"
+		<p:ajax event="rowUnselect" update="@form:btn_create_invoice"
 			immediate="true" />
 
 		<p:column headerText="номер" sortBy="#{c.number}"
@@ -70,41 +62,39 @@
 			filterBy="#{c.contractStatus}" filterMatchMode="contains">
 			<h:outputText value="#{c.contractStatus}" />
 		</p:column>
-		
+
 		<p:column headerText="Пробный период" sortBy="#{c.isTrial}"
-            filterBy="#{c.isTrial}" filterMatchMode="contains">
-            <h:outputText value="#{c.isTrial}" />
-        </p:column>
+			filterBy="#{c.isTrial}" filterMatchMode="contains">
+			<h:outputText value="#{c.isTrial}" />
+		</p:column>
 
 		<p:column headerText="Клиент" sortBy="#{c.deal.client}"
 			filterBy="#{c.deal.client}" filterMatchMode="contains">
 			<h:outputText value="#{c.deal.client}" />
 		</p:column>
 
-		<p:column headerText="Сумма" sortBy="#{c.clientRate.showSumAndCurrency()}"
-			filterBy="#{c.clientRate.showSumAndCurrency()}" filterMatchMode="contains">
+		<p:column headerText="Сумма"
+			sortBy="#{c.clientRate.showSumAndCurrency()}"
+			filterBy="#{c.clientRate.showSumAndCurrency()}"
+			filterMatchMode="contains">
 			<h:outputText value="#{c.clientRate.showSumAndCurrency()}" />
 		</p:column>
 
 		<p:column headerText="Последняя дата выставления счета"
-			sortBy="#{invoiceListController.findLatestInvoice(c).date}"
-			filterBy="#{invoiceListController.findLatestInvoice(c).date}"
+			sortBy="#{invoiceController.findLatestInvoice(c).date}"
+			filterBy="#{invoiceController.findLatestInvoice(c).date}"
 			filterMatchMode="contains">
 			<h:outputText
-				value="#{invoiceListController.findLatestInvoice(c).date}"
+				value="#{invoiceController.findLatestInvoice(c).date}"
 				converter="localDateConverter" pattern="dd.MM.yyyy" />
 		</p:column>
 
-		<p:column headerText="След.период начисления" sortBy="#{invoiceListController.findNextPayPeriod(c)}"
-			filterBy="#{invoiceListController.findNextPayPeriod(c)}" filterMatchMode="contains">
-			<h:outputText value="#{invoiceListController.findNextPayPeriod(c).showPeriod()}" />
-		</p:column>
-
-		<p:column headerText="Выставление счета">
-			<p:commandButton id="btn_add" value="сформировать счет"
-				update=":contentForm" icon="ui-icon-document"
-				actionListener="#{invoiceController.add(c)}"
-				action='#{navController.setMainContent("invoice/invoice")}' />
+		<p:column headerText="След.период начисления"
+			sortBy="#{invoiceController.findNextPayPeriod(c)}"
+			filterBy="#{invoiceController.findNextPayPeriod(c)}"
+			filterMatchMode="contains">
+			<h:outputText
+				value="#{invoiceController.findNextPayPeriod(c).showPeriod()}" />
 		</p:column>
 
 	</p:dataTable>
