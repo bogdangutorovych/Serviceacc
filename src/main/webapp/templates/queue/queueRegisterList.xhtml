@@ -26,8 +26,8 @@
 	<br />
 	<p:dataTable id="queueList" editable="true"
 		tableStyle="table-layout:auto;width:100%;" emptyMessage="Нет данных"
-		var="queue" value="#{queueRegisterController.list}"
-		rowKey="#{queueRegisterController.list.indexOf(queue)}"
+		var="queue" value="#{queueRegisterListController.list}"
+		rowKey="#{queue.id}"
 		selectionMode="single" selection="#{queueRegisterController.selected}"
 		widgetVar="queueTable">
 
