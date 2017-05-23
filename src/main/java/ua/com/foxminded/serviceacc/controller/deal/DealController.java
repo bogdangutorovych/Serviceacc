@@ -35,7 +35,6 @@ public class DealController implements Serializable {
 
     @PostConstruct
     public void init() {
-        selected = new Deal();
 
     }
 

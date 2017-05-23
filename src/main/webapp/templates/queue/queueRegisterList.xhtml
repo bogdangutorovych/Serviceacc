@@ -29,6 +29,15 @@
 				disabled="#{queueRegisterController.selected==null}"
 				actionListener="#{queueRegisterController.delete()}" />
 
+			<span class="ui-separator"><span
+				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+
+			<p:commandButton id="btn_create_contract" value="Сформировать договор"
+				update=":contentForm" icon="ui-icon-document"
+				disabled="#{queueRegisterController.selected==null}"
+				actionListener="#{contractController.add(queueRegisterController.selected.deal)}"
+				action='#{navController.setMainContent("contract/contract")}' />
+
 		</f:facet>
 	</p:toolbar>
 
@@ -69,14 +78,7 @@
 			filterBy="#{queue.deal.service.name}" filterMatchMode="contains">
 			<h:outputText value="#{queue.deal.service.name}" />
 		</p:column>
-		
-		<p:column headerText="Договор">
-            <p:commandButton id="btn_add" value="Сформировать договор"
-                update=":contentForm" icon="ui-icon-document"
-                actionListener="#{contractController.add(queue.deal)}"
-                action='#{navController.setMainContent("contract/contract")}' />
-        </p:column>
-		
+
 	</p:dataTable>
 
 </ui:composition>

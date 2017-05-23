@@ -57,6 +57,7 @@ public class QueueRegisterController implements Serializable {
         selected.setDeal(deal);
         selected.setRegisterDate(LocalDate.now());
         queueRegisterService.save(selected);
+        list.add(selected);
     }
 
     public void getActualLists() {

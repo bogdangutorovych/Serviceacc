@@ -32,7 +32,7 @@ public class ContractController implements Serializable {
         this.contractService = contractService;
     }
 
-    public void addFromDeal(Deal deal) {
+    public void add(Deal deal) {
         selected = new Contract();
         selected.setDeal(deal);
         selected.setContractDate(LocalDate.now());

@@ -23,7 +23,7 @@
 			<p:commandButton id="btn_create_contract"
 				value="Сформировать договор" update=":contentForm"
 				icon="ui-icon-close"
-				actionListener="#{contractController.addFromDeal(dealController.selected)}"
+				actionListener="#{contractController.add(dealController.selected)}"
 				action='#{navController.setMainContent("contract/contract")}'
 				immediate="true" />
 
@@ -32,8 +32,8 @@
 
 			<p:commandButton id="btn_put_into_queue" value="Поставить в очередь"
 				update=":contentForm" icon="ui-icon-close"
-				actionListener="#{queueRegisterController.add(dealController.selected)}"
-				action='#{navController.setMainContent("queue/queueRegisterList")}'
+				action="#{queueRegisterController.add(dealController.selected)}"
+				actionListener='#{navController.setMainContent("queue/queueRegisterList")}'
 				immediate="true" />
 		</f:facet>
 	</p:toolbar>
