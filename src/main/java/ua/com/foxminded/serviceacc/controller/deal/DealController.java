@@ -46,13 +46,6 @@ public class DealController implements Serializable {
         selected.setService(new Service());
     }
 
-    public String showDefaultServiceNameValue() {
-        if (selected.getService().getName() == null) {
-            return "Выберите услугу";
-        }
-        return selected.getService().getName();
-    }
-
     public void onOk() {
         if (selected.getId() == null) {
             selected.getService().getPrices().add(price);
@@ -63,6 +56,10 @@ public class DealController implements Serializable {
 
     public void clearSelected() {
         selected = null;
+    }
+
+    public void delete(Deal deal) {
+        dealService.delete(deal.getId());
     }
 
     public void onCancel() {

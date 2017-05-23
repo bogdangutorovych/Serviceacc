@@ -13,8 +13,8 @@ public interface DealService {
 
     List<Deal> findAll();
 
-    List<Deal> findByClient(Client client);
-
     void delete(Long dealId);
+    
+    List<Deal> findByClient(Client client);
 
 }

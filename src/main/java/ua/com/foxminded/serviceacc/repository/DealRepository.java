@@ -8,6 +8,5 @@ import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.Deal;
 
 public interface DealRepository extends JpaRepository<Deal, Long> {
-
     List<Deal> findByClient(Client client);
 }

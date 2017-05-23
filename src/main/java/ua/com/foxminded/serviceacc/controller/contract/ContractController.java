@@ -1,6 +1,7 @@
 package ua.com.foxminded.serviceacc.controller.contract;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -12,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import ua.com.foxminded.serviceacc.model.Contract;
 import ua.com.foxminded.serviceacc.model.Deal;
+import ua.com.foxminded.serviceacc.model.Money;
 import ua.com.foxminded.serviceacc.service.ContractService;
 
 @Named
@@ -33,6 +35,8 @@ public class ContractController implements Serializable {
     public void addFromDeal(Deal deal) {
         selected = new Contract();
         selected.setDeal(deal);
+        selected.setContractDate(LocalDate.now());
+        selected.setClientRate(new Money());
     }
 
     public void onOk() {

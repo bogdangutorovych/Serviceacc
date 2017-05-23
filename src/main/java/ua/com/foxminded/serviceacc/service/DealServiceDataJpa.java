@@ -10,7 +10,7 @@ import ua.com.foxminded.serviceacc.model.Deal;
 import ua.com.foxminded.serviceacc.repository.DealRepository;
 
 @Service("dealService")
-public class DealSeviceDataJpa implements DealService {
+public class DealServiceDataJpa implements DealService {
 
     @Autowired
     DealRepository dealRepository;
@@ -21,8 +21,8 @@ public class DealSeviceDataJpa implements DealService {
     }
 
     @Override
-    public Deal findById(Long DealId) {
-        return dealRepository.findOne(DealId);
+    public Deal findById(Long dealId) {
+        return dealRepository.findOne(dealId);
     }
 
     @Override
@@ -31,13 +31,12 @@ public class DealSeviceDataJpa implements DealService {
     }
 
     @Override
-    public void delete(Long DealId) {
-        dealRepository.delete(DealId);
+    public void delete(Long dealId) {
+        dealRepository.delete(dealId);
     }
 
     @Override
     public List<Deal> findByClient(Client client) {
         return dealRepository.findByClient(client);
     }
-
 }

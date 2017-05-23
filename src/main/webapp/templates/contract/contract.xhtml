@@ -16,9 +16,12 @@
 
 	<p:toolbar>
 		<f:facet name="left">
+
 			<p:commandButton id="btn_ok" value="Ok" update=":contentForm"
 				icon="ui-icon-check" actionListener="#{contractController.onOk()}"
-				action='#{navController.setMainContent("contract/contractList")}' />
+				action='#{navController.setMainContent("contract/contractList")}'>
+			</p:commandButton>
+
 			<span class="ui-separator"><span
 				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
@@ -37,26 +40,26 @@
 			style="font-weight:bold" />
 		<p:calendar id="date" converter="localDateConverter"
 			pattern="dd.MM.yyyy"
-			value="#{contractController.selectedContract.contractDate}"
-			showOn="button" mask="99.99.9999" required="true"
+			value="#{contractController.selected.contractDate}" showOn="button"
+			mask="99.99.9999" required="true"
 			requiredMessage="Выберите дату договора">
 		</p:calendar>
 
 		<h:outputLabel for="service" value="Услуга: " style="font-weight:bold" />
 		<p:inputText id="service"
-			value="#{contractController.selectedContract.deal.service.name}"
+			value="#{contractController.selected.deal.service.name}"
 			disabled="true" />
 
 		<h:outputLabel for="amount" value="Сумма договора: "
 			style="font-weight:bold" />
 		<p:inputText id="amount"
-			value="#{contractController.selectedContract.clientRate.amount}"
+			value="#{contractController.selected.clientRate.amount}"
 			disabled="false" />
 
 		<p:outputLabel for="currency" value="Валюта договора: "
 			style="font-weight:bold" />
 		<p:selectOneMenu id="currency"
-			value="#{contractController.selectedContract.clientRate.currency}"
+			value="#{contractController.selected.clientRate.currency}"
 			required="true" requiredMessage="Выберите валюту"
 			converter="omnifaces.SelectItemsConverter">
 			<f:selectItem itemLabel="Выбрать валюту договора..."
@@ -65,19 +68,17 @@
 				itemLabel="#{currencyEnum}" />
 		</p:selectOneMenu>
 
-		<h:outputLabel for="client" value="Клиент: "
-			style="font-weight:bold" />
+		<h:outputLabel for="client" value="Клиент: " style="font-weight:bold" />
 		<p:inputText id="number"
-			value="#{contractController.selectedContract.deal.client}"
-			disabled="true" />
+			value="#{contractController.selected.deal.client}" disabled="true" />
 
 		<p:outputLabel for="manager" value="Ментор: " style="font-weight:bold" />
 		<p:selectOneMenu id="manager"
-			value="#{contractController.selectedContract.manager}"
-			required="true" requiredMessage="Выберите ментора"
+			value="#{contractController.selected.manager}" required="true"
+			requiredMessage="Выберите ментора"
 			converter="omnifaces.SelectItemsConverter">
 			<f:selectItem itemLabel="Выбрать ментора..." noSelectionOption="true" />
-			<f:selectItems value="#{contractController.availableManagers}"
+			<f:selectItems value="#{managerListController.managerList}"
 				var="manager" itemLabel="#{manager.firstName} #{manager.lastName}"
 				itemValue="#{manager}" />
 		</p:selectOneMenu>
@@ -85,8 +86,8 @@
 		<p:outputLabel for="contractStatus" value="Статус договора: "
 			style="font-weight:bold" />
 		<p:selectOneMenu id="contractStatus"
-			value="#{contractController.selectedContract.contractStatus}"
-			required="true" requiredMessage="Выберите статус договора"
+			value="#{contractController.selected.contractStatus}" required="true"
+			requiredMessage="Выберите статус договора"
 			converter="omnifaces.SelectItemsConverter">
 			<f:selectItem itemLabel="Выбрать статус договора..."
 				noSelectionOption="true" />
@@ -97,8 +98,8 @@
 		<p:outputLabel for="contractType" value="Тип договора: "
 			style="font-weight:bold" />
 		<p:selectOneMenu id="contractType"
-			value="#{contractController.selectedContract.contractType}"
-			required="true" requiredMessage="Выберите тип договора"
+			value="#{contractController.selected.contractType}" required="true"
+			requiredMessage="Выберите тип договора"
 			converter="omnifaces.SelectItemsConverter">
 			<f:selectItem itemLabel="Выбрать тип договора..."
 				noSelectionOption="true" />
@@ -108,9 +109,9 @@
 
 		<h:outputText value="Пробный период" />
 		<p:selectBooleanCheckbox
-			value="#{contractController.selectedContract.isTrial}">
+			value="#{contractController.selected.isTrial}">
 			<p:ajax update=":contentForm"
-				listener="#{contractController.selectedContract.isTrial}" />
+				listener="#{contractController.selected.isTrial}" />
 		</p:selectBooleanCheckbox>
 
 
