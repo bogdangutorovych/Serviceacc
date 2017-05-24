@@ -20,6 +20,8 @@
 			<p:commandButton id="btn_ok" value="Ok" update=":contentForm"
 				icon="ui-icon-check" actionListener="#{contractController.onOk()}"
 				action='#{navController.setMainContent("contract/contractList")}'>
+				<f:actionListener
+					binding="#{queueRegisterController.delete()}" />
 			</p:commandButton>
 
 			<span class="ui-separator"><span

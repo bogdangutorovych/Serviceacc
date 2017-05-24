@@ -3,8 +3,8 @@ package ua.com.foxminded.serviceacc.controller.invoice;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.slf4j.Logger;
@@ -17,7 +17,6 @@ import ua.com.foxminded.serviceacc.service.InvoiceService;
 
 @Named
 @ViewScoped
-@ManagedBean
 public class InvoiceController implements Serializable {
 
     private static final Logger log = LoggerFactory.getLogger(InvoiceController.class);
@@ -28,6 +27,7 @@ public class InvoiceController implements Serializable {
     private Period period;
     private InvoiceService invoiceService;
 
+    @Inject
     public InvoiceController(InvoiceService invoiceService) {
         this.invoiceService = invoiceService;
     }

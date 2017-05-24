@@ -4,8 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -17,7 +16,6 @@ import ua.com.foxminded.serviceacc.service.ContractService;
 
 @Named
 @RequestScoped
-@ManagedBean
 public class ContractListController implements Serializable {
 
     private static Logger logger = LoggerFactory.getLogger(ContractListController.class);

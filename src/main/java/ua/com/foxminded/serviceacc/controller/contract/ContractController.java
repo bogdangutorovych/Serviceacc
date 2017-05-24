@@ -3,8 +3,7 @@ package ua.com.foxminded.serviceacc.controller.contract;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -18,7 +17,6 @@ import ua.com.foxminded.serviceacc.service.ContractService;
 
 @Named
 @ViewScoped
-@ManagedBean
 public class ContractController implements Serializable {
 
     private static Logger logger = LoggerFactory.getLogger(ContractController.class);

@@ -4,8 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -20,8 +19,7 @@ import ua.com.foxminded.serviceacc.service.ClientService;
  */
 
 @Named
-@ViewScoped
-@ManagedBean
+@RequestScoped
 public class ClientListController implements Serializable {
 
     private static final Logger log = LoggerFactory.getLogger(ClientListController.class);

@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.slf4j.Logger;
@@ -17,7 +17,6 @@ import ua.com.foxminded.serviceacc.service.InvoiceService;
 
 @Named
 @RequestScoped
-@ManagedBean
 public class InvoiceListController implements Serializable {
 
     private static final Logger log = LoggerFactory.getLogger(InvoiceListController.class);
@@ -28,6 +27,7 @@ public class InvoiceListController implements Serializable {
 
     private InvoiceService invoiceService;
 
+    @Inject
     public InvoiceListController(InvoiceService invoiceService) {
         this.invoiceService = invoiceService;
     }

@@ -3,8 +3,8 @@ package ua.com.foxminded.serviceacc.controller.deal;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.slf4j.Logger;
@@ -18,7 +18,6 @@ import ua.com.foxminded.serviceacc.service.DealService;
 
 @Named
 @ViewScoped
-@ManagedBean
 public class DealController implements Serializable {
 
     private static final Logger log = LoggerFactory.getLogger(DealController.class);
@@ -29,6 +28,7 @@ public class DealController implements Serializable {
     private DealService dealService;
     private Money price;
 
+    @Inject
     public DealController(DealService dealService) {
         this.dealService = dealService;
     }

@@ -9,15 +9,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Loader;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 @Entity
 @Table(name = "queue_register")
 @SQLDelete(sql = "UPDATE queue_register SET is_deleted = true WHERE id = ?")
+@Loader(namedQuery = "findQueueRegisterById")
+@NamedQuery(name = "findQueueRegisterById", query = "FROM QueueRegister WHERE id = ?1 AND isDeleted = false")
+@Where(clause = "is_deleted = false")
 public class QueueRegister {
 
     @Id

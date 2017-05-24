@@ -7,49 +7,31 @@
 	<p:toolbar>
 
 		<f:facet name="left">
-			<p:commandButton id="btn_add" value="Добавить" update=":contentForm"
-				icon="ui-icon-document"
-				actionListener="#{queueRegisterController.add()}"
-				action='#{navController.setMainContent("queue/queueRegister")}' />
-
-			<span class="ui-separator"><span
-				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
-
-			<p:commandButton id="btn_edit" value="Редактировать"
-				update=":contentForm" icon="ui-icon-pencil"
-				disabled="#{queueRegisterController.selected==null}"
-				actionListener="#{queueRegisterController.getActualLists()}"
-				action='#{navController.setMainContent("queue/queueRegister")}' />
-
-			<span class="ui-separator"><span
-				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
-
 			<p:commandButton id="btn_delete" value="Удалить"
 				update=":contentForm" icon="ui-icon-trash"
-				disabled="#{queueRegisterController.selected==null}"
-				actionListener="#{queueRegisterController.delete()}" />
+				disabled='#{queueRegisterController.selected==null}'
+				actionListener="#{queueRegisterController.delete()}"/>
 
 			<span class="ui-separator"><span
 				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
 			<p:commandButton id="btn_create_contract" value="Сформировать договор"
-				update=":contentForm" icon="ui-icon-document"
-				disabled="#{queueRegisterController.selected==null}"
+				update=":contentForm" icon="ui-icon-trash"
+				disabled='#{queueRegisterController.selected==null}'
 				actionListener="#{contractController.add(queueRegisterController.selected.deal)}"
-				action='#{navController.setMainContent("contract/contract")}' />
-
+				action='#{navController.setMainContent("contract/contract")}'/>
 		</f:facet>
 	</p:toolbar>
 
 	<br />
-	<p:dataTable id="queue" editable="true"
+	<p:dataTable id="queueList" editable="true"
 		tableStyle="table-layout:auto;width:100%;" emptyMessage="Нет данных"
-		var="queue" value="#{queueRegisterController.list}"
-		rowKey="#{queueRegisterController.list.indexOf(queue)}"
+		var="queue" value="#{queueRegisterListController.list}"
+		rowKey="#{queue.id}"
 		selectionMode="single" selection="#{queueRegisterController.selected}"
 		widgetVar="queueTable">
 
-		<f:facet name="header" style="text-align:center">Очередь
+		<f:facet name="header" style="text-align:center">Счета
         <p:outputPanel>
 				<h:outputText value="Искать везде: " />
 				<p:inputText id="globalFilter" onkeyup="PF('queueTable').filter()"
@@ -57,27 +39,27 @@
 			</p:outputPanel>
 		</f:facet>
 
-		<p:ajax event="rowSelect" update="@form:btn_edit,@form:btn_delete"
+		<p:ajax event="rowSelect" update="@form:btn_delete,@form:btn_create_contract"
 			immediate="true" />
-		<p:ajax event="rowUnselect" update="@form:btn_edit,@form:btn_delete"
+		<p:ajax event="rowUnselect" update="@form:btn_delete,@form:btn_create_contract"
 			immediate="true" />
 
 		<p:column headerText="дата" sortBy="registerDate"
-			filterBy="#{queue.registerDate}" filterMatchMode="contains">
-			<h:outputText value="#{queue.registerDate}"
-				converter="localDateConverter" pattern="dd.MM.yyyy" />
-		</p:column>
+            filterBy="#{queue.registerDate}" filterMatchMode="contains">
+            <h:outputText value="#{queue.registerDate}"
+                converter="localDateConverter" pattern="dd.MM.yyyy" />
+        </p:column>
 
-		<p:column headerText="клиент" sortBy="#{queue.deal.client}"
-			filterBy="#{queue.deal.client}" filterMatchMode="contains"
-			converter="omnifaces.SelectItemsConverter">
-			<h:outputText value="#{queue.deal.client}" />
-		</p:column>
+        <p:column headerText="клиент" sortBy="#{queue.deal.client}"
+            filterBy="#{queue.deal.client}" filterMatchMode="contains"
+            converter="omnifaces.SelectItemsConverter">
+            <h:outputText value="#{queue.deal.client}" />
+        </p:column>
 
-		<p:column headerText="услуга" sortBy="#{queue.deal.service.name}"
-			filterBy="#{queue.deal.service.name}" filterMatchMode="contains">
-			<h:outputText value="#{queue.deal.service.name}" />
-		</p:column>
+        <p:column headerText="услуга" sortBy="#{queue.deal.service.name}"
+            filterBy="#{queue.deal.service.name}" filterMatchMode="contains">
+            <h:outputText value="#{queue.deal.service.name}" />
+        </p:column>
 
 	</p:dataTable>
 
