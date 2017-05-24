@@ -42,24 +42,37 @@ public class Salary {
     @JoinColumn(name = "money_id")
     private Money amount;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<WorkStatement> salaryItems = new HashSet<>();
-
+    @OneToMany(mappedBy = "salary", 
+            fetch = FetchType.LAZY, 
+            orphanRemoval = true,
+            cascade = CascadeType.ALL)
+    private Set<WorkStatement> workStatements = new HashSet<>();
+    
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
 
+    public void addWorkStatement(WorkStatement workStatement) {
+        workStatements.add(workStatement);
+        workStatement.setSalary(this);
+    }
+    
+    public void removeWorkStatement(WorkStatement workStatement) {
+        workStatements.remove(workStatement);
+        workStatement.setSalary(null);
+    }
+    
     public Salary() {
 
     }
 
-    
-    public Salary(Long id, LocalDate date, Manager manager, Money amount, Set<WorkStatement> salaryItems, boolean isDeleted) {
+    public Salary(Long id, LocalDate date, Manager manager, 
+            Money amount, Set<WorkStatement> workStatements, boolean isDeleted) {
         super();
         this.id = id;
         this.date = date;
         this.manager = manager;
         this.amount = amount;
-        this.salaryItems = salaryItems;
+        this.workStatements = workStatements;
         this.isDeleted = isDeleted;
     }
 
@@ -95,12 +108,12 @@ public class Salary {
         this.amount = amount;
     }
 
-    public Set<WorkStatement> getSalaryItems() {
-        return salaryItems;
+    public Set<WorkStatement> getWorkStatements() {
+        return workStatements;
     }
 
-    public void setSalaryItems(Set<WorkStatement> salaryItems) {
-        this.salaryItems = salaryItems;
+    public void setWorkStatements(Set<WorkStatement> workStatements) {
+        this.workStatements = workStatements;
     }
 
     public boolean isDeleted() {

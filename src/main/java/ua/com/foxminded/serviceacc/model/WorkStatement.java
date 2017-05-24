@@ -50,6 +50,10 @@ public class WorkStatement {
     @JoinColumn(name = "period_id")
     private Period period;
     
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "salary_id")
+    Salary salary;
+    
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
 
@@ -110,5 +114,25 @@ public class WorkStatement {
 
     public void setInvoice(Invoice invoice) {
         this.invoice = invoice;
+    }
+
+    public Salary getSalary() {
+        return salary;
+    }
+
+    public void setSalary(Salary salary) {
+        this.salary = salary;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof WorkStatement )) return false;
+        return id != null && id.equals(((WorkStatement) o).id);
+    }
+    
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 }

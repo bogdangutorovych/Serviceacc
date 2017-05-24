@@ -3,10 +3,17 @@ package ua.com.foxminded.serviceacc.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import ua.com.foxminded.serviceacc.model.Manager;
 import ua.com.foxminded.serviceacc.model.WorkStatement;
 
 public interface WorkStatementRepository extends JpaRepository<WorkStatement, Long>{
     List<WorkStatement> findByManager(Manager manager);
+    
+    @Query(value = "select workStatement from WorkStatement workStatement "
+            + "where workStatement is not null and "
+            + "workStatement.payStatus = 'PAID' and "
+            + "workStatement.salary is null")
+    List<WorkStatement> findPaidNotInSalary();
 }
