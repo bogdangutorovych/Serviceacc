@@ -4,8 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
 import org.slf4j.Logger;
@@ -16,7 +15,6 @@ import ua.com.foxminded.serviceacc.service.DealService;
 
 @Named
 @RequestScoped
-@ManagedBean
 public class DealListController implements Serializable {
 
     private static final Logger log = LoggerFactory.getLogger(DealListController.class);

@@ -4,78 +4,74 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.primefaces.event.RowEditEvent;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 
 import ua.com.foxminded.serviceacc.model.ClientInformationType;
 import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
 
-@Controller
-@ManagedBean
-@ViewScoped
+@Named
+@javax.faces.view.ViewScoped
 public class ClientInformationTypeController implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private ClientInformationType selected;
+    private ClientInformationType selected;
 
-	private static List<ClientInformationType> clientInformationTypeList;
+    private static List<ClientInformationType> clientInformationTypeList;
 
-	private ClientInformationTypeService clientInformationTypeService;
-
-    @Autowired
+    private ClientInformationTypeService clientInformationTypeService;
     private ConfigController configController;
 
-	@Autowired
-	public ClientInformationTypeController(ClientInformationTypeService cltService) {
-		this.clientInformationTypeService = cltService;
-	}
+    @Inject
+    public ClientInformationTypeController(ClientInformationTypeService cltService, ConfigController configController) {
+        this.clientInformationTypeService = cltService;
+        this.configController = configController;
+    }
 
-	@PostConstruct
-	public void init() {
-		clientInformationTypeList = configController.getClientInformationTypeList();
-	}
+    @PostConstruct
+    public void init() {
+        clientInformationTypeList = configController.getClientInformationTypeList();
+    }
 
-	public ClientInformationTypeService getClientInformationTypeService() {
-		return clientInformationTypeService;
-	}
+    public ClientInformationTypeService getClientInformationTypeService() {
+        return clientInformationTypeService;
+    }
 
-	public List<ClientInformationType> getClientInformationTypeList() {
-		return clientInformationTypeList;
-	}
+    public List<ClientInformationType> getClientInformationTypeList() {
+        return clientInformationTypeList;
+    }
 
-	public ClientInformationType getSelected() {
-		return selected;
-	}
+    public ClientInformationType getSelected() {
+        return selected;
+    }
 
-	public void setSelected(ClientInformationType selected) {
-		this.selected = selected;
-	}
+    public void setSelected(ClientInformationType selected) {
+        this.selected = selected;
+    }
 
-	public void add() {
-		selected = new ClientInformationType("", "");
-		clientInformationTypeList.add(selected);
-	}
+    public void add() {
+        selected = new ClientInformationType("", "");
+        clientInformationTypeList.add(selected);
+    }
 
-	public void delete() {
+    public void delete() {
         configController.deleteClientInformationType(selected.getId());
         clientInformationTypeList.remove(selected);
-		selected = null;
-	}
+        selected = null;
+    }
 
-	public void onRowEdit(RowEditEvent event) {
-		configController.saveClientInformationType((ClientInformationType) event.getObject());
-		selected = null;
-	}
+    public void onRowEdit(RowEditEvent event) {
+        configController.saveClientInformationType((ClientInformationType) event.getObject());
+        selected = null;
+    }
 
-	public void onRowCancel(RowEditEvent event) {
-		ClientInformationType info = (ClientInformationType) event.getObject();
-		if (info.getId() == null) {
-			clientInformationTypeList.remove(info);
-			selected = null;
-		}
-	}
+    public void onRowCancel(RowEditEvent event) {
+        ClientInformationType info = (ClientInformationType) event.getObject();
+        if (info.getId() == null) {
+            clientInformationTypeList.remove(info);
+            selected = null;
+        }
+    }
 }

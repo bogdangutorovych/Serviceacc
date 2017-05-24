@@ -3,11 +3,9 @@ package ua.com.foxminded.serviceacc.controller.catalogue;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.context.annotation.ApplicationScope;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import ua.com.foxminded.serviceacc.model.ClientInformationType;
 import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
@@ -17,13 +15,16 @@ import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
  * is up
  *
  */
-@Controller
-@ManagedBean
-@ApplicationScope
+@Named
+@ApplicationScoped
 public class ConfigController {
 
-    @Autowired
     ClientInformationTypeService clientInformationTypeService;
+
+    @Inject
+    public ConfigController(ClientInformationTypeService clientInformationTypeService) {
+        this.clientInformationTypeService = clientInformationTypeService;
+    }
 
     private List<ClientInformationType> clientInformationTypeList;
 

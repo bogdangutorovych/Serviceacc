@@ -1,10 +1,10 @@
 package ua.com.foxminded.serviceacc.controller;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 
 /** Created by Grischenko Maxim on 11.04.17. */
-@ManagedBean
+@Named
 @SessionScoped
 public class NavController {
 
@@ -17,5 +17,5 @@ public class NavController {
     public void setMainContent(String mainContent) {
         this.mainContent = "/templates/" + mainContent + ".xhtml";
     }
-    
+
 }

@@ -1,12 +1,13 @@
 package ua.com.foxminded.serviceacc.controller;
 
-import org.springframework.stereotype.Controller;
+import javax.inject.Named;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Created by andreb on 08.04.17.
  */
-@Controller
+@Named
 public class HomeController {
     @RequestMapping("/")
     public String home() {

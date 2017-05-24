@@ -2,7 +2,7 @@ package ua.com.foxminded.serviceacc.controller.period;
 
 import java.io.Serializable;
 
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 

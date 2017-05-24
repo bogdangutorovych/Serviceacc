@@ -3,7 +3,7 @@ package ua.com.foxminded.serviceacc.controller.queue;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
