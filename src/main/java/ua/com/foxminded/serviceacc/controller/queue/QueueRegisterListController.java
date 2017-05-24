@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.slf4j.Logger;
@@ -24,6 +25,7 @@ public class QueueRegisterListController implements Serializable {
 
     private QueueRegisterService queueRegisterService;
 
+    @Inject
     public QueueRegisterListController(QueueRegisterService queueRegisterService) {
         this.queueRegisterService = queueRegisterService;
     }

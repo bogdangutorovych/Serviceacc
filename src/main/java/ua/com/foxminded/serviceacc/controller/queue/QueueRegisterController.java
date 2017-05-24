@@ -3,8 +3,8 @@ package ua.com.foxminded.serviceacc.controller.queue;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.slf4j.Logger;
@@ -16,7 +16,6 @@ import ua.com.foxminded.serviceacc.service.QueueRegisterService;
 
 @Named
 @ViewScoped
-@ManagedBean
 public class QueueRegisterController implements Serializable {
 
     private static final Logger log = LoggerFactory.getLogger(QueueRegisterController.class);
@@ -26,6 +25,7 @@ public class QueueRegisterController implements Serializable {
     private QueueRegister selected;
     private QueueRegisterService queueRegisterService;
 
+    @Inject
     public QueueRegisterController(QueueRegisterService queueRegisterService) {
         this.queueRegisterService = queueRegisterService;
     }

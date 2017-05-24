@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -21,7 +20,6 @@ import ua.com.foxminded.serviceacc.service.ServiceService;
  */
 @Named
 @ViewScoped
-@ManagedBean
 public class ServiceListController implements Serializable {
 
     private static final long serialVersionUID = 1L;

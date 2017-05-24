@@ -2,8 +2,8 @@ package ua.com.foxminded.serviceacc.controller.period;
 
 import java.io.Serializable;
 
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.slf4j.Logger;
@@ -14,7 +14,6 @@ import ua.com.foxminded.serviceacc.service.PeriodService;
 
 @Named
 @ViewScoped
-@ManagedBean
 public class PeriodController implements Serializable {
 
     private static final Logger log = LoggerFactory.getLogger(PeriodController.class);
@@ -24,6 +23,7 @@ public class PeriodController implements Serializable {
     private Period selected;
     private PeriodService periodService;
 
+    @Inject
     public PeriodController(PeriodService periodService) {
         this.periodService = periodService;
     }
@@ -33,7 +33,7 @@ public class PeriodController implements Serializable {
     }
 
     public void onOk() {
-            selected = periodService.save(selected);
+        selected = periodService.save(selected);
     }
 
     public void clearSelected() {
