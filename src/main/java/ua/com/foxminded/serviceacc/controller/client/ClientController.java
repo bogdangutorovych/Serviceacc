@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -23,7 +22,7 @@ import ua.com.foxminded.serviceacc.service.ClientService;
 import ua.com.foxminded.serviceacc.service.DealService;
 
 @Named
-@RequestScoped
+@ViewScoped
 public class ClientController implements Serializable {
 
     private static final Logger log = LoggerFactory.getLogger(ClientController.class);
@@ -46,11 +45,6 @@ public class ClientController implements Serializable {
         this.clientInformationService = clientInformationService;
         this.configController = configController;
         this.dealService = dealService;
-    }
-
-    @PostConstruct
-    public void init() {
-        clientDeals = dealService.findByClient(selectedClient);
     }
 
     public void add() {
@@ -121,7 +115,7 @@ public class ClientController implements Serializable {
     }
 
     public List<Deal> getClientDeals() {
-        return clientDeals;
+        return dealService.findByClient(selectedClient);
     }
 
     public void setClientDeals(List<Deal> clientDeals) {

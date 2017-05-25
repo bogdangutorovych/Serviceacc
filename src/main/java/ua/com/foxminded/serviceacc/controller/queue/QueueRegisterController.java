@@ -42,8 +42,10 @@ public class QueueRegisterController implements Serializable {
     }
 
     public void delete() {
-        queueRegisterService.delete(selected.getId());
-        selected = null;
+        if (selected != null) {
+            queueRegisterService.delete(selected.getId());
+            selected = null;
+        }
     }
 
     public void onCancel() {

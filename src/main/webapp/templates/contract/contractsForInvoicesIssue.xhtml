@@ -17,12 +17,12 @@
 	<br />
 	<p:dataTable id="contractList" editable="true"
 		tableStyle="table-layout:auto;width:100%;" emptyMessage="Нет данных"
-		var="c" value="#{contractListController.list}"
-		rowKey="#{contractListController.list.indexOf(c)}"
+		var="c" value="#{contractListController.findContractsForInvoiceCreation()}"
+		rowKey="#{c.id}"
 		selectionMode="single" selection="#{contractController.selected}"
 		widgetVar="contractTable">
 
-		<f:facet name="header" style="text-align:center">Договора
+		<f:facet name="header" style="text-align:center">Выставление счетов
 		<p:outputPanel>
 				<h:outputText value="Искать везде: " />
 				<p:inputText id="globalFilter"
@@ -60,11 +60,6 @@
 		<p:column headerText="статус" sortBy="#{c.contractStatus}"
 			filterBy="#{c.contractStatus}" filterMatchMode="contains">
 			<h:outputText value="#{c.contractStatus}" />
-		</p:column>
-
-		<p:column headerText="Пробный период" sortBy="#{c.isTrial}"
-			filterBy="#{c.isTrial}" filterMatchMode="contains">
-			<h:outputText value="#{c.isTrial}" />
 		</p:column>
 
 		<p:column headerText="Клиент" sortBy="#{c.deal.client}"

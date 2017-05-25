@@ -1,7 +1,6 @@
 package ua.com.foxminded.serviceacc.controller.invoice;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -13,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import ua.com.foxminded.serviceacc.model.Contract;
 import ua.com.foxminded.serviceacc.model.Invoice;
 import ua.com.foxminded.serviceacc.model.Period;
+import ua.com.foxminded.serviceacc.model.enums.InvoiceType;
 import ua.com.foxminded.serviceacc.service.InvoiceService;
 
 @Named
@@ -32,13 +32,27 @@ public class InvoiceController implements Serializable {
         this.invoiceService = invoiceService;
     }
 
-    public void add(Contract contract) {
+    public Invoice prepareForSaving(Contract contract) {
         init();
         selected.setContract(contract);
-        selected.setPeriod(period);
-        selected.setDate(LocalDate.now());
+        selected.setDate(contract.getContractDate());
         selected.setPeriod(findNextPayPeriod(contract));
         selected.setPrice(contract.getClientRate());
+        selected.setInvoiceType(InvoiceType.NEW);
+        return selected;
+    }
+
+    public void add(Contract contract) {
+        if (contract.getIsTrial() == false) {
+            prepareForSaving(contract);
+        }
+    }
+
+    public void createInvoiceWithinContractCreation(Contract contract) {
+        if (contract.getIsTrial() == false) {
+            add(contract);
+            onOk();
+        }
     }
 
     public Invoice findLatestInvoice(Contract contract) {
@@ -46,11 +60,13 @@ public class InvoiceController implements Serializable {
     }
 
     public Period findNextPayPeriod(Contract contract) {
+        Period nextPayPeriod = new Period();
         Invoice latestInvoice = findLatestInvoice(contract);
         if (latestInvoice == null) {
-            return null;
+            nextPayPeriod.setDateFrom(contract.getContractDate());
+            nextPayPeriod.setDateTo(nextPayPeriod.getDateFrom().plusMonths(1).minusDays(1));
+            return nextPayPeriod;
         }
-        Period nextPayPeriod = new Period();
         nextPayPeriod.setDateFrom(latestInvoice.getPeriod().getDateTo().plusDays(1));
         nextPayPeriod.setDateTo(latestInvoice.getPeriod().getDateTo().plusMonths(1));
         return nextPayPeriod;

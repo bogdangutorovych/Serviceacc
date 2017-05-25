@@ -31,8 +31,11 @@ INSERT INTO MONEY (id, amount, currency, is_deleted) VALUES
 (11, 1500, 'UAH', false),
 (12, 1500, 'UAH', false),
 (13, 1500, 'UAH', false),
-(14, 3000, 'UAH', false);
-ALTER SEQUENCE money_id_seq RESTART WITH 15;
+(14, 3000, 'UAH', false),
+(15, 3000, 'UAH', false),
+(16, 3000, 'UAH', false),
+(17, 3000, 'UAH', false);
+ALTER SEQUENCE money_id_seq RESTART WITH 18;
 
 INSERT INTO SERVICE (id, name, description, manager_rate_id, is_deleted) VALUES
 (1, 'менторинг', 'обучение студента идет на заданиях и анализе их выполнения', 7, false),
@@ -50,12 +53,12 @@ INSERT INTO DEAL (id, client_id, service_id, is_deleted) VALUES
 (5, 8, 1, false);
 ALTER SEQUENCE deal_id_seq RESTART WITH 6;
 
-INSERT INTO CONTRACT (id, number, contract_date, deal_id, client_rate, manager_rate, manager_id, contract_status, is_deleted, is_trial, contract_type) VALUES
-(1, '1', '2017-01-01', 1, 1, 7, 1, 'ACTIVE', false, false, 'POSTPAID'),
-(2, '2', '2017-02-28', 2, 2, 8, 2, 'ACTIVE', false, false, 'POSTPAID'),
-(3, '3', '2017-04-25', 3, 3, 9, 3, 'FROZEN', false, false, 'POSTPAID'),
-(4, '4', '2017-04-30', 4, 4, 10, 3, 'CLOSED', false, false, 'PREPAID'),
-(5, '5', '2017-05-10', 4, 5, 11, 3, 'ACTIVE', false, false, 'PREPAID');
+INSERT INTO CONTRACT (id, number, contract_date, deal_id, client_rate, manager_rate, manager_id, contract_status, is_deleted, is_trial, contract_type, close_date) VALUES
+(1, '1', '2017-01-01', 1, 1, 7, 1, 'ACTIVE', false, false, 'POSTPAID', NULL),
+(2, '2', '2017-02-28', 2, 4, 8, 2, 'ACTIVE', false, false, 'POSTPAID', NULL),
+(3, '3', '2017-04-10', 3, 14, 9, 3, 'FROZEN', false, false, 'POSTPAID', NULL),
+(4, '4', '2017-03-15', 4, 15, 10, 3, 'CLOSED', false, false, 'PREPAID', '2017-05-15'),
+(5, '5', '2017-05-10', 4, 16, 11, 3, 'ACTIVE', false, false, 'PREPAID', NULL);
 ALTER SEQUENCE contract_id_seq RESTART WITH 6;
 
 INSERT INTO QUEUE_REGISTER (id, register_date, deal_id, after_freezing, is_deleted) VALUES
@@ -106,27 +109,34 @@ INSERT INTO MANAGER_INFO (id, content, info_type_id, manager_id, is_deleted) VAL
 ALTER SEQUENCE manager_info_seq RESTART WITH 11;
 
 INSERT INTO PAYMENT (id, date, money_id, payment_type, is_deleted) VALUES
-(1, '2017-01-14', 1, 'CASH', false),
-(2, '2017-02-14', 1, 'BANK', false),
-(3, '2017-03-14', 1, 'UNISTREAM', false);
-ALTER SEQUENCE payment_id_seq RESTART WITH 4;
+(1, '2017-02-02', 1, 'CASH', false),
+(2, '2017-03-03', 1, 'BANK', false),
+(3, '2017-04-02', 1, 'UNISTREAM', false),
+(4, '2017-03-30', 1, 'UNISTREAM', false),
+(5, '2017-03-17', 1, 'UNISTREAM', false);
+ALTER SEQUENCE payment_id_seq RESTART WITH 6;
 
 INSERT INTO PERIOD (id, date_from, date_to) VALUES
-(1, '2017-01-14', '2017-02-13'),
-(2, '2017-02-12', '2017-03-11'),
-(3, '2017-03-04', '2017-04-03'),
-(4, '2017-04-25', '2017-05-24'),
-(5, '2017-05-09', '2017-06-08'),
-(6, '2017-06-09', '2017-07-08'),
-(7, '2017-07-09', '2017-08-08');
-ALTER SEQUENCE period_id_seq RESTART WITH 8;
+(1, '2017-01-01', '2017-01-31'),
+(2, '2017-02-01', '2017-02-28'),
+(3, '2017-03-01', '2017-03-31'),
+(4, '2017-04-01', '2017-04-30'),
+(5, '2017-02-28', '2017-03-27'),
+(6, '2017-03-28', '2017-04-27'),
+(7, '2017-03-15', '2017-04-14'),
+(8, '2017-03-15', '2017-04-14'),
+(9, '2017-05-10', '2017-06-09');
+ALTER SEQUENCE period_id_seq RESTART WITH 10;
 
 INSERT INTO INVOICE (id, number, date, contract_id, money_id, invoice_type, payment_id, period_id, is_deleted) VALUES
-(1, 'inv# 1', '2017-01-01', 1, 1, 'NEW', NULL, 1, false),
-(2, 'inv# 2', '2017-02-01', 2, 2, 'NEW', NULL, 2, false),
-(3, 'inv# 3', '2017-03-01', 3, 3, 'PAID', 1, 3, false),
-(4, 'inv# 4', '2017-04-01', 4, 4, 'PAID', 2, 4, false),
-(5, 'inv# 5', '2017-02-01', 5, 5, 'PAID', 3, 5, false),
-(6, 'inv# 6', '2017-03-01', 5, 6, 'PAID', 3, 6, false),
-(7, 'inv# 7', '2017-04-01', 5, 7, 'PAID', 3, 7, false);
-ALTER SEQUENCE invoice_id_seq RESTART WITH 8;
+(1, 'inv# 1', '2017-01-01', 1, 1, 'PAID', 1, 1, false),
+(2, 'inv# 2', '2017-02-01', 1, 1, 'PAID', 2, 2, false),
+(3, 'inv# 3', '2017-03-01', 1, 1, 'PAID', 3, 3, false),
+(4, 'inv# 4', '2017-04-01', 1, 1, 'NEW', NULL, 4, false),
+(5, 'inv# 5', '2017-02-28', 2, 1, 'PAID', 4, 5, false),
+(6, 'inv# 6', '2017-03-28', 2, 1, 'NEW', NULL, 6, false),
+(7, 'inv# 7', '2017-03-15', 4, 1, 'PAID', 5, 7, false),
+(8, 'inv# 8', '2017-04-10', 3, 1, 'NEW', NULL, 8, false),
+(9, 'inv# 9', '2017-05-10', 5, 1, 'NEW', NULL, 9, false);
+
+ALTER SEQUENCE invoice_id_seq RESTART WITH 10;

@@ -56,6 +56,12 @@
 				converter="localDateConverter" pattern="dd.MM.yyyy" />
 		</p:column>
 
+		<p:column headerText="дата закрытия" sortBy="#{c.closeDate}"
+			filterBy="#{c.closeDate}" filterMatchMode="contains">
+			<h:outputText value="#{c.closeDate}"
+				converter="localDateConverter" pattern="dd.MM.yyyy" />
+		</p:column>
+
 		<p:column headerText="услуга" sortBy="#{c.deal.service.name}"
 			filterBy="#{c.deal.service.name}" filterMatchMode="contains">
 			<h:outputText value="#{c.deal.service.name}" />
