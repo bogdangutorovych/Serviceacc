@@ -102,9 +102,7 @@ public class ManagerController implements Serializable {
     }
 
     public List<Client> fetchClients(Manager manager){
-        List<Client> clients = managerService.findClients(manager);
-        log.debug("Fetch Clients by Manager: " + clients);
-        return clients;
+        return managerService.findClients(manager);
     }
 
 	public void setSelectedManager(Manager selectedManager) {
