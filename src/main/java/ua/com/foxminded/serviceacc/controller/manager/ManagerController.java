@@ -14,6 +14,7 @@ import javax.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.Manager;
 import ua.com.foxminded.serviceacc.model.ManagerInformation;
 import ua.com.foxminded.serviceacc.model.ManagerInformationType;
@@ -101,7 +102,11 @@ public class ManagerController implements Serializable {
         return managerInfo;
     }
 
-
+    public List<Client> fetchClients(Manager manager){
+        List<Client> clients = managerService.findClients(manager);
+        log.debug("Fetch Clients by Manager: " + clients);
+        return clients;
+    }
 
 	public void setSelectedManager(Manager selectedManager) {
 		this.selectedManager = selectedManager;
