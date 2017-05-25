@@ -54,26 +54,8 @@ public class ManagerCapacityBean implements Serializable{
      *  This method do calculate of workload by manager
      *  Return array of 2 numbers: current load and capacity count by manager2
      */
-    public String workload(Manager manager){
-        int[] workload = new int[2];
-        ManagerInformation capacity = managerInformationService.findByTypeAndManager(clientsLimitType, manager);
-        log.debug("workload capacity: " + capacity);
-        int capacityCount = -1;
-
-        try{
-            if(capacity != null){
-                capacityCount = Integer.parseInt(capacity.getContent());
-            }
-        }catch(NumberFormatException e){
-            capacityCount = -2;
-        }
-        workload[1] = capacityCount;
-        int currentLoad = managerService.countClient(manager);
-        log.debug("Current load: " + currentLoad);
-//        log.debug("Clients: " + managerService.findClients(manager));
-        workload[0] = currentLoad;
-        log.debug("Workload: " + workload);
-        return workload[0] + "/" + workload[1];
+    public int countActiveClient(Manager manager){
+        return managerService.countClient(manager);
     }
 
     public List<Client> fetchClients(Manager manager){

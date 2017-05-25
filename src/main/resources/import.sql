@@ -1,8 +1,8 @@
-INSERT INTO MANAGER (id, birth_day, first_name, last_name, is_deleted) VALUES
-(1, '2000-01-01', 'Mihail', 'Sokolovsky', false),
-(2, '1990-02-12', 'Viktor', 'Gratchev', false),
-(3, '1995-03-13', 'Vitaly', 'Staruhin', false),
-(4, '1998-04-16', 'Diego', 'Maradona', false);
+INSERT INTO MANAGER (id, birth_day, first_name, last_name, clients_limit, is_deleted) VALUES
+(1, '2000-01-01', 'Mihail', 'Sokolovsky', 5, false),
+(2, '1990-02-12', 'Viktor', 'Gratchev', 5, false),
+(3, '1995-03-13', 'Vitaly', 'Staruhin', 4, false),
+(4, '1998-04-16', 'Diego', 'Maradona', 3, false);
 ALTER SEQUENCE manager_id_seq RESTART WITH 5;
 
 INSERT INTO CLIENT (id, birth_day, first_name, last_name, is_deleted) VALUES

@@ -12,16 +12,16 @@ public interface ManagerRepository extends JpaRepository<Manager, Long> {
     String fromContractByManager =
         "from Contract contract " +
         "inner join contract.deal deal " +
-        "inner join deal.client c " +
-        "inner join contract.manager m " +
-        "where m = ?1";
+        "inner join deal.client client " +
+        "inner join contract.manager manager " +
+        "where contract.contractStatus = 'ACTIVE' and manager = ?1";
 
     List<Manager> findAllByOrderByIdAsc();
 
-    @Query("SELECT distinct c " + fromContractByManager)
+    @Query("SELECT distinct client " + fromContractByManager)
     List<Client> findAllByManager(Manager manager);
 
-    @Query("SELECT count(distinct c) " + fromContractByManager)
+    @Query("SELECT count(distinct client) " + fromContractByManager)
     int countClientByManager(Manager manager);
 
 }
