@@ -24,7 +24,6 @@ public class InvoiceController implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Invoice selected;
-    private Period period;
     private InvoiceService invoiceService;
 
     @Inject
@@ -33,7 +32,7 @@ public class InvoiceController implements Serializable {
     }
 
     public Invoice prepareForSaving(Contract contract) {
-        init();
+        selected = new Invoice();
         selected.setContract(contract);
         selected.setDate(contract.getContractDate());
         selected.setPeriod(findNextPayPeriod(contract));
@@ -70,11 +69,6 @@ public class InvoiceController implements Serializable {
         nextPayPeriod.setDateFrom(latestInvoice.getPeriod().getDateTo().plusDays(1));
         nextPayPeriod.setDateTo(latestInvoice.getPeriod().getDateTo().plusMonths(1));
         return nextPayPeriod;
-    }
-
-    public void init() {
-        selected = new Invoice();
-        period = new Period();
     }
 
     public void onOk() {
