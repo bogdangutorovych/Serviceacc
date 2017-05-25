@@ -43,14 +43,18 @@ public class Manager {
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
 
+    @Column(name = "clients_limit")
+    private Integer clientsLimit = 0;
+
     public Manager() {
 
     }
 
-    public Manager(String firstName, String lastName, LocalDate birthday, boolean isDeleted) {
+    public Manager(String firstName, String lastName, LocalDate birthday, int clientsLimit, boolean isDeleted) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
+        this.clientsLimit = clientsLimit;
         this.isDeleted = isDeleted;
     }
 
@@ -84,6 +88,14 @@ public class Manager {
 
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
+    }
+
+    public Integer getClientsLimit() {
+        return clientsLimit;
+    }
+
+    public void setClientsLimit(Integer clientsLimit) {
+        this.clientsLimit = clientsLimit;
     }
 
     public boolean isDeleted() {
