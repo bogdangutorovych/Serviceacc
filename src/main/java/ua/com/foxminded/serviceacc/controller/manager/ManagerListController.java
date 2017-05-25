@@ -41,7 +41,9 @@ public class ManagerListController implements Serializable {
         managerService.delete(manager.getId());
     }
 
-
+    public int countActiveClient(Manager manager){
+        return managerService.countClient(manager);
+    }
 
     public List<Manager> getManagerList() {
         return managerList;

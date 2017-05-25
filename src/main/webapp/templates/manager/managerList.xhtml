@@ -1,8 +1,8 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 	<p:toolbar>
 		<f:facet name="left">
@@ -68,7 +68,9 @@
             <h:outputText value="#{manager.birthday}" converter="localDateConverter" />
         </p:column>
         <p:column headerText="Загруженность">
-                <h:outputText value="#{''.concat(managerCapacityBean.countActiveClient(manager)).concat('/').concat(manager.clientsLimit)}" escape="false"/>
+            <c:set var="count" value="#{managerListController.countActiveClient(manager)}" />
+            <h:outputText value="#{''.concat(count).concat('/').concat(manager.clientsLimit)}" escape="false"
+                          style="display: block; background-color: #{count lt manager.clientsLimit ? 'green' : (count eq manager.clientsLimit ? 'yellow' : 'red')}"/>
         </p:column>
 
 	</p:dataTable>
