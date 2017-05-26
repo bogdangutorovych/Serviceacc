@@ -6,11 +6,45 @@
 
     <p:toolbar>
         <f:facet name="left">
-            <p:commandButton id="btn_add" value="Посмотреть"
+            <p:commandButton id="btn_show" value="Посмотреть" 
+                disabled="#{salariesCalculationController.selectedSalary==null}"
                 icon="ui-icon-check" actionListener="#{salariesCalculationController.onAdd()}" update=":contentForm" />
             <span class="ui-separator"><span
                 class="ui-icon ui-icon-grip-dotted-vertical" /></span>
         </f:facet>
     </p:toolbar>    
     
+    <br />
+    <p:dataTable id="salaryList" editable="true"
+        tableStyle="table-layout:auto;width:100%;" emptyMessage="Нет данных"
+        var="salary" value="#{salariesCalculationController.salaries}"
+        rowKey="#{salariesCalculationController.salaries.indexOf(salary)}" selectionMode="single"
+        selection="salariesCalculationController.selectedSalary"
+        widgetVar="salaryTable">
+        
+        <f:facet name="header" style="text-align:center">Расчет зарплат
+        <p:outputPanel>
+                <h:outputText value="Искать везде: " />
+                <p:inputText id="globalFilter"
+                    onkeyup="PF('salaryTable').filter()" style="width:150px"
+                    placeholder="Enter keyword" />
+            </p:outputPanel>
+        </f:facet>
+        
+        <p:ajax event="rowSelect" update="@form:btn_show"
+            immediate="true" />
+        <p:ajax event="rowUnselect" update="@form:btn_show"
+            immediate="true" />
+            
+        <p:column headerText="ментор" sortBy="#{salary.manager}"
+            filterBy="#{salary.manager}" filterMatchMode="contains"
+            converter="omnifaces.SelectItemsConverter">
+            <h:outputText value="#{salary.manager}" />
+        </p:column>
+        
+        <p:column headerText="Сумма" sortBy="#{salary.amount.amount}"
+            filterBy="#{salary.amount.amount}" filterMatchMode="contains">
+            <h:outputText value="#{salary.amount.amount}" />
+        </p:column>
+    </p:dataTable>
 </ui:composition>

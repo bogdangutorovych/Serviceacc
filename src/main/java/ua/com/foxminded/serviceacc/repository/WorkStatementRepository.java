@@ -13,7 +13,7 @@ public interface WorkStatementRepository extends JpaRepository<WorkStatement, Lo
     
     @Query(value = "select workStatement from WorkStatement workStatement "
             + "where workStatement is not null and "
-            + "workStatement.payStatus = 'PAID' and "
+            + "workStatement.invoice.invoiceType = 'PAID' and "
             + "workStatement.salary is null")
     List<WorkStatement> findPaidNotInSalary();
 }
