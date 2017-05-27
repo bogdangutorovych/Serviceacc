@@ -7,8 +7,10 @@
     <p:toolbar>
         <f:facet name="left">
             <p:commandButton id="btn_show" value="Посмотреть" 
-                disabled="#{salariesCalculationController.selectedSalary==null}"
-                icon="ui-icon-check" actionListener="#{salariesCalculationController.onAdd()}" update=":contentForm" />
+                disabled="#{salaryDetailsController.selectedSalary==null}"
+                icon="ui-icon-check"  
+                action='#{navController.setMainContent("salary/salaryDetails")}'
+                update=":contentForm" />
             <span class="ui-separator"><span
                 class="ui-icon ui-icon-grip-dotted-vertical" /></span>
         </f:facet>
@@ -18,8 +20,8 @@
     <p:dataTable id="salaryList" editable="true"
         tableStyle="table-layout:auto;width:100%;" emptyMessage="Нет данных"
         var="salary" value="#{salariesCalculationController.salaries}"
-        rowKey="#{salariesCalculationController.salaries.indexOf(salary)}" selectionMode="single"
-        selection="salariesCalculationController.selectedSalary"
+        rowKey="#{salariesCalculationController.salaries.indexOf(salary)}" 
+        selectionMode="single" selection="#{salaryDetailsController.selectedSalary}"
         widgetVar="salaryTable">
         
         <f:facet name="header" style="text-align:center">Расчет зарплат

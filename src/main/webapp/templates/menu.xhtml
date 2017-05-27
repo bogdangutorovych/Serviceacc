@@ -32,14 +32,14 @@
 				<p:submenu label="Зарплата">
 				    <p:menuitem value="Все зарплаты" icon="ui-icon-document" 
 				        update=":contentForm"
-				        action='#{navController.setMainContent("invoice/invoiceList")}'/>
+				        action='#{navController.setMainContent("salary/salaryList")}'/>
 				    <p:menuitem value="Расчет зарплат" icon="ui-icon-document" 
 				        update=":contentForm"
-				        action='#{navController.setMainContent("salary/salarycalculation")}'
+				        action='#{navController.setMainContent("salary/salaryCalculation")}'
 				        actionListener="#{salariesCalculationController.calculateSalaries}" />
                     <p:menuitem value="Акты" icon="ui-icon-document" 
                         update=":contentForm"
-                        action='#{navController.setMainContent("salary/workstatements")}' 
+                        action='#{navController.setMainContent("salary/workStatements")}' 
                         actionListener="#{workStatementController.prepareData}"/>
 				</p:submenu>
 				<p:menuitem value="Оплаты" icon="ui-icon-document" />

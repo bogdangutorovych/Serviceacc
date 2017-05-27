@@ -22,7 +22,6 @@ public class SalariesCalculationController {
     private SalaryService salaryService;
     
     private List<Salary> salaries = new ArrayList<Salary>();
-    private Salary selectedSalary;
     
     public void calculateSalaries() {
         salaries = salaryService.calculateSalaries();
@@ -45,11 +44,4 @@ public class SalariesCalculationController {
         this.salaries = salaries;
     }
 
-    public Salary getSelectedSalary() {
-        return selectedSalary;
-    }
-
-    public void setSelectedSalary(Salary selectedSalary) {
-        this.selectedSalary = selectedSalary;
-    }
 }

@@ -38,9 +38,9 @@
         <p:selectOneMenu id="invoice"
             value="#{workStatementController.newWorkStatement.invoice}"
             required="true" requiredMessage="Выберите инвойс"
-            update=":invoiceType"
             converter="omnifaces.SelectItemsConverter">
-            <f:selectItem itemLabel="Выбрать инвойс..." noSelectionOption="true" />
+            <p:ajax update="invoiceType"/>
+            <f:selectItem itemLabel="Выбрать инвойс..." noSelectionOption="false" />
             <f:selectItems value="#{workStatementController.invoices}"
                 var="invoice" itemLabel="#{invoice.number} #{invoice.invoiceType}"
                 itemValue="#{invoice}" />
@@ -54,7 +54,7 @@
         <p:inputText id="clientSpending"
             value="#{workStatementController.newWorkStatement.clientSpending.amount}" />
             
-        <h:outputLabel for="managerEarning" value="Ставка клиента: "
+        <h:outputLabel for="managerEarning" value="Оплата ментору: "
             style="font-weight:bold" />
         <p:inputText id="managerEarning"
             value="#{workStatementController.newWorkStatement.managerEarning.amount}" />
