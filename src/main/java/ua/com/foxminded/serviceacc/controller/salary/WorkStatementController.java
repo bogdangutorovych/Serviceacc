@@ -2,12 +2,12 @@ package ua.com.foxminded.serviceacc.controller.salary;
 
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
 
 import ua.com.foxminded.serviceacc.model.Invoice;
 import ua.com.foxminded.serviceacc.model.Manager;
@@ -19,9 +19,8 @@ import ua.com.foxminded.serviceacc.service.InvoiceService;
 import ua.com.foxminded.serviceacc.service.ManagerService;
 import ua.com.foxminded.serviceacc.service.WorkStatementService;
 
-@Controller
+@Named
 @ViewScoped
-@ManagedBean
 public class WorkStatementController {
     private static final Logger log = LoggerFactory.getLogger(WorkStatementController.class);
 
@@ -35,6 +34,7 @@ public class WorkStatementController {
     private InvoiceService invoiceService;
     private WorkStatementService workStatementService;
 
+    @Inject
     public WorkStatementController(ManagerService managerService, InvoiceService invoiceService, 
             WorkStatementService workStatementService) {
         super();

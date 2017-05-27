@@ -1,18 +1,17 @@
 package ua.com.foxminded.serviceacc.controller.salary;
 
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
 
 import ua.com.foxminded.serviceacc.model.Salary;
 import ua.com.foxminded.serviceacc.service.SalaryService;
 
-@Controller
+@Named
 @ViewScoped
-@ManagedBean
 public class SalaryDetailsController {
     private static final Logger log = LoggerFactory.getLogger(SalaryDetailsController.class);
     
@@ -20,6 +19,7 @@ public class SalaryDetailsController {
     
     private Salary selectedSalary;
     
+    @Inject
     public SalaryDetailsController(SalaryService salaryService) {
         super();
         this.salaryService = salaryService;
