@@ -52,11 +52,9 @@ public class ClientInformation {
     public ClientInformation() {
     }
 
-    public ClientInformation(String content, ClientInformationType clientInformationType, boolean isDeleted) {
-
+    public ClientInformation(String content, ClientInformationType clientInformationType) {
         this.content = content;
         this.clientInformationType = clientInformationType;
-        this.isDeleted = isDeleted;
     }
 
     public Long getId() {

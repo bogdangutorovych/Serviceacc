@@ -44,7 +44,7 @@ public class ClientController implements Serializable {
         List<ClientInformationType> clientInfoTypes = clientInfoTypeService.findAll();
 
         for (int i = 0; i < clientInfoTypes.size(); i++) {
-            clientInfoList.add(new ClientInformation("", clientInfoTypes.get(i), false));
+            clientInfoList.add(new ClientInformation("", clientInfoTypes.get(i)));
         }
         selected.setClientInfoList(clientInfoList);
     }
