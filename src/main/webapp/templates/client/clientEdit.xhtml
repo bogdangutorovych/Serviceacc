@@ -59,4 +59,50 @@
 
 	</p:dataTable>
 
+	<p:toolbar>
+		<f:facet name="left"> Заявки: 
+            <p:commandButton id="btn_deal_create" value="Добавить"
+				update=":contentForm" icon="ui-icon-check"
+				actionListener="#{dealController.add(clientController.selected)}"
+				action='#{navController.setMainContent("deal/deal")}'>
+			</p:commandButton>
+			<span class="ui-separator"><span
+				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+
+			<p:commandButton id="btn_deal_update" value="Просмотр"
+				update=":contentForm" icon="ui-icon-close"
+				disabled="#{dealController.selected==null}"
+				action='#{navController.setMainContent("deal/viewDeal")}'
+				immediate="true">
+			</p:commandButton>
+
+			<span class="ui-separator"><span
+				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+
+			<p:commandButton id="btn_deal_delete" value="Удалить"
+				update=":contentForm" icon="ui-icon-close"
+				disabled="#{dealController.selected==null}"
+				actionListener="#{dealListController.removeDealFromClient(dealController.selected)}"
+				immediate="true">
+			</p:commandButton>
+		</f:facet>
+	</p:toolbar>
+
+	<p:dataTable id="deals" editable="true"
+		tableStyle="table-layout:auto;width:100%;" emptyMessage="Нет данных"
+		var="deal" value="#{dealListController.clientDeals}"
+		rowKey="#{deal.id}"
+		selectionMode="single" selection="#{dealController.selected}">
+
+		<p:ajax event="rowSelect" update="@form:btn_deal_update,@form:btn_deal_delete"
+			immediate="true" />
+		<p:ajax event="rowUnselect" update="@form:btn_deal_update,@form:btn_deal_delete"
+			immediate="true" />
+
+		<p:column headerText="Сделка"
+			converter="omnifaces.SelectItemsConverter">
+			<h:outputText value="#{deal.service.name}" />
+		</p:column>
+
+	</p:dataTable>
 </ui:composition>

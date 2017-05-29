@@ -17,7 +17,7 @@
 	<br />
 	<p:dataTable id="contractList" editable="true"
 		tableStyle="table-layout:auto;width:100%;" emptyMessage="Нет данных"
-		var="c" value="#{contractListController.findContractsForInvoiceCreation()}"
+		var="c" value="#{contractListController.contractsForInvoices}"
 		rowKey="#{c.id}"
 		selectionMode="single" selection="#{contractController.selected}"
 		widgetVar="contractTable">

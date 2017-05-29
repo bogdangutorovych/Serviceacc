@@ -4,10 +4,13 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.primefaces.event.RowEditEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import ua.com.foxminded.serviceacc.model.ManagerInformationType;
 import ua.com.foxminded.serviceacc.service.ManagerInformationTypeService;
@@ -20,8 +23,19 @@ public class ManagerInformationTypeController implements Serializable {
     private ManagerInformationType selected;
 
     private static List<ManagerInformationType> managerInformationTypeList;
-
     private ManagerInformationTypeService managerInformationTypeService;
+
+    private static final Logger log = LoggerFactory.getLogger(ManagerInformationTypeController.class);
+
+    @PostConstruct
+    public void inits() {
+        log.info("========== creation ManagerInformationTypeController ========================");
+    }
+
+    @PreDestroy
+    public void kill() {
+        log.info("======================= KILL ManagerInformationTypeController ============================");
+    }
 
     @Inject
     public ManagerInformationTypeController(ManagerInformationTypeService cltService) {

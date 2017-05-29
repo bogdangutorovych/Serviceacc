@@ -88,12 +88,51 @@ INSERT INTO CLIENT_INFO (id, content, info_type_id, client_id, is_deleted) VALUE
 (3, 'www.test.ua', 3, 1, false),
 (4, 'testik', 4, 1, false),
 (5, 'Kyev', 5, 1, false),
+
 (6, '0936854214', 1, 2, false),
 (7, 'karamba@gmail.com', 2, 2, false),
 (8, null, 3, 2, false),
 (9, 'rocket56', 4, 2, false),
-(10, 'Kyev', 5, 2, false);
-ALTER SEQUENCE client_info_seq RESTART WITH 11;
+(10, 'Kyev', 5, 2, false),
+
+(11, '', 1, 3, false),
+(12, '', 2, 3, false),
+(13, '', 3, 3, false),
+(14, '', 4, 3, false),
+(15, '', 5, 3, false),
+
+(16, '', 1, 4, false),
+(17, '', 2, 4, false),
+(18, '', 3, 4, false),
+(19, '', 4, 4, false),
+(20, '', 5, 4, false),
+
+(21, '', 1, 5, false),
+(22, '', 2, 5, false),
+(23, '', 3, 5, false),
+(24, '', 4, 5, false),
+(25, '', 5, 5, false),
+
+(26, '', 1, 6, false),
+(27, '', 2, 6, false),
+(28, '', 3, 6, false),
+(29, '', 4, 6, false),
+(30, '', 5, 6, false),
+
+(31, '', 1, 7, false),
+(32, '', 2, 7, false),
+(33, '', 3, 7, false),
+(34, '', 4, 7, false),
+(35, '', 5, 7, false),
+
+(36, '', 1, 8, false),
+(37, '', 2, 8, false),
+(38, '', 3, 8, false),
+(39, '', 4, 8, false),
+(40, '', 5, 8, false);
+
+
+ALTER SEQUENCE client_info_seq RESTART WITH 41;
 
 INSERT INTO MANAGER_INFO (id, content, info_type_id, manager_id, is_deleted) VALUES
 (1, '0503265566', 1, 1, false),

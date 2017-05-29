@@ -25,25 +25,26 @@ public class ClientListController implements Serializable {
     private static final Logger log = LoggerFactory.getLogger(ClientListController.class);
     private static final long serialVersionUID = 1L;
 
-    private List<Client> clientList;
+    private List<Client> list;
     private final ClientService clientService;
+
+    @PostConstruct
+    public void inits() {
+        list = clientService.findAll();
+    }
 
     @Inject
     public ClientListController(ClientService clientService) {
         this.clientService = clientService;
     }
 
-    @PostConstruct
-    public void init() {
-        clientList = clientService.findAll();
-    }
-
     public void deleteClient(Client client) {
         clientService.delete(client.getId());
-        clientList.remove(client);
+        list.remove(client);
     }
 
-    public List<Client> getClientList() {
-        return clientList;
+    public List<Client> getList() {
+        return list;
     }
+
 }

@@ -22,9 +22,7 @@ public class InvoiceListController implements Serializable {
     private static final Logger log = LoggerFactory.getLogger(InvoiceListController.class);
 
     private static final long serialVersionUID = 1L;
-
     private List<Invoice> list;
-
     private InvoiceService invoiceService;
 
     @Inject

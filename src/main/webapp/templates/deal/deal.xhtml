@@ -7,9 +7,11 @@
 	<p:toolbar>
 		<f:facet name="left">
 			<p:commandButton id="btn_ok" value="Ok" update=":contentForm"
-				icon="ui-icon-check" 
-				actionListener='#{dealController.onOk()}'
-				action='#{navController.setMainContent("client/client")}'/>
+				icon="ui-icon-check" actionListener='#{dealController.onOk()}'
+				action='#{navController.setMainContent("client/clientEdit")}'>
+				<f:actionListener
+                    binding="#{dealListController.prepareClientDeals(clientController.selected)}" />
+			</p:commandButton>
 			<span class="ui-separator"><span
 				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
@@ -24,7 +26,7 @@
 	<h:panelGrid columns="2" cellpadding="5">
 
 		<h:outputLabel for="client" value="Клиент: " style="font-weight:bold" />
-		<p:inputText id="number" value="#{clientController.selectedClient}"
+		<p:inputText id="number" value="#{clientController.selected}"
 			disabled="true" />
 
 		<p:outputLabel for="service" value="Услуга: " style="font-weight:bold" />
@@ -32,7 +34,8 @@
 			value="#{dealController.selected.service}"
 			converter="omnifaces.SelectItemsConverter" required="true"
 			requiredMessage="Выберите услугу">
-			<f:selectItem itemLabel="Выберите услугу...  " noSelectionOption="true" />
+			<f:selectItem itemLabel="Выберите услугу...  "
+				noSelectionOption="true" />
 			<f:selectItems value="#{serviceListController.serviceList}"
 				var="service" itemLabel="#{service.name}" itemValue="#{service}" />
 		</p:selectOneMenu>

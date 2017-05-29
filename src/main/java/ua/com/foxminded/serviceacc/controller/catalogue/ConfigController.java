@@ -7,6 +7,9 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ua.com.foxminded.serviceacc.model.ClientInformationType;
 import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
 
@@ -20,6 +23,7 @@ import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
 public class ConfigController {
 
     ClientInformationTypeService clientInformationTypeService;
+    private static final Logger log = LoggerFactory.getLogger(ConfigController.class);
 
     @Inject
     public ConfigController(ClientInformationTypeService clientInformationTypeService) {
@@ -39,25 +43,18 @@ public class ConfigController {
 
     public void setClientInformationTypeList(List<ClientInformationType> newClientTypeListType) {
         for (ClientInformationType type : newClientTypeListType) {
-            if (type.getId() == null) {
-                clientInformationTypeService.save(type);
-            } else {
-                clientInformationTypeService.save(type);
-            }
+            clientInformationTypeService.save(type);
         }
-
         this.clientInformationTypeList = clientInformationTypeService.findAll();
     }
 
     public ClientInformationType saveClientInformationType(ClientInformationType type) {
-
         clientInformationTypeService.save(type);
         clientInformationTypeList = clientInformationTypeService.findAll();
         return type;
     }
 
     public ClientInformationType updateClientInformationType(ClientInformationType forUpdateType) {
-
         clientInformationTypeService.save(forUpdateType);
         clientInformationTypeList = clientInformationTypeService.findAll();
         return forUpdateType;

@@ -4,10 +4,13 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.primefaces.event.RowEditEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import ua.com.foxminded.serviceacc.model.ClientInformationType;
 import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
@@ -17,12 +20,24 @@ import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
 public class ClientInformationTypeController implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    private static final Logger log = LoggerFactory.getLogger(ClientInformationTypeController.class);
+
     private ClientInformationType selected;
 
     private static List<ClientInformationType> clientInformationTypeList;
 
     private ClientInformationTypeService clientInformationTypeService;
     private ConfigController configController;
+
+    @PostConstruct
+    public void inits() {
+        log.info("==========creation ClientInformationTypeController ========================");
+    }
+
+    @PreDestroy
+    public void kill() {
+        log.info("======================= KILL ClientInformationTypeController ============================");
+    }
 
     @Inject
     public ClientInformationTypeController(ClientInformationTypeService cltService, ConfigController configController) {

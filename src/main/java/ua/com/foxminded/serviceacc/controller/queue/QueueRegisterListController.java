@@ -3,6 +3,7 @@ package ua.com.foxminded.serviceacc.controller.queue;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -20,10 +21,13 @@ public class QueueRegisterListController implements Serializable {
     private static final Logger log = LoggerFactory.getLogger(QueueRegisterListController.class);
 
     private static final long serialVersionUID = 1L;
-
     private List<QueueRegister> list;
-
     private QueueRegisterService queueRegisterService;
+
+    @PostConstruct
+    public void inits() {
+        list = queueRegisterService.findAll();
+    }
 
     @Inject
     public QueueRegisterListController(QueueRegisterService queueRegisterService) {
@@ -31,7 +35,7 @@ public class QueueRegisterListController implements Serializable {
     }
 
     public List<QueueRegister> getList() {
-        return queueRegisterService.findAll();
+        return list;
     }
 
     public void setList(List<QueueRegister> list) {

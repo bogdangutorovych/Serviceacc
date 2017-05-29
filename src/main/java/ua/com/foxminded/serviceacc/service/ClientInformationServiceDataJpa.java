@@ -40,4 +40,9 @@ public class ClientInformationServiceDataJpa implements ClientInformationService
         return clientInformationRepository.findByClient(client);
     }
 
+    @Override
+    public ClientInformation findByTypeAndClient(Long clientId, Long clientInfoTypeId) {
+        return clientInformationRepository.findByTypeAndClient(clientId, clientInfoTypeId);
+    }
+
 }

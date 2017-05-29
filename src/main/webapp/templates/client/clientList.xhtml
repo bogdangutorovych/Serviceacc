@@ -8,15 +8,19 @@
 		<f:facet name="left">
 			<p:commandButton id="btn_add" value="Добавить" update=":contentForm"
 				icon="ui-icon-document" actionListener="#{clientController.add()}"
-				action='#{navController.setMainContent("client/client")}' />
+				action='#{navController.setMainContent("client/client")}'>
+				</p:commandButton>
 
 			<span class="ui-separator"><span
 				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
 			<p:commandButton id="btn_edit" value="Редактировать"
 				update=":contentForm" icon="ui-icon-pencil"
-				disabled="#{clientController.selectedClient==null}"
-				action='#{navController.setMainContent("client/client")}'/>
+				disabled="#{clientController.selected==null}"
+				actionListener='#{navController.setMainContent("client/clientEdit")}'>
+				<f:actionListener
+					binding="#{dealListController.prepareClientDeals(clientController.selected)}" />
+			</p:commandButton>
 
 
 			<span class="ui-separator"><span
@@ -24,20 +28,20 @@
 
 			<p:commandButton id="btn_delete" value="Удалить"
 				update=":contentForm" icon="ui-icon-trash"
-				disabled="#{clientController.selectedClient==null}"
-				actionListener="#{clientListController.deleteClient(clientController.selectedClient)}" >
-            </p:commandButton>
+				disabled="#{clientController.selected==null}"
+				actionListener="#{clientListController.deleteClient(clientController.selected)}">
+			</p:commandButton>
 
 		</f:facet>
 	</p:toolbar>
 
-	<br/>
+	<br />
 
 	<p:dataTable id="clientList" editable="true" emptyMessage="Нет данных"
-                 var="client" value="#{clientListController.clientList}"
-                 rowKey="#{client.id}" selectionMode="single"
-                 selection="#{clientController.selectedClient}"
-                 widgetVar="clientsTable">
+		var="client" value="#{clientListController.list}"
+		rowKey="#{client.id}" selectionMode="single"
+		selection="#{clientController.selected}"
+		widgetVar="clientsTable">
 
 		<f:facet name="header">
 		    Клиенты
@@ -54,17 +58,18 @@
 			immediate="true" />
 
 		<p:column headerText="Имя" sortBy="#{client.firstName}"
-                  filterBy="#{client.firstName}" filterMatchMode="contains">
+			filterBy="#{client.firstName}" filterMatchMode="contains">
 			<h:outputText value="#{client.firstName}" />
 		</p:column>
 
 		<p:column headerText="Фамилия" sortBy="#{client.lastName}"
-                  filterBy="#{client.lastName}" filterMatchMode="contains">
+			filterBy="#{client.lastName}" filterMatchMode="contains">
 			<h:outputText value="#{client.lastName}" />
 		</p:column>
 
 		<p:column headerText="Day of birth">
-			<h:outputText value="#{client.birthday}" converter="localDateConverter" />
+			<h:outputText value="#{client.birthday}"
+				converter="localDateConverter" />
 		</p:column>
 
 	</p:dataTable>

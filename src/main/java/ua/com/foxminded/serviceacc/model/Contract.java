@@ -80,16 +80,28 @@ public class Contract {
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
 
+    public Contract() {
+    }
+
+    public Contract(String number, LocalDate contractDate, LocalDate closeDate, ContractStatus contractStatus,
+            ContractType contractType, Deal deal, Money clientRate, Manager manager, Money managerRate, boolean isTrial,
+            boolean isDeleted) {
+        super();
+        this.number = number;
+        this.contractDate = contractDate;
+        this.closeDate = closeDate;
+        this.contractStatus = contractStatus;
+        this.contractType = contractType;
+        this.deal = deal;
+        this.clientRate = clientRate;
+        this.manager = manager;
+        this.managerRate = managerRate;
+        this.isTrial = isTrial;
+        this.isDeleted = isDeleted;
+    }
+
     public Long getId() {
         return id;
-    }
-
-    public ContractType getContractType() {
-        return contractType;
-    }
-
-    public void setContractType(ContractType contractType) {
-        this.contractType = contractType;
     }
 
     public void setId(Long id) {
@@ -126,6 +138,14 @@ public class Contract {
 
     public void setContractStatus(ContractStatus contractStatus) {
         this.contractStatus = contractStatus;
+    }
+
+    public ContractType getContractType() {
+        return contractType;
+    }
+
+    public void setContractType(ContractType contractType) {
+        this.contractType = contractType;
     }
 
     public Deal getDeal() {
@@ -176,22 +196,4 @@ public class Contract {
         this.isDeleted = isDeleted;
     }
 
-    public Contract(Long id, String number, LocalDate contractDate, LocalDate closeDate, ContractStatus contractStatus,
-            Deal deal, Money clientRate, Manager manager, Money managerRate, boolean isTrial, boolean isDeleted) {
-        super();
-        this.id = id;
-        this.number = number;
-        this.contractDate = contractDate;
-        this.closeDate = closeDate;
-        this.contractStatus = contractStatus;
-        this.deal = deal;
-        this.clientRate = clientRate;
-        this.manager = manager;
-        this.managerRate = managerRate;
-        this.isTrial = isTrial;
-        this.isDeleted = isDeleted;
-    }
-
-    public Contract() {
-    }
 }

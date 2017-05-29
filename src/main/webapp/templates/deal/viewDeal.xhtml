@@ -8,13 +8,14 @@
 		<f:facet name="left">
 			<p:commandButton id="btn_ok" value="Ok" update=":contentForm"
 				icon="ui-icon-check" actionListener='#{dealController.onOk()}'
-				action='#{navController.setMainContent("client/client")}' />
+				action='#{navController.setMainContent("client/client")}'>
+			</p:commandButton>
 			<span class="ui-separator"><span
 				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
 			<p:commandButton id="btn_cancel" value="Cancel" update=":contentForm"
 				icon="ui-icon-close" actionListener="#{dealController.onCancel()}"
-				action='#{navController.setMainContent("client/client")}'
+				action='#{navController.setMainContent("client/clientEdit")}'
 				immediate="true" />
 
 			<span class="ui-separator"><span
@@ -42,7 +43,7 @@
 	<h:panelGrid columns="2" cellpadding="5">
 
 		<h:outputLabel for="client" value="Клиент: " style="font-weight:bold" />
-		<p:inputText id="number" value="#{clientController.selectedClient}"
+		<p:inputText id="number" value="#{clientController.selected}"
 			disabled="true" />
 
 		<h:outputLabel for="service" value="Услуга: " style="font-weight:bold" />

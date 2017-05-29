@@ -35,7 +35,6 @@ public class ServiceListController implements Serializable {
 
     @PostConstruct
     public void init() {
-        log.debug("Create ServiceList Bean");
         serviceList = serviceService.findAll();
         updateServiceListFromDB();
     }

@@ -2,7 +2,6 @@ package ua.com.foxminded.serviceacc.controller.deal;
 
 import java.io.Serializable;
 
-import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -31,11 +30,6 @@ public class DealController implements Serializable {
     @Inject
     public DealController(DealService dealService) {
         this.dealService = dealService;
-    }
-
-    @PostConstruct
-    public void init() {
-
     }
 
     public void add(Client client) {

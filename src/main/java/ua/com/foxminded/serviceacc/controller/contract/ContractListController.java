@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -20,13 +20,14 @@ import ua.com.foxminded.serviceacc.service.ContractService;
 import ua.com.foxminded.serviceacc.service.InvoiceService;
 
 @Named
-@RequestScoped
+@ViewScoped
 public class ContractListController implements Serializable {
 
-    private static Logger logger = LoggerFactory.getLogger(ContractListController.class);
+    private static Logger log = LoggerFactory.getLogger(ContractListController.class);
     private static final long serialVersionUID = 1L;
 
     private List<Contract> list;
+    private List<Contract> contractsForInvoices;
     private ContractService contractService;
     private InvoiceService invoiceService;
 
@@ -41,6 +42,7 @@ public class ContractListController implements Serializable {
     @PostConstruct
     public void init() {
         list = contractService.findAll();
+        contractsForInvoices = findContractsForInvoiceCreation();
     }
 
     public void delete(Contract contract) {
@@ -86,6 +88,10 @@ public class ContractListController implements Serializable {
 
     public void setContractService(ContractService contractService) {
         this.contractService = contractService;
+    }
+
+    public List<Contract> getContractsForInvoices() {
+        return contractsForInvoices;
     }
 
 }

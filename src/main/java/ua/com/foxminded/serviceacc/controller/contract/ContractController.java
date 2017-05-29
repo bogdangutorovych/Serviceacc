@@ -19,7 +19,7 @@ import ua.com.foxminded.serviceacc.service.ContractService;
 @ViewScoped
 public class ContractController implements Serializable {
 
-    private static Logger logger = LoggerFactory.getLogger(ContractController.class);
+    private static Logger log = LoggerFactory.getLogger(ContractController.class);
     private static final long serialVersionUID = 1L;
 
     private Contract selected;
@@ -50,7 +50,7 @@ public class ContractController implements Serializable {
     }
 
     public void onCancel() {
-        logger.info("onCancel");
+        log.info("onCancel");
         selected = null;
     }
 

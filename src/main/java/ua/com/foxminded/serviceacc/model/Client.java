@@ -1,12 +1,17 @@
 package ua.com.foxminded.serviceacc.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -40,16 +45,23 @@ public class Client {
     @Column(name = "birth_day")
     private LocalDate birthday;
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "client_id")
+    private List<ClientInformation> clientInfoList;
+
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
 
     public Client() {
     }
 
-    public Client(String firstName, String lastName, LocalDate birthday, boolean isDeleted) {
+    public Client(String firstName, String lastName, LocalDate birthday, List<ClientInformation> clientInfoList,
+            boolean isDeleted) {
+        super();
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
+        this.clientInfoList = clientInfoList;
         this.isDeleted = isDeleted;
     }
 
@@ -85,9 +97,12 @@ public class Client {
         this.birthday = birthday;
     }
 
-    @Override
-    public String toString() {
-        return firstName + " " + lastName;
+    public List<ClientInformation> getClientInfoList() {
+        return clientInfoList;
+    }
+
+    public void setClientInfoList(List<ClientInformation> clientInfoList) {
+        this.clientInfoList = clientInfoList;
     }
 
     public boolean isDeleted() {
@@ -96,6 +111,11 @@ public class Client {
 
     public void setDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
+    }
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
     }
 
 }
