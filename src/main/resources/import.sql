@@ -77,8 +77,7 @@ INSERT INTO MANAGER_INFO_TYPE (id, title, is_deleted, code) VALUES
 (3, 'site', false, 'site'),
 (4, 'skype', false, 'skype'),
 (5, 'city', false, 'city'),
-(6, 'clients limit', false, 'lim');
-ALTER SEQUENCE manager_info_type_seq RESTART WITH 7;
+ALTER SEQUENCE manager_info_type_seq RESTART WITH 6;
 
 INSERT INTO CLIENT_INFO (id, content, info_type_id, client_id, is_deleted) VALUES
 (1, '0503265566', 1, 1, false),
@@ -103,10 +102,8 @@ INSERT INTO MANAGER_INFO (id, content, info_type_id, manager_id, is_deleted) VAL
 (7, 'karamba@gmail.com', 2, 2, false),
 (8, null, 3, 2, false),
 (9, 'rocket56', 4, 2, false),
-(10, 'Kyev', 5, 3, false),
-(11, 6, 6, 1, false),
-(12, 4, 6, 2, false);
-ALTER SEQUENCE manager_info_seq RESTART WITH 13;
+(10, 'Kyev', 5, 3, false);
+ALTER SEQUENCE manager_info_seq RESTART WITH 11;
 
 INSERT INTO PAYMENT (id, date, money_id, payment_type, is_deleted) VALUES
 (1, '2017-01-14', 1, 'CASH', false),
