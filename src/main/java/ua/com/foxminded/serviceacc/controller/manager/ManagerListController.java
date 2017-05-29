@@ -34,6 +34,10 @@ public class ManagerListController implements Serializable {
 
     @PostConstruct
     public void init() {
+        updateManagerListFromDB();
+    }
+
+    public void updateManagerListFromDB(){
         managerList = managerService.findAll();
     }
 
