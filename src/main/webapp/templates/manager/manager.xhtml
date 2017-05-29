@@ -46,6 +46,10 @@
         <p:calendar id="birthday" converter="localDateConverter" pattern="dd.MM.yyyy" showOn="button" mask="99.99.9999"
             value="#{managerController.selectedManager.birthday}" />
 
+        <p:outputLabel for="clientslimit" value="Clients limit: "
+                       style="font-weight:bold"/>
+        <p:inputText id="clientslimit" value="#{managerController.selectedManager.clientsLimit}" />
+
 	</h:panelGrid>
 
 	<p:dataTable id="ManagerInfoList" editable="true" emptyMessage="No items yet"

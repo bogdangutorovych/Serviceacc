@@ -46,6 +46,7 @@ public class ManagerListController implements Serializable {
     }
 
     public int countActiveClient(Manager manager){
+        log.debug("count CLients for manager: " + manager);
         return managerService.countClient(manager);
     }
 
