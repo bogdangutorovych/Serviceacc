@@ -76,7 +76,7 @@ INSERT INTO MANAGER_INFO_TYPE (id, title, is_deleted, code) VALUES
 (2, 'e-mail', false, 'mail'),
 (3, 'site', false, 'site'),
 (4, 'skype', false, 'skype'),
-(5, 'city', false, 'city'),
+(5, 'city', false, 'city');
 ALTER SEQUENCE manager_info_type_seq RESTART WITH 6;
 
 INSERT INTO CLIENT_INFO (id, content, info_type_id, client_id, is_deleted) VALUES
