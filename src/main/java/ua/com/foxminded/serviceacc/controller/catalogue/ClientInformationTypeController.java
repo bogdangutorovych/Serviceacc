@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -28,16 +27,6 @@ public class ClientInformationTypeController implements Serializable {
 
     private ClientInformationTypeService clientInformationTypeService;
     private ConfigController configController;
-
-    @PostConstruct
-    public void inits() {
-        log.info("==========creation ClientInformationTypeController ========================");
-    }
-
-    @PreDestroy
-    public void kill() {
-        log.info("======================= KILL ClientInformationTypeController ============================");
-    }
 
     @Inject
     public ClientInformationTypeController(ClientInformationTypeService cltService, ConfigController configController) {

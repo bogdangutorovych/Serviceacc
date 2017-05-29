@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -26,16 +25,6 @@ public class ManagerInformationTypeController implements Serializable {
     private ManagerInformationTypeService managerInformationTypeService;
 
     private static final Logger log = LoggerFactory.getLogger(ManagerInformationTypeController.class);
-
-    @PostConstruct
-    public void inits() {
-        log.info("========== creation ManagerInformationTypeController ========================");
-    }
-
-    @PreDestroy
-    public void kill() {
-        log.info("======================= KILL ManagerInformationTypeController ============================");
-    }
 
     @Inject
     public ManagerInformationTypeController(ManagerInformationTypeService cltService) {
