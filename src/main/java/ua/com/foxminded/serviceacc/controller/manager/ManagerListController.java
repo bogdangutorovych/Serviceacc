@@ -34,11 +34,20 @@ public class ManagerListController implements Serializable {
 
     @PostConstruct
     public void init() {
+        updateManagerListFromDB();
+    }
+
+    public void updateManagerListFromDB(){
         managerList = managerService.findAll();
     }
 
     public void deleteManager(Manager manager) {
         managerService.delete(manager.getId());
+    }
+
+    public int countActiveClient(Manager manager){
+        log.debug("count CLients for manager: " + manager);
+        return managerService.countClient(manager);
     }
 
     public List<Manager> getManagerList() {

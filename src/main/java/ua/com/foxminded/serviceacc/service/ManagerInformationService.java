@@ -4,6 +4,7 @@ import java.util.List;
 
 import ua.com.foxminded.serviceacc.model.Manager;
 import ua.com.foxminded.serviceacc.model.ManagerInformation;
+import ua.com.foxminded.serviceacc.model.ManagerInformationType;
 
 public interface ManagerInformationService {
 
@@ -16,4 +17,6 @@ public interface ManagerInformationService {
     List<ManagerInformation> findByManager(Manager manager);
 
     void delete(Long managerInformationId);
+
+    ManagerInformation findByTypeAndManager(ManagerInformationType type, Manager manager);
 }
