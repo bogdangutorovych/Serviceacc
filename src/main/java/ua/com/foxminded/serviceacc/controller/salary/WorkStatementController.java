@@ -2,7 +2,7 @@ package ua.com.foxminded.serviceacc.controller.salary;
 
 import java.util.List;
 
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -23,16 +23,18 @@ import ua.com.foxminded.serviceacc.service.WorkStatementService;
 @ViewScoped
 public class WorkStatementController {
     private static final Logger log = LoggerFactory.getLogger(WorkStatementController.class);
+    
+    private static final long serialVersionUID = 1L;
+
+    private final ManagerService managerService;
+    private final InvoiceService invoiceService;
+    private final WorkStatementService workStatementService;
 
     private List<Manager> managers;
     private List<Invoice> invoices;
 
     private WorkStatement newWorkStatement;
     private List<WorkStatement> workStatements;
-
-    private ManagerService managerService;
-    private InvoiceService invoiceService;
-    private WorkStatementService workStatementService;
 
     @Inject
     public WorkStatementController(ManagerService managerService, InvoiceService invoiceService, 

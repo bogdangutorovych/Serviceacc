@@ -1,9 +1,8 @@
 package ua.com.foxminded.serviceacc.controller.salary;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -17,14 +16,12 @@ import ua.com.foxminded.serviceacc.service.SalaryService;
 @ViewScoped
 public class SalariesCalculationController {
     private static final Logger log = LoggerFactory.getLogger(SalariesCalculationController.class);
+    
+    private static final long serialVersionUID = 1L;
 
-    private SalaryService salaryService;
+    private final SalaryService salaryService;
     
-    private List<Salary> salaries = new ArrayList<Salary>();
-    
-    public void calculateSalaries() {
-        salaries = salaryService.calculateSalaries();
-    }
+    private List<Salary> salaries;
     
     @Inject
     public SalariesCalculationController(SalaryService salaryService) {
@@ -32,10 +29,10 @@ public class SalariesCalculationController {
         this.salaryService = salaryService;
     }
 
-    public void onView() {
-        
+    public void calculateSalaries() {
+        salaries = salaryService.calculateSalaries();
     }
-
+    
     public List<Salary> getSalaries() {
         return salaries;
     }
