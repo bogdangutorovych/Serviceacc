@@ -46,11 +46,6 @@ public class Deal {
     public Deal() {
     }
 
-    public Deal(Client client, Service service) {
-        this.client = client;
-        this.service = service;
-    }
-
     public Long getId() {
         return id;
     }

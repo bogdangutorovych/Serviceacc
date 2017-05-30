@@ -60,20 +60,6 @@ public class Invoice {
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
 
-    public Invoice(Long id, String number, LocalDate date, Contract contract, Money price, InvoiceType invoiceType,
-            Payment payment, Period period, boolean isDeleted) {
-        super();
-        this.id = id;
-        this.number = number;
-        this.date = date;
-        this.contract = contract;
-        this.price = price;
-        this.invoiceType = invoiceType;
-        this.payment = payment;
-        this.period = period;
-        this.isDeleted = isDeleted;
-    }
-
     public Invoice() {
     }
 

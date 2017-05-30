@@ -46,13 +46,6 @@ public class Client {
     public Client() {
     }
 
-    public Client(String firstName, String lastName, LocalDate birthday, boolean isDeleted) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthday = birthday;
-        this.isDeleted = isDeleted;
-    }
-
     public Long getId() {
         return id;
     }

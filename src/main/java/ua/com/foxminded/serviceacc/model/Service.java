@@ -57,14 +57,6 @@ public class Service {
     private boolean isDeleted;
 
     public Service() {
-
-    }
-
-    public Service(String name, String description, Set<Money> prices, Money managerRate) {
-        this.name = name;
-        this.prices = prices;
-        this.description = description;
-        this.managerRate = managerRate;
     }
 
     public Long getId() {

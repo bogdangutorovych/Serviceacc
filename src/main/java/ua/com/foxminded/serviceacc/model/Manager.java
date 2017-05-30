@@ -47,15 +47,6 @@ public class Manager {
     private Integer clientsLimit = 0;
 
     public Manager() {
-
-    }
-
-    public Manager(String firstName, String lastName, LocalDate birthday, int clientsLimit, boolean isDeleted) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthday = birthday;
-        this.clientsLimit = clientsLimit;
-        this.isDeleted = isDeleted;
     }
 
     public Long getId() {

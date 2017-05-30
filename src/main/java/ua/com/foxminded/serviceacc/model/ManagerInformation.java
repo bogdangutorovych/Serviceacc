@@ -51,11 +51,9 @@ public class ManagerInformation {
     public ManagerInformation() {
     }
 
-    public ManagerInformation(String content, ManagerInformationType managerInformationType, boolean isDeleted) {
-
+    public ManagerInformation(String content, ManagerInformationType managerInformationType) {
         this.content = content;
         this.managerInformationType = managerInformationType;
-        this.isDeleted = isDeleted;
     }
 
     public Long getId() {
