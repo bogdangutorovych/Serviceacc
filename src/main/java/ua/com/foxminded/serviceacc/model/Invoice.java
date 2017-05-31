@@ -60,9 +60,6 @@ public class Invoice {
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
 
-    public Invoice() {
-    }
-
     public Long getId() {
         return id;
     }

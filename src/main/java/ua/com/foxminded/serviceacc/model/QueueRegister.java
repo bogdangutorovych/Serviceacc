@@ -47,9 +47,6 @@ public class QueueRegister {
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
 
-    public QueueRegister() {
-    }
-
     public Long getId() {
         return id;
     }

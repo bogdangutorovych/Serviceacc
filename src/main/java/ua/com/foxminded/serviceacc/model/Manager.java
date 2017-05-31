@@ -46,9 +46,6 @@ public class Manager {
     @Column(name = "clients_limit")
     private Integer clientsLimit = 0;
 
-    public Manager() {
-    }
-
     public Long getId() {
         return id;
     }

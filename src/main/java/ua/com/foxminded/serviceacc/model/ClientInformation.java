@@ -48,9 +48,6 @@ public class ClientInformation {
         this.client = client;
     }
 
-    public ClientInformation() {
-    }
-
     public Long getId() {
         return id;
     }

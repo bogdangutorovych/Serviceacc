@@ -44,9 +44,6 @@ public class Payment {
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
 
-    public Payment() {
-    }
-
     public Long getId() {
         return id;
     }

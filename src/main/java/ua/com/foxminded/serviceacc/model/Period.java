@@ -34,9 +34,6 @@ public class Period {
         return id;
     }
 
-    public Period() {
-    }
-
     public String showPeriod() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         return (dateFrom.format(formatter) + " - " + dateTo.format(formatter));

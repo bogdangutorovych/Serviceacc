@@ -56,9 +56,6 @@ public class Service {
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
 
-    public Service() {
-    }
-
     public Long getId() {
         return id;
     }

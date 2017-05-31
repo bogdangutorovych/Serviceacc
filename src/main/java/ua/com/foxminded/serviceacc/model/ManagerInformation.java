@@ -48,14 +48,6 @@ public class ManagerInformation {
         this.manager = manager;
     }
 
-    public ManagerInformation() {
-    }
-
-    public ManagerInformation(String content, ManagerInformationType managerInformationType) {
-        this.content = content;
-        this.managerInformationType = managerInformationType;
-    }
-
     public Long getId() {
         return id;
     }

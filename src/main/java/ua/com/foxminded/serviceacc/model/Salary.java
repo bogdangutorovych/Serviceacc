@@ -61,9 +61,6 @@ public class Salary {
         workStatement.setSalary(null);
     }
 
-    public Salary() {
-    }
-
     public long getId() {
         return id;
     }

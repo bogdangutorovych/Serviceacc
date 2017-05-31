@@ -46,13 +46,13 @@ public class Money {
     public Money() {
     }
 
-    public String showSumAndCurrency() {
-        return (getAmount() + " " + getCurrency());
-    }
-
     public Money(Currency currency, Long amount) {
         this.currency = currency;
         this.amount = amount;
+    }
+
+    public String showSumAndCurrency() {
+        return (getAmount() + " " + getCurrency());
     }
 
     public long getId() {

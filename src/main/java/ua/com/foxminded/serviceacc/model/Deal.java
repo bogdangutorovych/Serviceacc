@@ -43,9 +43,6 @@ public class Deal {
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
 
-    public Deal() {
-    }
-
     public Long getId() {
         return id;
     }

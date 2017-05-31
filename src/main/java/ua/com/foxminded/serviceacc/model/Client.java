@@ -43,9 +43,6 @@ public class Client {
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
 
-    public Client() {
-    }
-
     public Long getId() {
         return id;
     }
