@@ -50,7 +50,6 @@ public class ContractController implements Serializable {
     }
 
     public void onCancel() {
-        log.info("onCancel");
         selected = null;
     }
 

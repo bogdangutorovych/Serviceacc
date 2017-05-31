@@ -23,6 +23,8 @@ import ua.com.foxminded.serviceacc.service.InvoiceService;
 @ViewScoped
 public class ContractListController implements Serializable {
 
+    public static final int DAYS_TO_CREATE_INVOICE = 5;
+
     private static Logger log = LoggerFactory.getLogger(ContractListController.class);
     private static final long serialVersionUID = 1L;
 
@@ -30,8 +32,6 @@ public class ContractListController implements Serializable {
     private List<Contract> contractsForInvoices;
     private ContractService contractService;
     private InvoiceService invoiceService;
-
-    public static final int DAYS_TO_CREATE_INVOICE = 5;
 
     @Inject
     public ContractListController(ContractService contractService, InvoiceService invoiceService) {
@@ -75,7 +75,7 @@ public class ContractListController implements Serializable {
                 || ((contract.getContractStatus().equals(ContractStatus.FROZEN)
                         || contract.getContractStatus().equals(ContractStatus.CLOSED))
                         && invoiceDateTo.isBefore(contract.getCloseDate())))
-                && contract.getIsTrial() == false;
+                && !contract.getIsTrial();
     }
 
     public List<Contract> getList() {

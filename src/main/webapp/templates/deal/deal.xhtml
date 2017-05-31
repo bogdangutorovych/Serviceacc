@@ -10,7 +10,7 @@
 				icon="ui-icon-check" actionListener='#{dealController.onOk()}'
 				action='#{navController.setMainContent("client/clientEdit")}'>
 				<f:actionListener
-                    binding="#{dealListController.prepareClientDeals(clientController.selected)}" />
+                    binding="#{dealListController.prepareClientDeals(clientController.selectedClient)}" />
 			</p:commandButton>
 			<span class="ui-separator"><span
 				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
@@ -26,7 +26,7 @@
 	<h:panelGrid columns="2" cellpadding="5">
 
 		<h:outputLabel for="client" value="Клиент: " style="font-weight:bold" />
-		<p:inputText id="number" value="#{clientController.selected}"
+		<p:inputText id="number" value="#{clientController.selectedClient}"
 			disabled="true" />
 
 		<p:outputLabel for="service" value="Услуга: " style="font-weight:bold" />

@@ -29,7 +29,7 @@ public class ClientListController implements Serializable {
     private final ClientService clientService;
 
     @PostConstruct
-    public void inits() {
+    public void init() {
         list = clientService.findAll();
     }
 

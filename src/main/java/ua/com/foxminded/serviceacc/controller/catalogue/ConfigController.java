@@ -22,15 +22,14 @@ import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
 @ApplicationScoped
 public class ConfigController {
 
-    ClientInformationTypeService clientInformationTypeService;
+    private final ClientInformationTypeService clientInformationTypeService;
     private static final Logger log = LoggerFactory.getLogger(ConfigController.class);
+    private List<ClientInformationType> clientInformationTypeList;
 
     @Inject
     public ConfigController(ClientInformationTypeService clientInformationTypeService) {
         this.clientInformationTypeService = clientInformationTypeService;
     }
-
-    private List<ClientInformationType> clientInformationTypeList;
 
     @PostConstruct
     public void init() {

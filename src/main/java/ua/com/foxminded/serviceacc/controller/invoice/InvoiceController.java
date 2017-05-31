@@ -42,13 +42,13 @@ public class InvoiceController implements Serializable {
     }
 
     public void add(Contract contract) {
-        if (contract.getIsTrial() == false) {
+        if (!contract.getIsTrial()) {
             prepareForSaving(contract);
         }
     }
 
     public void createInvoiceWithinContractCreation(Contract contract) {
-        if (contract.getIsTrial() == false) {
+        if (!contract.getIsTrial()) {
             add(contract);
             onOk();
         }

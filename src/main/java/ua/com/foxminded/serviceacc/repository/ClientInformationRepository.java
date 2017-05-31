@@ -10,7 +10,7 @@ import ua.com.foxminded.serviceacc.model.ClientInformation;
 
 public interface ClientInformationRepository extends JpaRepository<ClientInformation, Long> {
 
-    public String query = "select ci.* " + "from client_info ci " + "left join client c on c.id = ci.client_id "
+    String query = "select ci.* " + "from client_info ci " + "left join client c on c.id = ci.client_id "
             + "left join client_info_type cit on cit.id = ci.info_type_id " +
 
             "where   c.id = ?1 " + "and ci.id = ?2 ";

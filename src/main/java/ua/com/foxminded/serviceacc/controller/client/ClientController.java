@@ -24,7 +24,7 @@ public class ClientController implements Serializable {
     private static final Logger log = LoggerFactory.getLogger(ClientController.class);
     private static final long serialVersionUID = 1L;
 
-    private Client selected;
+    private Client selectedClient;
     private ClientInformationTypeService clientInfoTypeService;
     private ClientService clientService;
 
@@ -35,7 +35,7 @@ public class ClientController implements Serializable {
     }
 
     public void add() {
-        selected = new Client();
+        selectedClient = new Client();
         populateClientInfoWithInitData();
     }
 
@@ -46,19 +46,19 @@ public class ClientController implements Serializable {
         for (int i = 0; i < clientInfoTypes.size(); i++) {
             clientInfoList.add(new ClientInformation("", clientInfoTypes.get(i)));
         }
-        selected.setClientInfoList(clientInfoList);
+        selectedClient.setClientInfoList(clientInfoList);
     }
 
     public void onOk() {
-        clientService.save(selected);
+        clientService.save(selectedClient);
     }
 
-    public void setSelected(Client selectedClient) {
-        this.selected = selectedClient;
+    public void setSelectedClient(Client selectedClient) {
+        this.selectedClient = selectedClient;
     }
 
-    public Client getSelected() {
-        return selected;
+    public Client getSelectedClient() {
+        return selectedClient;
     }
 
 }
