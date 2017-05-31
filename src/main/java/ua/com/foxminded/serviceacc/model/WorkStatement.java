@@ -52,7 +52,7 @@ public class WorkStatement {
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "salary_id")
-    Salary salary;
+    private Salary salary;
     
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
