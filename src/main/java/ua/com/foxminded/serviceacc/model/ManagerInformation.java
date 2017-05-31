@@ -48,16 +48,6 @@ public class ManagerInformation {
         this.manager = manager;
     }
 
-    public ManagerInformation() {
-    }
-
-    public ManagerInformation(String content, ManagerInformationType managerInformationType, boolean isDeleted) {
-
-        this.content = content;
-        this.managerInformationType = managerInformationType;
-        this.isDeleted = isDeleted;
-    }
-
     public Long getId() {
         return id;
     }

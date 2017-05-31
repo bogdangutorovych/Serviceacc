@@ -43,16 +43,6 @@ public class Client {
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
 
-    public Client() {
-    }
-
-    public Client(String firstName, String lastName, LocalDate birthday, boolean isDeleted) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthday = birthday;
-        this.isDeleted = isDeleted;
-    }
-
     public Long getId() {
         return id;
     }

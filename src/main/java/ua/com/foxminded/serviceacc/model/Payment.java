@@ -44,19 +44,6 @@ public class Payment {
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
 
-    public Payment() {
-
-    }
-
-    public Payment(Long id, LocalDate date, Money money, PaymentType type, boolean isDeleted) {
-        super();
-        this.id = id;
-        this.date = date;
-        this.money = money;
-        this.paymentType = type;
-        this.isDeleted = isDeleted;
-    }
-
     public Long getId() {
         return id;
     }

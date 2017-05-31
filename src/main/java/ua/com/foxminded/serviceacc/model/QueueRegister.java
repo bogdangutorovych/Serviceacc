@@ -47,18 +47,6 @@ public class QueueRegister {
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
 
-    public QueueRegister() {
-    }
-
-    public QueueRegister(Long id, LocalDate registerDate, Deal deal, boolean afterFreezing, boolean isDeleted) {
-        super();
-        this.id = id;
-        this.registerDate = registerDate;
-        this.deal = deal;
-        this.afterFreezing = afterFreezing;
-        this.isDeleted = isDeleted;
-    }
-
     public Long getId() {
         return id;
     }

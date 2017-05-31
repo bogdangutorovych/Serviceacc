@@ -48,16 +48,6 @@ public class ClientInformation {
         this.client = client;
     }
 
-    public ClientInformation() {
-    }
-
-    public ClientInformation(String content, ClientInformationType clientInformationType, boolean isDeleted) {
-
-        this.content = content;
-        this.clientInformationType = clientInformationType;
-        this.isDeleted = isDeleted;
-    }
-
     public Long getId() {
         return id;
     }

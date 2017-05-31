@@ -43,14 +43,6 @@ public class Deal {
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
 
-    public Deal() {
-    }
-
-    public Deal(Client client, Service service) {
-        this.client = client;
-        this.service = service;
-    }
-
     public Long getId() {
         return id;
     }

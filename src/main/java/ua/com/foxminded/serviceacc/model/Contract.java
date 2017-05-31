@@ -176,22 +176,4 @@ public class Contract {
         this.isDeleted = isDeleted;
     }
 
-    public Contract(Long id, String number, LocalDate contractDate, LocalDate closeDate, ContractStatus contractStatus,
-            Deal deal, Money clientRate, Manager manager, Money managerRate, boolean isTrial, boolean isDeleted) {
-        super();
-        this.id = id;
-        this.number = number;
-        this.contractDate = contractDate;
-        this.closeDate = closeDate;
-        this.contractStatus = contractStatus;
-        this.deal = deal;
-        this.clientRate = clientRate;
-        this.manager = manager;
-        this.managerRate = managerRate;
-        this.isTrial = isTrial;
-        this.isDeleted = isDeleted;
-    }
-
-    public Contract() {
-    }
 }

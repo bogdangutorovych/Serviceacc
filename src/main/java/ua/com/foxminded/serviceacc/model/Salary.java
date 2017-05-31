@@ -42,12 +42,12 @@ public class Salary {
     @JoinColumn(name = "money_id")
     private Money amount;
 
-    @OneToMany(mappedBy = "salary", 
-            fetch = FetchType.LAZY, 
+    @OneToMany(mappedBy = "salary",
+            fetch = FetchType.LAZY,
             orphanRemoval = true,
             cascade = CascadeType.ALL)
     private Set<WorkStatement> workStatements = new HashSet<>();
-    
+
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
 
@@ -55,25 +55,10 @@ public class Salary {
         workStatements.add(workStatement);
         workStatement.setSalary(this);
     }
-    
+
     public void removeWorkStatement(WorkStatement workStatement) {
         workStatements.remove(workStatement);
         workStatement.setSalary(null);
-    }
-    
-    public Salary() {
-
-    }
-
-    public Salary(Long id, LocalDate date, Manager manager, 
-            Money amount, Set<WorkStatement> workStatements, boolean isDeleted) {
-        super();
-        this.id = id;
-        this.date = date;
-        this.manager = manager;
-        this.amount = amount;
-        this.workStatements = workStatements;
-        this.isDeleted = isDeleted;
     }
 
     public long getId() {
