@@ -1,6 +1,7 @@
 package ua.com.foxminded.serviceacc.controller.payment;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -14,18 +15,34 @@ import ua.com.foxminded.serviceacc.service.PaymentService;
 
 @Named
 @ViewScoped
-public class PaymentController implements Serializable {
+public class PaymentListController implements Serializable {
 
-    private static final Logger log = LoggerFactory.getLogger(PaymentController.class);
+    private static final Logger log = LoggerFactory.getLogger(PaymentListController.class);
 
     private static final long serialVersionUID = 1L;
 
     private Payment selected;
     private PaymentService paymentService;
 
+    private List<Payment> payments;
+
     @Inject
-    public PaymentController(PaymentService paymentService) {
+    public PaymentListController(PaymentService paymentService) {
         this.paymentService = paymentService;
+        log.debug("New PaymentListController");
+    }
+
+    public void prepareData(){
+        log.debug("Prepare List Payments");
+        this.payments = paymentService.findAll();
+    }
+
+    public List<Payment> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(List<Payment> payments) {
+        this.payments = payments;
     }
 
     public void add() {
