@@ -49,7 +49,7 @@ public class WorkStatementController {
         managers = managerService.findAll();
         invoices = invoiceService.findAll();
 
-        workStatements = workStatementService.findAll();
+        workStatements = workStatementService.findAllEagerInvoice();
         
         newWorkStatement = new WorkStatement();
         newWorkStatement.getManagerEarning().setCurrency(Currency.UAH);
@@ -60,7 +60,7 @@ public class WorkStatementController {
                 newWorkStatement.getInvoice().getPrice().getCurrency());
     
         workStatementService.save(newWorkStatement);
-        workStatements = workStatementService.findAll();
+        workStatements = workStatementService.findAllEagerInvoice();
         
         newWorkStatement = new WorkStatement();
         newWorkStatement.getManagerEarning().setCurrency(Currency.UAH);

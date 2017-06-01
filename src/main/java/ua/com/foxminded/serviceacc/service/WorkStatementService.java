@@ -9,5 +9,6 @@ public interface WorkStatementService {
     WorkStatement save(WorkStatement workStatement);
     WorkStatement findById(Long id);
     List<WorkStatement> findAll();
+    List<WorkStatement> findAllEagerInvoice();
     void delete(Long id);
 }

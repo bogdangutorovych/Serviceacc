@@ -42,7 +42,7 @@ public class WorkStatement {
     @JoinColumn(name ="manager_earning")
     private Money managerEarning = new Money();
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "invoice_id")
     private Invoice invoice;
     

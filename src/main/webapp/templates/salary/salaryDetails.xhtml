@@ -34,12 +34,12 @@
         tableStyle="table-layout:auto;width:100%;" emptyMessage="Нет данных"
         var="workStatement" value="#{salaryDetailsController.selectedSalary.workStatements}">
             
-        <p:column headerText="Инвойс"
+        <p:column headerText="Клиент"
             converter="omnifaces.SelectItemsConverter">
-            <h:outputText value="#{workStatement.invoice.number}" />
+            <h:outputText value="#{workStatement.invoice.contract.deal.client}" />
         </p:column>
 
-        <p:column headerText="Дата акта">
+        <p:column headerText="Период">
             <h:outputText value="#{workStatement.period.dateFrom}" 
                 converter="localDateConverter"
                 pattern="dd.MM.yyyy" />
@@ -49,7 +49,7 @@
                 pattern="dd.MM.yyyy" />
         </p:column>    
 
-        <p:column headerText="Оплата ментору">
+        <p:column headerText="Оплата">
             <h:outputText value="#{workStatement.managerEarning.amount}" />
         </p:column>    
     </p:dataTable>
