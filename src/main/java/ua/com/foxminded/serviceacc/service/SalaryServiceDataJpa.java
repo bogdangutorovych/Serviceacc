@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,8 +28,13 @@ public class SalaryServiceDataJpa implements SalaryService {
     private SalaryRepository salaryRepository;
 
     @Override
+    @Transactional
     public Salary save(Salary salary) {
-        return salaryRepository.save(salary);
+        Salary savedSalary = salaryRepository.save(salary);
+        
+        workStatementRepository.save(savedSalary.getWorkStatements());
+        
+        return savedSalary;
     }
 
     @Override
