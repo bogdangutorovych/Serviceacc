@@ -36,11 +36,11 @@ public class WorkStatement {
     
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "client_spending")
-    private Money clientSpending;
+    private Money clientSpending = new Money();
     
     @OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name ="manager_earning")
-    private Money managerEarning;
+    private Money managerEarning = new Money();
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "invoice_id")
@@ -48,7 +48,7 @@ public class WorkStatement {
     
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "period_id")
-    private Period period;
+    private Period period = new Period();
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "salary_id")

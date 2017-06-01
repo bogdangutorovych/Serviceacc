@@ -23,7 +23,7 @@ import ua.com.foxminded.serviceacc.service.WorkStatementService;
 @ViewScoped
 public class WorkStatementController {
     private static final Logger log = LoggerFactory.getLogger(WorkStatementController.class);
-
+    
     private static final long serialVersionUID = 1L;
 
     private final ManagerService managerService;
@@ -37,7 +37,7 @@ public class WorkStatementController {
     private List<WorkStatement> workStatements;
 
     @Inject
-    public WorkStatementController(ManagerService managerService, InvoiceService invoiceService,
+    public WorkStatementController(ManagerService managerService, InvoiceService invoiceService, 
             WorkStatementService workStatementService) {
         super();
         this.managerService = managerService;
@@ -50,28 +50,20 @@ public class WorkStatementController {
         invoices = invoiceService.findAll();
 
         workStatements = workStatementService.findAll();
-
-        newWorkStatement = createNewWorkStatement();
+        
+        newWorkStatement = new WorkStatement();
+        newWorkStatement.getManagerEarning().setCurrency(Currency.UAH);
     }
 
-    private WorkStatement createNewWorkStatement() {
-        WorkStatement workStatement = new WorkStatement();
-        workStatement.setPeriod(new Period());
-        workStatement.setClientSpending(new Money());
-        workStatement.setManagerEarning(new Money());
-        workStatement.getManagerEarning().setCurrency(Currency.UAH);
-
-        return workStatement;
-    }
-
-    public void onAdd() {
+       public void onAdd() {
         newWorkStatement.getClientSpending().setCurrency(
                 newWorkStatement.getInvoice().getPrice().getCurrency());
-
+    
         workStatementService.save(newWorkStatement);
         workStatements = workStatementService.findAll();
-
-        newWorkStatement = createNewWorkStatement();
+        
+        newWorkStatement = new WorkStatement();
+        newWorkStatement.getManagerEarning().setCurrency(Currency.UAH);
     }
 
     public WorkStatement getNewWorkStatement() {
@@ -89,5 +81,5 @@ public class WorkStatementController {
     public List<WorkStatement> getWorkStatements() {
         return workStatements;
     }
-
+ 
 }
