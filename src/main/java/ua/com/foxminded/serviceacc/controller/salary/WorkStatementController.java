@@ -51,17 +51,8 @@ public class WorkStatementController {
 
         workStatements = workStatementService.findAll();
         
-        newWorkStatement = createNewWorkStatement();
-    }
-
-    private WorkStatement createNewWorkStatement() {
-        WorkStatement workStatement = new WorkStatement();
-        workStatement.setPeriod(new Period());
-        workStatement.setClientSpending(new Money());
-        workStatement.setManagerEarning(new Money());
-        workStatement.getManagerEarning().setCurrency(Currency.UAH);
-        
-        return workStatement;
+        newWorkStatement = new WorkStatement();
+        newWorkStatement.getManagerEarning().setCurrency(Currency.UAH);
     }
 
     public void onAdd() {
@@ -71,7 +62,8 @@ public class WorkStatementController {
         workStatementService.save(newWorkStatement);
         workStatements = workStatementService.findAll();
         
-        newWorkStatement = createNewWorkStatement();
+        newWorkStatement = new WorkStatement();
+        newWorkStatement.getManagerEarning().setCurrency(Currency.UAH);
     }
 
     public WorkStatement getNewWorkStatement() {
