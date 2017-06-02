@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import ua.com.foxminded.serviceacc.model.Contract;
 import ua.com.foxminded.serviceacc.model.Invoice;
+import ua.com.foxminded.serviceacc.model.Payment;
 import ua.com.foxminded.serviceacc.model.Period;
 import ua.com.foxminded.serviceacc.service.InvoiceService;
 
@@ -26,6 +27,7 @@ public class InvoiceController implements Serializable {
     private Invoice selected;
     private Period period;
     private InvoiceService invoiceService;
+    private Payment payment;
 
     @Inject
     public InvoiceController(InvoiceService invoiceService) {
@@ -69,6 +71,10 @@ public class InvoiceController implements Serializable {
         invoiceService.save(selected);
     }
 
+    public void addNewPayment(){
+        payment = new Payment();
+    }
+
     public void clearSelected() {
         selected = null;
     }
@@ -93,4 +99,11 @@ public class InvoiceController implements Serializable {
         this.invoiceService = invoiceService;
     }
 
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
 }
