@@ -1,4 +1,4 @@
-package ua.com.foxminded.serviceacc.service;
+package ua.com.foxminded.serviceacc.service.datajpa;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,12 +16,13 @@ import ua.com.foxminded.serviceacc.model.WorkStatement;
 import ua.com.foxminded.serviceacc.model.enums.Currency;
 import ua.com.foxminded.serviceacc.repository.SalaryRepository;
 import ua.com.foxminded.serviceacc.repository.WorkStatementRepository;
+import ua.com.foxminded.serviceacc.service.SalaryService;
 
 @Service("salaryService")
 public class SalaryServiceDataJpa implements SalaryService {
     @Autowired
     private WorkStatementRepository workStatementRepository;
-    
+
     @Autowired
     private SalaryRepository salaryRepository;
 
@@ -47,17 +48,17 @@ public class SalaryServiceDataJpa implements SalaryService {
 
     public List<Salary> calculateSalaries() {
         List<WorkStatement> workStatements = workStatementRepository.findPaidNotInSalary();
-        
+
         List<Salary> salaries = sortToSalaries(workStatements);
-        
+
         salaries = calculateSalaryAmounts(salaries);
-       
+
         return salaries;
     }
 
     private List<Salary> sortToSalaries(List<WorkStatement> workStatements) {
         Map<Manager, Salary> salaries = new HashMap<Manager, Salary>();
-       
+
         for (WorkStatement workStatement : workStatements) {
             if (salaries.containsKey(workStatement.getManager())) {
                 Salary salary = salaries.get(workStatement.getManager());
@@ -72,25 +73,25 @@ public class SalaryServiceDataJpa implements SalaryService {
         }
         return new ArrayList<Salary>(salaries.values());
     }
-    
+
     private Money getManagerEarnings(Set <WorkStatement> workStatements) {
         Money money = new Money();
         money.setAmount(0l);
         money.setCurrency(Currency.UAH);
-        
+
         for (WorkStatement workStatement : workStatements) {
             money.setAmount(Long.sum(money.getAmount(), workStatement.getManagerEarning().getAmount()));
         }
-        
+
         return money;
     }
-    
+
     private List<Salary> calculateSalaryAmounts(List<Salary> salaries) {
         for (Salary salary : salaries) {
             Money salaryAmount = getManagerEarnings(salary.getWorkStatements());
             salary.setAmount(salaryAmount);
         }
-        
+
         return salaries;
     }
 }

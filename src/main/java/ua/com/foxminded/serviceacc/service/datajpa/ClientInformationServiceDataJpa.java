@@ -1,4 +1,4 @@
-package ua.com.foxminded.serviceacc.service;
+package ua.com.foxminded.serviceacc.service.datajpa;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.ClientInformation;
 import ua.com.foxminded.serviceacc.repository.ClientInformationRepository;
+import ua.com.foxminded.serviceacc.service.ClientInformationService;
 
 @Service("clientInformationService")
 public class ClientInformationServiceDataJpa implements ClientInformationService {

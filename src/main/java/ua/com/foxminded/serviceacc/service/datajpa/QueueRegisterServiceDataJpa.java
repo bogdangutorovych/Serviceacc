@@ -1,4 +1,4 @@
-package ua.com.foxminded.serviceacc.service;
+package ua.com.foxminded.serviceacc.service.datajpa;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import ua.com.foxminded.serviceacc.model.QueueRegister;
 import ua.com.foxminded.serviceacc.repository.QueueRegisterRepository;
+import ua.com.foxminded.serviceacc.service.QueueRegisterService;
 
 @Service("queueRegisterService")
 public class QueueRegisterServiceDataJpa implements QueueRegisterService {
