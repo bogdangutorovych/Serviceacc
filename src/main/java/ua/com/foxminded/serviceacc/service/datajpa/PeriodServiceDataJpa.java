@@ -1,4 +1,4 @@
-package ua.com.foxminded.serviceacc.service;
+package ua.com.foxminded.serviceacc.service.datajpa;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import ua.com.foxminded.serviceacc.model.Period;
 import ua.com.foxminded.serviceacc.repository.PeriodRepository;
+import ua.com.foxminded.serviceacc.service.PeriodService;
 
 @Service("periodService")
 public class PeriodServiceDataJpa implements PeriodService {

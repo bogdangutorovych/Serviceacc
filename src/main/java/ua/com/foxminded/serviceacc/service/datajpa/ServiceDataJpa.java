@@ -1,4 +1,4 @@
-package ua.com.foxminded.serviceacc.service;
+package ua.com.foxminded.serviceacc.service.datajpa;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ua.com.foxminded.serviceacc.repository.ServiceRepository;
+import ua.com.foxminded.serviceacc.service.ServiceService;
 
 @Service("serviceService")
 public class ServiceDataJpa implements ServiceService {

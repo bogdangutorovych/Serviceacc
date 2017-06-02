@@ -1,4 +1,4 @@
-package ua.com.foxminded.serviceacc.service;
+package ua.com.foxminded.serviceacc.service.datajpa;
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ import ua.com.foxminded.serviceacc.model.Manager;
 import ua.com.foxminded.serviceacc.model.ManagerInformation;
 import ua.com.foxminded.serviceacc.model.ManagerInformationType;
 import ua.com.foxminded.serviceacc.repository.ManagerInformationRepository;
+import ua.com.foxminded.serviceacc.service.ManagerInformationService;
 
 @Service("managerInformationService")
 public class ManagerInformationServiceDataJpa implements ManagerInformationService {

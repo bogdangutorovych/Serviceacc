@@ -1,4 +1,4 @@
-package ua.com.foxminded.serviceacc.service;
+package ua.com.foxminded.serviceacc.service.datajpa;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.Manager;
 import ua.com.foxminded.serviceacc.repository.ManagerRepository;
+import ua.com.foxminded.serviceacc.service.ManagerService;
 
 /**
  * Created by andreb on 31.03.17.

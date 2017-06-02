@@ -1,4 +1,4 @@
-package ua.com.foxminded.serviceacc.service;
+package ua.com.foxminded.serviceacc.service.datajpa;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.Deal;
 import ua.com.foxminded.serviceacc.repository.DealRepository;
+import ua.com.foxminded.serviceacc.service.DealService;
 
 @Service("dealService")
 public class DealServiceDataJpa implements DealService {

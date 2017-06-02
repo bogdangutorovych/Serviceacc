@@ -1,4 +1,4 @@
-package ua.com.foxminded.serviceacc.service;
+package ua.com.foxminded.serviceacc.service.datajpa;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import ua.com.foxminded.serviceacc.model.Contract;
 import ua.com.foxminded.serviceacc.repository.ContractRepository;
+import ua.com.foxminded.serviceacc.service.ContractService;
 
 @Service("contractService")
 public class ContractServiceDataJpa implements ContractService {

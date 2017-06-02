@@ -1,4 +1,4 @@
-package ua.com.foxminded.serviceacc.service;
+package ua.com.foxminded.serviceacc.service.datajpa;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import ua.com.foxminded.serviceacc.model.ClientInformationType;
 import ua.com.foxminded.serviceacc.repository.ClientInformationTypeRepository;
+import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
 
 /**
  * Created by andreb on 04.04.17.
