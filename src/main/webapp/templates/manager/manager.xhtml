@@ -67,7 +67,7 @@
 
 	</p:dataTable>
 
-    <h:panelGrid columns="2" cellpadding="5">
+    <h:panelGrid columns="2" cellpadding="5" rendered="#{managerController.selectedManager.id != null}">
 
         <p:dataTable id="clientsListByManager" editable="true" emptyMessage="No items yet"
                      var="client" value="#{managerController.fetchClients(managerController.selectedManager)}">
