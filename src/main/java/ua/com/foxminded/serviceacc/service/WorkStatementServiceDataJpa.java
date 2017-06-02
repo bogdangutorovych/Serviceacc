@@ -3,6 +3,8 @@ package ua.com.foxminded.serviceacc.service;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Service;
 
 import ua.com.foxminded.serviceacc.model.WorkStatement;
@@ -12,6 +14,7 @@ import ua.com.foxminded.serviceacc.repository.WorkStatementRepository;
 public class WorkStatementServiceDataJpa implements WorkStatementService {
     private final WorkStatementRepository workStatementRepository;
     
+    @Inject
     public WorkStatementServiceDataJpa(WorkStatementRepository workStatementRepository) {
         super();
         this.workStatementRepository = workStatementRepository;

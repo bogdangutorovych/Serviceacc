@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +26,7 @@ public class SalaryServiceDataJpa implements SalaryService {
     
     private final SalaryRepository salaryRepository;
 
+    @Inject
     public SalaryServiceDataJpa(WorkStatementRepository workStatementRepository, SalaryRepository salaryRepository) {
         super();
         this.workStatementRepository = workStatementRepository;

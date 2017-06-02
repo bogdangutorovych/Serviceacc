@@ -1,6 +1,6 @@
 package ua.com.foxminded.serviceacc.controller.salary;
 
-import java.time.LocalDate;
+import java.util.List;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -14,36 +14,41 @@ import ua.com.foxminded.serviceacc.service.SalaryService;
 
 @Named
 @ViewScoped
-public class SalaryDetailsController {
-    private static final Logger log = LoggerFactory.getLogger(SalaryDetailsController.class);
+public class SalariesController {
+    private static final Logger log = LoggerFactory.getLogger(SalariesController.class);
     
     private static final long serialVersionUID = 1L;
-    
+
     private final SalaryService salaryService;
     
-    private Salary selectedSalary;
+    private List<Salary> salaries;
     
+    private Salary selectedSalary;
+
     @Inject
-    public SalaryDetailsController(SalaryService salaryService) {
+    public SalariesController(SalaryService salaryService) {
         super();
         this.salaryService = salaryService;
     }
 
-    public void onGenerate() {
-        selectedSalary.setDate(LocalDate.now());
-        salaryService.save(selectedSalary);
+    public void prepareData() {
+        salaries = salaryService.findAll();
     }
     
-    public boolean getIsNewSalary() {
-        return selectedSalary.getId() == null;
+    public List<Salary> getSalaries() {
+        return salaries;
     }
-    
+
+    public void setSalaries(List<Salary> salaries) {
+        this.salaries = salaries;
+    }
+
     public Salary getSelectedSalary() {
         return selectedSalary;
     }
 
     public void setSelectedSalary(Salary selectedSalary) {
         this.selectedSalary = selectedSalary;
-    }    
- 
+    }
+
 }
