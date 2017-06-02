@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,11 +20,15 @@ import ua.com.foxminded.serviceacc.repository.WorkStatementRepository;
 
 @Service("salaryService")
 public class SalaryServiceDataJpa implements SalaryService {
-    @Autowired
-    private WorkStatementRepository workStatementRepository;
+    private final WorkStatementRepository workStatementRepository;
     
-    @Autowired
-    private SalaryRepository salaryRepository;
+    private final SalaryRepository salaryRepository;
+
+    public SalaryServiceDataJpa(WorkStatementRepository workStatementRepository, SalaryRepository salaryRepository) {
+        super();
+        this.workStatementRepository = workStatementRepository;
+        this.salaryRepository = salaryRepository;
+    }
 
     @Override
     @Transactional
