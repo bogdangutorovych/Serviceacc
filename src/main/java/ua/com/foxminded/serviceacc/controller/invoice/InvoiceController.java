@@ -14,6 +14,8 @@ import ua.com.foxminded.serviceacc.model.Contract;
 import ua.com.foxminded.serviceacc.model.Invoice;
 import ua.com.foxminded.serviceacc.model.Payment;
 import ua.com.foxminded.serviceacc.model.Period;
+import ua.com.foxminded.serviceacc.model.enums.InvoiceType;
+import ua.com.foxminded.serviceacc.model.enums.PaymentType;
 import ua.com.foxminded.serviceacc.service.InvoiceService;
 
 @Named
@@ -61,6 +63,7 @@ public class InvoiceController implements Serializable {
     public void init() {
         selected = new Invoice();
         period = new Period();
+        payment = new Payment();
     }
 
     public void onOk() {
@@ -71,8 +74,14 @@ public class InvoiceController implements Serializable {
         invoiceService.save(selected);
     }
 
-    public void addNewPayment(){
+    public void prepareNewPayment(){
+        log.debug("Prepare new Payment");
         payment = new Payment();
+    }
+
+    public void addPayment(){
+        log.debug("Payment " + payment + " was attached to Invoice " + selected);
+        selected.setPayment(payment);
     }
 
     public void clearSelected() {
