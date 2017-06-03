@@ -3,6 +3,7 @@ package ua.com.foxminded.serviceacc.controller.invoice;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -10,10 +11,8 @@ import javax.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ua.com.foxminded.serviceacc.model.Contract;
-import ua.com.foxminded.serviceacc.model.Invoice;
-import ua.com.foxminded.serviceacc.model.Payment;
-import ua.com.foxminded.serviceacc.model.Period;
+import ua.com.foxminded.serviceacc.model.*;
+import ua.com.foxminded.serviceacc.model.enums.Currency;
 import ua.com.foxminded.serviceacc.model.enums.InvoiceType;
 import ua.com.foxminded.serviceacc.model.enums.PaymentType;
 import ua.com.foxminded.serviceacc.service.InvoiceService;
@@ -60,10 +59,11 @@ public class InvoiceController implements Serializable {
         return nextPayPeriod;
     }
 
+    @PostConstruct
     public void init() {
         selected = new Invoice();
         period = new Period();
-        payment = new Payment();
+        prepareNewPayment();
     }
 
     public void onOk() {
@@ -77,11 +77,13 @@ public class InvoiceController implements Serializable {
     public void prepareNewPayment(){
         log.debug("Prepare new Payment");
         payment = new Payment();
+        payment.setMoney(new Money());
     }
 
     public void addPayment(){
         log.debug("Payment " + payment + " was attached to Invoice " + selected);
         selected.setPayment(payment);
+        selected.setInvoiceType(InvoiceType.PAID);
     }
 
     public void clearSelected() {

@@ -42,6 +42,7 @@ public class ServiceController implements Serializable {
 
     public void addNewService() {
         selectedService = new Service();
+        selectedService.setManagerRate(new Money());
         tempPrices.clear();
     }
 

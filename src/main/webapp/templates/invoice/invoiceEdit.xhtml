@@ -74,8 +74,9 @@
         <p:outputPanel id="addPaymentPanel"
                        rendered="#{invoiceController.selected.invoiceType == 'NEW'}">
             <p:commandButton value="Добавить оплату"
-                             actionListener="#{invoiceController.prepareNewPayment}"
-                             onclick="PF('paymentDlg').show();" />
+                             actionListener="#{invoiceController.prepareNewPayment()}"
+                             update="payDlg"
+                             oncomplete="PF('paymentDlg').show();" />
         </p:outputPanel>
         <p:outputPanel rendered="#{invoiceController.selected.invoiceType == 'NEW'}">
         </p:outputPanel>
@@ -106,8 +107,7 @@
 		</p:calendar>
 	</h:panelGrid>
 
-    <p:dialog id="payDlg" header="Добавить оплату" widgetVar="paymentDlg" modal="false"
-              appendTo="@(body)" >
+    <p:dialog id="payDlg" header="Добавить оплату" widgetVar="paymentDlg">
         <h:panelGrid columns="2">
             <h:outputLabel for="paymentDateDlg" value="Дата оплаты: "
                            style="font-weight:bold" />
@@ -121,14 +121,24 @@
             <p:inputText id="amountDlg" value="#{invoiceController.payment.money.amount}"
                          disabled="false" />
 
+            <h:outputLabel for="payTypeDlg" value="Тип оплаты: "
+                           style="font-weight:bold" />
+            <p:selectOneMenu id="payTypeDlg"
+                             value="#{invoiceController.payment.type}"
+                             converter="omnifaces.SelectItemsConverter">
+                <f:selectItems value="#{PaymentTypes.ALL_VALUES}" var="paymentType"
+                               itemLabel="#{paymentType.name()}" />
+                <p:inputText id="payTypeDlg2"
+                             value="#{invoiceController.payment.type}" required="true" />
+            </p:selectOneMenu>
 
-            <f:facet name="footer">
                 <p:commandButton value="Сохранить"
-                                 actionListener="#{invoiceController.addPayment}"
+                                 actionListener="#{invoiceController.addPayment()}"
+                                 update="invoiceEdit"
                                  oncomplete="PF('paymentDlg').hide();"/>
 
                 <p:commandButton value="Отмена" oncomplete="PF('paymentDlg').hide();"/>
-            </f:facet>
+
         </h:panelGrid>
     </p:dialog>
 
