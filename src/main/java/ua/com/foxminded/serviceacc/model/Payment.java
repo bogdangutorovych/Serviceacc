@@ -39,7 +39,7 @@ public class Payment {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -73,10 +73,6 @@ public class Payment {
 
     public void setDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
 }
