@@ -10,6 +10,8 @@
     <p:importEnum
         type="ua.com.foxminded.serviceacc.model.enums.PaymentType"
         var="PaymentTypes" />
+    <p:importEnum type="ua.com.foxminded.serviceacc.model.enums.Currency"
+                  var="CurrencyTypes" />
 
 	<p:toolbar>
 		<f:facet name="left">
@@ -117,9 +119,17 @@
                         mask="99.99.9999">
             </p:calendar>
 
-            <h:outputLabel for="amountDlg" value="Сумма: " style="font-weight:bold" />
-            <p:inputText id="amountDlg" value="#{invoiceController.payment.money.amount}"
-                         disabled="false" />
+            <h:outputLabel for="pay_amount" value="Сумма: " style="font-weight:bold" />
+            <p:inputText id="pay_amount" value="#{invoiceController.payment.money.amount}" />
+
+            <h:outputLabel for="pay_currency" value="Валюта: " style="font-weight:bold" />
+            <p:selectOneMenu id="pay_currency" value="#{invoiceController.payment.money.currency}"
+                                 converter="omnifaces.SelectItemsConverter">
+                    <f:selectItems value="#{CurrencyTypes.ALL_VALUES}"
+                                   var="currencyType" itemLabel="#{currencyType.name()}"/>
+                    <p:inputText id="pay_currency_type"
+                                 value="#{invoiceController.payment.money.currency}" required="true" />
+                </p:selectOneMenu>
 
             <h:outputLabel for="payTypeDlg" value="Тип оплаты: "
                            style="font-weight:bold" />
