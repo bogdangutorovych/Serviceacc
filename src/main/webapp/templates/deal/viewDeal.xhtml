@@ -23,7 +23,7 @@
 			<p:commandButton id="btn_create_contract"
 				value="Сформировать договор" update=":contentForm"
 				icon="ui-icon-close"
-				actionListener="#{contractController.add(dealController.selected)}"
+				actionListener="#{contractController.add(dealController.selectedDeal)}"
 				action='#{navController.setMainContent("contract/contract")}'
 				immediate="true" />
 
@@ -32,7 +32,7 @@
 
 			<p:commandButton id="btn_put_into_queue" value="Поставить в очередь"
 				update=":contentForm" icon="ui-icon-close"
-				action="#{queueRegisterController.add(dealController.selected)}"
+				action="#{queueRegisterController.add(dealController.selectedDeal)}"
 				actionListener='#{navController.setMainContent("queue/queueRegisterList")}'
 				immediate="true" />
 		</f:facet>
@@ -42,12 +42,12 @@
 	<h:panelGrid columns="2" cellpadding="5">
 
 		<h:outputLabel for="client" value="Клиент: " style="font-weight:bold" />
-		<p:inputText id="number" value="#{clientController.selectedClient}"
+		<p:inputText id="client" value="#{clientController.selectedClient}"
 			disabled="true" />
 
 		<h:outputLabel for="service" value="Услуга: " style="font-weight:bold" />
 		<p:inputText id="service"
-			value="#{dealController.selected.service.name}" disabled="true" />
+			value="#{dealController.selectedDeal.service.name}" disabled="true" />
 
 	</h:panelGrid>
 

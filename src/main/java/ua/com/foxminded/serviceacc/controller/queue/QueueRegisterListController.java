@@ -3,6 +3,7 @@ package ua.com.foxminded.serviceacc.controller.queue;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -23,27 +24,28 @@ public class QueueRegisterListController implements Serializable {
 
     private List<QueueRegister> list;
 
-    private QueueRegisterService queueRegisterService;
+    private final QueueRegisterService queueRegisterService;
 
     @Inject
     public QueueRegisterListController(QueueRegisterService queueRegisterService) {
         this.queueRegisterService = queueRegisterService;
     }
 
+    @PostConstruct
+    public void init(){
+        prepareData();
+    }
+
+    public void prepareData(){
+        list = queueRegisterService.findAll();
+    }
+
     public List<QueueRegister> getList() {
-        return queueRegisterService.findAll();
+        return list;
     }
 
     public void setList(List<QueueRegister> list) {
         this.list = list;
-    }
-
-    public QueueRegisterService getQueueRegisterService() {
-        return queueRegisterService;
-    }
-
-    public void setQueueRegisterService(QueueRegisterService queueRegisterService) {
-        this.queueRegisterService = queueRegisterService;
     }
 
 }

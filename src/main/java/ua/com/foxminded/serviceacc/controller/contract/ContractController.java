@@ -22,7 +22,7 @@ public class ContractController implements Serializable {
     private static Logger logger = LoggerFactory.getLogger(ContractController.class);
     private static final long serialVersionUID = 1L;
 
-    private Contract selected;
+    private Contract selectedContract;
     private ContractService contractService;
 
     @Inject
@@ -31,35 +31,35 @@ public class ContractController implements Serializable {
     }
 
     public void add(Deal deal) {
-        selected = new Contract();
-        selected.setDeal(deal);
-        selected.setContractDate(LocalDate.now());
-        selected.setClientRate(new Money());
+        selectedContract = new Contract();
+        selectedContract.setDeal(deal);
+        selectedContract.setContractDate(LocalDate.now());
+        selectedContract.setClientRate(new Money());
     }
 
     public void onOk() {
-        if (selected.getId() == null) {
-            selected = contractService.save(selected);
-            selected.setNumber("contr# " + selected.getId());
+        if (selectedContract.getId() == null) {
+            selectedContract = contractService.save(selectedContract);
+            selectedContract.setNumber("contr# " + selectedContract.getId());
         }
-        contractService.save(selected);
+        contractService.save(selectedContract);
     }
 
     public void delete() {
-        contractService.delete(selected.getId());
+        contractService.delete(selectedContract.getId());
     }
 
     public void onCancel() {
         logger.info("onCancel");
-        selected = null;
+        selectedContract = null;
     }
 
-    public Contract getSelected() {
-        return selected;
+    public Contract getSelectedContract() {
+        return selectedContract;
     }
 
-    public void setSelected(Contract selected) {
-        this.selected = selected;
+    public void setSelectedContract(Contract selectedContract) {
+        this.selectedContract = selectedContract;
     }
 
     public ContractService getContractService() {

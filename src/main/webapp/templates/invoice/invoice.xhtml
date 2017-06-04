@@ -31,56 +31,56 @@
 		<h:outputLabel for="date" value="Дата счета: "
 			style="font-weight:bold" />
 		<p:calendar id="date" converter="localDateConverter"
-			pattern="dd.MM.yyyy" value="#{invoiceController.selected.date}"
+			pattern="dd.MM.yyyy" value="#{invoiceController.selectedInvoice.date}"
 			showOn="button" mask="99.99.9999">
 		</p:calendar>
 
 		<h:outputLabel for="contractNumber" value="Номер договора: "
 			style="font-weight:bold" />
 		<p:inputText id="contractNumber"
-			value="#{invoiceController.selected.contract.number}" disabled="true" />
+                     value="#{invoiceController.selectedInvoice.contract.number}" disabled="true" />
 
 
 		<h:outputLabel for="client" value="Клиент: " style="font-weight:bold" />
 		<p:inputText id="client"
-			value="#{invoiceController.selected.contract.deal.client}"
+			value="#{invoiceController.selectedInvoice.contract.deal.client}"
 			disabled="true" />
 
 		<h:outputLabel for="amount" value="Сумма: " style="font-weight:bold" />
 		<p:inputText id="amount"
-			value="#{invoiceController.selected.price.amount}" disabled="false" />
-			
+                     value="#{invoiceController.selectedInvoice.price.amount}" disabled="false" />
+
 			<h:outputLabel for="currency" value="Валюта: " style="font-weight:bold" />
         <p:inputText id="currency"
-            value="#{invoiceController.selected.price.currency}" disabled="true" />
+                     value="#{invoiceController.selectedInvoice.price.currency}" disabled="true" />
 
 
 		<h:outputLabel for="invoiceType" value="Тип счета: "
 			style="font-weight:bold" />
 		<p:selectOneMenu id="invoiceType"
-			value="#{invoiceController.selected.invoiceType}"
+			value="#{invoiceController.selectedInvoice.invoiceType}"
 			converter="omnifaces.SelectItemsConverter">
 			<f:selectItems value="#{InvoiceTypes.ALL_VALUES}" var="invoiceType"
 				itemLabel="#{invoiceType.name()}" />
 			<p:inputText id="type"
-				value="#{invoiceController.selected.invoiceType}" required="true" />
+                         value="#{invoiceController.selectedInvoice.invoiceType}" required="true" />
 		</p:selectOneMenu>
 
 
 		<h:outputLabel for="dateFrom" value="Период с: "
 			style="font-weight:bold" />
 		<p:calendar id="dateFrom" converter="localDateConverter"
-			pattern="dd.MM.yyyy"
-			value="#{invoiceController.selected.period.dateFrom}" showOn="button"
-			mask="99.99.9999">
+                    pattern="dd.MM.yyyy"
+                    value="#{invoiceController.selectedInvoice.period.dateFrom}" showOn="button"
+                    mask="99.99.9999">
 		</p:calendar>
 
 		<h:outputLabel for="dateTo" value="Период по: "
 			style="font-weight:bold" />
 		<p:calendar id="dateTo" converter="localDateConverter"
-			pattern="dd.MM.yyyy"
-			value="#{invoiceController.selected.period.dateTo}" showOn="button"
-			mask="99.99.9999">
+                    pattern="dd.MM.yyyy"
+                    value="#{invoiceController.selectedInvoice.period.dateTo}" showOn="button"
+                    mask="99.99.9999">
 		</p:calendar>
 	</h:panelGrid>
 

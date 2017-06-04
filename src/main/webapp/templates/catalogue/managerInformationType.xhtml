@@ -13,7 +13,7 @@
             <span class="ui-separator"><span class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
             <p:commandButton  id="btn_delete" value="Delete" update=":contentForm" icon="ui-icon-trash"
-                              disabled="#{managerInformationTypeController.selected==null}"
+                              disabled="#{managerInformationTypeController.selectedManagerInfoType==null}"
                               actionListener="#{managerInformationTypeController.delete()}"/>
 
         </f:facet>
@@ -24,7 +24,7 @@
     <p:dataTable id="managerInformationTypeList" editable="true" emptyMessage="No items yet"
                  var="managerInfoType" value="#{managerInformationTypeController.managerInformationTypeList}"
                  rowKey="#{managerInformationTypeController.managerInformationTypeList.indexOf(managerInfoType)}"
-                 selectionMode="single" selection="#{managerInformationTypeController.selected}">
+                 selectionMode="single" selection="#{managerInformationTypeController.selectedManagerInfoType}">
 
         <f:facet name="header">Manager Information Types</f:facet>
         <p:ajax event="rowEdit" listener="#{managerInformationTypeController.onRowEdit}"/>

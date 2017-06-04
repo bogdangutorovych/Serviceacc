@@ -25,7 +25,7 @@ public class InvoiceListController implements Serializable {
 
     private List<Invoice> list;
 
-    private InvoiceService invoiceService;
+    private final InvoiceService invoiceService;
 
     @Inject
     public InvoiceListController(InvoiceService invoiceService) {
@@ -52,14 +52,6 @@ public class InvoiceListController implements Serializable {
 
     public void setList(List<Invoice> list) {
         this.list = list;
-    }
-
-    public InvoiceService getInvoiceService() {
-        return invoiceService;
-    }
-
-    public void setInvoiceService(InvoiceService invoiceService) {
-        this.invoiceService = invoiceService;
     }
 
 }

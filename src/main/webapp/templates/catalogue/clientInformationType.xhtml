@@ -13,7 +13,7 @@
             <span class="ui-separator"><span class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
             <p:commandButton  id="btn_delete" value="Delete" update=":contentForm" icon="ui-icon-trash"
-                              disabled="#{clientInformationTypeController.selected==null}"
+                              disabled="#{clientInformationTypeController.selectedClientInfoType==null}"
                               actionListener="#{clientInformationTypeController.delete()}"/>
 
         </f:facet>
@@ -24,7 +24,7 @@
     <p:dataTable id="clientInformationTypeList" editable="true" emptyMessage="No items yet"
                  var="clientInfoType" value="#{clientInformationTypeController.clientInformationTypeList}"
                  rowKey="#{clientInformationTypeController.clientInformationTypeList.indexOf(clientInfoType)}"
-                 selectionMode="single" selection="#{clientInformationTypeController.selected}">
+                 selectionMode="single" selection="#{clientInformationTypeController.selectedClientInfoType}">
 
         <f:facet name="header">Client Information Types</f:facet>
         <p:ajax event="rowEdit" listener="#{clientInformationTypeController.onRowEdit}"/>

@@ -20,8 +20,8 @@ public class PeriodController implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Period selected;
-    private PeriodService periodService;
+    private Period selectedPeriod;
+    private final PeriodService periodService;
 
     @Inject
     public PeriodController(PeriodService periodService) {
@@ -29,35 +29,27 @@ public class PeriodController implements Serializable {
     }
 
     public void add() {
-        selected = new Period();
+        selectedPeriod = new Period();
     }
 
     public void onOk() {
-        selected = periodService.save(selected);
+        selectedPeriod = periodService.save(selectedPeriod);
     }
 
     public void clearSelected() {
-        selected = null;
+        selectedPeriod = null;
     }
 
     public void onCancel() {
-        selected = null;
+        selectedPeriod = null;
     }
 
-    public Period getSelected() {
-        return selected;
+    public Period getSelectedPeriod() {
+        return selectedPeriod;
     }
 
-    public void setSelected(Period selected) {
-        this.selected = selected;
-    }
-
-    public PeriodService getPeriodService() {
-        return periodService;
-    }
-
-    public void setPeriodService(PeriodService periodService) {
-        this.periodService = periodService;
+    public void setSelectedPeriod(Period selectedPeriod) {
+        this.selectedPeriod = selectedPeriod;
     }
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.slf4j.Logger;
@@ -23,8 +24,9 @@ public class DealListController implements Serializable {
 
     private List<Deal> list;
 
-    private DealService dealService;
+    private final DealService dealService;
 
+    @Inject
     public DealListController(DealService dealService) {
         this.dealService = dealService;
     }
@@ -45,14 +47,6 @@ public class DealListController implements Serializable {
 
     public void setList(List<Deal> list) {
         this.list = list;
-    }
-
-    public DealService getDealService() {
-        return dealService;
-    }
-
-    public void setDealService(DealService dealService) {
-        this.dealService = dealService;
     }
 
 }

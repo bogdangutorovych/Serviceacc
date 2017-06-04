@@ -22,8 +22,8 @@ public class QueueRegisterController implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private QueueRegister selected;
-    private QueueRegisterService queueRegisterService;
+    private QueueRegister selectedQueue;
+    private final QueueRegisterService queueRegisterService;
 
     @Inject
     public QueueRegisterController(QueueRegisterService queueRegisterService) {
@@ -31,39 +31,31 @@ public class QueueRegisterController implements Serializable {
     }
 
     public void add(Deal deal) {
-        selected = new QueueRegister();
-        selected.setDeal(deal);
-        selected.setRegisterDate(LocalDate.now());
-        queueRegisterService.save(selected);
+        selectedQueue = new QueueRegister();
+        selectedQueue.setDeal(deal);
+        selectedQueue.setRegisterDate(LocalDate.now());
+        queueRegisterService.save(selectedQueue);
     }
 
     public void onOk() {
-        selected = queueRegisterService.save(selected);
+        selectedQueue = queueRegisterService.save(selectedQueue);
     }
 
     public void delete() {
-        queueRegisterService.delete(selected.getId());
-        selected = null;
+        queueRegisterService.delete(selectedQueue.getId());
+        selectedQueue = null;
     }
 
     public void onCancel() {
-        selected = null;
+        selectedQueue = null;
     }
 
-    public QueueRegister getSelected() {
-        return selected;
+    public QueueRegister getSelectedQueue() {
+        return selectedQueue;
     }
 
-    public void setSelected(QueueRegister selected) {
-        this.selected = selected;
-    }
-
-    public QueueRegisterService getQueueRegisterService() {
-        return queueRegisterService;
-    }
-
-    public void setQueueRegisterService(QueueRegisterService queueRegisterService) {
-        this.queueRegisterService = queueRegisterService;
+    public void setSelectedQueue(QueueRegister selectedQueue) {
+        this.selectedQueue = selectedQueue;
     }
 
 }

@@ -3,6 +3,7 @@ package ua.com.foxminded.serviceacc.controller.invoice;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -12,7 +13,10 @@ import org.slf4j.LoggerFactory;
 
 import ua.com.foxminded.serviceacc.model.Contract;
 import ua.com.foxminded.serviceacc.model.Invoice;
+import ua.com.foxminded.serviceacc.model.Payment;
 import ua.com.foxminded.serviceacc.model.Period;
+import ua.com.foxminded.serviceacc.model.Money;
+import ua.com.foxminded.serviceacc.model.enums.InvoiceType;
 import ua.com.foxminded.serviceacc.service.InvoiceService;
 
 @Named
@@ -23,9 +27,10 @@ public class InvoiceController implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Invoice selected;
+    private Invoice selectedInvoice;
     private Period period;
-    private InvoiceService invoiceService;
+    private final InvoiceService invoiceService;
+    private Payment payment;
 
     @Inject
     public InvoiceController(InvoiceService invoiceService) {
@@ -34,11 +39,11 @@ public class InvoiceController implements Serializable {
 
     public void add(Contract contract) {
         init();
-        selected.setContract(contract);
-        selected.setPeriod(period);
-        selected.setDate(LocalDate.now());
-        selected.setPeriod(findNextPayPeriod(contract));
-        selected.setPrice(contract.getClientRate());
+        selectedInvoice.setContract(contract);
+        selectedInvoice.setPeriod(period);
+        selectedInvoice.setDate(LocalDate.now());
+        selectedInvoice.setPeriod(findNextPayPeriod(contract));
+        selectedInvoice.setPrice(contract.getClientRate());
     }
 
     public Invoice findLatestInvoice(Contract contract) {
@@ -56,41 +61,54 @@ public class InvoiceController implements Serializable {
         return nextPayPeriod;
     }
 
+    @PostConstruct
     public void init() {
-        selected = new Invoice();
+        selectedInvoice = new Invoice();
         period = new Period();
+        prepareNewPayment();
     }
 
     public void onOk() {
-        if (selected.getId() == null) {
-            selected = invoiceService.save(selected);
-            selected.setNumber("inv# " + selected.getId());
+        if (selectedInvoice.getId() == null) {
+            selectedInvoice = invoiceService.save(selectedInvoice);
+            selectedInvoice.setNumber("inv# " + selectedInvoice.getId());
         }
-        invoiceService.save(selected);
+        invoiceService.save(selectedInvoice);
+    }
+
+    public void prepareNewPayment(){
+        payment = new Payment();
+        payment.setMoney(new Money());
+        log.debug("Prepared new Payment");
+    }
+
+    public void addPayment(){
+        selectedInvoice.setPayment(payment);
+        selectedInvoice.setInvoiceType(InvoiceType.PAID);
+        log.debug("Payment " + payment + " was attached to Invoice " + selectedInvoice);
     }
 
     public void clearSelected() {
-        selected = null;
+        selectedInvoice = null;
     }
 
     public void onCancel() {
-        selected = null;
+        selectedInvoice = null;
     }
 
-    public Invoice getSelected() {
-        return selected;
+    public Invoice getSelectedInvoice() {
+        return selectedInvoice;
     }
 
-    public void setSelected(Invoice selected) {
-        this.selected = selected;
+    public void setSelectedInvoice(Invoice selectedInvoice) {
+        this.selectedInvoice = selectedInvoice;
     }
 
-    public InvoiceService getInvoiceService() {
-        return invoiceService;
+    public Payment getPayment() {
+        return payment;
     }
 
-    public void setInvoiceService(InvoiceService invoiceService) {
-        this.invoiceService = invoiceService;
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
-
 }

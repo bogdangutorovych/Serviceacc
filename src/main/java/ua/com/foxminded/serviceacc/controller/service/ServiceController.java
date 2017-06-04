@@ -2,6 +2,7 @@ package ua.com.foxminded.serviceacc.controller.service;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -28,8 +29,8 @@ public class ServiceController implements Serializable {
     private final ServiceService serviceService;
 
     private Service selectedService;
-    private List<Money> tempPrices = new ArrayList<>();
-    private Money newMoney = new Money();
+    private List<Money> tempPrices;
+    private Money newMoney;
 
     @Inject
     public ServiceController(ServiceService serviceService) {
@@ -38,10 +39,14 @@ public class ServiceController implements Serializable {
 
     @PostConstruct
     public void init() {
+        tempPrices = new ArrayList<>();
+        newMoney = new Money();
     }
 
     public void addNewService() {
         selectedService = new Service();
+        selectedService.setPrices(new HashSet<>());
+        selectedService.setManagerRate(new Money());
         tempPrices.clear();
     }
 
@@ -83,14 +88,6 @@ public class ServiceController implements Serializable {
         newMoney = new Money();
     }
 
-    public Service getSelectedService() {
-        return selectedService;
-    }
-
-    public void setSelectedService(Service selectedService) {
-        this.selectedService = selectedService;
-    }
-
     public List<Money> getTempPrices() {
         return tempPrices;
     }
@@ -103,4 +100,11 @@ public class ServiceController implements Serializable {
         return newMoney;
     }
 
+    public Service getSelectedService() {
+        return selectedService;
+    }
+
+    public void setSelectedService(Service selectedService) {
+        this.selectedService = selectedService;
+    }
 }

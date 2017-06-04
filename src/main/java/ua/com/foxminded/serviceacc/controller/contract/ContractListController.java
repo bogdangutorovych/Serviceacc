@@ -22,7 +22,7 @@ public class ContractListController implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private List<Contract> list;
-    private ContractService contractService;
+    private final ContractService contractService;
 
     @Inject
     public ContractListController(ContractService contractService) {
@@ -41,14 +41,6 @@ public class ContractListController implements Serializable {
 
     public List<Contract> getList() {
         return list;
-    }
-
-    public ContractService getContractService() {
-        return contractService;
-    }
-
-    public void setContractService(ContractService contractService) {
-        this.contractService = contractService;
     }
 
 }

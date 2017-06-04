@@ -30,19 +30,23 @@
 						action='#{navController.setMainContent("contract/contractsForInvoicesIssue")}' />
 				</p:submenu>
 				<p:submenu label="Зарплата">
-				    <p:menuitem value="Все зарплаты" icon="ui-icon-document" 
+				    <p:menuitem value="Все зарплаты" icon="ui-icon-document"
 				        update=":contentForm"
 				        action='#{navController.setMainContent("salary/salaryList")}'/>
-				    <p:menuitem value="Расчет зарплат" icon="ui-icon-document" 
+				    <p:menuitem value="Расчет зарплат" icon="ui-icon-document"
 				        update=":contentForm"
 				        action='#{navController.setMainContent("salary/salaryCalculation")}'
 				        actionListener="#{salariesCalculationController.calculateSalaries}" />
-                    <p:menuitem value="Акты" icon="ui-icon-document" 
+                    <p:menuitem value="Акты" icon="ui-icon-document"
                         update=":contentForm"
-                        action='#{navController.setMainContent("salary/workStatements")}' 
+                        action='#{navController.setMainContent("salary/workStatements")}'
                         actionListener="#{workStatementController.prepareData}"/>
 				</p:submenu>
-				<p:menuitem value="Оплаты" icon="ui-icon-document" />
+				<p:menuitem value="Оплаты" icon="ui-icon-document"
+                            update=":contentForm"
+                            action='#{navController.setMainContent("payment/payments")}'
+                            actionListener="#{paymentListController.prepareData}"
+                />
 			</p:submenu>
 			<p:submenu label="Настройки">
 				<p:menuitem value="Типы доп.информации клиента" icon="ui-icon-note"
@@ -51,9 +55,6 @@
 				<p:menuitem value="Типы доп.информации ментора" icon="ui-icon-note"
 					update=":contentForm"
 					action='#{navController.setMainContent("catalogue/managerInformationType")}' />
-				<p:menuitem value="Статусы оплат" icon="ui-icon-note"
-					update=":contentForm"
-					action='#{navController.setMainContent("catalogue/payStatus")}' />
 			</p:submenu>
 		</p:panelMenu>
 	</h:form>
