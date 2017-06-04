@@ -3,6 +3,7 @@ package ua.com.foxminded.serviceacc.controller.payment;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -21,20 +22,24 @@ public class PaymentListController implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Payment selected;
-    private PaymentService paymentService;
+    private final PaymentService paymentService;
 
     private List<Payment> payments;
 
     @Inject
     public PaymentListController(PaymentService paymentService) {
         this.paymentService = paymentService;
-        log.debug("New PaymentListController");
+    }
+
+    @PostConstruct
+    public void init(){
+        prepareData();
+        log.debug("initiated PaymentListController");
     }
 
     public void prepareData(){
-        log.debug("Prepare List Payments");
         this.payments = paymentService.findAll();
+        log.debug("Prepared List Payments");
     }
 
     public List<Payment> getPayments() {
@@ -43,38 +48,6 @@ public class PaymentListController implements Serializable {
 
     public void setPayments(List<Payment> payments) {
         this.payments = payments;
-    }
-
-    public void add() {
-        selected = new Payment();
-    }
-
-    public void onOk() {
-        selected = paymentService.save(selected);
-    }
-
-    public void clearSelected() {
-        selected = null;
-    }
-
-    public void onCancel() {
-        selected = null;
-    }
-
-    public Payment getSelected() {
-        return selected;
-    }
-
-    public void setSelected(Payment selected) {
-        this.selected = selected;
-    }
-
-    public PaymentService getPaymentService() {
-        return paymentService;
-    }
-
-    public void setPaymentService(PaymentService paymentService) {
-        this.paymentService = paymentService;
     }
 
 }

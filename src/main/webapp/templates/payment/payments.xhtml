@@ -12,7 +12,7 @@
              tableStyle="table-layout:auto;width:100%;" emptyMessage="Нет данных"
              var="payment" value="#{paymentListController.payments}"
              rowKey="#{payment.id}"
-             selectionMode="single" selection="#{paymentListController.selected}"
+             selectionMode="single"
              widgetVar="contractTable">
 
 
@@ -32,7 +32,6 @@
               filterBy="#{payment.type}" filterMatchMode="contains">
         <h:outputText value="#{payment.type}" />
     </p:column>
-
 
 </p:dataTable>
 </html>

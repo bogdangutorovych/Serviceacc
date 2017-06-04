@@ -13,16 +13,16 @@
 
 			<p:commandButton id="btn_edit" value="Редактировать"
 				update=":contentForm" icon="ui-icon-pencil"
-				disabled="#{invoiceController.selected == null}"
-				action='#{navController.setMainContent("invoice/invoiceEdit")}'/> 
+				disabled="#{invoiceController.selectedInvoice == null}"
+				action='#{navController.setMainContent("invoice/invoiceEdit")}'/>
 
 			<span class="ui-separator"><span
 				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
 			<p:commandButton id="btn_delete" value="Удалить"
 				update=":contentForm" icon="ui-icon-trash"
-				disabled="#{invoiceController.selected==null}"
-				actionListener="#{invoiceListController.delete(invoiceController.selected)}" 
+				disabled="#{invoiceController.selectedInvoice==null}"
+				actionListener="#{invoiceListController.delete(invoiceController.selectedInvoice)}"
 				action = "#{invoiceController.clearSelected()}" />
 
 		</f:facet>
@@ -33,7 +33,7 @@
 		tableStyle="table-layout:auto;width:100%;" emptyMessage="Нет данных"
 		var="invoice" value="#{invoiceListController.list}"
 		rowKey="#{invoiceListController.list.indexOf(invoice)}"
-		selectionMode="single" selection="#{invoiceController.selected}"
+		selectionMode="single" selection="#{invoiceController.selectedInvoice}"
 		widgetVar="invoiceTable">
 
 		<f:facet name="header" style="text-align:center">Счета
