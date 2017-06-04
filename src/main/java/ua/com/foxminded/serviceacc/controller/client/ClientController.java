@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -23,7 +23,7 @@ import ua.com.foxminded.serviceacc.service.ClientService;
 import ua.com.foxminded.serviceacc.service.DealService;
 
 @Named
-@RequestScoped
+@ViewScoped
 public class ClientController implements Serializable {
 
     private static final Logger log = LoggerFactory.getLogger(ClientController.class);

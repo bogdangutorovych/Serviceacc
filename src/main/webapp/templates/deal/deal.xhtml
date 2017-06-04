@@ -7,7 +7,7 @@
 	<p:toolbar>
 		<f:facet name="left">
 			<p:commandButton id="btn_ok" value="Ok" update=":contentForm"
-				icon="ui-icon-check" 
+				icon="ui-icon-check"
 				actionListener='#{dealController.onOk()}'
 				action='#{navController.setMainContent("client/client")}'/>
 			<span class="ui-separator"><span
@@ -24,12 +24,12 @@
 	<h:panelGrid columns="2" cellpadding="5">
 
 		<h:outputLabel for="client" value="Клиент: " style="font-weight:bold" />
-		<p:inputText id="number" value="#{clientController.selectedClient}"
+		<p:inputText id="client" value="#{clientController.selectedClient}"
 			disabled="true" />
 
 		<p:outputLabel for="service" value="Услуга: " style="font-weight:bold" />
 		<p:selectOneMenu id="service"
-			value="#{dealController.selected.service}"
+			value="#{dealController.selectedDeal.service}"
 			converter="omnifaces.SelectItemsConverter" required="true"
 			requiredMessage="Выберите услугу">
 			<f:selectItem itemLabel="Выберите услугу...  " noSelectionOption="true" />

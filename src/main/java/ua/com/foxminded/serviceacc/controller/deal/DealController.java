@@ -24,8 +24,8 @@ public class DealController implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Deal selected;
-    private DealService dealService;
+    private Deal selectedDeal;
+    private final DealService dealService;
     private Money price;
 
     @Inject
@@ -33,28 +33,23 @@ public class DealController implements Serializable {
         this.dealService = dealService;
     }
 
-    @PostConstruct
-    public void init() {
-
-    }
-
     public void add(Client client) {
-        selected = new Deal();
+        selectedDeal = new Deal();
         price = new Money();
-        selected.setClient(client);
-        selected.setService(new Service());
+        selectedDeal.setClient(client);
+        selectedDeal.setService(new Service());
     }
 
     public void onOk() {
-        if (selected.getId() == null) {
-            selected.getService().getPrices().add(price);
-            dealService.save(selected);
+        if (selectedDeal.getId() == null) {
+            selectedDeal.getService().getPrices().add(price);
+            dealService.save(selectedDeal);
         }
-        dealService.save(selected);
+        dealService.save(selectedDeal);
     }
 
     public void clearSelected() {
-        selected = null;
+        selectedDeal = null;
     }
 
     public void delete(Deal deal) {
@@ -62,23 +57,15 @@ public class DealController implements Serializable {
     }
 
     public void onCancel() {
-        selected = null;
+        selectedDeal = null;
     }
 
-    public Deal getSelected() {
-        return selected;
+    public Deal getSelectedDeal() {
+        return selectedDeal;
     }
 
-    public void setSelected(Deal selected) {
-        this.selected = selected;
-    }
-
-    public DealService getDealService() {
-        return dealService;
-    }
-
-    public void setDealService(DealService dealService) {
-        this.dealService = dealService;
+    public void setSelectedDeal(Deal selectedDeal) {
+        this.selectedDeal = selectedDeal;
     }
 
     public Money getPrice() {

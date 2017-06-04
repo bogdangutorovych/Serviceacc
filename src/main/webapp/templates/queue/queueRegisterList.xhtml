@@ -9,7 +9,7 @@
 		<f:facet name="left">
 			<p:commandButton id="btn_delete" value="Удалить"
 				update=":contentForm" icon="ui-icon-trash"
-				disabled='#{queueRegisterController.selected==null}'
+				disabled='#{queueRegisterController.selectedQueue==null}'
 				actionListener="#{queueRegisterController.delete()}"/>
 
 			<span class="ui-separator"><span
@@ -17,8 +17,8 @@
 
 			<p:commandButton id="btn_create_contract" value="Сформировать договор"
 				update=":contentForm" icon="ui-icon-trash"
-				disabled='#{queueRegisterController.selected==null}'
-				actionListener="#{contractController.add(queueRegisterController.selected.deal)}"
+				disabled='#{queueRegisterController.selectedQueue==null}'
+				actionListener="#{contractController.add(queueRegisterController.selectedQueue.deal)}"
 				action='#{navController.setMainContent("contract/contract")}'/>
 		</f:facet>
 	</p:toolbar>
@@ -28,7 +28,7 @@
 		tableStyle="table-layout:auto;width:100%;" emptyMessage="Нет данных"
 		var="queue" value="#{queueRegisterListController.list}"
 		rowKey="#{queue.id}"
-		selectionMode="single" selection="#{queueRegisterController.selected}"
+		selectionMode="single" selection="#{queueRegisterController.selectedQueue}"
 		widgetVar="queueTable">
 
 		<f:facet name="header" style="text-align:center">Счета

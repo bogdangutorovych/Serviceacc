@@ -17,7 +17,7 @@ import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
 public class ClientInformationTypeController implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private ClientInformationType selected;
+    private ClientInformationType selectedClientInfoType;
 
     private static List<ClientInformationType> clientInformationTypeList;
 
@@ -43,35 +43,35 @@ public class ClientInformationTypeController implements Serializable {
         return clientInformationTypeList;
     }
 
-    public ClientInformationType getSelected() {
-        return selected;
+    public ClientInformationType getSelectedClientInfoType() {
+        return selectedClientInfoType;
     }
 
-    public void setSelected(ClientInformationType selected) {
-        this.selected = selected;
+    public void setSelectedClientInfoType(ClientInformationType selectedClientInfoType) {
+        this.selectedClientInfoType = selectedClientInfoType;
     }
 
     public void add() {
-        selected = new ClientInformationType("", "");
-        clientInformationTypeList.add(selected);
+        selectedClientInfoType = new ClientInformationType("", "");
+        clientInformationTypeList.add(selectedClientInfoType);
     }
 
     public void delete() {
-        configController.deleteClientInformationType(selected.getId());
-        clientInformationTypeList.remove(selected);
-        selected = null;
+        configController.deleteClientInformationType(selectedClientInfoType.getId());
+        clientInformationTypeList.remove(selectedClientInfoType);
+        selectedClientInfoType = null;
     }
 
     public void onRowEdit(RowEditEvent event) {
         configController.saveClientInformationType((ClientInformationType) event.getObject());
-        selected = null;
+        selectedClientInfoType = null;
     }
 
     public void onRowCancel(RowEditEvent event) {
         ClientInformationType info = (ClientInformationType) event.getObject();
         if (info.getId() == null) {
             clientInformationTypeList.remove(info);
-            selected = null;
+            selectedClientInfoType = null;
         }
     }
 }

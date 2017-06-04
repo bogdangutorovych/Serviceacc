@@ -113,10 +113,6 @@ public class ManagerController implements Serializable {
         return selectedManager;
     }
 
-    public ManagerInformationTypeService getManagerInformationTypeService() {
-        return managerInformationTypeService;
-    }
-
     public List<ManagerInformationType> getManagerInformationTypeList() {
         return managerInformationTypeList;
     }

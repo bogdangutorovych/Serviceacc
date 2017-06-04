@@ -35,18 +35,18 @@ public class ServiceListController implements Serializable {
 
     @PostConstruct
     public void init() {
-        log.debug("Create ServiceList Bean");
-        serviceList = serviceService.findAll();
         updateServiceListFromDB();
+        log.debug("initiated ServiceList Bean");
     }
 
     public void deleteService(Service service) {
         serviceService.delete(service.getId());
         updateServiceListFromDB();
-        log.debug("Delete Service: " + service);
+        log.debug("Deleted Service: " + service);
     }
 
     public void updateServiceListFromDB() {
+        serviceList = serviceService.findAll();
         log.debug("update ServiceList from DB: " + serviceList);
     }
 

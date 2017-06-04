@@ -17,7 +17,7 @@ import ua.com.foxminded.serviceacc.service.ManagerInformationTypeService;
 public class ManagerInformationTypeController implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private ManagerInformationType selected;
+    private ManagerInformationType selectedManagerInfoType;
 
     private static List<ManagerInformationType> managerInformationTypeList;
 
@@ -41,35 +41,35 @@ public class ManagerInformationTypeController implements Serializable {
         return managerInformationTypeList;
     }
 
-    public ManagerInformationType getSelected() {
-        return selected;
+    public ManagerInformationType getSelectedManagerInfoType() {
+        return selectedManagerInfoType;
     }
 
-    public void setSelected(ManagerInformationType selected) {
-        this.selected = selected;
+    public void setSelectedManagerInfoType(ManagerInformationType selectedManagerInfoType) {
+        this.selectedManagerInfoType = selectedManagerInfoType;
     }
 
     public void add() {
-        selected = new ManagerInformationType("", "");
-        managerInformationTypeList.add(selected);
+        selectedManagerInfoType = new ManagerInformationType("", "");
+        managerInformationTypeList.add(selectedManagerInfoType);
     }
 
     public void delete() {
-        managerInformationTypeList.remove(selected);
-        managerInformationTypeService.delete(selected.getId());
-        selected = null;
+        managerInformationTypeList.remove(selectedManagerInfoType);
+        managerInformationTypeService.delete(selectedManagerInfoType.getId());
+        selectedManagerInfoType = null;
     }
 
     public void onRowEdit(RowEditEvent event) {
         managerInformationTypeService.save((ManagerInformationType) event.getObject());
-        selected = null;
+        selectedManagerInfoType = null;
     }
 
     public void onRowCancel(RowEditEvent event) {
         ManagerInformationType info = (ManagerInformationType) event.getObject();
         if (info.getId() == null) {
             managerInformationTypeList.remove(info);
-            selected = null;
+            selectedManagerInfoType = null;
         }
     }
 }

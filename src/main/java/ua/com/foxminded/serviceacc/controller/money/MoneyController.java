@@ -20,8 +20,8 @@ public class MoneyController implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Money selected;
-    private MoneyService moneyService;
+    private Money selectedMoney;
+    private final MoneyService moneyService;
 
     @Inject
     public MoneyController(MoneyService moneyService) {
@@ -29,35 +29,27 @@ public class MoneyController implements Serializable {
     }
 
     public void add() {
-        selected = new Money();
+        selectedMoney = new Money();
     }
 
     public void onOk() {
-        selected = moneyService.save(selected);
+        selectedMoney = moneyService.save(selectedMoney);
     }
 
     public void clearSelected() {
-        selected = null;
+        selectedMoney = null;
     }
 
     public void onCancel() {
-        selected = null;
+        selectedMoney = null;
     }
 
-    public Money getSelected() {
-        return selected;
+    public Money getSelectedMoney() {
+        return selectedMoney;
     }
 
-    public void setSelected(Money selected) {
-        this.selected = selected;
-    }
-
-    public MoneyService getMoneyService() {
-        return moneyService;
-    }
-
-    public void setMoneyService(MoneyService moneyService) {
-        this.moneyService = moneyService;
+    public void setSelectedMoney(Money selectedMoney) {
+        this.selectedMoney = selectedMoney;
     }
 
 }

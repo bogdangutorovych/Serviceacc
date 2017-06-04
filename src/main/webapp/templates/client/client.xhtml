@@ -60,7 +60,7 @@
 	</p:dataTable>
 
 	<p:toolbar>
-		<f:facet name="left"> Заявки: 
+		<f:facet name="left"> Заявки:
             <p:commandButton id="btn_deal_create" value="Добавить"
 				update=":contentForm" icon="ui-icon-check"
 				actionListener="#{dealController.add(clientController.selectedClient)}"
@@ -71,7 +71,7 @@
 
 			<p:commandButton id="btn_deal_update" value="Просмотр"
 				update=":contentForm" icon="ui-icon-close"
-				disabled="#{dealController.selected==null}"
+				disabled="#{dealController.selectedDeal==null}"
 				action='#{navController.setMainContent("deal/viewDeal")}'
 				immediate="true">
 			</p:commandButton>
@@ -81,8 +81,8 @@
 
 			<p:commandButton id="btn_deal_delete" value="Удалить"
 				update=":contentForm" icon="ui-icon-close"
-				disabled="#{dealController.selected==null}"
-				actionListener="#{clientController.removeDealFromClient(dealController.selected)}"
+				disabled="#{dealController.selectedDeal==null}"
+				actionListener="#{clientController.removeDealFromClient(dealController.selectedDeal)}"
 				immediate="true">
 			</p:commandButton>
 		</f:facet>
@@ -92,7 +92,7 @@
 		tableStyle="table-layout:auto;width:100%;" emptyMessage="Нет данных"
 		var="deal" value="#{clientController.clientDeals}"
 		rowKey="#{deal.id}"
-		selectionMode="single" selection="#{dealController.selected}">
+		selectionMode="single" selection="#{dealController.selectedDeal}">
 
 		<p:ajax event="rowSelect" update="@form:btn_deal_update,@form:btn_deal_delete"
 			immediate="true" />
