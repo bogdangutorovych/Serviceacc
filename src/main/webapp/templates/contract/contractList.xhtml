@@ -12,8 +12,9 @@
 				disabled="#{contractController.selectedContract==null}"
 				action='#{navController.setMainContent("contract/contractEdit")}' />
 
-			<span class="ui-separator"><span
-				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+			<span class="ui-separator">
+				<span class="ui-icon ui-icon-grip-dotted-vertical" />
+			</span>
 
 			<p:commandButton id="btn_delete" value="Удалить"
 				update=":contentForm" icon="ui-icon-trash"
@@ -26,9 +27,10 @@
 	<br />
 	<p:dataTable id="contractList" editable="true"
 		tableStyle="table-layout:auto;width:100%;" emptyMessage="Нет данных"
-		var="c" value="#{contractListController.list}"
+		var="contract" value="#{contractListController.list}"
 		rowKey="#{contractListController.list.indexOf(c)}"
-		selectionMode="single" selection="#{contractController.selectedContract}"
+		selectionMode="single"
+		selection="#{contractController.selectedContract}"
 		widgetVar="contractTable">
 
 		<f:facet name="header" style="text-align:center">Договора
@@ -45,51 +47,52 @@
 		<p:ajax event="rowUnselect" update="@form:btn_edit,@form:btn_delete"
 			immediate="true" />
 
-		<p:column headerText="номер" sortBy="#{c.number}"
-			filterBy="#{c.number}" filterMatchMode="contains">
-			<h:outputText value="#{c.number}" />
+		<p:column headerText="номер" sortBy="#{contract.number}"
+			filterBy="#{contract.number}" filterMatchMode="contains">
+			<h:outputText value="#{contract.number}" />
 		</p:column>
 
-		<p:column headerText="дата договора" sortBy="#{c.contractDate}"
-			filterBy="#{c.contractDate}" filterMatchMode="contains">
-			<h:outputText value="#{c.contractDate}"
+		<p:column headerText="дата договора" sortBy="#{contract.contractDate}"
+			filterBy="#{contract.contractDate}" filterMatchMode="contains">
+			<h:outputText value="#{contract.contractDate}"
 				converter="localDateConverter" pattern="dd.MM.yyyy" />
 		</p:column>
 
-		<p:column headerText="услуга" sortBy="#{c.deal.service.name}"
-			filterBy="#{c.deal.service.name}" filterMatchMode="contains">
-			<h:outputText value="#{c.deal.service.name}" />
+		<p:column headerText="услуга" sortBy="#{contract.deal.service.name}"
+			filterBy="#{contract.deal.service.name}" filterMatchMode="contains">
+			<h:outputText value="#{contract.deal.service.name}" />
 		</p:column>
 
-		<p:column headerText="Тип контракта" sortBy="#{c.contractType}"
-			filterBy="#{c.contractType}" filterMatchMode="contains">
-			<h:outputText value="#{c.contractType}" />
+		<p:column headerText="Тип контракта" sortBy="#{contract.contractType}"
+			filterBy="#{contract.contractType}" filterMatchMode="contains">
+			<h:outputText value="#{contract.contractType}" />
 		</p:column>
 
-		<p:column headerText="статус" sortBy="#{c.contractStatus}"
-			filterBy="#{c.contractStatus}" filterMatchMode="contains">
-			<h:outputText value="#{c.contractStatus}" />
+		<p:column headerText="статус" sortBy="#{contract.contractStatus}"
+			filterBy="#{contract.contractStatus}" filterMatchMode="contains">
+			<h:outputText value="#{contract.contractStatus}" />
 		</p:column>
 
-		<p:column headerText="Пробный период" sortBy="#{c.isTrial}"
-			filterBy="#{c.isTrial}" filterMatchMode="contains">
-			<h:outputText value="#{c.isTrial}" />
+		<p:column headerText="Пробный период" sortBy="#{contract.isTrial}"
+			filterBy="#{contract.isTrial}" filterMatchMode="contains">
+			<h:outputText value="#{contract.isTrial}" />
 		</p:column>
 
-		<p:column headerText="Клиент" sortBy="#{c.deal.client}"
-			filterBy="#{c.deal.client}" filterMatchMode="contains">
-			<h:outputText value="#{c.deal.client}" />
+		<p:column headerText="Клиент" sortBy="#{contract.deal.client}"
+			filterBy="#{contract.deal.client}" filterMatchMode="contains">
+			<h:outputText value="#{contract.deal.client}" />
 		</p:column>
 
-		<p:column headerText="Ментор" sortBy="#{c.manager}"
-			filterBy="#{c.manager}" filterMatchMode="contains">
-			<h:outputText value="#{c.manager}" />
+		<p:column headerText="Ментор" sortBy="#{contract.manager}"
+			filterBy="#{contract.manager}" filterMatchMode="contains">
+			<h:outputText value="#{contract.manager}" />
 		</p:column>
 
-		<p:column headerText="Сумма" sortBy="#{c.clientRate.showSumAndCurrency()}"
-			filterBy="#{c.clientRate.showSumAndCurrency()}"
+		<p:column headerText="Сумма"
+			sortBy="#{contract.clientRate.showSumAndCurrency()}"
+			filterBy="#{contract.clientRate.showSumAndCurrency()}"
 			filterMatchMode="contains">
-			<h:outputText value="#{c.clientRate.showSumAndCurrency()}" />
+			<h:outputText value="#{contract.clientRate.showSumAndCurrency()}" />
 		</p:column>
 
 	</p:dataTable>
