@@ -1,7 +1,9 @@
 package ua.com.foxminded.serviceacc.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -51,7 +53,7 @@ public class Client {
         cascade = CascadeType.ALL,
         orphanRemoval = true
     )
-    private Set<ClientInformation> information = new HashSet<>();
+    private List<ClientInformation> information = new ArrayList<>();
 
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
@@ -96,11 +98,11 @@ public class Client {
         this.isDeleted = isDeleted;
     }
 
-    public Set<ClientInformation> getInformation() {
+    public List<ClientInformation> getInformation() {
         return information;
     }
 
-    public void setInformation(Set<ClientInformation> information) {
+    public void setInformation(List<ClientInformation> information) {
         this.information = information;
     }
 

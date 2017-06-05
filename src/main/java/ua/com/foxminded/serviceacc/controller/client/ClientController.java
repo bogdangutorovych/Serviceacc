@@ -31,7 +31,6 @@ public class ClientController implements Serializable {
 
     private Client selectedClient;
 
-    private List<ClientInformation> clientInfos;
     private List<Deal> clientDeals;
 
     private final ClientService clientService;
@@ -51,19 +50,37 @@ public class ClientController implements Serializable {
     @PostConstruct
     public void init() {
         prepareData();
+        log.debug("initialized");
     }
 
     public void prepareData(){
-        if (selectedClient != null){
+        log.debug("Preparing data...");
+        if (selectedClient != null && selectedClient.getId() != null){
+            //load client with clientInformation eagerly
+            selectedClient = clientService.
+                findByIdWithClientInformation(selectedClient.getId());
             clientDeals = dealService.findByClient(selectedClient);
-            clientInfos = clientInformationService.findByClient(selectedClient);
+            log.debug("Fetch client: " + selectedClient + "Info: " + selectedClient.getInformation());
+        }else if (selectedClient != null){
+            fillClientByEmptyInformation();
+            log.debug("Fill client: " + selectedClient + "Info: " + selectedClient.getInformation());
         }
 
     }
 
+    private void fillClientByEmptyInformation() {
+        for (ClientInformationType type : clientInfoTypeHolderBean.getClientInformationTypeList()){
+            ClientInformation info = new ClientInformation();
+            info.setClientInformationType(type);
+            info.setClient(selectedClient);
+            selectedClient.getInformation().add(info);
+        }
+    }
+
+
     public void add() {
         selectedClient = new Client();
-        getActualLists();
+//        getActualLists();
     }
 
     public void removeDealFromClient(Deal deal) {
@@ -71,54 +88,54 @@ public class ClientController implements Serializable {
         clientDeals.remove(deal);
     }
 
-    public void getActualLists() {
-        clientInfos = getClientInfos();
-    }
+//    public void getActualLists() {
+//        clientInfos = getClientInfos();
+//    }
 
     public void onOk() {
         // save or update client
         clientService.save(selectedClient);
 
         // Save or update informations
-        Iterator<ClientInformation> iteratorInfos = clientInfos.iterator();
-        while (iteratorInfos.hasNext()) {
-            ClientInformation info = iteratorInfos.next();
-            if (!info.getContent().isEmpty()) {
-                clientInformationService.save(info);
-            } else if (info.getContent().isEmpty() && info.getId() != null) {
-                clientInformationService.delete(info.getId());
-            }
-        }
+//        Iterator<ClientInformation> iteratorInfos = clientInfos.iterator();
+//        while (iteratorInfos.hasNext()) {
+//            ClientInformation info = iteratorInfos.next();
+//            if (!info.getContent().isEmpty()) {
+//                clientInformationService.save(info);
+//            } else if (info.getContent().isEmpty() && info.getId() != null) {
+//                clientInformationService.delete(info.getId());
+//            }
+//        }
     }
 
-    public ClientInformation getInfoByType(ClientInformationType clientInformationType) {
-
-        if (selectedClient.getId() != null) {
-            for (ClientInformation clientInfo : clientInformationService.findByClient(selectedClient)) {
-                if (clientInfo.getClientInformationType().equals(clientInformationType)) {
-                    return clientInfo;
-                }
-            }
-        }
-
-        ClientInformation clientInfo = new ClientInformation();
-        clientInfo.setClientInformationType(clientInformationType);
-        clientInfo.setClient(selectedClient);
-        return clientInfo;
-    }
-
-    public List<ClientInformationType> getInfoTypeList() {
-        return clientInfoTypeHolderBean.getClientInformationTypeList();
-    }
-
-    public List<ClientInformation> getClientInfos() {
-        clientInfos = new ArrayList<>();
-        for (ClientInformationType type : getInfoTypeList()) {
-            ClientInformation info = getInfoByType(type);
-            clientInfos.add(info);
-        }
-        return clientInfos;
-    }
+//    public ClientInformation getInfoByType(ClientInformationType clientInformationType) {
+//
+//        if (selectedClient.getId() != null) {
+//            for (ClientInformation clientInfo : clientInformationService.findByClient(selectedClient)) {
+//                if (clientInfo.getClientInformationType().equals(clientInformationType)) {
+//                    return clientInfo;
+//                }
+//            }
+//        }
+//
+//        ClientInformation clientInfo = new ClientInformation();
+//        clientInfo.setClientInformationType(clientInformationType);
+//        clientInfo.setClient(selectedClient);
+//        return clientInfo;
+//    }
+//
+//    public List<ClientInformationType> getInfoTypeList() {
+//        return clientInfoTypeHolderBean.getClientInformationTypeList();
+//    }
+//
+//    public List<ClientInformation> getClientInfos() {
+//        clientInfos = new ArrayList<>();
+//        for (ClientInformationType type : getInfoTypeList()) {
+//            ClientInformation info = getInfoByType(type);
+//            clientInfos.add(info);
+//        }
+//        return clientInfos;
+//    }
 
     public void setSelectedClient(Client selectedClient) {
         this.selectedClient = selectedClient;

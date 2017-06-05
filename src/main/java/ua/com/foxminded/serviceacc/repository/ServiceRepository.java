@@ -7,5 +7,5 @@ import ua.com.foxminded.serviceacc.model.Service;
 import java.util.List;
 
 public interface ServiceRepository extends JpaRepository<Service, Long> {
-    public List<Service> findAllByOrderByIdAsc();
+    List<Service> findAllByOrderByIdAsc();
 }

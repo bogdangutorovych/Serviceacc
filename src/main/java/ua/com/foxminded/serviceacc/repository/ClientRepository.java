@@ -12,4 +12,9 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
 
     List<Client> findAllByOrderByIdAsc();
 
+    @Query("select client from Client client " +
+        "left join fetch client.information " +
+        "where client.id = ?1")
+    Client findOneWithClientInformation(Long clientId);
+
 }

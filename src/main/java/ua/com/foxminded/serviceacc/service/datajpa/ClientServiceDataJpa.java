@@ -28,7 +28,12 @@ public class ClientServiceDataJpa implements ClientService {
 		return clientRepository.findOne(clientId);
 	}
 
-	@Override
+    @Override
+    public Client findByIdWithClientInformation(Long clientId) {
+        return clientRepository.findOneWithClientInformation(clientId);
+    }
+
+    @Override
 	public void delete(Long clientId) {
 		clientRepository.delete(clientId);
 	}

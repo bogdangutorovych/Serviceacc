@@ -44,7 +44,7 @@
 
 	<p:dataTable id="clientInfoList" editable="true"
 		emptyMessage="Нет данных" var="clientInfo"
-		value="#{clientController.clientInfos}">
+		value="#{clientController.selectedClient.information}">
 
 		<f:facet name="header">Client Information</f:facet>
 
