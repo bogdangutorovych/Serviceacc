@@ -1,8 +1,9 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jsp/jstl/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 	<p:toolbar>
 		<f:facet name="left">
@@ -10,25 +11,29 @@
 				icon="ui-icon-document" actionListener="#{managerController.add()}"
 				action='#{navController.setMainContent("manager/manager")}' />
 
-			<span class="ui-separator"><span
-				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+			<span class="ui-separator">
+				<span class="ui-icon ui-icon-grip-dotted-vertical" />
+			</span>
 
 			<p:commandButton id="btn_edit" value="Edit" update=":contentForm"
 				icon="ui-icon-pencil"
 				disabled="#{managerController.selectedManager==null}"
 				action='#{navController.setMainContent("manager/manager")}' />
 
-			<span class="ui-separator"><span
-				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+			<span class="ui-separator">
+				<span class="ui-icon ui-icon-grip-dotted-vertical" />
+			</span>
 
 			<p:commandButton id="btn_delete" value="Delete" update=":contentForm"
 				icon="ui-icon-trash"
 				disabled="#{managerController.selectedManager==null}"
-				actionListener="#{managerListController.deleteManager(managerController.selectedManager)}" >
+				actionListener="#{managerListController.deleteManager(managerController.selectedManager)}">
 
-                <f:actionListener binding="#{managerListController.updateManagerListFromDB()}" />
-                <f:actionListener binding="#{managerController.selectedManager = null}" />
-            </p:commandButton>
+				<f:actionListener
+					binding="#{managerListController.updateManagerListFromDB()}" />
+				<f:actionListener
+					binding="#{managerController.selectedManager = null}" />
+			</p:commandButton>
 
 		</f:facet>
 	</p:toolbar>
@@ -36,8 +41,10 @@
 	<br />
 
 	<p:dataTable id="managerList" editable="true"
-		emptyMessage="No items yet" var="manager" value="#{managerListController.managerList}"
-		rowKey="#{managerListController.managerList.indexOf(manager)}" selectionMode="single"
+		emptyMessage="No items yet" var="manager"
+		value="#{managerListController.managerList}"
+		rowKey="#{managerListController.managerList.indexOf(manager)}"
+		selectionMode="single"
 		selection="#{managerController.selectedManager}"
 		widgetVar="managersTable">
 
@@ -45,8 +52,9 @@
 		Managers
 		<p:outputPanel>
 				<h:outputText value="Search all fields:" />
-				<p:inputText id="globalFilter" onkeyup="PF('managersTable').filter()"
-					style="width:150px" placeholder="Enter keyword" />
+				<p:inputText id="globalFilter"
+					onkeyup="PF('managersTable').filter()" style="width:150px"
+					placeholder="Enter keyword" />
 			</p:outputPanel>
 		</f:facet>
 		<p:ajax event="rowSelect" update="@form:btn_edit,@form:btn_delete"
@@ -54,24 +62,23 @@
 		<p:ajax event="rowUnselect" update="@form:btn_edit,@form:btn_delete"
 			immediate="true" />
 
-		<p:column headerText="id" sortBy="#{manager.id}" filterBy="#{manager.id}" filterMatchMode="contains">
+		<p:column headerText="id" sortBy="#{manager.id}">
 			#{manager.id}
 		</p:column>
 
-		<p:column headerText="First name" sortBy="#{manager.firstName}" filterBy="#{manager.firstName}" filterMatchMode="contains">
-			<h:outputText value="#{manager.firstName}" />
+		<p:column headerText="Name" sortBy="#{manager.firstName}"
+			filterBy="#{manager.firstName}" filterMatchMode="contains">
+			<h:outputText value="#{manager}" />
 		</p:column>
-		<p:column headerText="Last name" sortBy="#{manager.lastName}" filterBy="#{manager.lastName}" filterMatchMode="contains">
-			<h:outputText value="#{manager.lastName}" />
+
+		<p:column headerText="Загруженность">
+			<c:set var="count"
+				value="#{managerListController.countActiveClient(manager)}" />
+			<h:outputText
+				value="#{''.concat(count).concat('/').concat(manager.clientsLimit)}"
+				escape="false"
+				style="display: block; background-color: #{count lt manager.clientsLimit ? 'green' : (count eq manager.clientsLimit ? 'yellow' : 'red')}" />
 		</p:column>
-		<p:column headerText="Day of birth">
-            <h:outputText value="#{manager.birthday}" converter="localDateConverter" />
-        </p:column>
-        <p:column headerText="Загруженность">
-            <c:set var="count" value="#{managerListController.countActiveClient(manager)}" />
-            <h:outputText value="#{''.concat(count).concat('/').concat(manager.clientsLimit)}" escape="false"
-                          style="display: block; background-color: #{count lt manager.clientsLimit ? 'green' : (count eq manager.clientsLimit ? 'yellow' : 'red')}"/>
-        </p:column>
 
 	</p:dataTable>
 
