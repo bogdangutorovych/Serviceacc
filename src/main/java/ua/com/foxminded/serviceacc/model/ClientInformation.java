@@ -33,12 +33,12 @@ public class ClientInformation {
     @JoinColumn(name = "info_type_id")
     private ClientInformationType clientInformationType;
 
-    @Column(name = "is_deleted", nullable = false)
-    private boolean isDeleted;
-
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id")
     private Client client;
+
+    @Column(name = "is_deleted", nullable = false)
+    private boolean isDeleted;
 
     public Client getClient() {
         return client;

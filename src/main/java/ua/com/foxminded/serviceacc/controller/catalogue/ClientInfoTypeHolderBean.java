@@ -17,16 +17,16 @@ import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
  */
 @Named
 @ApplicationScoped
-public class ConfigController {
+public class ClientInfoTypeHolderBean {
 
-    ClientInformationTypeService clientInformationTypeService;
-
-    @Inject
-    public ConfigController(ClientInformationTypeService clientInformationTypeService) {
-        this.clientInformationTypeService = clientInformationTypeService;
-    }
+    final ClientInformationTypeService clientInformationTypeService;
 
     private List<ClientInformationType> clientInformationTypeList;
+
+    @Inject
+    public ClientInfoTypeHolderBean(ClientInformationTypeService clientInformationTypeService) {
+        this.clientInformationTypeService = clientInformationTypeService;
+    }
 
     @PostConstruct
     public void init() {
@@ -37,29 +37,12 @@ public class ConfigController {
         return clientInformationTypeList;
     }
 
-    public void setClientInformationTypeList(List<ClientInformationType> newClientTypeListType) {
-
-        for (ClientInformationType type : newClientTypeListType) {
-            clientInformationTypeService.save(type);
-        }
-
-        this.clientInformationTypeList = clientInformationTypeService.findAll();
-    }
-
     public ClientInformationType saveClientInformationType(ClientInformationType type) {
 
         clientInformationTypeService.save(type);
         clientInformationTypeList = clientInformationTypeService.findAll();
 
         return type;
-    }
-
-    public ClientInformationType updateClientInformationType(ClientInformationType forUpdateType) {
-
-        clientInformationTypeService.save(forUpdateType);
-        clientInformationTypeList = clientInformationTypeService.findAll();
-
-        return forUpdateType;
     }
 
     public void deleteClientInformationType(Long typeId) {

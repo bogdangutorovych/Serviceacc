@@ -15,28 +15,25 @@ import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
 @Named
 @javax.faces.view.ViewScoped
 public class ClientInformationTypeController implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     private ClientInformationType selectedClientInfoType;
 
-    private static List<ClientInformationType> clientInformationTypeList;
+    private List<ClientInformationType> clientInformationTypeList;
 
-    private ClientInformationTypeService clientInformationTypeService;
-    private ConfigController configController;
+    private final ClientInformationTypeService clientInformationTypeService;
+    private final ClientInfoTypeHolderBean clientInfoTypeHolderBean;
 
     @Inject
-    public ClientInformationTypeController(ClientInformationTypeService cltService, ConfigController configController) {
+    public ClientInformationTypeController(ClientInformationTypeService cltService, ClientInfoTypeHolderBean clientInfoTypeHolderBean) {
         this.clientInformationTypeService = cltService;
-        this.configController = configController;
+        this.clientInfoTypeHolderBean = clientInfoTypeHolderBean;
     }
 
     @PostConstruct
     public void init() {
-        clientInformationTypeList = configController.getClientInformationTypeList();
-    }
-
-    public ClientInformationTypeService getClientInformationTypeService() {
-        return clientInformationTypeService;
+        clientInformationTypeList = clientInfoTypeHolderBean.getClientInformationTypeList();
     }
 
     public List<ClientInformationType> getClientInformationTypeList() {
@@ -57,13 +54,13 @@ public class ClientInformationTypeController implements Serializable {
     }
 
     public void delete() {
-        configController.deleteClientInformationType(selectedClientInfoType.getId());
+        clientInfoTypeHolderBean.deleteClientInformationType(selectedClientInfoType.getId());
         clientInformationTypeList.remove(selectedClientInfoType);
         selectedClientInfoType = null;
     }
 
     public void onRowEdit(RowEditEvent event) {
-        configController.saveClientInformationType((ClientInformationType) event.getObject());
+        clientInfoTypeHolderBean.saveClientInformationType((ClientInformationType) event.getObject());
         selectedClientInfoType = null;
     }
 

@@ -1,12 +1,17 @@
 package ua.com.foxminded.serviceacc.model;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -39,6 +44,14 @@ public class Client {
 
     @Column(name = "birth_day")
     private LocalDate birthday;
+
+    @OneToMany(
+        mappedBy = "client",
+        fetch = FetchType.LAZY,
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private Set<ClientInformation> information = new HashSet<>();
 
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
@@ -75,17 +88,25 @@ public class Client {
         this.birthday = birthday;
     }
 
-    @Override
-    public String toString() {
-        return firstName + " " + lastName;
-    }
-
     public boolean isDeleted() {
         return isDeleted;
     }
 
     public void setDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
+    }
+
+    public Set<ClientInformation> getInformation() {
+        return information;
+    }
+
+    public void setInformation(Set<ClientInformation> information) {
+        this.information = information;
+    }
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
     }
 
 }

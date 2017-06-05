@@ -13,7 +13,7 @@ import javax.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ua.com.foxminded.serviceacc.controller.catalogue.ConfigController;
+import ua.com.foxminded.serviceacc.controller.catalogue.ClientInfoTypeHolderBean;
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.ClientInformation;
 import ua.com.foxminded.serviceacc.model.ClientInformationType;
@@ -31,26 +31,34 @@ public class ClientController implements Serializable {
 
     private Client selectedClient;
 
-    private List<ClientInformation> clientInfo;
+    private List<ClientInformation> clientInfos;
     private List<Deal> clientDeals;
 
     private final ClientService clientService;
     private final ClientInformationService clientInformationService;
-    private final ConfigController configController;
+    private final ClientInfoTypeHolderBean clientInfoTypeHolderBean;
     private final DealService dealService;
 
     @Inject
     public ClientController(ClientService clientService, ClientInformationService clientInformationService,
-            ConfigController configController, DealService dealService) {
+                            ClientInfoTypeHolderBean clientInfoTypeHolderBean, DealService dealService) {
         this.clientService = clientService;
         this.clientInformationService = clientInformationService;
-        this.configController = configController;
+        this.clientInfoTypeHolderBean = clientInfoTypeHolderBean;
         this.dealService = dealService;
     }
 
     @PostConstruct
     public void init() {
-        clientDeals = dealService.findByClient(selectedClient);
+        prepareData();
+    }
+
+    public void prepareData(){
+        if (selectedClient != null){
+            clientDeals = dealService.findByClient(selectedClient);
+            clientInfos = clientInformationService.findByClient(selectedClient);
+        }
+
     }
 
     public void add() {
@@ -64,7 +72,7 @@ public class ClientController implements Serializable {
     }
 
     public void getActualLists() {
-        clientInfo = getClientInfo();
+        clientInfos = getClientInfos();
     }
 
     public void onOk() {
@@ -72,7 +80,7 @@ public class ClientController implements Serializable {
         clientService.save(selectedClient);
 
         // Save or update informations
-        Iterator<ClientInformation> iteratorInfos = clientInfo.iterator();
+        Iterator<ClientInformation> iteratorInfos = clientInfos.iterator();
         while (iteratorInfos.hasNext()) {
             ClientInformation info = iteratorInfos.next();
             if (!info.getContent().isEmpty()) {
@@ -100,16 +108,16 @@ public class ClientController implements Serializable {
     }
 
     public List<ClientInformationType> getInfoTypeList() {
-        return configController.getClientInformationTypeList();
+        return clientInfoTypeHolderBean.getClientInformationTypeList();
     }
 
-    public List<ClientInformation> getClientInfo() {
-        clientInfo = new ArrayList<>();
+    public List<ClientInformation> getClientInfos() {
+        clientInfos = new ArrayList<>();
         for (ClientInformationType type : getInfoTypeList()) {
             ClientInformation info = getInfoByType(type);
-            clientInfo.add(info);
+            clientInfos.add(info);
         }
-        return clientInfo;
+        return clientInfos;
     }
 
     public void setSelectedClient(Client selectedClient) {
