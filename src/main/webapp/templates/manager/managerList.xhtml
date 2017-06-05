@@ -68,7 +68,9 @@
 
 		<p:column headerText="Name" sortBy="#{manager.firstName}"
 			filterBy="#{manager.firstName}" filterMatchMode="contains">
-			<h:outputText value="#{manager}" />
+			<h:outputText value="#{manager.lastName}" />
+			<h:outputText value="&#160;" />
+			<h:outputText value="#{manager.firstName}" />
 		</p:column>
 
 		<p:column headerText="Загруженность">
