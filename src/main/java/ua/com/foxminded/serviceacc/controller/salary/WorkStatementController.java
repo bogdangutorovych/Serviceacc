@@ -1,5 +1,6 @@
 package ua.com.foxminded.serviceacc.controller.salary;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.view.ViewScoped;
@@ -21,7 +22,7 @@ import ua.com.foxminded.serviceacc.service.WorkStatementService;
 
 @Named
 @ViewScoped
-public class WorkStatementController {
+public class WorkStatementController implements Serializable {
     private static final Logger log = LoggerFactory.getLogger(WorkStatementController.class);
     
     private static final long serialVersionUID = 1L;
