@@ -38,14 +38,12 @@ public class Salary {
     @JoinColumn(name = "manager_id")
     private Manager manager;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "money_id")
     private Money amount;
 
     @OneToMany(mappedBy = "salary",
-            fetch = FetchType.LAZY,
-            orphanRemoval = true,
-            cascade = CascadeType.ALL)
+            fetch = FetchType.LAZY)
     private Set<WorkStatement> workStatements = new HashSet<>();
 
     @Column(name = "is_deleted", nullable = false)
@@ -61,11 +59,11 @@ public class Salary {
         workStatement.setSalary(null);
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -108,9 +106,4 @@ public class Salary {
     public void setDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
 }

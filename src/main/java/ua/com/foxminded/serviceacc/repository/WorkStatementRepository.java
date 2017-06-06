@@ -12,8 +12,13 @@ public interface WorkStatementRepository extends JpaRepository<WorkStatement, Lo
     List<WorkStatement> findByManager(Manager manager);
     
     @Query(value = "select workStatement from WorkStatement workStatement "
-            + "where workStatement is not null and "
+            + "join fetch workStatement.invoice "
+            + "where workStatement.invoice is not null and "
             + "workStatement.invoice.invoiceType = 'PAID' and "
             + "workStatement.salary is null")
     List<WorkStatement> findPaidNotInSalary();
+    
+    @Query(value = "select workStatement from WorkStatement workStatement "
+            + "join fetch workStatement.invoice")
+    List<WorkStatement> findAllEagerInvoice();
 }
