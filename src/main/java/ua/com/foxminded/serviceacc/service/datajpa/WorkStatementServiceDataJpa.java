@@ -1,18 +1,24 @@
-package ua.com.foxminded.serviceacc.service.datajpa;
+
+package ua.com.foxminded.serviceacc.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Service;
 
 import ua.com.foxminded.serviceacc.model.WorkStatement;
 import ua.com.foxminded.serviceacc.repository.WorkStatementRepository;
-import ua.com.foxminded.serviceacc.service.WorkStatementService;
 
 @Service("workStatementService")
 public class WorkStatementServiceDataJpa implements WorkStatementService {
-    @Autowired
-    WorkStatementRepository workStatementRepository;
+    private final WorkStatementRepository workStatementRepository;
+    
+    @Inject
+    public WorkStatementServiceDataJpa(WorkStatementRepository workStatementRepository) {
+        super();
+        this.workStatementRepository = workStatementRepository;
+    }
 
     @Override
     public WorkStatement save(WorkStatement workStatement) {
@@ -32,6 +38,11 @@ public class WorkStatementServiceDataJpa implements WorkStatementService {
     @Override
     public void delete(Long id) {
         workStatementRepository.delete(id);
+    }
+
+    @Override
+    public List<WorkStatement> findAllEagerInvoice() {
+        return workStatementRepository.findAllEagerInvoice();
     }
 
 }
