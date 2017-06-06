@@ -3,6 +3,7 @@ package ua.com.foxminded.serviceacc.controller.salary;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -12,8 +13,6 @@ import org.slf4j.LoggerFactory;
 
 import ua.com.foxminded.serviceacc.model.Invoice;
 import ua.com.foxminded.serviceacc.model.Manager;
-import ua.com.foxminded.serviceacc.model.Money;
-import ua.com.foxminded.serviceacc.model.Period;
 import ua.com.foxminded.serviceacc.model.WorkStatement;
 import ua.com.foxminded.serviceacc.model.enums.Currency;
 import ua.com.foxminded.serviceacc.service.InvoiceService;
@@ -36,6 +35,8 @@ public class WorkStatementController implements Serializable {
 
     private WorkStatement newWorkStatement;
     private List<WorkStatement> workStatements;
+    
+    private boolean justConstructed = true;
 
     @Inject
     public WorkStatementController(ManagerService managerService, InvoiceService invoiceService, 
@@ -45,8 +46,25 @@ public class WorkStatementController implements Serializable {
         this.invoiceService = invoiceService;
         this.workStatementService = workStatementService;
     }
+    
+    @PostConstruct
+    public void init() {
+        log.debug("init() started");
+        initData();
+    }
 
     public void prepareData() {
+        log.debug("prepareData() started");
+        if (justConstructed) {
+            justConstructed = false;
+            return;
+        }
+        
+        initData();
+    }
+
+    private void initData() {
+        log.debug("initData() started");
         managers = managerService.findAll();
         invoices = invoiceService.findAll();
 
@@ -55,8 +73,8 @@ public class WorkStatementController implements Serializable {
         newWorkStatement = new WorkStatement();
         newWorkStatement.getManagerEarning().setCurrency(Currency.UAH);
     }
-
-       public void onAdd() {
+    
+    public void onAdd() {
         newWorkStatement.getClientSpending().setCurrency(
                 newWorkStatement.getInvoice().getPrice().getCurrency());
     
