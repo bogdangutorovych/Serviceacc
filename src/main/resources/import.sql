@@ -54,11 +54,11 @@ INSERT INTO DEAL (id, client_id, service_id, is_deleted) VALUES
 ALTER SEQUENCE deal_id_seq RESTART WITH 6;
 
 INSERT INTO CONTRACT (id, number, contract_date, deal_id, client_rate, manager_rate, manager_id, contract_status, is_deleted, is_trial, contract_type, close_date) VALUES
-(1, '1', '2017-01-01', 1, 1, 7, 1, 'ACTIVE', false, false, 'POSTPAID', NULL),
-(2, '2', '2017-02-28', 2, 4, 8, 2, 'ACTIVE', false, false, 'POSTPAID', NULL),
-(3, '3', '2017-04-10', 3, 14, 9, 3, 'FROZEN', false, false, 'POSTPAID', NULL),
+(1, '1', '2017-01-01', 1, 1, 7, 1, 'ACTIVE', false, false, 'POSTPAID', null),
+(2, '2', '2017-02-28', 2, 4, 8, 2, 'ACTIVE', false, false, 'POSTPAID', null),
+(3, '3', '2017-04-10', 3, 14, 9, 3, 'FROZEN', false, false, 'POSTPAID', null),
 (4, '4', '2017-03-15', 4, 15, 10, 3, 'CLOSED', false, false, 'PREPAID', '2017-05-15'),
-(5, '5', '2017-05-10', 4, 16, 11, 3, 'ACTIVE', false, false, 'PREPAID', NULL);
+(5, '5', '2017-05-10', 4, 16, 11, 3, 'ACTIVE', false, false, 'PREPAID', null);
 ALTER SEQUENCE contract_id_seq RESTART WITH 6;
 
 INSERT INTO QUEUE_REGISTER (id, register_date, deal_id, after_freezing, is_deleted) VALUES
