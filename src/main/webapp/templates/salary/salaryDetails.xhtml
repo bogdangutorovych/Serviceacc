@@ -7,11 +7,50 @@
     <p:toolbar>
         <f:facet name="left">
             <p:commandButton id="btn_generate" value="Сформировать" 
+                disabled="#{salaryDetailsController.selectedSalary.id!=null}"
                 icon="ui-icon-check" actionListener="#{salaryDetailsController.onGenerate()}" update=":contentForm" />
             <span class="ui-separator"><span
                 class="ui-icon ui-icon-grip-dotted-vertical" /></span>
         </f:facet>
     </p:toolbar>
     
+    <h:panelGrid columns="2" cellpadding="5">
+        <h:outputLabel for="date" value="Дата начисления: " style="font-weight:bold" />
+        <h:inputText id="date" disabled="true"
+            converter="localDateConverter" pattern="dd.MM.yyyy"
+            value="#{salaryDetailsController.selectedSalary.date}" />
+            
+        <h:outputLabel for="manager" value="Ментор: " style="font-weight:bold" />
+        <h:inputText id="manager" disabled="true"
+            value="#{salaryDetailsController.selectedSalary.manager.firstName} #{salaryDetailsController.selectedSalary.manager.lastName}" />
+                    
+        <h:outputLabel for="amount" value="Сумма: " style="font-weight:bold" />
+        <h:inputText id="amount" disabled="true"
+            value="#{salaryDetailsController.selectedSalary.amount}" />
+    </h:panelGrid>
     
+    <br/>
+    <p:dataTable id="workStatementList" 
+        tableStyle="table-layout:auto;width:100%;" emptyMessage="Нет данных"
+        var="workStatement" value="#{salaryDetailsController.selectedSalary.workStatements}">
+            
+        <p:column headerText="Клиент"
+            converter="omnifaces.SelectItemsConverter">
+            <h:outputText value="#{workStatement.invoice.contract.deal.client}" />
+        </p:column>
+
+        <p:column headerText="Период">
+            <h:outputText value="#{workStatement.period.dateFrom}" 
+                converter="localDateConverter"
+                pattern="dd.MM.yyyy" />
+            <h:outputLabel value=" - "/>
+             <h:outputText value="#{workStatement.period.dateTo}" 
+                converter="localDateConverter"
+                pattern="dd.MM.yyyy" />
+        </p:column>    
+
+        <p:column headerText="Оплата">
+            <h:outputText value="#{workStatement.managerEarning.amount}" />
+        </p:column>    
+    </p:dataTable>
 </ui:composition>

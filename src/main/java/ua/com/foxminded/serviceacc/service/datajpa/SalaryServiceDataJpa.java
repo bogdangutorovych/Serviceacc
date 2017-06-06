@@ -1,3 +1,4 @@
+
 package ua.com.foxminded.serviceacc.service.datajpa;
 
 import java.util.ArrayList;
@@ -6,8 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import ua.com.foxminded.serviceacc.model.Manager;
 import ua.com.foxminded.serviceacc.model.Money;
@@ -20,15 +23,25 @@ import ua.com.foxminded.serviceacc.service.SalaryService;
 
 @Service("salaryService")
 public class SalaryServiceDataJpa implements SalaryService {
-    @Autowired
-    private WorkStatementRepository workStatementRepository;
+    private final WorkStatementRepository workStatementRepository;
+    
+    private final SalaryRepository salaryRepository;
 
-    @Autowired
-    private SalaryRepository salaryRepository;
+    @Inject
+    public SalaryServiceDataJpa(WorkStatementRepository workStatementRepository, SalaryRepository salaryRepository) {
+        super();
+        this.workStatementRepository = workStatementRepository;
+        this.salaryRepository = salaryRepository;
+    }
 
     @Override
+    @Transactional
     public Salary save(Salary salary) {
-        return salaryRepository.save(salary);
+        Salary savedSalary = salaryRepository.save(salary);
+        
+        workStatementRepository.save(savedSalary.getWorkStatements());
+        
+        return savedSalary;
     }
 
     @Override
@@ -48,17 +61,17 @@ public class SalaryServiceDataJpa implements SalaryService {
 
     public List<Salary> calculateSalaries() {
         List<WorkStatement> workStatements = workStatementRepository.findPaidNotInSalary();
-
+        
         List<Salary> salaries = sortToSalaries(workStatements);
-
+        
         salaries = calculateSalaryAmounts(salaries);
-
+       
         return salaries;
     }
 
     private List<Salary> sortToSalaries(List<WorkStatement> workStatements) {
         Map<Manager, Salary> salaries = new HashMap<Manager, Salary>();
-
+       
         for (WorkStatement workStatement : workStatements) {
             if (salaries.containsKey(workStatement.getManager())) {
                 Salary salary = salaries.get(workStatement.getManager());
@@ -73,25 +86,25 @@ public class SalaryServiceDataJpa implements SalaryService {
         }
         return new ArrayList<Salary>(salaries.values());
     }
-
+    
     private Money getManagerEarnings(Set <WorkStatement> workStatements) {
         Money money = new Money();
         money.setAmount(0l);
         money.setCurrency(Currency.UAH);
-
+        
         for (WorkStatement workStatement : workStatements) {
             money.setAmount(Long.sum(money.getAmount(), workStatement.getManagerEarning().getAmount()));
         }
-
+        
         return money;
     }
-
+    
     private List<Salary> calculateSalaryAmounts(List<Salary> salaries) {
         for (Salary salary : salaries) {
             Money salaryAmount = getManagerEarnings(salary.getWorkStatements());
             salary.setAmount(salaryAmount);
         }
-
+        
         return salaries;
     }
 }
