@@ -43,8 +43,7 @@ public class Salary {
     private Money amount;
 
     @OneToMany(mappedBy = "salary",
-            fetch = FetchType.LAZY,
-            orphanRemoval = true)
+            fetch = FetchType.LAZY)
     private Set<WorkStatement> workStatements = new HashSet<>();
 
     @Column(name = "is_deleted", nullable = false)
