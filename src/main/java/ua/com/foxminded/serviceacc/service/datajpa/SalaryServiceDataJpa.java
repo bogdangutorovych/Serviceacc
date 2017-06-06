@@ -1,5 +1,5 @@
 
-package ua.com.foxminded.serviceacc.service;
+package ua.com.foxminded.serviceacc.service.datajpa;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +19,7 @@ import ua.com.foxminded.serviceacc.model.WorkStatement;
 import ua.com.foxminded.serviceacc.model.enums.Currency;
 import ua.com.foxminded.serviceacc.repository.SalaryRepository;
 import ua.com.foxminded.serviceacc.repository.WorkStatementRepository;
+import ua.com.foxminded.serviceacc.service.SalaryService;
 
 @Service("salaryService")
 public class SalaryServiceDataJpa implements SalaryService {

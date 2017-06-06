@@ -1,5 +1,5 @@
 
-package ua.com.foxminded.serviceacc.service;
+package ua.com.foxminded.serviceacc.service.datajpa;
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import ua.com.foxminded.serviceacc.model.WorkStatement;
 import ua.com.foxminded.serviceacc.repository.WorkStatementRepository;
+import ua.com.foxminded.serviceacc.service.WorkStatementService;
 
 @Service("workStatementService")
 public class WorkStatementServiceDataJpa implements WorkStatementService {
@@ -41,7 +42,7 @@ public class WorkStatementServiceDataJpa implements WorkStatementService {
     }
 
     @Override
-    public List<WorkStatement> findAllEagerInvoice() {
+    public List<WorkStatement> findAllWithInvoice() {
         return workStatementRepository.findAllEagerInvoice();
     }
 

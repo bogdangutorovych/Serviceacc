@@ -50,7 +50,7 @@ public class WorkStatementController implements Serializable {
         managers = managerService.findAll();
         invoices = invoiceService.findAll();
 
-        workStatements = workStatementService.findAllEagerInvoice();
+        workStatements = workStatementService.findAllWithInvoice();
         
         newWorkStatement = new WorkStatement();
         newWorkStatement.getManagerEarning().setCurrency(Currency.UAH);
@@ -61,7 +61,7 @@ public class WorkStatementController implements Serializable {
                 newWorkStatement.getInvoice().getPrice().getCurrency());
     
         workStatementService.save(newWorkStatement);
-        workStatements = workStatementService.findAllEagerInvoice();
+        workStatements = workStatementService.findAllWithInvoice();
         
         newWorkStatement = new WorkStatement();
         newWorkStatement.getManagerEarning().setCurrency(Currency.UAH);
