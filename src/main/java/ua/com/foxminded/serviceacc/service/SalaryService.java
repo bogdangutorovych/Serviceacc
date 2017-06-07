@@ -11,4 +11,6 @@ public interface SalaryService {
     void delete(Long id);
     
     List<Salary> calculateSalaries();
+    
+    List<SalaryCalculationDetails> getSalaryCalculationDetails();
 }
