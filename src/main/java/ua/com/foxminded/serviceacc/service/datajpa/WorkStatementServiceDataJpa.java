@@ -43,7 +43,7 @@ public class WorkStatementServiceDataJpa implements WorkStatementService {
 
     @Override
     public List<WorkStatement> findAllWithInvoice() {
-        return workStatementRepository.findAllEagerInvoice();
+        return workStatementRepository.findAllWithInvoice();
     }
 
 }

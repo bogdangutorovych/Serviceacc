@@ -36,8 +36,8 @@
 				        actionListener="#{salariesController.prepareData}"/>
 				    <p:menuitem value="Расчет зарплат" icon="ui-icon-document" 
 				        update=":contentForm"
-				        action='#{navController.setMainContent("salary/salaryCalculation")}'
-				        actionListener="#{salariesCalculationController.calculateSalaries}" />
+				        action='#{navController.setMainContent("salary/salaryCalculationList")}'
+				        actionListener="#{salaryCalculationController.prepareData}" />
                     <p:menuitem value="Акты" icon="ui-icon-document" 
                         update=":contentForm"
                         action='#{navController.setMainContent("salary/workStatements")}' 

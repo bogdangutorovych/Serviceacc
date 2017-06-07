@@ -3,17 +3,18 @@ package ua.com.foxminded.serviceacc.controller.salary;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ua.com.foxminded.serviceacc.model.Invoice;
 import ua.com.foxminded.serviceacc.model.Manager;
-import ua.com.foxminded.serviceacc.model.Money;
-import ua.com.foxminded.serviceacc.model.Period;
 import ua.com.foxminded.serviceacc.model.WorkStatement;
 import ua.com.foxminded.serviceacc.model.enums.Currency;
 import ua.com.foxminded.serviceacc.service.InvoiceService;
@@ -36,7 +37,7 @@ public class WorkStatementController implements Serializable {
 
     private WorkStatement newWorkStatement;
     private List<WorkStatement> workStatements;
-
+    
     @Inject
     public WorkStatementController(ManagerService managerService, InvoiceService invoiceService, 
             WorkStatementService workStatementService) {
@@ -44,6 +45,13 @@ public class WorkStatementController implements Serializable {
         this.managerService = managerService;
         this.invoiceService = invoiceService;
         this.workStatementService = workStatementService;
+    }
+    
+    @PostConstruct
+    public void init() {
+        if(!FacesContext.getCurrentInstance().isPostback()) {
+            prepareData();
+        }
     }
 
     public void prepareData() {
@@ -56,7 +64,7 @@ public class WorkStatementController implements Serializable {
         newWorkStatement.getManagerEarning().setCurrency(Currency.UAH);
     }
 
-       public void onAdd() {
+    public void onAdd() {
         newWorkStatement.getClientSpending().setCurrency(
                 newWorkStatement.getInvoice().getPrice().getCurrency());
     

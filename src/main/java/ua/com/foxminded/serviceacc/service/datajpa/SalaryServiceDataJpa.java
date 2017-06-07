@@ -19,6 +19,7 @@ import ua.com.foxminded.serviceacc.model.WorkStatement;
 import ua.com.foxminded.serviceacc.model.enums.Currency;
 import ua.com.foxminded.serviceacc.repository.SalaryRepository;
 import ua.com.foxminded.serviceacc.repository.WorkStatementRepository;
+import ua.com.foxminded.serviceacc.service.SalaryCalculationDetails;
 import ua.com.foxminded.serviceacc.service.SalaryService;
 
 @Service("salaryService")
@@ -106,5 +107,23 @@ public class SalaryServiceDataJpa implements SalaryService {
         }
         
         return salaries;
+    }
+
+    @Override
+    public List<SalaryCalculationDetails> getSalaryCalculationDetails() {
+        List<SalaryCalculationDetails> salaryCalculationDetailsList = workStatementRepository.findSalaryCalculationDetails();
+        
+        List<Salary> lastSalaries = salaryRepository.findSalariesWithMaxDate();
+        
+        for (Salary salary : lastSalaries) {
+            for (SalaryCalculationDetails salaryCalculationDetails : salaryCalculationDetailsList) {
+                if (salaryCalculationDetails.equalsManager(salary.getManager())) {
+                    salaryCalculationDetails.setLastSalary(salary);
+                    break;
+                }
+            }
+        }
+        
+        return salaryCalculationDetailsList;
     }
 }
