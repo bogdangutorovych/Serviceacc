@@ -73,7 +73,6 @@ public class ClientController implements Serializable {
         }
     }
 
-
     public void add() {
         selectedClient = new Client();
         fillClientByEmptyInformation();
