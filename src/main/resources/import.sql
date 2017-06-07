@@ -92,19 +92,6 @@ INSERT INTO MANAGER_INFO_TYPE (id, title, is_deleted, code) VALUES
 (5, 'city', false, 'city');
 ALTER SEQUENCE manager_info_type_seq RESTART WITH 6;
 
-INSERT INTO CLIENT_INFO (id, content, info_type_id, client_id, is_deleted) VALUES
-(1, '0503265566', 1, 1, false),
-(2, 'test@gmail.com', 2, 1, false),
-(3, 'www.test.ua', 3, 1, false),
-(4, 'testik', 4, 1, false),
-(5, 'Kyev', 5, 1, false),
-(6, '0936854214', 1, 2, false),
-(7, 'karamba@gmail.com', 2, 2, false),
-(8, null, 3, 2, false),
-(9, 'rocket56', 4, 2, false),
-(10, 'Kyev', 5, 2, false);
-ALTER SEQUENCE client_info_seq RESTART WITH 11;
-
 INSERT INTO MANAGER_INFO (id, content, info_type_id, manager_id, is_deleted) VALUES
 (1, '0503265566', 1, 1, false),
 (2, 'test@gmail.com', 2, 1, false),
@@ -167,3 +154,51 @@ INSERT INTO WORK_STATEMENT (id, manager_id, client_spending, manager_earning, in
 (6, 1, 26, 27, 8, 13, 1, false),
 (7, 1, 26, 27, 9, 14, 2, false);
 
+
+INSERT INTO CLIENT_INFO (id, content, info_type_id, client_id, is_deleted) VALUES
+(1, '0503265566', 1, 1, false),
+(2, 'test1@gmail.com', 2, 1, false),
+(3, 'www.test.ua', 3, 1, false),
+(4, 'testik', 4, 1, false),
+(5, 'Kyev', 5, 1, false),
+(6, '0936854214', 1, 2, false),
+(7, 'karamba@gmail.com', 2, 2, false),
+(8, null, 3, 2, false),
+(9, 'rocket56', 4, 2, false),
+(10, 'Lviv', 5, 2, false),
+(11, '0936854214', 1, 3, false),
+(12, 'mail2@gmail.com', 2, 3, false),
+(13, '-', 3, 3, false),
+(14, 'skype3', 4, 3, false),
+(15, 'Kharkiv', 5, 3, false),
+(16, '093000000', 1, 4, false),
+(17, 'test3@gmail.com', 2, 4, false),
+(18, '-', 3, 4, false),
+(19, 'qwerty', 4, 4, false),
+(20, 'Kiev', 5, 4, false),
+(21, '0936854214', 1, 5, false),
+(22, 'myweb@gmail.com', 2, 5, false),
+(23, '-', 3, 5, false),
+(24, 'skype5', 4, 5, false),
+(25, 'Kyev', 5, 5, false),
+(26, '0936854214', 1, 6, false),
+(27, 'test4@gmail.com', 2, 6, false),
+(28, '-', 3, 6, false),
+(29, 'skype6', 4, 6, false),
+(30, 'Kyev', 5, 6, false),
+(31, '0936854214', 1, 7, false),
+(32, 'test5@gmail.com', 2, 7, false),
+(33, '-', 3, 7, false),
+(34, 'skype7', 4, 7, false),
+(35, 'Kyev', 5, 7, false),
+(36, '0936854214', 1, 8, false),
+(37, 'test6@gmail.com', 2, 8, false),
+(38, '-', 3, 8, false),
+(39, 'skype7', 4, 8, false),
+(40, 'Kyev', 5, 8, false),
+(41, '0936854214', 1, 9, false),
+(42, 'test8@gmail.com', 2, 9, false),
+(43, '-', 3, 9, false),
+(44, 'skype9', 4, 9, false),
+(45, 'Kyev', 5, 9, false);
+ALTER SEQUENCE client_info_seq RESTART WITH 51;
