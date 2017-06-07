@@ -41,8 +41,11 @@ INSERT INTO MONEY (id, amount, currency, is_deleted) VALUES
 (21, 3000, 'UAH', false),
 (22, 1500, 'UAH', false),
 (23, 3000, 'UAH', false),
-(24, 1500, 'UAH', false);
-ALTER SEQUENCE money_id_seq RESTART WITH 25;
+(24, 1500, 'UAH', false),
+(25, 3000, 'UAH', false),
+(26, 3000, 'UAH', false),
+(27, 1500, 'UAH', false);
+ALTER SEQUENCE money_id_seq RESTART WITH 28;
 
 INSERT INTO SERVICE (id, name, description, manager_rate_id, is_deleted) VALUES
 (1, 'менторинг', 'обучение студента идет на заданиях и анализе их выполнения', 7, false),
@@ -118,8 +121,9 @@ ALTER SEQUENCE manager_info_seq RESTART WITH 11;
 INSERT INTO PAYMENT (id, date, money_id, payment_type, is_deleted) VALUES
 (1, '2017-01-14', 1, 'CASH', false),
 (2, '2017-02-14', 1, 'BANK', false),
-(3, '2017-03-14', 1, 'UNISTREAM', false);
-ALTER SEQUENCE payment_id_seq RESTART WITH 4;
+(3, '2017-03-14', 1, 'UNISTREAM', false),
+(4, '2017-02-02', 1, 'CASH', false);
+ALTER SEQUENCE payment_id_seq RESTART WITH 5;
 
 INSERT INTO PERIOD (id, date_from, date_to) VALUES
 (1, '2017-01-14', '2017-02-13'),
@@ -133,8 +137,10 @@ INSERT INTO PERIOD (id, date_from, date_to) VALUES
 (9, '2017-04-01', '2017-05-01'),
 (10, '2017-02-01', '2017-03-01'),
 (11, '2017-03-01', '2017-04-01'),
-(12, '2017-04-01', '2017-05-01');
-ALTER SEQUENCE period_id_seq RESTART WITH 13;
+(12, '2017-04-01', '2017-05-01'),
+(13, '2017-01-01', '2017-02-01'),
+(14, '2017-01-01', '2017-02-01');
+ALTER SEQUENCE period_id_seq RESTART WITH 15;
 
 INSERT INTO INVOICE (id, number, date, contract_id, money_id, invoice_type, payment_id, period_id, is_deleted) VALUES
 (1, 'inv# 1', '2017-01-01', 1, 1, 'NEW', NULL, 1, false),
@@ -143,12 +149,21 @@ INSERT INTO INVOICE (id, number, date, contract_id, money_id, invoice_type, paym
 (4, 'inv# 4', '2017-04-01', 4, 4, 'PAID', 2, 4, false),
 (5, 'inv# 5', '2017-02-01', 5, 5, 'PAID', 3, 5, false),
 (6, 'inv# 6', '2017-03-01', 5, 6, 'PAID', 3, 6, false),
-(7, 'inv# 7', '2017-04-01', 5, 7, 'PAID', 3, 7, false);
-ALTER SEQUENCE invoice_id_seq RESTART WITH 8;
+(7, 'inv# 7', '2017-04-01', 5, 7, 'PAID', 3, 7, false),
+(8, 'inv# 8', '2017-02-01', 1, 25, 'PAID', 4, 13, false),
+(9, 'inv# 9', '2017-03-01', 1, 25, 'PAID', 4, 14, false);
+ALTER SEQUENCE invoice_id_seq RESTART WITH 10;
+
+INSERT INTO SALARY (id, date, manager_id, money_id, is_deleted) VALUES
+(1, '2017-02-15', 1, 27, false),
+(2, '2017-03-15', 1, 27, false);
 
 INSERT INTO WORK_STATEMENT (id, manager_id, client_spending, manager_earning, invoice_id, period_id, salary_id, is_deleted) VALUES
 (1, 1, 15, 16, 3, 8, NULL, false),
 (2, 1, 17, 18, 4, 9, NULL, false),
 (3, 2, 19, 20, 5, 10, NULL, false),
 (4, 2, 21, 22, 6, 11, NULL, false),
-(5, 3, 23, 24, 7, 12, NULL, false);
+(5, 3, 23, 24, 7, 12, NULL, false),
+(6, 1, 26, 27, 8, 13, 1, false),
+(7, 1, 26, 27, 9, 14, 2, false);
+
