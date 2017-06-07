@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,8 +38,6 @@ public class WorkStatementController implements Serializable {
     private WorkStatement newWorkStatement;
     private List<WorkStatement> workStatements;
     
-    private boolean justConstructed = true;
-
     @Inject
     public WorkStatementController(ManagerService managerService, InvoiceService invoiceService, 
             WorkStatementService workStatementService) {
@@ -49,24 +49,12 @@ public class WorkStatementController implements Serializable {
     
     @PostConstruct
     public void init() {
-        log.debug("init() started");
-        initData();
-        
-        
+        if(!FacesContext.getCurrentInstance().isPostback()) {
+            prepareData();
+        }
     }
 
     public void prepareData() {
-        log.debug("prepareData() started");
-        if (justConstructed) {
-            justConstructed = false;
-            return;
-        }
-        
-        initData();
-    }
-
-    private void initData() {
-        log.debug("initData() started");
         managers = managerService.findAll();
         invoices = invoiceService.findAll();
 
@@ -75,7 +63,7 @@ public class WorkStatementController implements Serializable {
         newWorkStatement = new WorkStatement();
         newWorkStatement.getManagerEarning().setCurrency(Currency.UAH);
     }
-    
+
     public void onAdd() {
         newWorkStatement.getClientSpending().setCurrency(
                 newWorkStatement.getInvoice().getPrice().getCurrency());

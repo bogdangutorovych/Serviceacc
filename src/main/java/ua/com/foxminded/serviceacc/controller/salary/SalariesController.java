@@ -3,6 +3,8 @@ package ua.com.foxminded.serviceacc.controller.salary;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -25,13 +27,20 @@ public class SalariesController implements Serializable {
     private List<Salary> salaries;
     
     private Salary selectedSalary;
-
+    
     @Inject
     public SalariesController(SalaryService salaryService) {
         super();
         this.salaryService = salaryService;
     }
 
+    @PostConstruct
+    public void init() {
+        if(!FacesContext.getCurrentInstance().isPostback()) {
+            prepareData();
+        }
+    }
+    
     public void prepareData() {
         salaries = salaryService.findAll();
     }
