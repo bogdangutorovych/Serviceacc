@@ -24,6 +24,6 @@ public interface WorkStatementRepository extends JpaRepository<WorkStatement, Lo
     List<WorkStatement> findAllWithInvoice();
     
     @Query(value = "select new ua.com.foxminded.serviceacc.service.SalaryCalculationDetails(manager, count(*) as workStatementCount) "
-            + "from WorkStatement workStatement join workStatement.manager manager group by manager.id")
+            + "from WorkStatement workStatement join workStatement.manager manager where workStatement.salary is null group by manager.id")
     public List<SalaryCalculationDetails> findSalaryCalculationDetails();
 }
