@@ -51,6 +51,8 @@ public class WorkStatementController implements Serializable {
     public void init() {
         log.debug("init() started");
         initData();
+        
+        
     }
 
     public void prepareData() {
