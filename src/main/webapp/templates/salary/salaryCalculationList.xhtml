@@ -1,0 +1,57 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+    <p:toolbar>
+        <f:facet name="left">
+            <p:commandButton id="btn_show" value="Посмотреть" 
+                disabled="true"
+                icon="ui-icon-check"  
+                action='#{navController.setMainContent("salary/salaryDetails")}'
+                update=":contentForm" />
+            <span class="ui-separator"><span
+                class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+        </f:facet>
+    </p:toolbar>    
+    
+    <br />
+    <p:dataTable id="salaryList" editable="true"
+        tableStyle="table-layout:auto;width:100%;" emptyMessage="Нет данных"
+        var="salaryCalculationDetails" value="#{salaryCalculationController.salaryCalculationDetailsList}"
+        rowKey="#{salaryCalculationController.salaryCalculationDetailsList.indexOf(salaryCalculationDetails)}" 
+        selectionMode="single"
+        widgetVar="salaryTable">
+        
+        <f:facet name="header" style="text-align:center">Расчет зарплат
+        <p:outputPanel>
+                <h:outputText value="Искать везде: " />
+                <p:inputText id="globalFilter"
+                    onkeyup="PF('salaryTable').filter()" style="width:150px"
+                    placeholder="Enter keyword" />
+            </p:outputPanel>
+        </f:facet>
+        
+        <p:ajax event="rowSelect" update="@form:btn_show"
+            immediate="true" />
+        <p:ajax event="rowUnselect" update="@form:btn_show"
+            immediate="true" />
+            
+        <p:column headerText="ментор" sortBy="#{salaryCalculationDetails.managerName}"
+            filterBy="#{salaryCalculationDetails.managerName}" filterMatchMode="contains"
+            converter="omnifaces.SelectItemsConverter">
+            <h:outputText value="#{salaryCalculationDetails.managerName}" />
+        </p:column>
+        
+        <p:column headerText="Дата последней зарплаты">
+            <h:outputText value="#{salaryCalculationDetails.lastSalaryDate}" 
+                converter="localDateConverter"
+                pattern="dd.MM.yyyy" />
+        </p:column>
+        
+        <p:column headerText="Количество актов" sortBy="#{salaryCalculationDetails.workStatementCount}">
+            <h:outputText value="#{salaryCalculationDetails.workStatementCount}" />
+        </p:column>
+    </p:dataTable>
+</ui:composition>

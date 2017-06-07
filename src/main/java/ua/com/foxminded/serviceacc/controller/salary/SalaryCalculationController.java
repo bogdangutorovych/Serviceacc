@@ -20,15 +20,15 @@ import ua.com.foxminded.serviceacc.service.dto.PrepareSalaryInfo;
 @ViewScoped
 public class SalaryCalculationController implements Serializable {
     private static final Logger log = LoggerFactory.getLogger(SalaryCalculationController.class);
-    
+
     private static final long serialVersionUID = 1L;
 
     private final SalaryService salaryService;
-    
+
     private List<PrepareSalaryInfo> prepareSalaryInfoList;
-    
+
     private PrepareSalaryInfo selectedPrepareSalaryInfo;
-    
+
     @Inject
     public SalaryCalculationController(SalaryService salaryService) {
         super();
@@ -41,18 +41,18 @@ public class SalaryCalculationController implements Serializable {
             prepareData();
         }
     }
-    
+
     public void prepareData() {
         prepareSalaryInfoList = salaryService.getPrepareSalaryInfoList();
     }
 
     public void onSalaryDetailsClose() {
         SalaryDetailsController salaryDetailsController = JSFUtils.getBean(SalaryDetailsController.class);
-        
+
         if (salaryDetailsController != null) {
             salaryDetailsController.setSelectedSalary(null);
         }
-        
+
         prepareData();
     }
 
@@ -67,5 +67,5 @@ public class SalaryCalculationController implements Serializable {
     public List<PrepareSalaryInfo> getPrepareSalaryInfoList() {
         return prepareSalaryInfoList;
     }
-    
+
 }
