@@ -7,9 +7,10 @@
     <p:toolbar>
         <f:facet name="left">
             <p:commandButton id="btn_show" value="Посмотреть" 
-                disabled="true"
+                disabled="#{salaryDetailsController.selectedSalary==null}"
                 icon="ui-icon-check"  
                 action='#{navController.setMainContent("salary/salaryDetails")}'
+                actionListener="#{salaryDetailsController.prepareData('salary/salaryList')}"
                 update=":contentForm" />
             <span class="ui-separator"><span
                 class="ui-icon ui-icon-grip-dotted-vertical" /></span>
@@ -21,11 +22,16 @@
         tableStyle="table-layout:auto;width:100%;" emptyMessage="Нет данных"
         var="salary" value="#{salariesController.salaries}"
         rowKey="#{salariesController.salaries.indexOf(salary)}" 
-        selectionMode="single" selection="#{salariesController.selectedSalary}"
+        selectionMode="single" selection="#{salaryDetailsController.selectedSalary}"
         widgetVar="salaryTable">
         
         <f:facet name="header" style="text-align:center">Зарплаты</f:facet>
           
+        <p:ajax event="rowSelect" update="@form:btn_show"
+            immediate="true" />
+        <p:ajax event="rowUnselect" update="@form:btn_show"
+            immediate="true" />
+        
         <p:column headerText="ментор" sortBy="#{salary.manager}"
             filterBy="#{salary.manager}" filterMatchMode="contains"
             converter="omnifaces.SelectItemsConverter">

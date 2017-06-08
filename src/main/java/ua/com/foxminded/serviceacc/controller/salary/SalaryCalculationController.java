@@ -26,6 +26,8 @@ public class SalaryCalculationController implements Serializable {
     
     private List<SalaryCalculationDetails> salaryCalculationDetailsList;
     
+    private SalaryCalculationDetails selectedSalaryDetails;
+    
     @Inject
     public SalaryCalculationController(SalaryService salaryService) {
         super();
@@ -45,6 +47,14 @@ public class SalaryCalculationController implements Serializable {
 
     public List<SalaryCalculationDetails> getSalaryCalculationDetailsList() {
         return salaryCalculationDetailsList;
+    }
+
+    public SalaryCalculationDetails getSelectedSalaryDetails() {
+        return selectedSalaryDetails;
+    }
+
+    public void setSelectedSalaryDetails(SalaryCalculationDetails selectedSalaryDetails) {
+        this.selectedSalaryDetails = selectedSalaryDetails;
     }
 
 }

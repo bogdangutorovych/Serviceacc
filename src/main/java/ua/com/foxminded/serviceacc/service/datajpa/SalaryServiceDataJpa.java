@@ -126,4 +126,22 @@ public class SalaryServiceDataJpa implements SalaryService {
         
         return salaryCalculationDetailsList;
     }
+
+    @Override
+    public Salary calculateSalaryForManager(Manager manager) {
+        List<WorkStatement> workStatements = workStatementRepository.findPaidNotInSalary(manager);
+        
+        Salary salary = new Salary();
+        salary.setManager(manager);
+        Money payment = new Money(Currency.UAH, 0L);
+        
+        for (WorkStatement workStatement : workStatements) {
+            salary.addWorkStatement(workStatement);
+            payment.setAmount(Long.sum(payment.getAmount(), workStatement.getManagerEarning().getAmount()));
+        }
+        
+        salary.setAmount(payment);
+        
+        return salary;
+    }
 }

@@ -2,6 +2,7 @@ package ua.com.foxminded.serviceacc.service;
 
 import java.util.List;
 
+import ua.com.foxminded.serviceacc.model.Manager;
 import ua.com.foxminded.serviceacc.model.Salary;
 
 public interface SalaryService {
@@ -11,6 +12,7 @@ public interface SalaryService {
     void delete(Long id);
     
     List<Salary> calculateSalaries();
+    Salary calculateSalaryForManager(Manager manager);
     
     List<SalaryCalculationDetails> getSalaryCalculationDetails();
 }
