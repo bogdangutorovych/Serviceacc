@@ -144,4 +144,9 @@ public class SalaryServiceDataJpa implements SalaryService {
         
         return salary;
     }
+
+    @Override
+    public Salary getSalaryWithWorkStatements(Salary salary) {
+        return salaryRepository.getSalaryWithWorkStatements(salary.getId());
+    }
 }

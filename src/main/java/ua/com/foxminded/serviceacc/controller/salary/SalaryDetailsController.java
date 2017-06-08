@@ -39,6 +39,7 @@ public class SalaryDetailsController implements Serializable {
     }
     
     public void prepareData(String previousPage) {
+        selectedSalary = salaryService.getSalaryWithWorkStatements(selectedSalary);
         this.previousPage = previousPage;
     }
     
