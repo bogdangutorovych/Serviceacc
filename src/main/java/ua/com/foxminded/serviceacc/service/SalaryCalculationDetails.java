@@ -34,7 +34,7 @@ public class SalaryCalculationDetails {
     }
     
     public String getManagerFullName() {
-        return manager.getFirstName() + manager.getLastName();
+        return manager.getFirstName() + " " + manager.getLastName();
     }
     
     public String getManagerLastName() {
