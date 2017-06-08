@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ua.com.foxminded.serviceacc.model.Salary;
+import ua.com.foxminded.serviceacc.service.SalaryCalculationDetails;
 import ua.com.foxminded.serviceacc.service.SalaryService;
 
 @Named
@@ -24,12 +25,23 @@ public class SalaryDetailsController implements Serializable {
     
     private Salary selectedSalary;
     
+    private String previousPage = "client/clientList";
+    
     @Inject
     public SalaryDetailsController(SalaryService salaryService) {
         super();
         this.salaryService = salaryService;
     }
 
+    public void prepareData(SalaryCalculationDetails salaryDetails, String previousPage) {
+        selectedSalary = salaryService.calculateSalaryForManager(salaryDetails.getManager());
+        this.previousPage = previousPage;
+    }
+    
+    public void prepareData(String previousPage) {
+        this.previousPage = previousPage;
+    }
+    
     public void onGenerate() {
         selectedSalary.setDate(LocalDate.now());
         salaryService.save(selectedSalary);
@@ -45,6 +57,14 @@ public class SalaryDetailsController implements Serializable {
 
     public void setSelectedSalary(Salary selectedSalary) {
         this.selectedSalary = selectedSalary;
+    }
+
+    public String getPreviousPage() {
+        return previousPage;
+    }
+
+    public void setPreviousPage(String previousPage) {
+        this.previousPage = previousPage;
     }    
  
 }

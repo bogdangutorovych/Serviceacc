@@ -11,6 +11,12 @@
                 icon="ui-icon-check" actionListener="#{salaryDetailsController.onGenerate()}" update=":contentForm" />
             <span class="ui-separator"><span
                 class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+            <p:commandButton id="btn_close" value="Закрыть" update=":contentForm"
+                icon="ui-icon-close"
+                actionListener="#{salaryDetailsController.setSelectedSalary(null)}"
+                action='#{navController.setMainContent(salaryDetailsController.previousPage)}'
+                immediate="true">
+            </p:commandButton>
         </f:facet>
     </p:toolbar>
     

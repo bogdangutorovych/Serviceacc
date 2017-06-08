@@ -15,8 +15,8 @@ import ua.com.foxminded.serviceacc.service.SalaryService;
 
 @Named
 @ViewScoped
-public class SalariesCalculationController  implements Serializable {
-    private static final Logger log = LoggerFactory.getLogger(SalariesCalculationController.class);
+public class SalaryCalculationSimpleController  implements Serializable {
+    private static final Logger log = LoggerFactory.getLogger(SalaryCalculationSimpleController.class);
     
     private static final long serialVersionUID = 1L;
 
@@ -25,7 +25,7 @@ public class SalariesCalculationController  implements Serializable {
     private List<Salary> salaries;
     
     @Inject
-    public SalariesCalculationController(SalaryService salaryService) {
+    public SalaryCalculationSimpleController(SalaryService salaryService) {
         super();
         this.salaryService = salaryService;
     }

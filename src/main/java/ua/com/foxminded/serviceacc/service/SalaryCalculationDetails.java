@@ -33,8 +33,12 @@ public class SalaryCalculationDetails {
         return this.manager.getId().equals(manager.getId());
     }
     
-    public String getManagerName() {
+    public String getManagerFullName() {
         return manager.getFirstName() + manager.getLastName();
+    }
+    
+    public String getManagerLastName() {
+        return manager.getLastName();
     }
     
     public LocalDate getLastSalaryDate() {
