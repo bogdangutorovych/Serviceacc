@@ -12,4 +12,8 @@ public interface SalaryRepository extends JpaRepository<Salary, Long> {
             + "(select lastSalary.manager, max(lastSalary.date) from Salary lastSalary group by lastSalary.manager)")
     public List<Salary> findSalariesWithMaxDate();
 
+    @Query(value = "select salary from Salary salary join fetch salary.workStatements workStatement "
+            + "join fetch workStatement.invoice where salary.id=?1")
+    public Salary getSalaryWithWorkStatements(Long id);
+
 }

@@ -15,4 +15,5 @@ public interface SalaryService {
     Salary calculateSalaryForManager(Manager manager);
     
     List<SalaryCalculationDetails> getSalaryCalculationDetails();
+    Salary getSalaryWithWorkStatements(Salary salary);
 }
