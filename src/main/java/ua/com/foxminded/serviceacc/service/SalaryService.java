@@ -4,6 +4,7 @@ import java.util.List;
 
 import ua.com.foxminded.serviceacc.model.Manager;
 import ua.com.foxminded.serviceacc.model.Salary;
+import ua.com.foxminded.serviceacc.service.dto.PrepareSalaryInfo;
 
 public interface SalaryService {
     Salary save(Salary salary);
@@ -14,6 +15,6 @@ public interface SalaryService {
     List<Salary> calculateSalaries();
     Salary calculateSalaryForManager(Manager manager);
     
-    List<SalaryCalculationDetails> getSalaryCalculationDetails();
+    List<PrepareSalaryInfo> getPrepareSalaryInfoList();
     Salary getSalaryWithWorkStatements(Salary salary);
 }

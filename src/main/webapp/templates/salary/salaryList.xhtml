@@ -10,7 +10,7 @@
                 disabled="#{salaryDetailsController.selectedSalary==null}"
                 icon="ui-icon-check"  
                 action='#{navController.setMainContent("salary/salaryDetails")}'
-                actionListener="#{salaryDetailsController.prepareData('salary/salaryList')}"
+                actionListener="#{salaryDetailsController.loadSalary}"
                 update=":contentForm" />
             <span class="ui-separator"><span
                 class="ui-icon ui-icon-grip-dotted-vertical" /></span>

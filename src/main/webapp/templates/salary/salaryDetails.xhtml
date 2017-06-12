@@ -7,14 +7,22 @@
     <p:toolbar>
         <f:facet name="left">
             <p:commandButton id="btn_generate" value="Сформировать" 
-                disabled="#{salaryDetailsController.selectedSalary.id!=null}"
+                rendered="#{salaryDetailsController.calculateSalary}"
                 icon="ui-icon-check" actionListener="#{salaryDetailsController.onGenerate()}" update=":contentForm" />
             <span class="ui-separator"><span
                 class="ui-icon ui-icon-grip-dotted-vertical" /></span>
-            <p:commandButton id="btn_close" value="Закрыть" update=":contentForm"
+            <p:commandButton id="btn_calc_close" value="Закрыть" update=":contentForm" 
                 icon="ui-icon-close"
+                rendered="#{salaryDetailsController.calculateSalary}"
+                actionListener="#{salaryCalculationController.onSalaryDetailsClose}"
+                action='#{navController.setMainContent("salary/salaryCalculationExtended")}'
+                immediate="true">
+            </p:commandButton>
+            <p:commandButton id="btn_edit_close" value="Закрыть" update=":contentForm" 
+                icon="ui-icon-close"
+                rendered="#{salaryDetailsController.editSalary}"
                 actionListener="#{salaryDetailsController.setSelectedSalary(null)}"
-                action='#{navController.setMainContent(salaryDetailsController.previousPage)}'
+                action='#{navController.setMainContent("salary/salaryList")}'
                 immediate="true">
             </p:commandButton>
         </f:facet>

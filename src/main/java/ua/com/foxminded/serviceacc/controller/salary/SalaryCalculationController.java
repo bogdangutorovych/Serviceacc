@@ -12,8 +12,9 @@ import javax.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ua.com.foxminded.serviceacc.service.SalaryCalculationDetails;
+import ua.com.foxminded.serviceacc.controller.JSFUtils;
 import ua.com.foxminded.serviceacc.service.SalaryService;
+import ua.com.foxminded.serviceacc.service.dto.PrepareSalaryInfo;
 
 @Named
 @ViewScoped
@@ -24,9 +25,9 @@ public class SalaryCalculationController implements Serializable {
 
     private final SalaryService salaryService;
     
-    private List<SalaryCalculationDetails> salaryCalculationDetailsList;
+    private List<PrepareSalaryInfo> prepareSalaryInfoList;
     
-    private SalaryCalculationDetails selectedSalaryDetails;
+    private PrepareSalaryInfo selectedPrepareSalaryInfo;
     
     @Inject
     public SalaryCalculationController(SalaryService salaryService) {
@@ -42,19 +43,29 @@ public class SalaryCalculationController implements Serializable {
     }
     
     public void prepareData() {
-        salaryCalculationDetailsList = salaryService.getSalaryCalculationDetails();
+        prepareSalaryInfoList = salaryService.getPrepareSalaryInfoList();
     }
 
-    public List<SalaryCalculationDetails> getSalaryCalculationDetailsList() {
-        return salaryCalculationDetailsList;
+    public void onSalaryDetailsClose() {
+        SalaryDetailsController salaryDetailsController = JSFUtils.getBean("salaryDetailsController", SalaryDetailsController.class);
+        
+        if (salaryDetailsController != null) {
+            salaryDetailsController.setSelectedSalary(null);
+        }
+        
+        prepareData();
     }
 
-    public SalaryCalculationDetails getSelectedSalaryDetails() {
-        return selectedSalaryDetails;
+    public PrepareSalaryInfo getSelectedPrepareSalaryInfo() {
+        return selectedPrepareSalaryInfo;
     }
 
-    public void setSelectedSalaryDetails(SalaryCalculationDetails selectedSalaryDetails) {
-        this.selectedSalaryDetails = selectedSalaryDetails;
+    public void setSelectedPrepareSalaryInfo(PrepareSalaryInfo selectedPrepareSalaryInfo) {
+        this.selectedPrepareSalaryInfo = selectedPrepareSalaryInfo;
     }
 
+    public List<PrepareSalaryInfo> getPrepareSalaryInfoList() {
+        return prepareSalaryInfoList;
+    }
+    
 }

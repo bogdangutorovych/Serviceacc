@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import ua.com.foxminded.serviceacc.model.Manager;
 import ua.com.foxminded.serviceacc.model.WorkStatement;
-import ua.com.foxminded.serviceacc.service.SalaryCalculationDetails;
+import ua.com.foxminded.serviceacc.service.dto.PrepareSalaryInfo;
 
 public interface WorkStatementRepository extends JpaRepository<WorkStatement, Long>{
     List<WorkStatement> findByManager(Manager manager);
@@ -30,7 +30,7 @@ public interface WorkStatementRepository extends JpaRepository<WorkStatement, Lo
             + "join fetch workStatement.invoice")
     List<WorkStatement> findAllWithInvoice();
     
-    @Query(value = "select new ua.com.foxminded.serviceacc.service.SalaryCalculationDetails(manager, count(*) as workStatementCount) "
+    @Query(value = "select new ua.com.foxminded.serviceacc.service.dto.PrepareSalaryInfo(manager, count(*) as workStatementCount) "
             + "from WorkStatement workStatement join workStatement.manager manager where workStatement.salary is null group by manager.id")
-    public List<SalaryCalculationDetails> findSalaryCalculationDetails();
+    public List<PrepareSalaryInfo> findPrepareSalaryInfoList();
 }

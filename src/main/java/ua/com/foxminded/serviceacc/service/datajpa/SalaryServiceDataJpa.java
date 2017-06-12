@@ -19,8 +19,8 @@ import ua.com.foxminded.serviceacc.model.WorkStatement;
 import ua.com.foxminded.serviceacc.model.enums.Currency;
 import ua.com.foxminded.serviceacc.repository.SalaryRepository;
 import ua.com.foxminded.serviceacc.repository.WorkStatementRepository;
-import ua.com.foxminded.serviceacc.service.SalaryCalculationDetails;
 import ua.com.foxminded.serviceacc.service.SalaryService;
+import ua.com.foxminded.serviceacc.service.dto.PrepareSalaryInfo;
 
 @Service("salaryService")
 public class SalaryServiceDataJpa implements SalaryService {
@@ -110,21 +110,21 @@ public class SalaryServiceDataJpa implements SalaryService {
     }
 
     @Override
-    public List<SalaryCalculationDetails> getSalaryCalculationDetails() {
-        List<SalaryCalculationDetails> salaryCalculationDetailsList = workStatementRepository.findSalaryCalculationDetails();
+    public List<PrepareSalaryInfo> getPrepareSalaryInfoList() {
+        List<PrepareSalaryInfo> prepareSalaryInfoList = workStatementRepository.findPrepareSalaryInfoList();
         
         List<Salary> lastSalaries = salaryRepository.findSalariesWithMaxDate();
         
         for (Salary salary : lastSalaries) {
-            for (SalaryCalculationDetails salaryCalculationDetails : salaryCalculationDetailsList) {
-                if (salaryCalculationDetails.equalsManager(salary.getManager())) {
-                    salaryCalculationDetails.setLastSalary(salary);
+            for (PrepareSalaryInfo prepareSalaryInfo : prepareSalaryInfoList) {
+                if (prepareSalaryInfo.getManager().equals(salary.getManager())) {
+                    prepareSalaryInfo.setLastSalary(salary);
                     break;
                 }
             }
         }
         
-        return salaryCalculationDetailsList;
+        return prepareSalaryInfoList;
     }
 
     @Override

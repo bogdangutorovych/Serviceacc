@@ -11,8 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ua.com.foxminded.serviceacc.model.Salary;
-import ua.com.foxminded.serviceacc.service.SalaryCalculationDetails;
 import ua.com.foxminded.serviceacc.service.SalaryService;
+import ua.com.foxminded.serviceacc.service.dto.PrepareSalaryInfo;
 
 @Named
 @ViewScoped
@@ -25,7 +25,7 @@ public class SalaryDetailsController implements Serializable {
     
     private Salary selectedSalary;
     
-    private String previousPage = "client/clientList";
+    private SalaryDetailsAction action = SalaryDetailsAction.EDIT;
     
     @Inject
     public SalaryDetailsController(SalaryService salaryService) {
@@ -33,14 +33,14 @@ public class SalaryDetailsController implements Serializable {
         this.salaryService = salaryService;
     }
 
-    public void prepareData(SalaryCalculationDetails salaryDetails, String previousPage) {
+    public void createSalary(PrepareSalaryInfo salaryDetails) {
         selectedSalary = salaryService.calculateSalaryForManager(salaryDetails.getManager());
-        this.previousPage = previousPage;
+        this.action = SalaryDetailsAction.CALCULATE;
     }
     
-    public void prepareData(String previousPage) {
+    public void loadSalary() {
         selectedSalary = salaryService.getSalaryWithWorkStatements(selectedSalary);
-        this.previousPage = previousPage;
+        this.action = SalaryDetailsAction.EDIT;
     }
     
     public void onGenerate() {
@@ -60,12 +60,11 @@ public class SalaryDetailsController implements Serializable {
         this.selectedSalary = selectedSalary;
     }
 
-    public String getPreviousPage() {
-        return previousPage;
+    public boolean getCalculateSalary() {
+        return action.equals(SalaryDetailsAction.CALCULATE);
     }
-
-    public void setPreviousPage(String previousPage) {
-        this.previousPage = previousPage;
-    }    
- 
+    
+    public boolean getEditSalary() {
+        return action.equals(SalaryDetailsAction.EDIT);
+    }
 }

@@ -1,20 +1,20 @@
-package ua.com.foxminded.serviceacc.service;
+package ua.com.foxminded.serviceacc.service.dto;
 
 import java.time.LocalDate;
 
 import ua.com.foxminded.serviceacc.model.Manager;
 import ua.com.foxminded.serviceacc.model.Salary;
 
-public class SalaryCalculationDetails {
+public class PrepareSalaryInfo {
     private Manager manager;
     private Salary lastSalary;
     private long workStatementCount;
     
-    public SalaryCalculationDetails() {
+    public PrepareSalaryInfo() {
     }
     
     
-    public SalaryCalculationDetails(Manager manager, long workStatementCount) {
+    public PrepareSalaryInfo(Manager manager, long workStatementCount) {
         super();
         this.manager = manager;
         this.workStatementCount = workStatementCount;
@@ -23,18 +23,6 @@ public class SalaryCalculationDetails {
 
     public Manager getManager() {
         return manager;
-    }
-    
-    public boolean equalsManager(Manager manager) {
-        if (this.manager.getId() == null || manager == null || manager.getId() == null) {
-            return false;
-        }
-        
-        return this.manager.getId().equals(manager.getId());
-    }
-    
-    public String getManagerFullName() {
-        return manager.getFirstName() + " " + manager.getLastName();
     }
     
     public String getManagerLastName() {
