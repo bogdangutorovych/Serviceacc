@@ -7,10 +7,10 @@
     <p:toolbar>
         <f:facet name="left">
             <p:commandButton id="btn_calc" value="Рассчитать зарплату" 
-                disabled="#{salaryCalculationController.selectedSalaryDetails==null}"
+                disabled="#{salaryCalculationController.selectedPrepareSalaryInfo==null}"
                 icon="ui-icon-check"  
                 action='#{navController.setMainContent("salary/salaryDetails")}'
-                actionListener="#{salaryDetailsController.prepareData(salaryCalculationController.selectedSalaryDetails, 'salary/salaryCalculationExtended')}"
+                actionListener="#{salaryDetailsController.createSalary(salaryCalculationController.selectedPrepareSalaryInfo)}"
                 update=":contentForm" />
             <span class="ui-separator"><span
                 class="ui-icon ui-icon-grip-dotted-vertical" /></span>
@@ -20,9 +20,9 @@
     <br />
     <p:dataTable id="salaryCalculationList" editable="true"
         tableStyle="table-layout:auto;width:100%;" emptyMessage="Нет данных"
-        var="salaryCalculationDetails" value="#{salaryCalculationController.salaryCalculationDetailsList}"
-        rowKey="#{salaryCalculationController.salaryCalculationDetailsList.indexOf(salaryCalculationDetails)}" 
-        selectionMode="single" selection="#{salaryCalculationController.selectedSalaryDetails}"
+        var="prepareSalaryInfo" value="#{salaryCalculationController.prepareSalaryInfoList}"
+        rowKey="#{salaryCalculationController.prepareSalaryInfoList.indexOf(prepareSalaryInfo)}" 
+        selectionMode="single" selection="#{salaryCalculationController.selectedPrepareSalaryInfo}"
         widgetVar="salaryTable">
         
         <f:facet name="header" style="text-align:center">Расчет зарплат
@@ -39,20 +39,20 @@
         <p:ajax event="rowUnselect" update="@form:btn_calc"
             immediate="true" />
             
-        <p:column headerText="ментор" sortBy="#{salaryCalculationDetails.managerLastName}"
-            filterBy="#{salaryCalculationDetails.managerLastName}" filterMatchMode="contains"
+        <p:column headerText="ментор" sortBy="#{prepareSalaryInfo.manager.lastName}"
+            filterBy="#{prepareSalaryInfo.manager.lastName}" filterMatchMode="contains"
             converter="omnifaces.SelectItemsConverter">
-            <h:outputText value="#{salaryCalculationDetails.managerFullName}" />
+            <h:outputText value="#{prepareSalaryInfo.manager.fullName}" />
         </p:column>
         
         <p:column headerText="Дата последней зарплаты">
-            <h:outputText value="#{salaryCalculationDetails.lastSalaryDate}" 
+            <h:outputText value="#{prepareSalaryInfo.lastSalaryDate}" 
                 converter="localDateConverter"
                 pattern="dd.MM.yyyy" />
         </p:column>
         
-        <p:column headerText="Количество актов" sortBy="#{salaryCalculationDetails.workStatementCount}">
-            <h:outputText value="#{salaryCalculationDetails.workStatementCount}" />
+        <p:column headerText="Количество актов" sortBy="#{prepareSalaryInfo.workStatementCount}">
+            <h:outputText value="#{prepareSalaryInfo.workStatementCount}" />
         </p:column>
     </p:dataTable>
 </ui:composition>

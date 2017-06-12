@@ -94,8 +94,24 @@ public class Manager {
         this.isDeleted = isDeleted;
     }
 
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+    
     @Override
     public String toString() {
         return firstName + " " + lastName;
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Manager )) return false;
+        return id != null && id.equals(((Manager) o).id);
+    }
+    
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 }
