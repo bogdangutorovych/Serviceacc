@@ -11,7 +11,7 @@ import javax.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ua.com.foxminded.serviceacc.controller.catalogue.ClientInformationTypeController;
+import ua.com.foxminded.serviceacc.controller.catalogue.ClientInfoTypeHolderBean;
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.ClientInformation;
 import ua.com.foxminded.serviceacc.model.ClientInformationType;
@@ -32,14 +32,14 @@ public class ClientController implements Serializable {
 
     private final ClientService clientService;
     private final DealService dealService;
-    private final ClientInformationTypeController typeController;
+    private final ClientInfoTypeHolderBean typeHolderBean;
 
     @Inject
     public ClientController(ClientService clientService, DealService dealService,
-                            ClientInformationTypeController typeController) {
+                            ClientInfoTypeHolderBean typeHolder) {
         this.clientService = clientService;
         this.dealService = dealService;
-        this.typeController = typeController;
+        this.typeHolderBean = typeHolder;
     }
 
     @PostConstruct
@@ -64,7 +64,7 @@ public class ClientController implements Serializable {
     public void add() {
         selectedClient = new Client();
         //fill empty info
-        for (ClientInformationType type : typeController.getClientInformationTypeList()){
+        for (ClientInformationType type : typeHolderBean.getClientInformationTypeList()){
             ClientInformation info = new ClientInformation();
             info.setClientInformationType(type);
             selectedClient.addClientInformation(info);

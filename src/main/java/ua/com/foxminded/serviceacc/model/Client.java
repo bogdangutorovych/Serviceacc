@@ -51,6 +51,7 @@ public class Client {
         cascade = CascadeType.ALL,
         orphanRemoval = true
     )
+    @Where(clause = "is_deleted = false")
     private List<ClientInformation> information = new ArrayList<>();
 
     @Column(name = "is_deleted", nullable = false)

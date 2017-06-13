@@ -1,5 +1,7 @@
 package ua.com.foxminded.serviceacc.controller.catalogue;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ua.com.foxminded.serviceacc.model.ClientInformationType;
 import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
 
@@ -7,6 +9,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -14,8 +17,9 @@ import java.util.List;
  */
 @Named
 @ApplicationScoped
-public class ClientInfoTypeHolderBean {
+public class ClientInfoTypeHolderBean implements Serializable{
 
+    private static final long serialVersionUID = 1L;
 
     private List<ClientInformationType> clientInformationTypeList;
     final ClientInformationTypeService clientInformationTypeService;
