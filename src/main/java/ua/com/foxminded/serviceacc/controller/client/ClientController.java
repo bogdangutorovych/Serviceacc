@@ -13,12 +13,11 @@ import javax.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ua.com.foxminded.serviceacc.controller.catalogue.ClientInfoTypeHolderBean;
+import ua.com.foxminded.serviceacc.controller.catalogue.ClientInformationTypeController;
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.ClientInformation;
 import ua.com.foxminded.serviceacc.model.ClientInformationType;
 import ua.com.foxminded.serviceacc.model.Deal;
-import ua.com.foxminded.serviceacc.service.ClientInformationService;
 import ua.com.foxminded.serviceacc.service.ClientService;
 import ua.com.foxminded.serviceacc.service.DealService;
 
@@ -34,15 +33,15 @@ public class ClientController implements Serializable {
     private List<Deal> clientDeals;
 
     private final ClientService clientService;
-    private final ClientInfoTypeHolderBean clientInfoTypeHolderBean;
     private final DealService dealService;
+    private final ClientInformationTypeController typeController;
 
     @Inject
-    public ClientController(ClientService clientService, ClientInfoTypeHolderBean clientInfoTypeHolderBean,
-                            DealService dealService) {
+    public ClientController(ClientService clientService, DealService dealService,
+                            ClientInformationTypeController typeController) {
         this.clientService = clientService;
-        this.clientInfoTypeHolderBean = clientInfoTypeHolderBean;
         this.dealService = dealService;
+        this.typeController = typeController;
     }
 
     @PostConstruct
@@ -67,7 +66,7 @@ public class ClientController implements Serializable {
     public void add() {
         selectedClient = new Client();
         //fill empty info
-        for (ClientInformationType type : clientInfoTypeHolderBean.getClientInformationTypeList()){
+        for (ClientInformationType type : typeController.getClientInformationTypeList()){
             ClientInformation info = new ClientInformation();
             info.setClientInformationType(type);
             info.setClient(selectedClient);
