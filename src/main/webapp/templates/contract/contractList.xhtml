@@ -28,7 +28,7 @@
     <p:dataTable id="contractList" editable="true"
                  tableStyle="table-layout:auto;width:100%;" emptyMessage="Нет данных"
                  var="contract" value="#{contractListController.list}"
-                 rowKey="#{contractListController.list.indexOf(c)}"
+                 rowKey="#{contractListController.list.indexOf(contract)}"
                  selectionMode="single"
                  selection="#{contractController.selectedContract}"
                  widgetVar="contractTable">
