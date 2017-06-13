@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.ClientInformation;
 import ua.com.foxminded.serviceacc.model.ClientInformationType;
+import ua.com.foxminded.serviceacc.repository.ClientInformationRepository;
 import ua.com.foxminded.serviceacc.repository.ClientInformationTypeRepository;
 import ua.com.foxminded.serviceacc.repository.ClientRepository;
 import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
@@ -23,6 +24,8 @@ public class ClientInformationTypeServiceDataJpa implements ClientInformationTyp
     ClientInformationTypeRepository clientInfoTypeRepository;
     @Autowired
     ClientRepository clientRepository;
+    @Autowired
+    ClientInformationRepository clientInformationRepository;
 
     @Override
     @Transactional
@@ -55,7 +58,9 @@ public class ClientInformationTypeServiceDataJpa implements ClientInformationTyp
     }
 
     @Override
-    public void delete(Long contactTypeId) {
-        clientInfoTypeRepository.delete(contactTypeId);
+    @Transactional
+    public void delete(ClientInformationType type) {
+        clientInformationRepository.deleteAllByClientInformationType(type);
+        clientInfoTypeRepository.delete(type);
     }
 }

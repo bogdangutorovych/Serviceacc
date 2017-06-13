@@ -8,12 +8,14 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+import org.hibernate.annotations.SQLDelete;
 
 /**
  * Created by andreb on 04.04.17. Represent information type
  */
 @Entity
 @Table(name = "client_info_type")
+@SQLDelete(sql = "UPDATE client_info_type SET is_deleted = true WHERE id = ?")
 public class ClientInformationType {
 
     @Id

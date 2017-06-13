@@ -4,6 +4,7 @@ import java.util.List;
 
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.ClientInformation;
+import ua.com.foxminded.serviceacc.model.ClientInformationType;
 
 public interface ClientInformationService {
 
@@ -16,4 +17,5 @@ public interface ClientInformationService {
     List<ClientInformation> findByClient(Client client);
 
     void delete(Long clientInformationId);
+
 }

@@ -41,7 +41,7 @@ public class ClientInformationTypeController implements Serializable {
     }
 
     public void delete() {
-        clientInformationTypeService.delete(selectedClientInfoType.getId());
+        clientInformationTypeService.delete(selectedClientInfoType);
         clientInformationTypeList.remove(selectedClientInfoType);
         selectedClientInfoType = null;
     }
