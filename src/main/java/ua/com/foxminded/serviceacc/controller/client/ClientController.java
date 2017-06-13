@@ -69,8 +69,7 @@ public class ClientController implements Serializable {
         for (ClientInformationType type : typeController.getClientInformationTypeList()){
             ClientInformation info = new ClientInformation();
             info.setClientInformationType(type);
-            info.setClient(selectedClient);
-            selectedClient.getInformation().add(info);
+            selectedClient.addClientInformation(info);
         }
     }
 
