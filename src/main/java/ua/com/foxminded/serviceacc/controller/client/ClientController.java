@@ -66,6 +66,7 @@ public class ClientController implements Serializable {
 
     public void add() {
         selectedClient = new Client();
+        //fill empty info
         for (ClientInformationType type : clientInfoTypeHolderBean.getClientInformationTypeList()){
             ClientInformation info = new ClientInformation();
             info.setClientInformationType(type);

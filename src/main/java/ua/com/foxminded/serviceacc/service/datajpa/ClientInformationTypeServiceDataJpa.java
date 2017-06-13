@@ -5,8 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import org.springframework.transaction.annotation.Transactional;
+import ua.com.foxminded.serviceacc.model.Client;
+import ua.com.foxminded.serviceacc.model.ClientInformation;
 import ua.com.foxminded.serviceacc.model.ClientInformationType;
 import ua.com.foxminded.serviceacc.repository.ClientInformationTypeRepository;
+import ua.com.foxminded.serviceacc.repository.ClientRepository;
 import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
 
 /**
@@ -17,10 +21,27 @@ public class ClientInformationTypeServiceDataJpa implements ClientInformationTyp
 
     @Autowired
     ClientInformationTypeRepository clientInfoTypeRepository;
+    @Autowired
+    ClientRepository clientRepository;
 
     @Override
+    @Transactional
     public ClientInformationType save(ClientInformationType clientInformationType) {
-        return clientInfoTypeRepository.save(clientInformationType);
+
+        if (clientInformationType.getId() != null){
+            return clientInfoTypeRepository.save(clientInformationType);
+        }else{
+            ClientInformationType persisted = clientInfoTypeRepository.save(clientInformationType);
+            for (Client client : clientRepository.findAll()){
+                ClientInformation info = new ClientInformation();
+                info.setClientInformationType(persisted);
+                info.setClient(client);
+                client.getInformation().add(info);
+                clientRepository.save(client);
+            }
+            return persisted;
+        }
+
     }
 
     @Override

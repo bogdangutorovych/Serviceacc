@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.bean.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -13,7 +14,7 @@ import ua.com.foxminded.serviceacc.model.ClientInformationType;
 import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
 
 @Named
-@javax.faces.view.ViewScoped
+@ApplicationScoped
 public class ClientInformationTypeController implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -23,18 +24,42 @@ public class ClientInformationTypeController implements Serializable {
     private List<ClientInformationType> clientInformationTypeList;
 
     private final ClientInformationTypeService clientInformationTypeService;
-    private final ClientInfoTypeHolderBean clientInfoTypeHolderBean;
 
     @Inject
-    public ClientInformationTypeController(ClientInformationTypeService cltService, ClientInfoTypeHolderBean clientInfoTypeHolderBean) {
+    public ClientInformationTypeController(ClientInformationTypeService cltService) {
         this.clientInformationTypeService = cltService;
-        this.clientInfoTypeHolderBean = clientInfoTypeHolderBean;
     }
 
     @PostConstruct
     public void init() {
-        clientInformationTypeList = clientInfoTypeHolderBean.getClientInformationTypeList();
+        clientInformationTypeList = clientInformationTypeService.findAll();
     }
+
+    public void add() {
+        selectedClientInfoType = new ClientInformationType("", "");
+        clientInformationTypeList.add(selectedClientInfoType);
+    }
+
+    public void delete() {
+        clientInformationTypeService.delete(selectedClientInfoType.getId());
+        clientInformationTypeList.remove(selectedClientInfoType);
+        selectedClientInfoType = null;
+    }
+
+    public void onRowEdit(RowEditEvent event) {
+        clientInformationTypeService.save((ClientInformationType) event.getObject());
+        selectedClientInfoType = null;
+    }
+
+    public void onRowCancel(RowEditEvent event) {
+        ClientInformationType info = (ClientInformationType) event.getObject();
+        if (info.getId() == null) {
+            clientInformationTypeList.remove(info);
+            selectedClientInfoType = null;
+        }
+    }
+
+    //Getters and Setters
 
     public List<ClientInformationType> getClientInformationTypeList() {
         return clientInformationTypeList;
@@ -46,29 +71,5 @@ public class ClientInformationTypeController implements Serializable {
 
     public void setSelectedClientInfoType(ClientInformationType selectedClientInfoType) {
         this.selectedClientInfoType = selectedClientInfoType;
-    }
-
-    public void add() {
-        selectedClientInfoType = new ClientInformationType("", "");
-        clientInformationTypeList.add(selectedClientInfoType);
-    }
-
-    public void delete() {
-        clientInfoTypeHolderBean.deleteClientInformationType(selectedClientInfoType.getId());
-        clientInformationTypeList.remove(selectedClientInfoType);
-        selectedClientInfoType = null;
-    }
-
-    public void onRowEdit(RowEditEvent event) {
-        clientInfoTypeHolderBean.saveClientInformationType((ClientInformationType) event.getObject());
-        selectedClientInfoType = null;
-    }
-
-    public void onRowCancel(RowEditEvent event) {
-        ClientInformationType info = (ClientInformationType) event.getObject();
-        if (info.getId() == null) {
-            clientInformationTypeList.remove(info);
-            selectedClientInfoType = null;
-        }
     }
 }
