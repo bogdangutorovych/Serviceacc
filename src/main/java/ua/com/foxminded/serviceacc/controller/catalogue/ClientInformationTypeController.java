@@ -4,35 +4,33 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ApplicationScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.primefaces.event.RowEditEvent;
 
 import ua.com.foxminded.serviceacc.model.ClientInformationType;
-import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
 
 @Named
-@ApplicationScoped
+@ViewScoped
 public class ClientInformationTypeController implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private ClientInformationType selectedClientInfoType;
-
     private List<ClientInformationType> clientInformationTypeList;
 
-    private final ClientInformationTypeService clientInformationTypeService;
+    private ClientInfoTypeHolderBean typeHolder;
 
     @Inject
-    public ClientInformationTypeController(ClientInformationTypeService cltService) {
-        this.clientInformationTypeService = cltService;
+    public ClientInformationTypeController(ClientInfoTypeHolderBean typeHolder) {
+        this.typeHolder = typeHolder;
     }
 
     @PostConstruct
     public void init() {
-        clientInformationTypeList = clientInformationTypeService.findAll();
+        clientInformationTypeList = typeHolder.getClientInformationTypeList();
     }
 
     public void add() {
@@ -41,13 +39,13 @@ public class ClientInformationTypeController implements Serializable {
     }
 
     public void delete() {
-        clientInformationTypeService.delete(selectedClientInfoType);
+        typeHolder.delete(selectedClientInfoType);
         clientInformationTypeList.remove(selectedClientInfoType);
         selectedClientInfoType = null;
     }
 
     public void onRowEdit(RowEditEvent event) {
-        clientInformationTypeService.save((ClientInformationType) event.getObject());
+        typeHolder.save((ClientInformationType) event.getObject());
         selectedClientInfoType = null;
     }
 
