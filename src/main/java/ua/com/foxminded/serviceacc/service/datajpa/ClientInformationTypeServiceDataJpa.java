@@ -20,12 +20,18 @@ import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
 @Service("clientInformationTypeService")
 public class ClientInformationTypeServiceDataJpa implements ClientInformationTypeService {
 
+    private final ClientInformationTypeRepository clientInfoTypeRepository;
+    private final ClientRepository clientRepository;
+    private final ClientInformationRepository clientInformationRepository;
+
     @Autowired
-    ClientInformationTypeRepository clientInfoTypeRepository;
-    @Autowired
-    ClientRepository clientRepository;
-    @Autowired
-    ClientInformationRepository clientInformationRepository;
+    public ClientInformationTypeServiceDataJpa(ClientInformationTypeRepository clientInfoTypeRepository,
+                                               ClientRepository clientRepository,
+                                               ClientInformationRepository clientInformationRepository) {
+        this.clientInfoTypeRepository = clientInfoTypeRepository;
+        this.clientRepository = clientRepository;
+        this.clientInformationRepository = clientInformationRepository;
+    }
 
     @Override
     @Transactional

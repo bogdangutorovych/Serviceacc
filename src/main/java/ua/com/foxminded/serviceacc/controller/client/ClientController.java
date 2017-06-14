@@ -54,7 +54,6 @@ public class ClientController implements Serializable {
     public void prepareData(){
         log.debug("Preparing data...");
         if (selectedClient != null && selectedClient.getId() != null){
-            //load client with clientInformation eagerly
             selectedClient = clientService.
                 findByIdWithClientInformation(selectedClient.getId());
             clientDeals = dealService.findByClient(selectedClient);
@@ -66,7 +65,6 @@ public class ClientController implements Serializable {
 
     public void add() {
         selectedClient = new Client();
-        //fill empty info
         for (ClientInformationType type : typeHolderBean.getClientInformationTypeList()){
             ClientInformation info = new ClientInformation();
             info.setClientInformationType(type);
@@ -80,7 +78,6 @@ public class ClientController implements Serializable {
     }
 
     public void onOk() {
-        // save or update client
         clientService.save(selectedClient);
 
     }

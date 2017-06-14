@@ -7,15 +7,18 @@ import org.springframework.stereotype.Service;
 
 import ua.com.foxminded.serviceacc.model.Client;
 import ua.com.foxminded.serviceacc.model.ClientInformation;
-import ua.com.foxminded.serviceacc.model.ClientInformationType;
 import ua.com.foxminded.serviceacc.repository.ClientInformationRepository;
 import ua.com.foxminded.serviceacc.service.ClientInformationService;
 
 @Service("clientInformationService")
 public class ClientInformationServiceDataJpa implements ClientInformationService {
 
+    private final ClientInformationRepository clientInformationRepository;
+
     @Autowired
-    ClientInformationRepository clientInformationRepository;
+    public ClientInformationServiceDataJpa(ClientInformationRepository clientInformationRepository) {
+        this.clientInformationRepository = clientInformationRepository;
+    }
 
     @Override
     public ClientInformation save(ClientInformation clientInformation) {
