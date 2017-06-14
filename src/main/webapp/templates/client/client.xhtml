@@ -63,6 +63,7 @@
 		<f:facet name="left"> Заявки:
             <p:commandButton id="btn_deal_create" value="Добавить"
 				update=":contentForm" icon="ui-icon-check"
+                disabled="#{clientController.selectedClient.id==null}"
 				actionListener="#{dealController.add(clientController.selectedClient)}"
 				action='#{navController.setMainContent("deal/deal")}'>
 			</p:commandButton>
