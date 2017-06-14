@@ -21,6 +21,11 @@ public class SalaryDetailsController implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
+    private static enum SalaryDetailsAction {
+        CALCULATE,
+        EDIT
+    };
+    
     private final SalaryService salaryService;
     
     private Salary selectedSalary;

@@ -129,7 +129,7 @@ public class SalaryServiceDataJpa implements SalaryService {
 
     @Override
     public Salary calculateSalaryForManager(Manager manager) {
-        List<WorkStatement> workStatements = workStatementRepository.findPaidNotInSalary(manager);
+        List<WorkStatement> workStatements = workStatementRepository.findWithPaidInvoicesNotInSalaryByManager(manager);
         
         Salary salary = new Salary();
         salary.setManager(manager);
