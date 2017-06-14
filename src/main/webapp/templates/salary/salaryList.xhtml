@@ -20,8 +20,8 @@
     <br />
     <p:dataTable id="salaryList" editable="true"
         tableStyle="table-layout:auto;width:100%;" emptyMessage="Нет данных"
-        var="salary" value="#{salariesController.salaries}"
-        rowKey="#{salariesController.salaries.indexOf(salary)}" 
+        var="salary" value="#{salaryListController.salaries}"
+        rowKey="#{salaryListController.salaries.indexOf(salary)}" 
         selectionMode="single" selection="#{salaryDetailsController.selectedSalary}"
         widgetVar="salaryTable">
         

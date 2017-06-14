@@ -47,7 +47,7 @@ public class SalaryCalculationController implements Serializable {
     }
 
     public void onSalaryDetailsClose() {
-        SalaryDetailsController salaryDetailsController = JSFUtils.getBean("salaryDetailsController", SalaryDetailsController.class);
+        SalaryDetailsController salaryDetailsController = JSFUtils.getBean(SalaryDetailsController.class);
         
         if (salaryDetailsController != null) {
             salaryDetailsController.setSelectedSalary(null);
