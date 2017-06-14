@@ -38,8 +38,8 @@ public class ClientServiceDataJpa implements ClientService {
     }
 
     @Override
-	public void delete(Long clientId) {
-		clientRepository.delete(clientId);
+	public void delete(Client client) {
+		clientRepository.delete(client);
 	}
 
 	@Override

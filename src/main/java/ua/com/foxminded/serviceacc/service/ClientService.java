@@ -17,5 +17,5 @@ public interface ClientService {
 
 	List<Client> findAll();
 
-	void delete(Long clientId);
+	void delete(Client client);
 }

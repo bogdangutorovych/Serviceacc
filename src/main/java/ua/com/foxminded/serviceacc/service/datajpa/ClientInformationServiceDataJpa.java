@@ -36,8 +36,8 @@ public class ClientInformationServiceDataJpa implements ClientInformationService
     }
 
     @Override
-    public void delete(Long clientInformationId) {
-        clientInformationRepository.delete(clientInformationId);
+    public void delete(ClientInformation clientInformation) {
+        clientInformationRepository.delete(clientInformation);
     }
 
     @Override

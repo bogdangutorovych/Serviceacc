@@ -46,7 +46,7 @@ public class ClientListController implements Serializable {
     }
 
     public void deleteClient(Client client) {
-        clientService.delete(client.getId());
+        clientService.delete(client);
         clientList.remove(client);
     }
 

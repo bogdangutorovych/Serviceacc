@@ -16,6 +16,6 @@ public interface ClientInformationService {
 
     List<ClientInformation> findByClient(Client client);
 
-    void delete(Long clientInformationId);
+    void delete(ClientInformation clientInformation);
 
 }
