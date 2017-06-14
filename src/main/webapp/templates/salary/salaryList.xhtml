@@ -22,6 +22,7 @@
         tableStyle="table-layout:auto;width:100%;" emptyMessage="Нет данных"
         var="salary" value="#{salaryListController.salaries}"
         rowKey="#{salaryListController.salaries.indexOf(salary)}" 
+        selectionMode="single" selection="#{salaryDetailsController.selectedSalary}"
         widgetVar="salaryTable">
         
         <f:facet name="header" style="text-align:center">Зарплаты</f:facet>
