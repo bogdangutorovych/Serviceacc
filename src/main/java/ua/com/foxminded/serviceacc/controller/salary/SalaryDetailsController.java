@@ -64,7 +64,7 @@ public class SalaryDetailsController implements Serializable {
     public void setSelectedSalary(Salary selectedSalary) {
         this.selectedSalary = selectedSalary;
     }
-
+    
     public boolean isCalculateMode() {
         return action.equals(SalaryDetailsAction.CALCULATE);
     }
