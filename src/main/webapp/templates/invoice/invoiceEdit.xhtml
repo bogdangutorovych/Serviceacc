@@ -26,6 +26,13 @@
 				actionListener="#{invoiceController.onCancel()}"
 				action='#{navController.setMainContent("invoice/invoiceList")}'
 				immediate="true" />
+            <span class="ui-separator"><span
+                class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+
+            <p:commandButton value="Добавить акт"
+                             actionListener="#{invoiceController.prepareNewWorkStatement()}"
+                             update="workStmntDlg"
+                             oncomplete="PF('workStatementDlg').show();" />
 		</f:facet>
 	</p:toolbar>
 
@@ -148,6 +155,47 @@
                                  oncomplete="PF('paymentDlg').hide();"/>
 
                 <p:commandButton value="Отмена" oncomplete="PF('paymentDlg').hide();"/>
+
+        </h:panelGrid>
+    </p:dialog>
+
+    <p:dialog id="workStmntDlg" header="Добавить акт" widgetVar="workStatementDlg">
+        <h:panelGrid columns="2">
+            <h:outputLabel for="start_date_ws_inv_dlg" value="Акт с: "
+                           style="font-weight:bold" />
+            <p:calendar id="start_date_ws_inv_dlg" converter="localDateConverter"
+                        pattern="dd.MM.yyyy"
+                        value="#{invoiceController.newWorkStatement.period.dateFrom}"
+                        showOn="button" mask="99.99.9999"
+                        required="true" requiredMessage="Выберите дату">
+            </p:calendar>
+
+            <h:outputLabel for="end_date_ws_inv_dlg" value="по: "
+                           style="font-weight:bold" />
+            <p:calendar id="end_date_ws_inv_dlg" converter="localDateConverter"
+                        pattern="dd.MM.yyyy"
+                        value="#{invoiceController.newWorkStatement.period.dateTo}"
+                        showOn="button" mask="99.99.9999"
+                        required="true" requiredMessage="Выберите дату">
+            </p:calendar>
+
+            <h:outputLabel for="manager_ws_inv_dlg" value="Ментор: " style="font-weight:bold" />
+            <p:selectOneMenu id="manager_ws_inv_dlg"
+                             value="#{workStatementController.newWorkStatement.manager}"
+                             required="true" requiredMessage="Выберите ментора"
+                             converter="omnifaces.SelectItemsConverter">
+                <f:selectItem itemLabel="Выбрать ментора..." noSelectionOption="true" />
+                <f:selectItems value="#{workStatementController.managers}"
+                               var="manager" itemLabel="#{manager.firstName} #{manager.lastName}"
+                               itemValue="#{manager}" />
+            </p:selectOneMenu>
+
+            <p:commandButton value="Сохранить"
+                             actionListener="#{invoiceController.addWorkStatement()}"
+                             update="invoiceEdit"
+                             oncomplete="PF('workStatementDlg').hide();"/>
+
+            <p:commandButton value="Отмена" oncomplete="PF('workStatementDlg').hide();"/>
 
         </h:panelGrid>
     </p:dialog>

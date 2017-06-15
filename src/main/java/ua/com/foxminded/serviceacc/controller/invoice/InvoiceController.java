@@ -2,6 +2,7 @@ package ua.com.foxminded.serviceacc.controller.invoice;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -16,6 +17,8 @@ import ua.com.foxminded.serviceacc.model.Invoice;
 import ua.com.foxminded.serviceacc.model.Payment;
 import ua.com.foxminded.serviceacc.model.Period;
 import ua.com.foxminded.serviceacc.model.Money;
+import ua.com.foxminded.serviceacc.model.WorkStatement;
+import ua.com.foxminded.serviceacc.model.WorkStatement_;
 import ua.com.foxminded.serviceacc.model.enums.InvoiceType;
 import ua.com.foxminded.serviceacc.service.InvoiceService;
 
@@ -31,6 +34,8 @@ public class InvoiceController implements Serializable {
     private Period period;
     private final InvoiceService invoiceService;
     private Payment payment;
+    private WorkStatement newWorkStatement;
+    private List<WorkStatement> workStatements;
 
     @Inject
     public InvoiceController(InvoiceService invoiceService) {
@@ -63,9 +68,15 @@ public class InvoiceController implements Serializable {
 
     @PostConstruct
     public void init() {
+        log.debug("init");
         selectedInvoice = new Invoice();
         period = new Period();
         prepareNewPayment();
+//        prepareNewWorkStatement();
+    }
+
+    public void prepareData(){
+
     }
 
     public void onOk() {
@@ -88,6 +99,17 @@ public class InvoiceController implements Serializable {
         log.debug("Payment " + payment + " was attached to Invoice " + selectedInvoice);
     }
 
+    public void prepareNewWorkStatement(){
+        log.debug("Prepare new WorkStatement");
+        newWorkStatement = new WorkStatement();
+        newWorkStatement.setInvoice(selectedInvoice);
+//        newWorkStatement.setManager(selectedInvoice.getContract().getManager());
+    }
+
+    public void addWorkStatement(){
+        log.debug("Added WorkStatement: " + newWorkStatement + " to invoice: " + selectedInvoice);
+    }
+
     public void clearSelected() {
         selectedInvoice = null;
     }
@@ -108,7 +130,8 @@ public class InvoiceController implements Serializable {
         return payment;
     }
 
-    public void setPayment(Payment payment) {
-        this.payment = payment;
+    public WorkStatement getNewWorkStatement() {
+        return newWorkStatement;
     }
+
 }
