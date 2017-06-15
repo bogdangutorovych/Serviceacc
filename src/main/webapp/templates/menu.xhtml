@@ -9,7 +9,8 @@
 			<p:submenu expanded="true" label="Меню">
 				<p:menuitem value="Клиенты" icon="ui-icon-person"
 					update=":contentForm"
-					action='#{navController.setMainContent("client/clientList")}' />
+					action='#{navController.setMainContent("client/clientList")}'
+                    actionListener="#{clientListController.prepareData}" />
 				<p:menuitem value="Менторы" icon="ui-icon-person"
 					update=":contentForm"
 					action='#{navController.setMainContent("manager/managerList")}' />
@@ -30,17 +31,17 @@
 						action='#{navController.setMainContent("contract/contractsForInvoicesIssue")}' />
 				</p:submenu>
 				<p:submenu label="Зарплата">
-				    <p:menuitem value="Все зарплаты" icon="ui-icon-document" 
+				    <p:menuitem value="Все зарплаты" icon="ui-icon-document"
 				        update=":contentForm"
 				        action='#{navController.setMainContent("salary/salaryList")}'
 				        actionListener="#{salariesController.prepareData}"/>
-				    <p:menuitem value="Расчет зарплат" icon="ui-icon-document" 
+				    <p:menuitem value="Расчет зарплат" icon="ui-icon-document"
 				        update=":contentForm"
 				        action='#{navController.setMainContent("salary/salaryCalculationExtended")}'
 				        actionListener="#{salaryCalculationController.prepareData}" />
-                    <p:menuitem value="Акты" icon="ui-icon-document" 
+                    <p:menuitem value="Акты" icon="ui-icon-document"
                         update=":contentForm"
-                        action='#{navController.setMainContent("salary/workStatements")}' 
+                        action='#{navController.setMainContent("salary/workStatements")}'
                         actionListener="#{workStatementController.prepareData}"/>
 				</p:submenu>
 				<p:menuitem value="Оплаты" icon="ui-icon-document"

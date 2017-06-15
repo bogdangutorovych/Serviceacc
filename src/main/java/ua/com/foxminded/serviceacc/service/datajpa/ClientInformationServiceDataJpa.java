@@ -13,8 +13,12 @@ import ua.com.foxminded.serviceacc.service.ClientInformationService;
 @Service("clientInformationService")
 public class ClientInformationServiceDataJpa implements ClientInformationService {
 
+    private final ClientInformationRepository clientInformationRepository;
+
     @Autowired
-    ClientInformationRepository clientInformationRepository;
+    public ClientInformationServiceDataJpa(ClientInformationRepository clientInformationRepository) {
+        this.clientInformationRepository = clientInformationRepository;
+    }
 
     @Override
     public ClientInformation save(ClientInformation clientInformation) {
@@ -32,8 +36,8 @@ public class ClientInformationServiceDataJpa implements ClientInformationService
     }
 
     @Override
-    public void delete(Long clientInformationId) {
-        clientInformationRepository.delete(clientInformationId);
+    public void delete(ClientInformation clientInformation) {
+        clientInformationRepository.delete(clientInformation);
     }
 
     @Override

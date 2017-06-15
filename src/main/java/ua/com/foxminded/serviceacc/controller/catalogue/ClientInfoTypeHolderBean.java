@@ -1,27 +1,28 @@
 package ua.com.foxminded.serviceacc.controller.catalogue;
 
-import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import ua.com.foxminded.serviceacc.model.ClientInformationType;
+import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import ua.com.foxminded.serviceacc.model.ClientInformationType;
-import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
+import java.io.Serializable;
+import java.util.List;
 
 /**
- * Created by andreb on 08.05.17. For holding information all time application
- * is up
- *
+ * Created by andreb on 13.06.17.
  */
 @Named
 @ApplicationScoped
-public class ClientInfoTypeHolderBean {
+public class ClientInfoTypeHolderBean implements Serializable{
 
-    final ClientInformationTypeService clientInformationTypeService;
+    private static final long serialVersionUID = 1L;
 
     private List<ClientInformationType> clientInformationTypeList;
+    final ClientInformationTypeService clientInformationTypeService;
 
     @Inject
     public ClientInfoTypeHolderBean(ClientInformationTypeService clientInformationTypeService) {
@@ -37,17 +38,21 @@ public class ClientInfoTypeHolderBean {
         return clientInformationTypeList;
     }
 
-    public ClientInformationType saveClientInformationType(ClientInformationType type) {
+    public void setClientInformationTypeList(List<ClientInformationType> newClientTypeListType) {
+        for (ClientInformationType type : newClientTypeListType) {
+            clientInformationTypeService.save(type);
+        }
+        this.clientInformationTypeList = clientInformationTypeService.findAll();
+    }
 
+    public ClientInformationType save(ClientInformationType type) {
         clientInformationTypeService.save(type);
         clientInformationTypeList = clientInformationTypeService.findAll();
-
         return type;
     }
 
-    public void deleteClientInformationType(Long typeId) {
-        clientInformationTypeService.delete(typeId);
+    public void delete(ClientInformationType type) {
+        clientInformationTypeService.delete(type);
         clientInformationTypeList = clientInformationTypeService.findAll();
     }
-
 }

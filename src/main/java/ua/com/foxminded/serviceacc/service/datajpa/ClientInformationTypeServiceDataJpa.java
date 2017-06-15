@@ -5,8 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import org.springframework.transaction.annotation.Transactional;
+import ua.com.foxminded.serviceacc.model.Client;
+import ua.com.foxminded.serviceacc.model.ClientInformation;
 import ua.com.foxminded.serviceacc.model.ClientInformationType;
+import ua.com.foxminded.serviceacc.repository.ClientInformationRepository;
 import ua.com.foxminded.serviceacc.repository.ClientInformationTypeRepository;
+import ua.com.foxminded.serviceacc.repository.ClientRepository;
 import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
 
 /**
@@ -15,12 +20,37 @@ import ua.com.foxminded.serviceacc.service.ClientInformationTypeService;
 @Service("clientInformationTypeService")
 public class ClientInformationTypeServiceDataJpa implements ClientInformationTypeService {
 
+    private final ClientInformationTypeRepository clientInfoTypeRepository;
+    private final ClientRepository clientRepository;
+    private final ClientInformationRepository clientInformationRepository;
+
     @Autowired
-    ClientInformationTypeRepository clientInfoTypeRepository;
+    public ClientInformationTypeServiceDataJpa(ClientInformationTypeRepository clientInfoTypeRepository,
+                                               ClientRepository clientRepository,
+                                               ClientInformationRepository clientInformationRepository) {
+        this.clientInfoTypeRepository = clientInfoTypeRepository;
+        this.clientRepository = clientRepository;
+        this.clientInformationRepository = clientInformationRepository;
+    }
 
     @Override
+    @Transactional
     public ClientInformationType save(ClientInformationType clientInformationType) {
-        return clientInfoTypeRepository.save(clientInformationType);
+
+        if (clientInformationType.getId() != null){
+            return clientInfoTypeRepository.save(clientInformationType);
+        }else{
+            ClientInformationType persisted = clientInfoTypeRepository.save(clientInformationType);
+            for (Client client : clientRepository.findAll()){
+                ClientInformation info = new ClientInformation();
+                info.setClientInformationType(persisted);
+                info.setClient(client);
+                client.getInformation().add(info);
+                clientRepository.save(client);
+            }
+            return persisted;
+        }
+
     }
 
     @Override
@@ -34,7 +64,9 @@ public class ClientInformationTypeServiceDataJpa implements ClientInformationTyp
     }
 
     @Override
-    public void delete(Long contactTypeId) {
-        clientInfoTypeRepository.delete(contactTypeId);
+    @Transactional
+    public void delete(ClientInformationType type) {
+        clientInformationRepository.deleteAllByClientInformationType(type);
+        clientInfoTypeRepository.delete(type);
     }
 }
