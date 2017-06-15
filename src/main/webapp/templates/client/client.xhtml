@@ -9,6 +9,7 @@
 			<p:commandButton id="btn_ok" value="Ok" update=":contentForm"
 				icon="ui-icon-check" actionListener="#{clientController.onOk()}"
 				action='#{navController.setMainContent("client/clientList")}'>
+                <f:actionListener binding="#{clientListController.prepareData()}"/>
 			</p:commandButton>
 			<span class="ui-separator"><span
 				class="ui-icon ui-icon-grip-dotted-vertical" /></span>
