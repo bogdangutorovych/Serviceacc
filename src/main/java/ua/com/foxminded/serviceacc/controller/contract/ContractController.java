@@ -23,7 +23,7 @@ public class ContractController implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Contract selectedContract;
-    private ContractService contractService;
+    private final ContractService contractService;
 
     @Inject
     public ContractController(ContractService contractService) {
@@ -35,6 +35,11 @@ public class ContractController implements Serializable {
         selectedContract.setDeal(deal);
         selectedContract.setContractDate(LocalDate.now());
         selectedContract.setClientRate(new Money());
+        //TODO: set manager Rate in view
+        Money managerRate = new Money();
+        managerRate.setAmount(deal.getService().getManagerRate().getAmount());
+        managerRate.setCurrency(deal.getService().getManagerRate().getCurrency());
+        selectedContract.setManagerRate(managerRate);
     }
 
     public void onOk() {
@@ -60,14 +65,6 @@ public class ContractController implements Serializable {
 
     public void setSelectedContract(Contract selectedContract) {
         this.selectedContract = selectedContract;
-    }
-
-    public ContractService getContractService() {
-        return contractService;
-    }
-
-    public void setContractService(ContractService contractService) {
-        this.contractService = contractService;
     }
 
 }

@@ -70,7 +70,7 @@ public class Contract {
     @JoinColumn(name = "manager_id")
     private Manager manager;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "manager_rate")
     private Money managerRate;
 

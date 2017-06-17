@@ -2,6 +2,7 @@ package ua.com.foxminded.serviceacc.controller.invoice;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,11 +54,14 @@ public class InvoiceController implements Serializable {
     }
 
     public void add(Contract contract) {
-        init();
+//        prepareData();
+        selectedInvoice = new Invoice();
         selectedInvoice.setContract(contract);
-        selectedInvoice.setPeriod(period);
-        selectedInvoice.setDate(LocalDate.now());
         selectedInvoice.setPeriod(findNextPayPeriod(contract));
+        if (selectedInvoice.getPeriod() == null){
+            selectedInvoice.setPeriod(new Period());
+        }
+        selectedInvoice.setDate(LocalDate.now());
         selectedInvoice.setPrice(contract.getClientRate());
     }
 
@@ -86,7 +90,10 @@ public class InvoiceController implements Serializable {
         period = new Period();
         prepareNewPayment();
         managers = managerService.findAll();
-        workStatements = workStatementService.findAllByInvoice(selectedInvoice);
+        if (selectedInvoice != null && selectedInvoice.getId() != null){
+            workStatements = workStatementService.findAllByInvoice(selectedInvoice);
+        }
+
     }
 
     public void onOk() {
@@ -116,13 +123,11 @@ public class InvoiceController implements Serializable {
         newWorkStatement.setInvoice(selectedInvoice);
         newWorkStatement.setManager(selectedInvoice.getContract().getManager());
 
-        if (workStatements.size() > 0){
-            newWorkStatement.getPeriod().setDateFrom(workStatements.get(workStatements.size()-1).getPeriod().getDateTo().plusDays(1));
-        }else{
-            newWorkStatement.getPeriod().setDateFrom(selectedInvoice.getDate());
-        }
+        LocalDate invoiceDate = selectedInvoice.getDate();
 
-        newWorkStatement.getPeriod().setDateTo(newWorkStatement.getPeriod().getDateFrom().plusDays(30L));
+        newWorkStatement.getPeriod().setDateFrom(invoiceDate);
+        newWorkStatement.getPeriod().setDateTo(invoiceDate.plusMonths(1));
+
         Money clientSpending = new Money();
         clientSpending.setAmount(selectedInvoice.getContract().getClientRate().getAmount());
         clientSpending.setCurrency(selectedInvoice.getContract().getClientRate().getCurrency());
@@ -134,8 +139,37 @@ public class InvoiceController implements Serializable {
     }
 
     public void addWorkStatement(){
-        workStatements.add(newWorkStatement);
+        if (workStatements.size() == 0){
+            workStatements.add(newWorkStatement);
+        }else if (workStatements.size() == 1){
+            WorkStatement first = workStatements.get(0);
+            first.getPeriod().setDateTo(newWorkStatement.getPeriod().getDateFrom().minusDays(1));
+            first.getManagerEarning().setAmount((calculateManagerRate(selectedInvoice.getPeriod(),
+                first.getPeriod(), selectedInvoice.getContract().getManagerRate())));
+
+            newWorkStatement.getManagerEarning().setAmount(
+                selectedInvoice.getContract().getManagerRate().getAmount() - first.getManagerEarning().getAmount());
+            workStatements.add(newWorkStatement);
+        }
+
         log.debug("Added WorkStatement: " + newWorkStatement + " to invoice: " + selectedInvoice);
+    }
+
+    private Long calculateManagerRate(Period invoicePeriod, Period workStPeriod, Money commonRate){
+
+        LocalDate tempDate = LocalDate.from(invoicePeriod.getDateFrom());
+        long allDays = tempDate.until(invoicePeriod.getDateTo(), ChronoUnit.DAYS);
+        log.debug("AllDays: " + allDays);
+
+        tempDate = LocalDate.from(workStPeriod.getDateFrom());
+        long workDays = tempDate.until(workStPeriod.getDateTo(), ChronoUnit.DAYS);
+        log.debug("workDays " + workDays);
+
+        double rate = (double) workDays/allDays;
+        log.debug("Rate: " + rate);
+        log.debug("Amount: " + Double.valueOf(commonRate.getAmount()*rate).longValue());
+
+        return Double.valueOf(commonRate.getAmount()*rate).longValue();
     }
 
     public void clearSelected() {
