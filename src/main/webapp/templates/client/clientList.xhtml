@@ -16,6 +16,7 @@
 			<p:commandButton id="btn_edit" value="Редактировать"
 				update=":contentForm" icon="ui-icon-pencil"
 				disabled="#{clientController.selectedClient==null}"
+                             actionListener="#{clientController.prepareData}"
 				action='#{navController.setMainContent("client/client")}'/>
 
 

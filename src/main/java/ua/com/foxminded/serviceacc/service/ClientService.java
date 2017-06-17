@@ -13,7 +13,9 @@ public interface ClientService {
 
 	Client findById(Long clientId);
 
+	Client findByIdWithClientInformation(Long clientId);
+
 	List<Client> findAll();
 
-	void delete(Long clientId);
+	void delete(Client client);
 }

@@ -9,7 +9,8 @@
 			<p:submenu expanded="true" label="Меню">
 				<p:menuitem value="Клиенты" icon="ui-icon-person"
 					update=":contentForm"
-					action='#{navController.setMainContent("client/clientList")}' />
+					action='#{navController.setMainContent("client/clientList")}'
+                    actionListener="#{clientListController.prepareData}" />
 				<p:menuitem value="Менторы" icon="ui-icon-person"
 					update=":contentForm"
 					action='#{navController.setMainContent("manager/managerList")}' />

@@ -15,5 +15,6 @@ public interface ClientInformationTypeService {
 
     List<ClientInformationType> findAll();
 
-    void delete(Long clientInformationTypeId);
+    void delete(ClientInformationType type);
+
 }

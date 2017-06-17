@@ -1,12 +1,17 @@
 package ua.com.foxminded.serviceacc.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -39,6 +44,15 @@ public class Client {
 
     @Column(name = "birth_day")
     private LocalDate birthday;
+
+    @OneToMany(
+        mappedBy = "client",
+        fetch = FetchType.LAZY,
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    @Where(clause = "is_deleted = false")
+    private List<ClientInformation> information = new ArrayList<>();
 
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
@@ -75,11 +89,6 @@ public class Client {
         this.birthday = birthday;
     }
 
-    @Override
-    public String toString() {
-        return firstName + " " + lastName;
-    }
-
     public boolean isDeleted() {
         return isDeleted;
     }
@@ -88,4 +97,26 @@ public class Client {
         this.isDeleted = isDeleted;
     }
 
+    public List<ClientInformation> getInformation() {
+        return information;
+    }
+
+    public void setInformation(List<ClientInformation> information) {
+        this.information = information;
+    }
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
+    }
+
+    public void addClientInformation(ClientInformation info){
+        information.add(info);
+        info.setClient(this);
+    }
+
+    public void removeClientInformation(ClientInformation info){
+        information.remove(info);
+        info.setClient(null);
+    }
 }

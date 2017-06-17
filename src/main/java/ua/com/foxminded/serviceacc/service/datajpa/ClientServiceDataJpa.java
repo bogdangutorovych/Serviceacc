@@ -15,10 +15,14 @@ import ua.com.foxminded.serviceacc.service.ClientService;
 @Service("clientService")
 public class ClientServiceDataJpa implements ClientService {
 
-    @Autowired
-	ClientRepository clientRepository;
+	private final ClientRepository clientRepository;
 
-	@Override
+	@Autowired
+    public ClientServiceDataJpa(ClientRepository clientRepository) {
+        this.clientRepository = clientRepository;
+    }
+
+    @Override
 	public Client save(Client client) {
 		return clientRepository.save(client);
 	}
@@ -28,9 +32,14 @@ public class ClientServiceDataJpa implements ClientService {
 		return clientRepository.findOne(clientId);
 	}
 
-	@Override
-	public void delete(Long clientId) {
-		clientRepository.delete(clientId);
+    @Override
+    public Client findByIdWithClientInformation(Long clientId) {
+        return clientRepository.findOneWithClientInformation(clientId);
+    }
+
+    @Override
+	public void delete(Client client) {
+		clientRepository.delete(client);
 	}
 
 	@Override
