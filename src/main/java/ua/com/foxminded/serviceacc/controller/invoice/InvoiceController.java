@@ -2,6 +2,7 @@ package ua.com.foxminded.serviceacc.controller.invoice;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -14,13 +15,15 @@ import org.slf4j.LoggerFactory;
 
 import ua.com.foxminded.serviceacc.model.Contract;
 import ua.com.foxminded.serviceacc.model.Invoice;
+import ua.com.foxminded.serviceacc.model.Manager;
 import ua.com.foxminded.serviceacc.model.Payment;
 import ua.com.foxminded.serviceacc.model.Period;
 import ua.com.foxminded.serviceacc.model.Money;
 import ua.com.foxminded.serviceacc.model.WorkStatement;
-import ua.com.foxminded.serviceacc.model.WorkStatement_;
 import ua.com.foxminded.serviceacc.model.enums.InvoiceType;
 import ua.com.foxminded.serviceacc.service.InvoiceService;
+import ua.com.foxminded.serviceacc.service.ManagerService;
+import ua.com.foxminded.serviceacc.service.WorkStatementService;
 
 @Named
 @ViewScoped
@@ -33,13 +36,20 @@ public class InvoiceController implements Serializable {
     private Invoice selectedInvoice;
     private Period period;
     private final InvoiceService invoiceService;
+    private final ManagerService managerService;
+    private final WorkStatementService workStatementService;
     private Payment payment;
     private WorkStatement newWorkStatement;
-    private List<WorkStatement> workStatements;
+    private List<WorkStatement> workStatements = new ArrayList<>();
+    private List<Manager> managers;
+
 
     @Inject
-    public InvoiceController(InvoiceService invoiceService) {
+    public InvoiceController(InvoiceService invoiceService,
+                             ManagerService managerService, WorkStatementService workStatementService) {
         this.invoiceService = invoiceService;
+        this.managerService = managerService;
+        this.workStatementService = workStatementService;
     }
 
     public void add(Contract contract) {
@@ -68,15 +78,15 @@ public class InvoiceController implements Serializable {
 
     @PostConstruct
     public void init() {
-        log.debug("init");
-        selectedInvoice = new Invoice();
-        period = new Period();
-        prepareNewPayment();
-//        prepareNewWorkStatement();
+        prepareData();
     }
 
     public void prepareData(){
-
+        log.debug("PrepareData");
+        period = new Period();
+        prepareNewPayment();
+        managers = managerService.findAll();
+        workStatements = workStatementService.findAllByInvoice(selectedInvoice);
     }
 
     public void onOk() {
@@ -85,6 +95,7 @@ public class InvoiceController implements Serializable {
             selectedInvoice.setNumber("inv# " + selectedInvoice.getId());
         }
         invoiceService.save(selectedInvoice);
+        workStatementService.save(workStatements);
     }
 
     public void prepareNewPayment(){
@@ -103,10 +114,27 @@ public class InvoiceController implements Serializable {
         log.debug("Prepare new WorkStatement");
         newWorkStatement = new WorkStatement();
         newWorkStatement.setInvoice(selectedInvoice);
-//        newWorkStatement.setManager(selectedInvoice.getContract().getManager());
+        newWorkStatement.setManager(selectedInvoice.getContract().getManager());
+
+        if (workStatements.size() > 0){
+            newWorkStatement.getPeriod().setDateFrom(workStatements.get(workStatements.size()-1).getPeriod().getDateTo().plusDays(1));
+        }else{
+            newWorkStatement.getPeriod().setDateFrom(selectedInvoice.getDate());
+        }
+
+        newWorkStatement.getPeriod().setDateTo(newWorkStatement.getPeriod().getDateFrom().plusDays(30L));
+        Money clientSpending = new Money();
+        clientSpending.setAmount(selectedInvoice.getContract().getClientRate().getAmount());
+        clientSpending.setCurrency(selectedInvoice.getContract().getClientRate().getCurrency());
+        newWorkStatement.setClientSpending(clientSpending);
+        Money managerEaning = new Money();
+        managerEaning.setAmount(selectedInvoice.getContract().getManagerRate().getAmount());
+        managerEaning.setCurrency(selectedInvoice.getContract().getManagerRate().getCurrency());
+        newWorkStatement.setManagerEarning(managerEaning);
     }
 
     public void addWorkStatement(){
+        workStatements.add(newWorkStatement);
         log.debug("Added WorkStatement: " + newWorkStatement + " to invoice: " + selectedInvoice);
     }
 
@@ -134,4 +162,11 @@ public class InvoiceController implements Serializable {
         return newWorkStatement;
     }
 
+    public List<Manager> getManagers() {
+        return managers;
+    }
+
+    public List<WorkStatement> getWorkStatements() {
+        return workStatements;
+    }
 }

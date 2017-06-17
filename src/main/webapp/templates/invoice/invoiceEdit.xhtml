@@ -30,93 +30,108 @@
                 class="ui-icon ui-icon-grip-dotted-vertical" /></span>
 
             <p:commandButton value="Добавить акт"
+                             update=":contentForm"
                              actionListener="#{invoiceController.prepareNewWorkStatement()}"
-                             update="workStmntDlg"
-                             oncomplete="PF('workStatementDlg').show();" />
+                             action='#{navController.setMainContent("invoice/addWorkStatement")}'>
+            </p:commandButton>
 		</f:facet>
 	</p:toolbar>
 
-
 	<br />
-	<h:panelGrid id="invoiceEdit" columns="2" cellpadding="5">
-		<h:outputText for="id" value="ID:" style="font-weight:bold" />
-		<p:inputText id="id" value="#{invoiceController.selectedInvoice.id}"
-			disabled="true" />
 
-		<h:outputLabel for="date" value="Дата счета: "
-			style="font-weight:bold" />
-		<p:inputText id="date" converter="localDateConverter"
-			pattern="dd.MM.yyyy" value="#{invoiceController.selectedInvoice.date}"
-			disabled="true" />
+    <h:panelGroup columns="2" style="display: -webkit-box;">
 
-		<h:outputLabel for="number" value="Номер счета: "
-			style="font-weight:bold" />
-		<p:inputText id="number" value="#{invoiceController.selectedInvoice.number}"
-			disabled="true" />
+        <h:panelGrid id="invoiceEdit" columns="2" cellpadding="5">
+            <h:outputText for="id" value="ID:" style="font-weight:bold" />
+            <p:inputText id="id" value="#{invoiceController.selectedInvoice.id}"
+                         disabled="true" />
 
-		<h:outputLabel for="contractNumber" value="Номер договора: "
-			style="font-weight:bold" />
-		<p:inputText id="contractNumber"
-                     value="#{invoiceController.selectedInvoice.contract.number}" disabled="true" />
+            <h:outputLabel for="date" value="Дата счета: "
+                           style="font-weight:bold" />
+            <p:inputText id="date" converter="localDateConverter"
+                         pattern="dd.MM.yyyy" value="#{invoiceController.selectedInvoice.date}"
+                         disabled="true" />
+
+            <h:outputLabel for="number" value="Номер счета: "
+                           style="font-weight:bold" />
+            <p:inputText id="number" value="#{invoiceController.selectedInvoice.number}"
+                         disabled="true" />
+
+            <h:outputLabel for="contractNumber" value="Номер договора: "
+                           style="font-weight:bold" />
+            <p:inputText id="contractNumber"
+                         value="#{invoiceController.selectedInvoice.contract.number}" disabled="true" />
 
 
-		<h:outputLabel for="client" value="Клиент: " style="font-weight:bold" />
-		<p:inputText id="client"
-			value="#{invoiceController.selectedInvoice.contract.deal.client}"
-			disabled="true" />
+            <h:outputLabel for="client" value="Клиент: " style="font-weight:bold" />
+            <p:inputText id="client"
+                         value="#{invoiceController.selectedInvoice.contract.deal.client}"
+                         disabled="true" />
 
-		<h:outputLabel for="amount" value="Сумма: " style="font-weight:bold" />
-		<p:inputText id="amount"
-                     value="#{invoiceController.selectedInvoice.price.amount}" disabled="true" />
+            <h:outputLabel for="amount" value="Сумма: " style="font-weight:bold" />
+            <p:inputText id="amount"
+                         value="#{invoiceController.selectedInvoice.price.amount}" disabled="true" />
 
-		<h:outputLabel for="invoiceType" value="Тип счета: "
-			style="font-weight:bold" />
-		<p:selectOneMenu id="invoiceType"
-			value="#{invoiceController.selectedInvoice.invoiceType}"
-			converter="omnifaces.SelectItemsConverter">
-			<f:selectItems value="#{InvoiceTypes.ALL_VALUES}" var="invoiceType"
-				itemLabel="#{invoiceType.name()}" />
-			<p:inputText id="type"
-                         value="#{invoiceController.selectedInvoice.invoiceType}" required="true" />
-		</p:selectOneMenu>
+            <h:outputLabel for="invoiceType" value="Тип счета: "
+                           style="font-weight:bold" />
+            <p:selectOneMenu id="invoiceType"
+                             value="#{invoiceController.selectedInvoice.invoiceType}"
+                             converter="omnifaces.SelectItemsConverter">
+                <f:selectItems value="#{InvoiceTypes.ALL_VALUES}" var="invoiceType"
+                               itemLabel="#{invoiceType.name()}" />
+                <p:inputText id="type"
+                             value="#{invoiceController.selectedInvoice.invoiceType}" required="true" />
+            </p:selectOneMenu>
 
-        <p:outputPanel id="addPaymentPanel"
-                       rendered="#{invoiceController.selectedInvoice.invoiceType == 'NEW'}">
-            <p:commandButton value="Добавить оплату"
-                             actionListener="#{invoiceController.prepareNewPayment()}"
-                             update="payDlg"
-                             oncomplete="PF('paymentDlg').show();" />
-        </p:outputPanel>
-        <p:outputPanel rendered="#{invoiceController.selectedInvoice.invoiceType == 'NEW'}">
-        </p:outputPanel>
+            <p:outputPanel id="addPaymentPanel"
+                           rendered="#{invoiceController.selectedInvoice.invoiceType == 'NEW'}">
+                <p:commandButton value="Добавить оплату"
+                                 actionListener="#{invoiceController.prepareNewPayment()}"
+                                 update="payDlg"
+                                 oncomplete="PF('paymentDlg').show();" />
+            </p:outputPanel>
+            <p:outputPanel rendered="#{invoiceController.selectedInvoice.invoiceType == 'NEW'}">
+            </p:outputPanel>
 
-		<h:outputLabel for="paymentDate" value="Дата оплаты: "
-			style="font-weight:bold" />
-		<p:calendar id="paymentDate" converter="localDateConverter"
-                    pattern="dd.MM.yyyy"
-                    value="#{invoiceController.selectedInvoice.payment.date}" showOn="button"
-                    mask="99.99.9999" rendered="#{invoiceController.selectedInvoice.payment ne null}">
-		</p:calendar>
-        <h:outputText rendered="#{invoiceController.selectedInvoice.payment eq null}" value="-"/>
+            <h:outputLabel for="paymentDate" value="Дата оплаты: "
+                           style="font-weight:bold" />
+            <p:calendar id="paymentDate" converter="localDateConverter"
+                        pattern="dd.MM.yyyy"
+                        value="#{invoiceController.selectedInvoice.payment.date}" showOn="button"
+                        mask="99.99.9999" rendered="#{invoiceController.selectedInvoice.payment ne null}">
+            </p:calendar>
+            <h:outputText rendered="#{invoiceController.selectedInvoice.payment eq null}" value="-"/>
 
-		<h:outputLabel for="dateFrom" value="Период с: "
-			style="font-weight:bold" />
-		<p:calendar id="dateFrom" converter="localDateConverter"
-                    pattern="dd.MM.yyyy"
-                    value="#{invoiceController.selectedInvoice.period.dateFrom}" showOn="button"
-                    mask="99.99.9999" disabled="true">
-		</p:calendar>
+            <h:outputLabel for="dateFrom" value="Период с: "
+                           style="font-weight:bold" />
+            <p:calendar id="dateFrom" converter="localDateConverter"
+                        pattern="dd.MM.yyyy"
+                        value="#{invoiceController.selectedInvoice.period.dateFrom}" showOn="button"
+                        mask="99.99.9999" disabled="true">
+            </p:calendar>
 
-		<h:outputLabel for="dateTo" value="Период по: "
-			style="font-weight:bold" />
-		<p:calendar id="dateTo" converter="localDateConverter"
-                    pattern="dd.MM.yyyy"
-                    value="#{invoiceController.selectedInvoice.period.dateTo}" showOn="button"
-                    mask="99.99.9999">
-		</p:calendar>
-	</h:panelGrid>
+            <h:outputLabel for="dateTo" value="Период по: "
+                           style="font-weight:bold" />
+            <p:calendar id="dateTo" converter="localDateConverter"
+                        pattern="dd.MM.yyyy"
+                        value="#{invoiceController.selectedInvoice.period.dateTo}" showOn="button"
+                        mask="99.99.9999">
+            </p:calendar>
+        </h:panelGrid>
 
-    <p:dialog id="payDlg" header="Добавить оплату" widgetVar="paymentDlg">
+        <h:panelGrid columns="2" >
+            <p:dataList id="inv_workSttmntList" value="#{invoiceController.workStatements}"
+                        var="workStatement" >
+                <f:facet name="header">
+                    List of WorkStatements
+                </f:facet>
+                #{workStatement.id}, #{workStatement.period}
+            </p:dataList>
+        </h:panelGrid>
+
+    </h:panelGroup>
+
+    <p:dialog id="payDlg" header="Добавить оплату" widgetVar="paymentDlg" dynamic="true">
         <h:panelGrid columns="2">
             <h:outputLabel for="paymentDateDlg" value="Дата оплаты: "
                            style="font-weight:bold" />
@@ -131,12 +146,12 @@
 
             <h:outputLabel for="pay_currency" value="Валюта: " style="font-weight:bold" />
             <p:selectOneMenu id="pay_currency" value="#{invoiceController.payment.money.currency}"
-                                 converter="omnifaces.SelectItemsConverter">
-                    <f:selectItems value="#{CurrencyTypes.ALL_VALUES}"
-                                   var="currencyType" itemLabel="#{currencyType.name()}"/>
-                    <p:inputText id="pay_currency_type"
-                                 value="#{invoiceController.payment.money.currency}" required="true" />
-                </p:selectOneMenu>
+                             converter="omnifaces.SelectItemsConverter">
+                <f:selectItems value="#{CurrencyTypes.ALL_VALUES}"
+                               var="currencyType" itemLabel="#{currencyType.name()}"/>
+                <p:inputText id="pay_currency_type"
+                             value="#{invoiceController.payment.money.currency}" required="true" />
+            </p:selectOneMenu>
 
             <h:outputLabel for="payTypeDlg" value="Тип оплаты: "
                            style="font-weight:bold" />
@@ -149,53 +164,12 @@
                              value="#{invoiceController.payment.type}" required="true" />
             </p:selectOneMenu>
 
-                <p:commandButton value="Сохранить"
-                                 actionListener="#{invoiceController.addPayment()}"
-                                 update="invoiceEdit"
-                                 oncomplete="PF('paymentDlg').hide();"/>
-
-                <p:commandButton value="Отмена" oncomplete="PF('paymentDlg').hide();"/>
-
-        </h:panelGrid>
-    </p:dialog>
-
-    <p:dialog id="workStmntDlg" header="Добавить акт" widgetVar="workStatementDlg">
-        <h:panelGrid columns="2">
-            <h:outputLabel for="start_date_ws_inv_dlg" value="Акт с: "
-                           style="font-weight:bold" />
-            <p:calendar id="start_date_ws_inv_dlg" converter="localDateConverter"
-                        pattern="dd.MM.yyyy"
-                        value="#{invoiceController.newWorkStatement.period.dateFrom}"
-                        showOn="button" mask="99.99.9999"
-                        required="true" requiredMessage="Выберите дату">
-            </p:calendar>
-
-            <h:outputLabel for="end_date_ws_inv_dlg" value="по: "
-                           style="font-weight:bold" />
-            <p:calendar id="end_date_ws_inv_dlg" converter="localDateConverter"
-                        pattern="dd.MM.yyyy"
-                        value="#{invoiceController.newWorkStatement.period.dateTo}"
-                        showOn="button" mask="99.99.9999"
-                        required="true" requiredMessage="Выберите дату">
-            </p:calendar>
-
-            <h:outputLabel for="manager_ws_inv_dlg" value="Ментор: " style="font-weight:bold" />
-            <p:selectOneMenu id="manager_ws_inv_dlg"
-                             value="#{workStatementController.newWorkStatement.manager}"
-                             required="true" requiredMessage="Выберите ментора"
-                             converter="omnifaces.SelectItemsConverter">
-                <f:selectItem itemLabel="Выбрать ментора..." noSelectionOption="true" />
-                <f:selectItems value="#{workStatementController.managers}"
-                               var="manager" itemLabel="#{manager.firstName} #{manager.lastName}"
-                               itemValue="#{manager}" />
-            </p:selectOneMenu>
-
             <p:commandButton value="Сохранить"
-                             actionListener="#{invoiceController.addWorkStatement()}"
+                             actionListener="#{invoiceController.addPayment()}"
                              update="invoiceEdit"
-                             oncomplete="PF('workStatementDlg').hide();"/>
+                             oncomplete="PF('paymentDlg').hide();"/>
 
-            <p:commandButton value="Отмена" oncomplete="PF('workStatementDlg').hide();"/>
+            <p:commandButton value="Отмена" oncomplete="PF('paymentDlg').hide();"/>
 
         </h:panelGrid>
     </p:dialog>
