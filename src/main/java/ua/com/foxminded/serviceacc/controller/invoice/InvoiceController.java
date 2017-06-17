@@ -162,6 +162,10 @@ public class InvoiceController implements Serializable {
         return newWorkStatement;
     }
 
+    public void setNewWorkStatement(WorkStatement newWorkStatement) {
+        this.newWorkStatement = newWorkStatement;
+    }
+
     public List<Manager> getManagers() {
         return managers;
     }

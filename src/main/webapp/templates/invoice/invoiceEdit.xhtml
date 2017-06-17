@@ -121,11 +121,18 @@
 
         <h:panelGrid columns="2" >
             <p:dataList id="inv_workSttmntList" value="#{invoiceController.workStatements}"
-                        var="workStatement" >
+                        var="workStatement" type="ordered">
                 <f:facet name="header">
                     List of WorkStatements
                 </f:facet>
-                #{workStatement.id}, #{workStatement.period}
+                <p:commandLink id="lnk_wrkst"
+                               update=":contentForm"
+                               action='#{navController.setMainContent("invoice/addWorkStatement")}'>
+                    <f:setPropertyActionListener target="#{invoiceController.newWorkStatement}" value="#{workStatement}" />
+
+                    <h:outputText value="#{workStatement.id} #{workStatement.period} #{workStatement.managerEarning}" />
+
+                </p:commandLink>
             </p:dataList>
         </h:panelGrid>
 
