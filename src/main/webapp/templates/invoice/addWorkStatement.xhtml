@@ -38,7 +38,7 @@
         <h:panelGrid columns="2">
 
             <f:facet name="header">
-                <h:outputText value="Добавление акта к счету ##{invoiceController.selectedInvoice.id}. Дата счета #{invoiceController.selectedInvoice.period}" />
+                <h:outputText value="Добавление акта к счету ##{invoiceController.selectedInvoice.id} за период: #{invoiceController.selectedInvoice.period}" />
             </f:facet>
 
             <h:outputLabel for="start_date_ws_inv" value="Акт с: "
@@ -48,6 +48,8 @@
                         value="#{invoiceController.newWorkStatement.period.dateFrom}"
                         showOn="button" mask="99.99.9999"
                         required="true" requiredMessage="Выберите дату">
+
+                <p:ajax event="dateSelect" listener="#{invoiceController.dateChange}" update="manager_money_ws_inv" />
             </p:calendar>
 
             <h:outputLabel for="end_date_ws_inv" value="по: "
@@ -57,6 +59,7 @@
                         value="#{invoiceController.newWorkStatement.period.dateTo}"
                         showOn="button" mask="99.99.9999"
                         required="true" requiredMessage="Выберите дату">
+                <p:ajax event="dateSelect" listener="#{invoiceController.dateChange}" update="manager_money_ws_inv" />
             </p:calendar>
 
             <h:outputLabel for="manager_ws_inv" value="Ментор: " style="font-weight:bold" />
@@ -67,6 +70,7 @@
 
             <h:outputLabel for="manager_money_ws_inv" value="Ставка менеджера: " style="font-weight:bold" />
             <h:outputText id="manager_money_ws_inv" value="#{invoiceController.newWorkStatement.managerEarning}"/>
+
         </h:panelGrid>
 
 

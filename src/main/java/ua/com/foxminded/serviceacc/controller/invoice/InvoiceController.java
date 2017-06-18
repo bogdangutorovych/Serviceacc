@@ -11,6 +11,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.event.SelectEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,7 +36,6 @@ public class InvoiceController implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Invoice selectedInvoice;
-    private Period period;
     private final InvoiceService invoiceService;
     private final ManagerService managerService;
     private final WorkStatementService workStatementService;
@@ -54,7 +54,6 @@ public class InvoiceController implements Serializable {
     }
 
     public void add(Contract contract) {
-//        prepareData();
         selectedInvoice = new Invoice();
         selectedInvoice.setContract(contract);
         selectedInvoice.setPeriod(findNextPayPeriod(contract));
@@ -87,7 +86,6 @@ public class InvoiceController implements Serializable {
 
     public void prepareData(){
         log.debug("PrepareData");
-        period = new Period();
         prepareNewPayment();
         managers = managerService.findAll();
         if (selectedInvoice != null && selectedInvoice.getId() != null){
@@ -167,9 +165,14 @@ public class InvoiceController implements Serializable {
 
         double rate = (double) workDays/allDays;
         log.debug("Rate: " + rate);
-        log.debug("Amount: " + Double.valueOf(commonRate.getAmount()*rate).longValue());
 
         return Double.valueOf(commonRate.getAmount()*rate).longValue();
+    }
+
+    public void dateChange(SelectEvent event){
+        newWorkStatement.getManagerEarning()
+            .setAmount(calculateManagerRate(selectedInvoice.getPeriod(),
+                newWorkStatement.getPeriod(), selectedInvoice.getContract().getManagerRate()));
     }
 
     public void clearSelected() {
