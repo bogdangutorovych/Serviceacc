@@ -130,7 +130,7 @@
                                action='#{navController.setMainContent("invoice/addWorkStatement")}'>
                     <f:setPropertyActionListener target="#{invoiceController.newWorkStatement}" value="#{workStatement}" />
 
-                    <h:outputText value="#{workStatement.id} #{workStatement.period} #{workStatement.managerEarning}" />
+                    <h:outputText value="#{workStatement.period} #{workStatement.managerEarning}" />
 
                 </p:commandLink>
             </p:dataList>
