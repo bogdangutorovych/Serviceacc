@@ -25,7 +25,7 @@ import ua.com.foxminded.serviceacc.service.dto.PrepareSalaryInfo;
 @Service("salaryService")
 public class SalaryServiceDataJpa implements SalaryService {
     private final WorkStatementRepository workStatementRepository;
-    
+
     private final SalaryRepository salaryRepository;
 
     @Inject
@@ -39,9 +39,9 @@ public class SalaryServiceDataJpa implements SalaryService {
     @Transactional
     public Salary save(Salary salary) {
         Salary savedSalary = salaryRepository.save(salary);
-        
+
         workStatementRepository.save(savedSalary.getWorkStatements());
-        
+
         return savedSalary;
     }
 
@@ -62,17 +62,17 @@ public class SalaryServiceDataJpa implements SalaryService {
 
     public List<Salary> calculateSalaries() {
         List<WorkStatement> workStatements = workStatementRepository.findPaidNotInSalary();
-        
+
         List<Salary> salaries = sortToSalaries(workStatements);
-        
+
         salaries = calculateSalaryAmounts(salaries);
-       
+
         return salaries;
     }
 
     private List<Salary> sortToSalaries(List<WorkStatement> workStatements) {
         Map<Manager, Salary> salaries = new HashMap<Manager, Salary>();
-       
+
         for (WorkStatement workStatement : workStatements) {
             if (salaries.containsKey(workStatement.getManager())) {
                 Salary salary = salaries.get(workStatement.getManager());
@@ -87,34 +87,34 @@ public class SalaryServiceDataJpa implements SalaryService {
         }
         return new ArrayList<Salary>(salaries.values());
     }
-    
+
     private Money getManagerEarnings(Set <WorkStatement> workStatements) {
         Money money = new Money();
         money.setAmount(0l);
         money.setCurrency(Currency.UAH);
-        
+
         for (WorkStatement workStatement : workStatements) {
             money.setAmount(Long.sum(money.getAmount(), workStatement.getManagerEarning().getAmount()));
         }
-        
+
         return money;
     }
-    
+
     private List<Salary> calculateSalaryAmounts(List<Salary> salaries) {
         for (Salary salary : salaries) {
             Money salaryAmount = getManagerEarnings(salary.getWorkStatements());
             salary.setAmount(salaryAmount);
         }
-        
+
         return salaries;
     }
 
     @Override
     public List<PrepareSalaryInfo> getPrepareSalaryInfoList() {
         List<PrepareSalaryInfo> prepareSalaryInfoList = workStatementRepository.findPrepareSalaryInfoList();
-        
+
         List<Salary> lastSalaries = salaryRepository.findSalariesWithMaxDate();
-        
+
         for (Salary salary : lastSalaries) {
             for (PrepareSalaryInfo prepareSalaryInfo : prepareSalaryInfoList) {
                 if (prepareSalaryInfo.getManager().equals(salary.getManager())) {
@@ -123,25 +123,25 @@ public class SalaryServiceDataJpa implements SalaryService {
                 }
             }
         }
-        
+
         return prepareSalaryInfoList;
     }
 
     @Override
     public Salary calculateSalaryForManager(Manager manager) {
         List<WorkStatement> workStatements = workStatementRepository.findByManagerWithPaidInvoicesNotInSalary(manager);
-        
+
         Salary salary = new Salary();
         salary.setManager(manager);
         Money payment = new Money(Currency.UAH, 0L);
-        
+
         for (WorkStatement workStatement : workStatements) {
             salary.addWorkStatement(workStatement);
             payment.setAmount(Long.sum(payment.getAmount(), workStatement.getManagerEarning().getAmount()));
         }
-        
+
         salary.setAmount(payment);
-        
+
         return salary;
     }
 
