@@ -26,13 +26,17 @@
 				actionListener="#{invoiceController.onCancel()}"
 				action='#{navController.setMainContent("invoice/invoiceList")}'
 				immediate="true" />
-            <span class="ui-separator"><span
-                class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+
+            <p:panel rendered="#{invoiceController.showAddWorkSt()}">
+                <span class="ui-separator"><span
+                    class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+            </p:panel>
 
             <p:commandButton value="Добавить акт"
                              update=":contentForm"
-                             actionListener="#{invoiceController.prepareNewWorkStatement()}"
-                             action='#{navController.setMainContent("invoice/addWorkStatement")}'>
+                             actionListener="#{addWorkStatementController.add(invoiceController.selectedInvoice)}"
+                             action='#{navController.setMainContent("invoice/addWorkStatement")}'
+                             rendered="#{invoiceController.showAddWorkSt()}">
             </p:commandButton>
 		</f:facet>
 	</p:toolbar>
@@ -119,20 +123,15 @@
             </p:calendar>
         </h:panelGrid>
 
-        <h:panelGrid columns="2" >
+        <h:panelGrid columns="2" rendered="#{!invoiceController.workStatements.isEmpty()}">
             <p:dataList id="inv_workSttmntList" value="#{invoiceController.workStatements}"
                         var="workStatement" type="ordered">
                 <f:facet name="header">
                     List of WorkStatements
                 </f:facet>
-                <p:commandLink id="lnk_wrkst"
-                               update=":contentForm"
-                               action='#{navController.setMainContent("invoice/addWorkStatement")}'>
-                    <f:setPropertyActionListener target="#{invoiceController.newWorkStatement}" value="#{workStatement}" />
 
-                    <h:outputText value="#{workStatement.period} #{workStatement.managerEarning}" />
+                <h:outputText value="#{workStatement.period} #{workStatement.managerEarning}" />
 
-                </p:commandLink>
             </p:dataList>
         </h:panelGrid>
 

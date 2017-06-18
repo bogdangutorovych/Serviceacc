@@ -11,7 +11,6 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.primefaces.event.SelectEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -101,6 +100,7 @@ public class InvoiceController implements Serializable {
         }
         invoiceService.save(selectedInvoice);
         workStatementService.save(workStatements);
+        log.debug("worksStatements saved: " + workStatements);
     }
 
     public void prepareNewPayment(){
@@ -115,65 +115,10 @@ public class InvoiceController implements Serializable {
         log.debug("Payment " + payment + " was attached to Invoice " + selectedInvoice);
     }
 
-    public void prepareNewWorkStatement(){
-        log.debug("Prepare new WorkStatement");
-        newWorkStatement = new WorkStatement();
-        newWorkStatement.setInvoice(selectedInvoice);
-        newWorkStatement.setManager(selectedInvoice.getContract().getManager());
-
-        LocalDate invoiceDate = selectedInvoice.getDate();
-
-        newWorkStatement.getPeriod().setDateFrom(invoiceDate);
-        newWorkStatement.getPeriod().setDateTo(invoiceDate.plusMonths(1));
-
-        Money clientSpending = new Money();
-        clientSpending.setAmount(selectedInvoice.getContract().getClientRate().getAmount());
-        clientSpending.setCurrency(selectedInvoice.getContract().getClientRate().getCurrency());
-        newWorkStatement.setClientSpending(clientSpending);
-        Money managerEaning = new Money();
-        managerEaning.setAmount(selectedInvoice.getContract().getManagerRate().getAmount());
-        managerEaning.setCurrency(selectedInvoice.getContract().getManagerRate().getCurrency());
-        newWorkStatement.setManagerEarning(managerEaning);
+    public boolean showAddWorkSt(){
+        return selectedInvoice.getPeriod().getDateTo().equals(LocalDate.now()) && workStatements.isEmpty();
     }
 
-    public void addWorkStatement(){
-        if (workStatements.size() == 0){
-            workStatements.add(newWorkStatement);
-        }else if (workStatements.size() == 1){
-            WorkStatement first = workStatements.get(0);
-            first.getPeriod().setDateTo(newWorkStatement.getPeriod().getDateFrom().minusDays(1));
-            first.getManagerEarning().setAmount((calculateManagerRate(selectedInvoice.getPeriod(),
-                first.getPeriod(), selectedInvoice.getContract().getManagerRate())));
-
-            newWorkStatement.getManagerEarning().setAmount(
-                selectedInvoice.getContract().getManagerRate().getAmount() - first.getManagerEarning().getAmount());
-            workStatements.add(newWorkStatement);
-        }
-
-        log.debug("Added WorkStatement: " + newWorkStatement + " to invoice: " + selectedInvoice);
-    }
-
-    private Long calculateManagerRate(Period invoicePeriod, Period workStPeriod, Money commonRate){
-
-        LocalDate tempDate = LocalDate.from(invoicePeriod.getDateFrom());
-        long allDays = tempDate.until(invoicePeriod.getDateTo(), ChronoUnit.DAYS);
-        log.debug("AllDays: " + allDays);
-
-        tempDate = LocalDate.from(workStPeriod.getDateFrom());
-        long workDays = tempDate.until(workStPeriod.getDateTo(), ChronoUnit.DAYS);
-        log.debug("workDays " + workDays);
-
-        double rate = (double) workDays/allDays;
-        log.debug("Rate: " + rate);
-
-        return Double.valueOf(commonRate.getAmount()*rate).longValue();
-    }
-
-    public void dateChange(SelectEvent event){
-        newWorkStatement.getManagerEarning()
-            .setAmount(calculateManagerRate(selectedInvoice.getPeriod(),
-                newWorkStatement.getPeriod(), selectedInvoice.getContract().getManagerRate()));
-    }
 
     public void clearSelected() {
         selectedInvoice = null;
