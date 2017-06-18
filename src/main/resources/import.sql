@@ -203,4 +203,4 @@ INSERT INTO CLIENT_INFO (id, content, info_type_id, client_id, is_deleted) VALUE
     (43, '-', 3, 9, FALSE),
     (44, 'skype9', 4, 9, FALSE),
     (45, 'Kyev', 5, 9, FALSE);
-ALTER SEQUENCE client_info_seq RESTART WITH 51;
+ALTER SEQUENCE client_info_seq RESTART WITH 46;
