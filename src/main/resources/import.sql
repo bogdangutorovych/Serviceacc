@@ -142,9 +142,9 @@ INSERT INTO INVOICE (id, number, date, contract_id, money_id, invoice_type, paym
     (9, 'inv# 9', '2017-03-01', 1, 25, 'PAID', 4, 14, FALSE);
 ALTER SEQUENCE invoice_id_seq RESTART WITH 10;
 
-INSERT INTO SALARY (id, date, manager_id, money_id, is_deleted) VALUES
-    (1, '2017-02-15', 1, 27, FALSE),
-    (2, '2017-03-15', 1, 27, FALSE);
+INSERT INTO SALARY (id, date, manager_id, money_id, is_paid, is_deleted) VALUES
+    (1, '2017-02-15', 1, 27, TRUE, FALSE),
+    (2, '2017-03-15', 1, 27, FALSE, FALSE);
 
 INSERT INTO WORK_STATEMENT (id, manager_id, client_spending, manager_earning, invoice_id, period_id, salary_id, is_deleted)
 VALUES

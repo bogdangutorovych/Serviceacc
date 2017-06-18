@@ -42,6 +42,9 @@
         <h:outputLabel for="amount" value="Сумма: " style="font-weight:bold" />
         <h:inputText id="amount" disabled="true"
             value="#{salaryDetailsController.selectedSalary.amount}" />
+            
+        <!-- <h:outputLabel for="paid" value="Выдана: " style="font-weight:bold" /> -->
+        <!-- <p:selectBooleanCheckbox id="paid" value="#{salaryDetailsController.selectedSalary.paid}" /> -->
     </h:panelGrid>
     
     <br/>
@@ -66,6 +69,7 @@
 
         <p:column headerText="Оплата">
             <h:outputText value="#{workStatement.managerEarning.amount}" />
-        </p:column>    
+        </p:column>
+        
     </p:dataTable>
 </ui:composition>

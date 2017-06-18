@@ -45,6 +45,9 @@ public class Salary {
     @OneToMany(mappedBy = "salary",
             fetch = FetchType.LAZY)
     private Set<WorkStatement> workStatements = new HashSet<>();
+    
+    @Column(name = "is_paid")
+    private boolean paid = false;
 
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
@@ -97,6 +100,14 @@ public class Salary {
 
     public void setWorkStatements(Set<WorkStatement> workStatements) {
         this.workStatements = workStatements;
+    }
+
+    public boolean isPaid() {
+        return paid;
+    }
+
+    public void setPaid(boolean paid) {
+        this.paid = paid;
     }
 
     public boolean isDeleted() {

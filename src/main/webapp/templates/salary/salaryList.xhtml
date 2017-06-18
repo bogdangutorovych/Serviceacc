@@ -50,5 +50,12 @@
             <h:outputText value="#{salary.amount.amount}" />
         </p:column>
         
+        <p:column headerText="Выдана" sortBy="#{salary.paid}">
+            <p:graphicImage value="/images/fancy_checkbox.png" rendered="#{salary.paid}" 
+                style="display: block;
+                       margin-left: auto;
+                       margin-right: auto; 
+                       height: 20px; width: 20px;"/>
+        </p:column>
     </p:dataTable>
 </ui:composition>
