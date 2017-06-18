@@ -31,17 +31,17 @@
 						action='#{navController.setMainContent("contract/contractsForInvoicesIssue")}' />
 				</p:submenu>
 				<p:submenu label="Зарплата">
-				    <p:menuitem value="Все зарплаты" icon="ui-icon-document"
+				    <p:menuitem value="Все зарплаты" icon="ui-icon-document" 
 				        update=":contentForm"
 				        action='#{navController.setMainContent("salary/salaryList")}'
-				        actionListener="#{salariesController.prepareData}"/>
-				    <p:menuitem value="Расчет зарплат" icon="ui-icon-document"
+				        actionListener="#{salaryListController.prepareData}"/>
+				    <p:menuitem value="Расчет зарплат" icon="ui-icon-document" 
 				        update=":contentForm"
-				        action='#{navController.setMainContent("salary/salaryCalculationExtended")}'
+				        action='#{navController.setMainContent("salary/salaryCalculation")}'
 				        actionListener="#{salaryCalculationController.prepareData}" />
-                    <p:menuitem value="Акты" icon="ui-icon-document"
+                    <p:menuitem value="Акты" icon="ui-icon-document" 
                         update=":contentForm"
-                        action='#{navController.setMainContent("salary/workStatements")}'
+                        action='#{navController.setMainContent("salary/workStatements")}' 
                         actionListener="#{workStatementController.prepareData}"/>
 				</p:submenu>
 				<p:menuitem value="Оплаты" icon="ui-icon-document"

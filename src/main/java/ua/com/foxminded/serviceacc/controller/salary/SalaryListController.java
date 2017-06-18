@@ -3,6 +3,8 @@ package ua.com.foxminded.serviceacc.controller.salary;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -15,8 +17,8 @@ import ua.com.foxminded.serviceacc.service.SalaryService;
 
 @Named
 @ViewScoped
-public class SalaryCalculationSimpleController  implements Serializable {
-    private static final Logger log = LoggerFactory.getLogger(SalaryCalculationSimpleController.class);
+public class SalaryListController implements Serializable {
+    private static final Logger log = LoggerFactory.getLogger(SalaryListController.class);
     
     private static final long serialVersionUID = 1L;
 
@@ -24,14 +26,23 @@ public class SalaryCalculationSimpleController  implements Serializable {
     
     private List<Salary> salaries;
     
+    private Salary selectedSalary;
+    
     @Inject
-    public SalaryCalculationSimpleController(SalaryService salaryService) {
+    public SalaryListController(SalaryService salaryService) {
         super();
         this.salaryService = salaryService;
     }
 
-    public void calculateSalaries() {
-        salaries = salaryService.calculateSalaries();
+    @PostConstruct
+    public void init() {
+        if(!FacesContext.getCurrentInstance().isPostback()) {
+            prepareData();
+        }
+    }
+    
+    public void prepareData() {
+        salaries = salaryService.findAll();
     }
     
     public List<Salary> getSalaries() {
@@ -40,6 +51,14 @@ public class SalaryCalculationSimpleController  implements Serializable {
 
     public void setSalaries(List<Salary> salaries) {
         this.salaries = salaries;
+    }
+
+    public Salary getSelectedSalary() {
+        return selectedSalary;
+    }
+
+    public void setSelectedSalary(Salary selectedSalary) {
+        this.selectedSalary = selectedSalary;
     }
 
 }

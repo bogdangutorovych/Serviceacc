@@ -21,6 +21,11 @@ public class SalaryDetailsController implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
+    private static enum SalaryDetailsAction {
+        CALCULATE,
+        EDIT
+    };
+    
     private final SalaryService salaryService;
     
     private Salary selectedSalary;
@@ -48,8 +53,8 @@ public class SalaryDetailsController implements Serializable {
         salaryService.save(selectedSalary);
     }
     
-    public boolean getIsNewSalary() {
-        return selectedSalary.getId() == null;
+    public boolean isNotNewSalary() {
+        return selectedSalary.getId() != null;
     }
     
     public Salary getSelectedSalary() {
@@ -59,12 +64,12 @@ public class SalaryDetailsController implements Serializable {
     public void setSelectedSalary(Salary selectedSalary) {
         this.selectedSalary = selectedSalary;
     }
-
-    public boolean getCalculateSalary() {
+    
+    public boolean isCalculateMode() {
         return action.equals(SalaryDetailsAction.CALCULATE);
     }
     
-    public boolean getEditSalary() {
+    public boolean isEditMode() {
         return action.equals(SalaryDetailsAction.EDIT);
     }
 }
