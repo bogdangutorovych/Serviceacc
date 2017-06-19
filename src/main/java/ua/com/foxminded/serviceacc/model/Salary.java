@@ -117,4 +117,20 @@ public class Salary {
     public void setDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Salary )) return false;
+        return id != null && id.equals(((Salary) o).id);
+    }
+    
+    @Override
+    public int hashCode() {
+        if (id == null) {
+            return 31;
+        }
+            
+        return id.hashCode();
+    }
 }
