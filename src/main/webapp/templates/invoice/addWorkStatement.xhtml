@@ -1,0 +1,75 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:importEnum
+        type="ua.com.foxminded.serviceacc.model.enums.InvoiceType"
+        var="InvoiceTypes" />
+    <p:importEnum
+        type="ua.com.foxminded.serviceacc.model.enums.PaymentType"
+        var="PaymentTypes" />
+    <p:importEnum type="ua.com.foxminded.serviceacc.model.enums.Currency"
+                  var="CurrencyTypes" />
+
+    <p:toolbar>
+        <f:facet name="left">
+            <p:commandButton id="btn_ok" value="Ok" update=":contentForm"
+                             actionListener="#{invoiceController.workStatements.add(addWorkStatementController.newWorkStatement)}"
+                             action='#{navController.setMainContent("invoice/invoiceEdit")}' />
+            <span class="ui-separator"><span
+                class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+
+            <p:commandButton id="btn_cancel" value="Cancel" update=":contentForm"
+                             icon="ui-icon-close"
+                             action='#{navController.setMainContent("invoice/invoiceEdit")}'
+                             immediate="true" />
+            <span class="ui-separator"><span
+                class="ui-icon ui-icon-grip-dotted-vertical" /></span>
+
+
+        </f:facet>
+    </p:toolbar>
+
+
+    <br />
+
+        <h:panelGrid columns="2">
+
+            <f:facet name="header">
+                <h:outputText value="Добавление акта к счету ##{invoiceController.selectedInvoice.id} за период: #{invoiceController.selectedInvoice.period}" />
+            </f:facet>
+
+            <h:outputLabel for="start_date_ws_inv" value="Акт с: "
+                           style="font-weight:bold" />
+            <p:calendar id="start_date_ws_inv" converter="localDateConverter"
+                        pattern="dd.MM.yyyy"
+                        value="#{addWorkStatementController.newWorkStatement.period.dateFrom}"
+                        showOn="button" mask="99.99.9999"
+                        required="true" requiredMessage="Выберите дату">
+
+            </p:calendar>
+
+            <h:outputLabel for="end_date_ws_inv" value="по: "
+                           style="font-weight:bold" />
+            <p:calendar id="end_date_ws_inv" converter="localDateConverter"
+                        pattern="dd.MM.yyyy"
+                        value="#{addWorkStatementController.newWorkStatement.period.dateTo}"
+                        showOn="button" mask="99.99.9999"
+                        required="true" requiredMessage="Выберите дату">
+            </p:calendar>
+
+            <h:outputLabel for="manager_ws_inv" value="Ментор: " style="font-weight:bold" />
+            <h:outputText id="manager_ws_inv" value="#{addWorkStatementController.newWorkStatement.manager}"/>
+
+            <h:outputLabel for="client_money_ws_inv" value="Ставка клиента: " style="font-weight:bold" />
+            <h:outputText id="client_money_ws_inv" value="#{addWorkStatementController.newWorkStatement.clientSpending}"/>
+
+            <h:outputLabel for="manager_money_ws_inv" value="Ставка менеджера: " style="font-weight:bold" />
+            <h:outputText id="manager_money_ws_inv" value="#{addWorkStatementController.newWorkStatement.managerEarning}"/>
+
+        </h:panelGrid>
+
+
+</ui:composition>

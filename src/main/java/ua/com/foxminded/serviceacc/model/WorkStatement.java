@@ -29,31 +29,31 @@ public class WorkStatement {
     @GeneratedValue(generator = "generator")
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
-    
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "manager_id")
     private Manager manager;
-    
+
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "client_spending")
     private Money clientSpending = new Money();
-    
+
     @OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name ="manager_earning")
     private Money managerEarning = new Money();
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "invoice_id")
     private Invoice invoice;
-    
+
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "period_id")
     private Period period = new Period();
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "salary_id")
     private Salary salary;
-    
+
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
 
@@ -127,12 +127,15 @@ public class WorkStatement {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof WorkStatement )) return false;
-        return id != null && id.equals(((WorkStatement) o).id);
+        if (o == null || getClass() != o.getClass()) return false;
+
+        WorkStatement that = (WorkStatement) o;
+
+        return id != null ? id.equals(that.id) : that.id == null;
     }
-    
+
     @Override
     public int hashCode() {
-        return id.hashCode();
+        return id != null ? id.hashCode() : 0;
     }
 }

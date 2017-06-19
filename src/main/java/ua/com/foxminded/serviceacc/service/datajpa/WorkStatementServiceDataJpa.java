@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import ua.com.foxminded.serviceacc.model.Invoice;
 import ua.com.foxminded.serviceacc.model.WorkStatement;
 import ua.com.foxminded.serviceacc.repository.WorkStatementRepository;
 import ua.com.foxminded.serviceacc.service.WorkStatementService;
@@ -14,7 +15,7 @@ import ua.com.foxminded.serviceacc.service.WorkStatementService;
 @Service("workStatementService")
 public class WorkStatementServiceDataJpa implements WorkStatementService {
     private final WorkStatementRepository workStatementRepository;
-    
+
     @Inject
     public WorkStatementServiceDataJpa(WorkStatementRepository workStatementRepository) {
         super();
@@ -24,6 +25,11 @@ public class WorkStatementServiceDataJpa implements WorkStatementService {
     @Override
     public WorkStatement save(WorkStatement workStatement) {
         return workStatementRepository.save(workStatement);
+    }
+
+    @Override
+    public List<WorkStatement> save(List<WorkStatement> workStatements) {
+        return workStatementRepository.save(workStatements);
     }
 
     @Override
@@ -39,6 +45,11 @@ public class WorkStatementServiceDataJpa implements WorkStatementService {
     @Override
     public void delete(Long id) {
         workStatementRepository.delete(id);
+    }
+
+    @Override
+    public List<WorkStatement> findAllByInvoice(Invoice invoice) {
+        return workStatementRepository.findAllByInvoice(invoice);
     }
 
     @Override
